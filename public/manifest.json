@@ -1,0 +1,11 @@
+{
+  "theme_color": "#f69435",
+  "background_color": "#f69435",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "name": "Lista de Compras",
+  "short_name": "Lista de Compras",
+  "description": "App para ajudar voc\u00ea com sua lista de compras.",
+  "icons": []
+}
