@@ -7,7 +7,7 @@
 }
 
 .imageAndTitleContainer {
-  @apply flex items-end absolute top-24 left-11;
+  @apply flex items-end absolute top-6 left-3 lg:top-24 lg:left-11 xl:top-40 xl:left-16;
 }
 
 .imageContainer {
