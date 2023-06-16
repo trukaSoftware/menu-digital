@@ -5,6 +5,6 @@ import Page from './page';
 describe('page', () => {
   it('test example', () => {
     render(<Page />);
-    expect(screen.getByText(/Docs/i)).toBeInTheDocument();
+    expect(screen.getByText(/Nome do Restaurante/i)).toBeInTheDocument();
   });
 });
