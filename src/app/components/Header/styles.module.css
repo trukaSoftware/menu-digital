@@ -1,0 +1,19 @@
+.header {
+  @apply relative h-24 w-full bg-white;
+}
+
+.themeContainer {
+  @apply relative w-full h-16 lg:h-48 xl:h-64;
+}
+
+.imageAndTitleContainer {
+  @apply flex items-end absolute top-24 left-11;
+}
+
+.imageContainer {
+  @apply relative w-16 h-16 lg:w-32 lg:h-32;
+}
+
+.title {
+  @apply ml-1 text-base text-black lg:text-2xl;
+}
