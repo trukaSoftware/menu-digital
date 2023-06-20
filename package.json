@@ -14,6 +14,7 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@prisma/client": "^4.15.0",
     "@types/react": "18.2.8",
     "@types/react-dom": "18.2.4",
     "@vitejs/plugin-react": "^4.0.0",
@@ -51,6 +52,7 @@
     "husky": "^8.0.3",
     "jsdom": "^22.1.0",
     "prettier": "^2.8.8",
+    "prisma": "^4.15.0",
     "tsconfig-paths": "^4.2.0",
     "vitest": "^0.32.0"
   }
