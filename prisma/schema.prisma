@@ -17,8 +17,8 @@ enum CompanyStatus {
 
 model Company {
   id        String          @id @default(uuid())
-  name      String          @db.VarChar(255)
-  slug      String          @db.VarChar(255)
+  name      String          @db.VarChar(45)
+  slug      String          @db.VarChar(45)
   status    CompanyStatus  @default(ACTIVE)
   branchs   Branch[]
   info      Info[]
@@ -27,7 +27,8 @@ model Company {
 
 model Branch {
   id          String         @id @default(uuid())
-  slug        String         @db.VarChar(255)
+  name        String         @db.VarChar(45)
+  slug        String         @db.VarChar(45)
   status      CompanyStatus  @default(ACTIVE)
   comopanyId  String?
   company     Company?       @relation(fields: [comopanyId], references: [id], onDelete: Cascade)
@@ -54,7 +55,7 @@ model Address {
 
 model Products {
   id              String     @id @default(uuid())
-  name            String     @db.VarChar(255)
+  name            String     @db.VarChar(45)
   price           Decimal    @db.Money()
   company         Company?   @relation(fields: [comopanyId], references: [id])
   comopanyId      String?

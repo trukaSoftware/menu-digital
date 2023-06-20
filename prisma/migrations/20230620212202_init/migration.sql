@@ -4,8 +4,8 @@ CREATE TYPE "CompanyStatus" AS ENUM ('ACTIVE', 'INACTIVE');
 -- CreateTable
 CREATE TABLE "Company" (
     "id" TEXT NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
-    "slug" VARCHAR(255) NOT NULL,
+    "name" VARCHAR(45) NOT NULL,
+    "slug" VARCHAR(45) NOT NULL,
     "status" "CompanyStatus" NOT NULL DEFAULT 'ACTIVE',
 
     CONSTRAINT "Company_pkey" PRIMARY KEY ("id")
@@ -14,7 +14,8 @@ CREATE TABLE "Company" (
 -- CreateTable
 CREATE TABLE "Branch" (
     "id" TEXT NOT NULL,
-    "slug" VARCHAR(255) NOT NULL,
+    "name" VARCHAR(45) NOT NULL,
+    "slug" VARCHAR(45) NOT NULL,
     "status" "CompanyStatus" NOT NULL DEFAULT 'ACTIVE',
     "comopanyId" TEXT,
 
@@ -46,7 +47,7 @@ CREATE TABLE "Address" (
 -- CreateTable
 CREATE TABLE "Products" (
     "id" TEXT NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
+    "name" VARCHAR(45) NOT NULL,
     "price" MONEY NOT NULL,
     "comopanyId" TEXT,
 
