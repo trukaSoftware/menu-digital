@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,73 +7,71 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum CompanyStatus {
-  ACTIVE
-  INACTIVE
-}
-
 model Company {
-  id        String          @id @default(uuid())
-  name      String          @db.VarChar(45)
-  slug      String          @db.VarChar(45)
-  status    CompanyStatus  @default(ACTIVE)
-  branchs   Branch[]
-  info      Info[]
-  products  Products[]
+  id       String        @id @default(uuid())
+  name     String        @db.VarChar(45)
+  email    String        @db.VarChar(45)
+  slug     String        @db.VarChar(45)
+  status   CompanyStatus @default(ACTIVE)
+  branchs  Branch[]
+  info     Info[]
+  products Products[]
 }
 
 model Branch {
-  id          String         @id @default(uuid())
-  name        String         @db.VarChar(45)
-  slug        String         @db.VarChar(45)
-  status      CompanyStatus  @default(ACTIVE)
-  comopanyId  String?
-  company     Company?       @relation(fields: [comopanyId], references: [id], onDelete: Cascade)
+  id         String        @id @default(uuid())
+  name       String        @db.VarChar(45)
+  slug       String        @db.VarChar(45)
+  status     CompanyStatus @default(ACTIVE)
+  comopanyId String?
+  company    Company?      @relation(fields: [comopanyId], references: [id], onDelete: Cascade)
 }
 
 model Info {
-  id               String     @id @default(uuid())
-  cnpj             String     @db.VarChar(14)
-  email            String     @db.VarChar(45)
-  companyLogoUrl   String
-  companyThemeUrl  String
-  comopanyId       String
-  company          Company    @relation(fields: [comopanyId], references: [id], onDelete: Cascade)
-  address          Address[]  @relation()
+  id              String    @id @default(uuid())
+  cnpj            String    @db.VarChar(14)
+  email           String    @db.VarChar(45)
+  companyLogoUrl  String
+  companyThemeUrl String
+  comopanyId      String
+  address         Address[]
+  company         Company   @relation(fields: [comopanyId], references: [id], onDelete: Cascade)
 }
 
 model Address {
-  id       String     @id @default(uuid())
-  address  String     @db.VarChar(255)
-  zipCode  String     @db.VarChar(10)
-  info     Info       @relation(fields: [infoId], references: [id])
-  infoId   String     @db.VarChar(255)
+  id      String @id @default(uuid())
+  address String @db.VarChar(255)
+  zipCode String @db.VarChar(10)
+  infoId  String @db.VarChar(255)
+  info    Info   @relation(fields: [infoId], references: [id])
 }
 
 model Products {
-  id              String     @id @default(uuid())
-  name            String     @db.VarChar(45)
-  price           Decimal    @db.Money()
-  company         Company?   @relation(fields: [comopanyId], references: [id])
-  comopanyId      String?
-  productsImages  ProductImages[]
-  materials       Materials[]
+  id             String          @id @default(uuid())
+  name           String          @db.VarChar(45)
+  price          Decimal         @db.Money
+  comopanyId     String?
+  materials      Materials[]
+  productsImages ProductImages[]
+  company        Company?        @relation(fields: [comopanyId], references: [id])
 }
 
 model ProductImages {
-  id         String    @id @default(uuid())
-  imageUrl   String
-  alt        String    @db.VarChar(500)
-  products   Products  @relation(fields: [productId], references: [id], onDelete: Cascade)
-  productId  String
+  id        String   @id @default(uuid())
+  imageUrl  String
+  alt       String   @db.VarChar(500)
+  productId String
+  products  Products @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
 model Materials {
-  id             String     @id @default(uuid())
-  name           String
-  grammage       Float?  
-  lastPrice      Decimal?   @db.Money()
-  batchValidity  DateTime?  @db.Date()
-  products       Products   @relation(fields: [productId], references: [id], onDelete: Cascade)
-  productId      String
+  id        String   @id @default(uuid())
+  name      String
+  productId String
+  products  Products @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+enum CompanyStatus {
+  ACTIVE
+  INACTIVE
 }
