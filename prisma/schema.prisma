@@ -20,41 +20,41 @@ model Company {
 }
 
 model Branch {
-  id         String        @id @default(uuid())
-  name       String        @db.VarChar(45)
-  slug       String        @db.VarChar(45)
-  status     CompanyStatus @default(ACTIVE)
-  companyId  String
-  info       Info?
-  createdAt  DateTime      @default(now())
-  updatedAt  DateTime      @updatedAt
-  company    Company       @relation(fields: [companyId], references: [id])
+  id        String        @id @default(uuid())
+  name      String        @db.VarChar(45)
+  slug      String        @db.VarChar(45)
+  status    CompanyStatus @default(ACTIVE)
+  companyId String
+  info      Info?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  company   Company       @relation(fields: [companyId], references: [id])
 }
 
 model Info {
-  id              String    @id @default(uuid())
-  cnpj            String    @db.VarChar(14)
-  email           String    @db.VarChar(45)
+  id              String   @id @default(uuid())
+  cnpj            String   @db.VarChar(14)
+  email           String   @db.VarChar(45)
   companyLogoUrl  String
   companyThemeUrl String
   address         Address?
-  companyId       String    @unique
-  branchId        String    @unique
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-  company         Company   @relation(fields: [companyId], references: [id])
-  branch          Branch    @relation(fields: [branchId], references: [id])
+  companyId       String   @unique
+  branchId        String   @unique
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  company         Company  @relation(fields: [companyId], references: [id])
+  branch          Branch   @relation(fields: [branchId], references: [id])
 }
 
 model Address {
-  id        String        @id @default(uuid())
-  address   String        @db.VarChar(255)
-  zipCode   String        @db.VarChar(10)
-  infoId    String        @unique
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @updatedAt
+  id        String   @id @default(uuid())
+  address   String   @db.VarChar(255)
+  zipCode   String   @db.VarChar(10)
+  infoId    String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  info      Info          @relation(fields: [infoId], references: [id], onDelete: Cascade)
+  info Info @relation(fields: [infoId], references: [id], onDelete: Cascade)
 }
 
 model Products {
