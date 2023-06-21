@@ -39,11 +39,11 @@ model Info {
   companyThemeUrl String
   address         Address?
   companyId       String   @unique
-  branchId        String   @unique
+  branchId        String?  @unique
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   company         Company  @relation(fields: [companyId], references: [id])
-  branch          Branch   @relation(fields: [branchId], references: [id])
+  branch          Branch?  @relation(fields: [branchId], references: [id])
 }
 
 model Address {
