@@ -5,6 +5,7 @@ CREATE TYPE "CompanyStatus" AS ENUM ('ACTIVE', 'INACTIVE');
 CREATE TABLE "Company" (
     "id" TEXT NOT NULL,
     "name" VARCHAR(45) NOT NULL,
+    "email" VARCHAR(45) NOT NULL,
     "slug" VARCHAR(45) NOT NULL,
     "status" "CompanyStatus" NOT NULL DEFAULT 'ACTIVE',
 
@@ -68,9 +69,6 @@ CREATE TABLE "ProductImages" (
 CREATE TABLE "Materials" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "grammage" DOUBLE PRECISION,
-    "lastPrice" MONEY,
-    "batchValidity" DATE,
     "productId" TEXT NOT NULL,
 
     CONSTRAINT "Materials_pkey" PRIMARY KEY ("id")
