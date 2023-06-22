@@ -5,9 +5,10 @@ CREATE TYPE "CompanyStatus" AS ENUM ('ACTIVE', 'INACTIVE');
 CREATE TABLE "Company" (
     "id" TEXT NOT NULL,
     "name" VARCHAR(45) NOT NULL,
-    "email" VARCHAR(45) NOT NULL,
     "slug" VARCHAR(45) NOT NULL,
     "status" "CompanyStatus" NOT NULL DEFAULT 'ACTIVE',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Company_pkey" PRIMARY KEY ("id")
 );
@@ -18,7 +19,9 @@ CREATE TABLE "Branch" (
     "name" VARCHAR(45) NOT NULL,
     "slug" VARCHAR(45) NOT NULL,
     "status" "CompanyStatus" NOT NULL DEFAULT 'ACTIVE',
-    "comopanyId" TEXT,
+    "companyId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Branch_pkey" PRIMARY KEY ("id")
 );
@@ -30,7 +33,10 @@ CREATE TABLE "Info" (
     "email" VARCHAR(45) NOT NULL,
     "companyLogoUrl" TEXT NOT NULL,
     "companyThemeUrl" TEXT NOT NULL,
-    "comopanyId" TEXT NOT NULL,
+    "companyId" TEXT NOT NULL,
+    "branchId" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Info_pkey" PRIMARY KEY ("id")
 );
@@ -40,7 +46,9 @@ CREATE TABLE "Address" (
     "id" TEXT NOT NULL,
     "address" VARCHAR(255) NOT NULL,
     "zipCode" VARCHAR(10) NOT NULL,
-    "infoId" VARCHAR(255) NOT NULL,
+    "infoId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Address_pkey" PRIMARY KEY ("id")
 );
@@ -50,7 +58,9 @@ CREATE TABLE "Products" (
     "id" TEXT NOT NULL,
     "name" VARCHAR(45) NOT NULL,
     "price" MONEY NOT NULL,
-    "comopanyId" TEXT,
+    "companyId" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Products_pkey" PRIMARY KEY ("id")
 );
@@ -61,6 +71,8 @@ CREATE TABLE "ProductImages" (
     "imageUrl" TEXT NOT NULL,
     "alt" VARCHAR(500) NOT NULL,
     "productId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "ProductImages_pkey" PRIMARY KEY ("id")
 );
@@ -70,21 +82,35 @@ CREATE TABLE "Materials" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "productId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Materials_pkey" PRIMARY KEY ("id")
 );
 
--- AddForeignKey
-ALTER TABLE "Branch" ADD CONSTRAINT "Branch_comopanyId_fkey" FOREIGN KEY ("comopanyId") REFERENCES "Company"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+-- CreateIndex
+CREATE UNIQUE INDEX "Info_companyId_key" ON "Info"("companyId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Info_branchId_key" ON "Info"("branchId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Address_infoId_key" ON "Address"("infoId");
 
 -- AddForeignKey
-ALTER TABLE "Info" ADD CONSTRAINT "Info_comopanyId_fkey" FOREIGN KEY ("comopanyId") REFERENCES "Company"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Branch" ADD CONSTRAINT "Branch_companyId_fkey" FOREIGN KEY ("companyId") REFERENCES "Company"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Address" ADD CONSTRAINT "Address_infoId_fkey" FOREIGN KEY ("infoId") REFERENCES "Info"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Info" ADD CONSTRAINT "Info_companyId_fkey" FOREIGN KEY ("companyId") REFERENCES "Company"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Products" ADD CONSTRAINT "Products_comopanyId_fkey" FOREIGN KEY ("comopanyId") REFERENCES "Company"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Info" ADD CONSTRAINT "Info_branchId_fkey" FOREIGN KEY ("branchId") REFERENCES "Branch"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Address" ADD CONSTRAINT "Address_infoId_fkey" FOREIGN KEY ("infoId") REFERENCES "Info"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Products" ADD CONSTRAINT "Products_companyId_fkey" FOREIGN KEY ("companyId") REFERENCES "Company"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ProductImages" ADD CONSTRAINT "ProductImages_productId_fkey" FOREIGN KEY ("productId") REFERENCES "Products"("id") ON DELETE CASCADE ON UPDATE CASCADE;

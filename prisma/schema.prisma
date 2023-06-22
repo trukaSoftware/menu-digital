@@ -8,52 +8,65 @@ datasource db {
 }
 
 model Company {
-  id       String        @id @default(uuid())
-  name     String        @db.VarChar(45)
-  email    String        @db.VarChar(45)
-  slug     String        @db.VarChar(45)
-  status   CompanyStatus @default(ACTIVE)
-  branchs  Branch[]
-  info     Info[]
-  products Products[]
+  id        String        @id @default(uuid())
+  name      String        @db.VarChar(45)
+  slug      String        @db.VarChar(45)
+  status    CompanyStatus @default(ACTIVE)
+  info      Info?
+  branchs   Branch[]
+  products  Products[]
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
 }
 
 model Branch {
-  id         String        @id @default(uuid())
-  name       String        @db.VarChar(45)
-  slug       String        @db.VarChar(45)
-  status     CompanyStatus @default(ACTIVE)
-  comopanyId String?
-  company    Company?      @relation(fields: [comopanyId], references: [id], onDelete: Cascade)
+  id        String        @id @default(uuid())
+  name      String        @db.VarChar(45)
+  slug      String        @db.VarChar(45)
+  status    CompanyStatus @default(ACTIVE)
+  companyId String
+  info      Info?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  company   Company       @relation(fields: [companyId], references: [id])
 }
 
 model Info {
-  id              String    @id @default(uuid())
-  cnpj            String    @db.VarChar(14)
-  email           String    @db.VarChar(45)
+  id              String   @id @default(uuid())
+  cnpj            String   @db.VarChar(14)
+  email           String   @db.VarChar(45)
   companyLogoUrl  String
   companyThemeUrl String
-  comopanyId      String
-  address         Address[]
-  company         Company   @relation(fields: [comopanyId], references: [id], onDelete: Cascade)
+  address         Address?
+  companyId       String   @unique
+  branchId        String?  @unique
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  company         Company  @relation(fields: [companyId], references: [id])
+  branch          Branch?  @relation(fields: [branchId], references: [id])
 }
 
 model Address {
-  id      String @id @default(uuid())
-  address String @db.VarChar(255)
-  zipCode String @db.VarChar(10)
-  infoId  String @db.VarChar(255)
-  info    Info   @relation(fields: [infoId], references: [id])
+  id        String   @id @default(uuid())
+  address   String   @db.VarChar(255)
+  zipCode   String   @db.VarChar(10)
+  infoId    String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  info Info @relation(fields: [infoId], references: [id], onDelete: Cascade)
 }
 
 model Products {
   id             String          @id @default(uuid())
   name           String          @db.VarChar(45)
   price          Decimal         @db.Money
-  comopanyId     String?
+  companyId      String?
   materials      Materials[]
   productsImages ProductImages[]
-  company        Company?        @relation(fields: [comopanyId], references: [id])
+  company        Company?        @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
 }
 
 model ProductImages {
@@ -61,6 +74,8 @@ model ProductImages {
   imageUrl  String
   alt       String   @db.VarChar(500)
   productId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   products  Products @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
@@ -68,6 +83,8 @@ model Materials {
   id        String   @id @default(uuid())
   name      String
   productId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   products  Products @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
