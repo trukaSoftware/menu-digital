@@ -20,7 +20,7 @@ describe(`Badge`, () => {
     vi.resetAllMocks();
   });
 
-  test(`When clicking on a link he should gain the class selected`, async () => {
+  it(`When clicking on a link should gain the class selected`, async () => {
     render(<Badges {...mockProps} />);
 
     const foodLink = screen.getByText(`Caldos`);
@@ -33,7 +33,7 @@ describe(`Badge`, () => {
     expect(await screen.findByText(`Caldos`)).toHaveClass(`selected`);
   });
 
-  test(`Should only have one selected link at time`, async () => {
+  it(`Should only have one selected link at time`, async () => {
     render(<Badges {...mockProps} />);
 
     fireEvent.click(screen.getByText(`Caldos`));

@@ -21,7 +21,7 @@ describe(`Badge`, () => {
     vi.resetAllMocks();
   });
 
-  test(`When prop isSelected equals to true should should have class "selected"`, () => {
+  it(`When prop isSelected equals to true should have class "selected"`, () => {
     const modifiedMockProps = {
       ...mockProps,
       isSelected: true,
@@ -34,7 +34,7 @@ describe(`Badge`, () => {
     );
   });
 
-  test(`When prop isSelected equals to true should should have class "selected"`, () => {
+  it(`When prop isSelected equals to true should have class "selected"`, () => {
     render(<Badge {...mockProps} />);
 
     expect(screen.getByText(mockProps.badgeName)).not.toHaveClass(`selected`);
