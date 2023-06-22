@@ -1,3 +1,5 @@
+import { vi } from 'vitest';
+
 import { render, screen, cleanup } from '@testing-library/react';
 
 import Badge, { BadgeProps } from '..';
@@ -6,17 +8,17 @@ const mockProps = {
   badgeName: `Caldinho`,
   isSelected: false,
   linkTo: `#caldinho`,
-  onClick: jest.fn(),
+  onClick: vi.fn(),
 } as BadgeProps;
 
 describe(`Badge`, () => {
   afterAll(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   afterEach(() => {
     cleanup();
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   test(`When prop isSelected equals to true should should have class "selected"`, () => {
