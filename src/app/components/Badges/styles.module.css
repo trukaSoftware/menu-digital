@@ -1,0 +1,12 @@
+.badges {
+  @apply flex items-center overflow-x-auto w-full h-12 gap-x-2 px-2 py-3 mt-7 border-b border-gray-300 border-solid;
+}
+
+.badges::-webkit-scrollbar {
+  display: none;
+}
+
+.badges {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
