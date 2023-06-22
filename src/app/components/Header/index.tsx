@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Badges from '../Badges';
 import styles from './styles.module.css';
 
-const mockBadges = [
+export const mockBadges = [
   `Mais vendidos`,
   `Caldos`,
   `Bebidas`,
