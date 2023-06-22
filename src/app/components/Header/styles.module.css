@@ -15,5 +15,5 @@
 }
 
 .title {
-  @apply ml-1 text-base text-black lg:text-2xl;
+  @apply ml-1 text-base font-semibold text-black lg:text-2xl;
 }
