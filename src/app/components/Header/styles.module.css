@@ -1,5 +1,5 @@
 .header {
-  @apply relative h-24 w-full bg-white;
+  @apply w-full bg-white fixed;
 }
 
 .themeContainer {
@@ -15,5 +15,5 @@
 }
 
 .title {
-  @apply ml-1 text-base text-black lg:text-2xl;
+  @apply ml-2 text-base font-bold text-gray-900 lg:text-2xl;
 }

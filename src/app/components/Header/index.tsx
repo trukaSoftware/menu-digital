@@ -1,6 +1,15 @@
 import Image from 'next/image';
 
+import Badges from '../Badges';
 import styles from './styles.module.css';
+
+export const mockBadges = [
+  `Mais vendidos`,
+  `Caldos`,
+  `Bebidas`,
+  `Espetinhos`,
+  `aiphone`,
+];
 
 export default function Header() {
   return (
@@ -23,6 +32,7 @@ export default function Header() {
         </div>
         <h1 className={styles.title}>Nome do Restaurante</h1>
       </div>
+      <Badges badges={mockBadges} />
     </header>
   );
 }

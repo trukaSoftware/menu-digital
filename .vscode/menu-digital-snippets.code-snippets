@@ -1,0 +1,41 @@
+{
+  "newComponent": {
+    "scope": "javascript, typescript, typescriptreact",
+    "prefix": "!nc",
+    "body": [
+      "import styles from './styles.module.css';",
+      "",
+      "export default function ${1:ComponentName}() {",
+      "  return (",
+      "    $2",
+      "  )",
+      "}",
+      ""
+    ],
+    "description": "Create a new unconnected component/view"
+  },
+  "newTest": {
+    "scope": "javascript,typescript,typescriptreact",
+    "prefix": "!nt",
+    "description": "Snippet to create the basis of a test 🧪",
+    "body": [
+      "import { vi } from 'vitest';",
+      "",
+      "import { render, screen, cleanup } from '@testing-library/react';",
+      "",
+      "describe(`$1`, () => {",
+      "  afterAll(() => {",
+      "    vi.clearAllMocks();",
+      "  });",
+      "",
+      "  afterEach(() => {",
+      "    cleanup();",
+      "    vi.resetAllMocks();",
+      "  });",
+      "",
+      "  it(`$2`, () => {$3});",
+      "});",
+      ""
+    ]
+  }
+}
