@@ -1,0 +1,7 @@
+.containerSignIn {
+  display: none;
+}
+
+.containerSignIn:has(> div) {
+  @apply flex justify-center items-center w-full h-screen;
+}
