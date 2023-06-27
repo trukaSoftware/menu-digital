@@ -1,6 +1,7 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
 
+import { ptBR } from '@clerk/localizations';
 import { ClerkProvider } from '@clerk/nextjs';
 
 // eslint-disable-next-line @typescript-eslint/quotes
@@ -17,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider localization={ptBR}>
       <html lang="en">
         <head>
           <link rel="manifest" href="/manifest.json" />
