@@ -27,18 +27,7 @@ body {
   display: none;
 }
 
-#brk_yuan:has(> div) {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-  position: unset;
-  top: unset;
-  left: unset;
-  z-index: unset;
-}
-
+#brk_yuan:has(> div),
 #pln_solda:has(> div) {
   display: flex;
   justify-content: center;
