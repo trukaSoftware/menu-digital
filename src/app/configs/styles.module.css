@@ -1,7 +1,7 @@
-.container {
+.configsContainer {
   @apply flex justify-between w-full p-3;
 }
 
-.title {
+.configsTitle {
   @apply font-bold;
 }
