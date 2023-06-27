@@ -1,0 +1,7 @@
+.container {
+  @apply flex justify-between w-full p-3;
+}
+
+.title {
+  @apply font-bold;
+}
