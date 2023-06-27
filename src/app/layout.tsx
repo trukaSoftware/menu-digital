@@ -1,6 +1,8 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
 
+import { ClerkProvider } from '@clerk/nextjs';
+
 // eslint-disable-next-line @typescript-eslint/quotes
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,12 +17,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/icon-512x512.png" />
-      </head>
-      <body className={inter.className}>{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <head>
+          <link rel="manifest" href="/manifest.json" />
+          <link rel="apple-touch-icon" href="/icon-512x512.png" />
+        </head>
+        <body className={inter.className}>{children}</body>
+      </html>
+    </ClerkProvider>
   );
 }
