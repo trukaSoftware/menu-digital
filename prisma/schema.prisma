@@ -8,17 +8,17 @@ datasource db {
 }
 
 model Company {
-  id                      String            @id @default(uuid())
-  name                    String            @db.VarChar(45)
-  slug                    String            @db.VarChar(45)
-  status                  CompanyStatus     @default(ACTIVE)
+  id                      String              @id @default(uuid())
+  name                    String              @db.VarChar(45)
+  slug                    String              @db.VarChar(45)
+  status                  CompanyStatus       @default(ACTIVE)
   info                    Info?
   requests                Requests?
   branchs                 Branch[]
   products                Products[]
   productCategory         ProductCategories[]
-  createdAt               DateTime          @default(now())
-  updatedAt               DateTime          @updatedAt
+  createdAt               DateTime            @default(now())
+  updatedAt               DateTime            @updatedAt
 }
 
 model Branch {
@@ -57,7 +57,7 @@ model Address {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  info Info @relation(fields: [infoId], references: [id], onDelete: Cascade)
+  info      Info     @relation(fields: [infoId], references: [id], onDelete: Cascade)
 }
 
 model Requests {
