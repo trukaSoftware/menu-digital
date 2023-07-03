@@ -8,15 +8,17 @@ datasource db {
 }
 
 model Company {
-  id        String        @id @default(uuid())
-  name      String        @db.VarChar(45)
-  slug      String        @db.VarChar(45)
-  status    CompanyStatus @default(ACTIVE)
-  info      Info?
-  branchs   Branch[]
-  products  Products[]
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @updatedAt
+  id                      String              @id @default(uuid())
+  name                    String              @db.VarChar(45)
+  slug                    String              @db.VarChar(45)
+  status                  CompanyStatus       @default(ACTIVE)
+  info                    Info?
+  requests                Requests?
+  branchs                 Branch[]
+  products                Products[]
+  productCategory         ProductCategories[]
+  createdAt               DateTime            @default(now())
+  updatedAt               DateTime            @updatedAt
 }
 
 model Branch {
@@ -26,6 +28,7 @@ model Branch {
   status    CompanyStatus @default(ACTIVE)
   companyId String
   info      Info?
+  requests  Requests?
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
   company   Company       @relation(fields: [companyId], references: [id])
@@ -54,19 +57,42 @@ model Address {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  info Info @relation(fields: [infoId], references: [id], onDelete: Cascade)
+  info      Info     @relation(fields: [infoId], references: [id], onDelete: Cascade)
+}
+
+model Requests {
+  id              String     @id @default(uuid())
+  products        String
+  companyId       String     @unique
+  branchId        String?    @unique
+  company         Company    @relation(fields: [companyId], references: [id])
+  branch          Branch?    @relation(fields: [branchId], references: [id])
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+}
+
+model ProductCategories {
+  id             String          @id @default(uuid())
+  name           String          @db.VarChar(45)
+  companyId      String?
+  company        Company?        @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  product        Products[]
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
 }
 
 model Products {
-  id             String          @id @default(uuid())
-  name           String          @db.VarChar(45)
-  price          Decimal         @db.Money
-  companyId      String?
-  materials      Materials[]
-  productsImages ProductImages[]
-  company        Company?        @relation(fields: [companyId], references: [id], onDelete: Cascade)
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
+  id                    String              @id @default(uuid())
+  name                  String              @db.VarChar(45)
+  price                 Decimal             @db.Money
+  companyId             String?
+  ProductCategoriesId   String?
+  materials             Materials[]
+  productsImages        ProductImages[]
+  company               Company?            @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  productCategories     ProductCategories?  @relation(fields: [ProductCategoriesId], references: [id], onDelete: Cascade)
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
 }
 
 model ProductImages {
