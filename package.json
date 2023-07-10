@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "vercel-build": "prisma generate && prisma migrate deploy && npm run build",
     "start": "next start",
     "prepare": "husky install",
     "type-check": "tsc",
