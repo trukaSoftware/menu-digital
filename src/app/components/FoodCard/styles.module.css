@@ -1,0 +1,43 @@
+.foodCard {
+  @apply flex gap-1 relative p-2 border-b border-gray-300 w-full;
+}
+
+.foodImageWrapper {
+  @apply w-24 h-24 relative;
+}
+
+.foodCardTextContent {
+  @apply flex flex-col gap-1 w-7/12 justify-between;
+}
+
+.foodCardTextWrapper {
+  @apply flex flex-col gap-1;
+}
+
+.foodCardTitle {
+  @apply text-gray-900 font-bold text-sm;
+}
+
+.foodCardDescription {
+  @apply text-gray-900 text-xs;
+}
+
+.foodCardPricesWrapper {
+  @apply flex gap-1.5;
+}
+
+.foodCardDiscountPrice {
+  @apply text-green-600 font-semibold text-xs;
+}
+
+.foodCardRealPrice {
+  @apply font-semibold text-xs text-gray-900;
+}
+
+.foodCardPriceScratched {
+  @apply line-through text-gray-400;
+}
+
+.foodCardDiscountTag {
+  @apply absolute top-1 right-1 p-1 bg-red-600 rounded text-xs text-white;
+}
