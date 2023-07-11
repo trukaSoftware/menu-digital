@@ -31,11 +31,11 @@ export default function FoodCard({
           <p className={styles.foodCardDescription}>{description}</p>
         </div>
         <p className={styles.foodCardPricesWrapper}>
-          {discountedPrice && (
+          {discountedPrice ? (
             <span className={`${styles.foodCardDiscountPrice}`}>
               R$ {discountedPrice}
             </span>
-          )}
+          ) : null}
           <span
             className={`${styles.foodCardRealPrice} ${
               discountedPrice ? styles.foodCardPriceScratched : ``
@@ -45,9 +45,9 @@ export default function FoodCard({
           </span>
         </p>
       </div>
-      {discountPercentage && (
+      {discountPercentage ? (
         <div className={styles.foodCardDiscountTag}>{discountPercentage}%</div>
-      )}
+      ) : null}
     </article>
   );
 }
