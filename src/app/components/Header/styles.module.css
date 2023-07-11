@@ -1,5 +1,5 @@
 .header {
-  @apply w-full bg-white fixed;
+  @apply w-full bg-white;
 }
 
 .themeContainer {
