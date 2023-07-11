@@ -2,7 +2,7 @@ import FoodCard from '../components/FoodCard';
 import {
   mockFoodCard,
   mockFoodCardWithoutDiscount,
-} from '../components/FoodCard/tests/FoodCard.test';
+} from '../components/FoodCard/mocks';
 import Header from '../components/Header';
 import styles from './styles.module.css';
 
