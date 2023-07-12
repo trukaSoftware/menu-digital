@@ -38,7 +38,7 @@ model Info {
   id                  String   @id @default(uuid())
   cnpj                String   @db.VarChar(14)
   email               String   @db.VarChar(45)
-  phoneNumber         String
+  phoneNumber         String   @db.VarChar(14)
   deliveryPhoneNumber String?
   companyLogoUrl      String
   companyThemeUrl     String
