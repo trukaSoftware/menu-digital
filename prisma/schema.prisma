@@ -35,18 +35,20 @@ model Branch {
 }
 
 model Info {
-  id              String   @id @default(uuid())
-  cnpj            String   @db.VarChar(14)
-  email           String   @db.VarChar(45)
-  companyLogoUrl  String
-  companyThemeUrl String
-  address         Address?
-  companyId       String   @unique
-  branchId        String?  @unique
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  company         Company  @relation(fields: [companyId], references: [id])
-  branch          Branch?  @relation(fields: [branchId], references: [id])
+  id                  String   @id @default(uuid())
+  cnpj                String   @db.VarChar(14)
+  email               String   @db.VarChar(45)
+  phoneNumber         String   @db.VarChar(14)
+  deliveryPhoneNumber String?
+  companyLogoUrl      String
+  companyThemeUrl     String
+  address             Address?
+  companyId           String   @unique
+  branchId            String?  @unique
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  company             Company  @relation(fields: [companyId], references: [id])
+  branch              Branch?  @relation(fields: [branchId], references: [id])
 }
 
 model Address {
@@ -85,6 +87,7 @@ model Products {
   id                    String              @id @default(uuid())
   name                  String              @db.VarChar(45)
   price                 Decimal             @db.Money
+  discount              Int?
   companyId             String?
   ProductCategoriesId   String?
   materials             Materials[]
