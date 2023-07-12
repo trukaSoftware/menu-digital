@@ -73,6 +73,35 @@ model Requests {
   updatedAt       DateTime   @updatedAt
 }
 
+model ProductsComplements {
+  products         Products     @relation(fields: [productsId], references: [id])
+  complements      Complements  @relation(fields: [complementsId], references: [id])
+  productsId       String
+  complementsId    String
+
+  @@id([productsId, complementsId])
+}
+
+model Complements {
+  id            String       @id @default(uuid())
+  nome          String
+  maxAmount     Int?
+  products      ProductsComplements[]
+  items         Items[]
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+}
+
+model Items {
+  id            String       @id @default(uuid())
+  nome          String
+  price         Decimal?     @db.Money
+  complements   Complements  @relation(fields: [complementsId], references: [id], onDelete: Cascade)
+  complementsId String
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+}
+
 model ProductCategories {
   id             String          @id @default(uuid())
   name           String          @db.VarChar(45)
@@ -90,8 +119,8 @@ model Products {
   discount              Int?
   companyId             String?
   ProductCategoriesId   String?
-  materials             Materials[]
   productsImages        ProductImages[]
+  complements           ProductsComplements[]
   company               Company?            @relation(fields: [companyId], references: [id], onDelete: Cascade)
   productCategories     ProductCategories?  @relation(fields: [ProductCategoriesId], references: [id], onDelete: Cascade)
   createdAt             DateTime            @default(now())
@@ -102,15 +131,6 @@ model ProductImages {
   id        String   @id @default(uuid())
   imageUrl  String
   alt       String   @db.VarChar(500)
-  productId String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  products  Products @relation(fields: [productId], references: [id], onDelete: Cascade)
-}
-
-model Materials {
-  id        String   @id @default(uuid())
-  name      String
   productId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
