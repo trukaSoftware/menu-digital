@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { getCompaniesService } from '../services/getCompaniesService';
+import { getCompaniesService } from '../../services/getCompaniesService';
 
 export async function GET() {
   try {

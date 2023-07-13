@@ -3,8 +3,8 @@ import { NextResponse } from 'next/server';
 import {
   validateCompanyData,
   CompanyData,
-} from '../../utils/validations/companyDataValidation';
-import { createCompanyService } from '../services/createCompanyService';
+} from '../../../utils/validations/companyDataValidation';
+import { createCompanyService } from '../../services/createCompanyService';
 
 export async function POST(req: Request) {
   const {
