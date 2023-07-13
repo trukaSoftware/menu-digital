@@ -11,5 +11,6 @@ const companySchema = object({
 });
 
 export type CompanyData = InferType<typeof companySchema>;
+
 export const validateCompanyData = (companyData: CompanyData) =>
   companySchema.validate(companyData);
