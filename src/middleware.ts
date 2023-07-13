@@ -15,7 +15,7 @@ export default authMiddleware({
     }
   },
 
-  publicRoutes: [`/`],
+  publicRoutes: [`/`, `/api/createCompany`],
 });
 
 export const config = {
