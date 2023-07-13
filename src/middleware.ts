@@ -15,7 +15,16 @@ export default authMiddleware({
     }
   },
 
-  publicRoutes: [`/`, `/api/createCompany`],
+  publicRoutes: [`/`],
+
+  // publicRoutes: [ // to test all routes on postman without need to sign in
+  //   `/`,
+  //   `/api/company/createCompany`,
+  //   `/api/company/getCompanies`,
+  //   `/api/company/getCompanyById`,
+  //   `/api/company/editCompany`,
+  //   `/api/company/deleteCompany`,
+  // ],
 });
 
 export const config = {
