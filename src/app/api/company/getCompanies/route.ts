@@ -8,6 +8,10 @@ export async function GET() {
 
     return NextResponse.json({ companies });
   } catch (error) {
-    return NextResponse.json({ success: false });
+    if (error instanceof Error) {
+      return NextResponse.json({ message: error.message });
+    }
+
+    return error;
   }
 }

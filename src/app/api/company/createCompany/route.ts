@@ -43,6 +43,10 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ companyId });
   } catch (error) {
-    return NextResponse.json({ success: false });
+    if (error instanceof Error) {
+      return NextResponse.json({ message: error.message });
+    }
+
+    return error;
   }
 }

@@ -27,6 +27,6 @@ export async function PUT(req: Request) {
       return NextResponse.json({ message: error.message });
     }
 
-    throw error;
+    return error;
   }
 }
