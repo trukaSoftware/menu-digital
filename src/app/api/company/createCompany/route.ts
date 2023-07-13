@@ -4,7 +4,7 @@ import {
   validateCompanyData,
   CompanyData,
 } from '../../../utils/validations/companyDataValidation';
-import { createCompanyService } from '../../services/createCompanyService';
+import { createCompanyService } from '../../services/company/createCompanyService';
 
 export async function POST(req: Request) {
   const {

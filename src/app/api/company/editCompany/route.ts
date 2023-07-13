@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 import { EditCompanyData } from '@/app/utils/types';
 
-import { editCompanyService } from '../../services/editCompanyService';
+import { editCompanyService } from '../../services/company/editCompanyService';
 
 export async function PUT(req: Request) {
   const { id, company, companyInfo, companyAddress } =

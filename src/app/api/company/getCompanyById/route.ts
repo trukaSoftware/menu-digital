@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { getCompanyByIdService } from '../../services/getCompanyByIdService';
+import { getCompanyByIdService } from '../../services/company/getCompanyByIdService';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
