@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import {
   validateCompanyData,
   CompanyData,
-} from '../../utils/companyDataValidation';
+} from '../../utils/validations/companyDataValidation';
 
 export async function POST(req: Request) {
   const {
