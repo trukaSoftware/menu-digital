@@ -16,5 +16,7 @@ export async function GET(request: Request) {
     if (error instanceof Error) {
       return NextResponse.json({ message: error.message });
     }
+
+    throw error;
   }
 }
