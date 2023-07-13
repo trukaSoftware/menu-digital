@@ -40,8 +40,8 @@ model Info {
   email               String   @db.VarChar(45)
   phoneNumber         String   @db.VarChar(14)
   deliveryPhoneNumber String?
-  companyLogoUrl      String
-  companyThemeUrl     String
+  companyLogoUrl      String?
+  companyThemeUrl     String?
   address             Address?
   companyId           String   @unique
   branchId            String?  @unique
