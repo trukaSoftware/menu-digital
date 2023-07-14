@@ -1,13 +1,13 @@
 .foodCard {
-  @apply flex gap-1 relative p-2 border-b border-gray-300 w-full;
+  @apply flex gap-2 relative p-2 border-b border-gray-300 w-full lg:border lg:rounded-lg lg:w-full lg:p-0;
 }
 
 .foodImageWrapper {
-  @apply w-24 h-24 relative;
+  @apply w-24 h-24 relative lg:w-36 lg:h-36 lg:m-4;
 }
 
 .foodCardTextContent {
-  @apply flex flex-col gap-1 w-7/12 justify-between;
+  @apply flex flex-col w-7/12 justify-between lg:py-4;
 }
 
 .foodCardTextWrapper {
@@ -15,11 +15,11 @@
 }
 
 .foodCardTitle {
-  @apply text-gray-900 font-bold text-sm;
+  @apply text-gray-900 font-bold text-sm lg:text-base;
 }
 
 .foodCardDescription {
-  @apply text-gray-900 text-xs;
+  @apply text-gray-900 text-xs lg:text-sm;
 }
 
 .foodCardPricesWrapper {
@@ -27,11 +27,11 @@
 }
 
 .foodCardDiscountPrice {
-  @apply text-green-600 font-semibold text-xs;
+  @apply text-green-600 font-semibold text-xs lg:text-sm;
 }
 
 .foodCardRealPrice {
-  @apply font-semibold text-xs text-gray-900;
+  @apply font-semibold text-xs text-gray-900 lg:text-sm;
 }
 
 .foodCardPriceScratched {
@@ -39,5 +39,5 @@
 }
 
 .foodCardDiscountTag {
-  @apply absolute top-1 right-1 p-1 bg-red-600 rounded text-xs text-white;
+  @apply absolute top-1 right-1 p-1 bg-red-600 rounded text-xs text-white lg:py-1 lg:px-2 lg:top-2 lg:right-2;
 }
