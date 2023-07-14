@@ -1,10 +1,8 @@
-export const createSlug = (text: string) => {
-  let result = text.toLowerCase();
-
-  result = result.replace(/\s/g, `-`);
-  result = result.normalize(`NFD`).replace(/[\u0300-\u036f]/g, ``);
-  result = result.replace(/[^a-z0-9-]/g, ``);
-  result = result.replace(/-+/g, `-`);
-
-  return result;
-};
+export const createSlug = (text: string) =>
+  text
+    .toLowerCase()
+    .replace(/\s/g, `-`)
+    .normalize(`NFD`)
+    .replace(/[\u0300-\u036f]/g, ``)
+    .replace(/[^a-z0-9-]/g, ``)
+    .replace(/-+/g, `-`);
