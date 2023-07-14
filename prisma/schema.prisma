@@ -31,7 +31,7 @@ model Branch {
   requests  Requests?
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
-  company   Company       @relation(fields: [companyId], references: [id])
+  company   Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
 }
 
 model Info {
@@ -40,15 +40,15 @@ model Info {
   email               String   @db.VarChar(45)
   phoneNumber         String   @db.VarChar(14)
   deliveryPhoneNumber String?
-  companyLogoUrl      String
-  companyThemeUrl     String
+  companyLogoUrl      String?
+  companyThemeUrl     String?
   address             Address?
   companyId           String   @unique
   branchId            String?  @unique
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
-  company             Company  @relation(fields: [companyId], references: [id])
-  branch              Branch?  @relation(fields: [branchId], references: [id])
+  company             Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  branch              Branch?  @relation(fields: [branchId], references: [id], onDelete: Cascade)
 }
 
 model Address {
