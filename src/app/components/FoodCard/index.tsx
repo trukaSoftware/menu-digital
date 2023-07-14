@@ -33,7 +33,11 @@ export default function FoodCard({
         <p className={styles.foodCardPricesWrapper}>
           {discountedPrice ? (
             <span className={`${styles.foodCardDiscountPrice}`}>
-              R$ {discountedPrice}
+              {discountedPrice.toLocaleString(`pt-BR`, {
+                minimumFractionDigits: 2,
+                style: `currency`,
+                currency: `BRL`,
+              })}
             </span>
           ) : null}
           <span
@@ -41,7 +45,11 @@ export default function FoodCard({
               discountedPrice ? styles.foodCardPriceScratched : ``
             }`}
           >
-            R$ {price}
+            {price.toLocaleString(`pt-BR`, {
+              minimumFractionDigits: 2,
+              style: `currency`,
+              currency: `BRL`,
+            })}
           </span>
         </p>
       </div>
