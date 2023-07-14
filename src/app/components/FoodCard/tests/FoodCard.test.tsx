@@ -30,7 +30,7 @@ describe(`FoodCard`, () => {
   it(`when prop discountedPrice is not passed, shouldn't render discounted price`, () => {
     render(<FoodCard {...mockFoodCardWithoutDiscount} />);
 
-    const discountedPrice = screen.queryByText(`R$ 8`);
+    const discountedPrice = screen.queryByText(`R$ 8,00`);
 
     expect(discountedPrice).not.toBeInTheDocument();
   });
@@ -38,7 +38,7 @@ describe(`FoodCard`, () => {
   it(`when prop discountedPrice is passed, should render discounted price`, () => {
     render(<FoodCard {...mockFoodCard} />);
 
-    const discountedPrice = screen.getByText(`R$ 8`);
+    const discountedPrice = screen.getByText(`R$ 8,00`);
 
     expect(discountedPrice).toBeInTheDocument();
   });
@@ -46,7 +46,7 @@ describe(`FoodCard`, () => {
   it(`when prop discountedPrice is not passed, original price shouldn't have style foodCardPriceScratched`, () => {
     render(<FoodCard {...mockFoodCardWithoutDiscount} />);
 
-    const originalPrice = screen.queryByText(`R$ 10`);
+    const originalPrice = screen.queryByText(`R$ 10,00`);
 
     expect(originalPrice).toBeInTheDocument();
     expect(originalPrice).not.toHaveClass(`foodCardPriceScratched`);
@@ -55,7 +55,7 @@ describe(`FoodCard`, () => {
   it(`when prop discountedPrice is passed, original price should have style foodCardPriceScratched`, () => {
     render(<FoodCard {...mockFoodCard} />);
 
-    const originalPrice = screen.getByText(`R$ 10`);
+    const originalPrice = screen.getByText(`R$ 10,00`);
 
     expect(originalPrice).toBeInTheDocument();
     expect(originalPrice).toHaveClass(`foodCardPriceScratched`);
