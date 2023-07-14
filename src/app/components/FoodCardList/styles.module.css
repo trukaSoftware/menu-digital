@@ -3,5 +3,9 @@
 }
 
 .foodCardListTitle {
-  @apply font-semibold text-gray-900 text-base pb-2;
+  @apply font-semibold text-gray-900 text-base pb-2 lg:pt-2 lg:text-xl;
+}
+
+.foodCardListFoods {
+  @apply w-full lg:grid lg:grid-cols-2 xl:grid-cols-3 lg:gap-3 lg:p-2;
 }
