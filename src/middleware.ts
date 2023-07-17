@@ -19,6 +19,7 @@ const publicRoutes =
         `/api/items/createItem`,
         `/api/items/deleteItem`,
         `/api/items/editItem`,
+        `/api/items/getItemById`,
         `/api/items/getItems`,
       ]
     : [`/`];
