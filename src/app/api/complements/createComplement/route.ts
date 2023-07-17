@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import {
   validateComplementData,
   ComplementData,
-} from '../../../utils/validations/complementsValidation';
+} from '../../../utils/validations/complementsDataValidation';
 import { createComplementService } from '../../services/complement/createComplementService';
 
 export async function POST(req: Request) {
