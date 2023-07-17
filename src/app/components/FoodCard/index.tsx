@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 import FoodImageSvg from '../../../../public/images/food-image.svg';
 import styles from './styles.module.css';
+import { priceToBrazilCurrency } from './utils/utils';
 
 export interface FoodCardProps {
   title: string;
@@ -33,11 +34,7 @@ export default function FoodCard({
         <p className={styles.foodCardPricesWrapper}>
           {discountedPrice ? (
             <span className={`${styles.foodCardDiscountPrice}`}>
-              {discountedPrice.toLocaleString(`pt-BR`, {
-                minimumFractionDigits: 2,
-                style: `currency`,
-                currency: `BRL`,
-              })}
+              {priceToBrazilCurrency(discountedPrice)}
             </span>
           ) : null}
           <span
@@ -45,11 +42,7 @@ export default function FoodCard({
               discountedPrice ? styles.foodCardPriceScratched : ``
             }`}
           >
-            {price.toLocaleString(`pt-BR`, {
-              minimumFractionDigits: 2,
-              style: `currency`,
-              currency: `BRL`,
-            })}
+            {priceToBrazilCurrency(price)}
           </span>
         </p>
       </div>
