@@ -12,6 +12,7 @@ const publicRoutes =
         `/api/company/editCompany`,
         `/api/company/deleteCompany`,
         `/api/complements/createComplement`,
+        `/api/complements/deleteComplement`,
       ]
     : [`/`];
 
