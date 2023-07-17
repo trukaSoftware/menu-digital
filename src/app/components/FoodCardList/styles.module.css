@@ -1,5 +1,5 @@
 .foodCardList {
-  @apply w-full pt-2 pl-2 pr-2;
+  @apply w-full pt-2 pl-2 pr-2 max-w-screen-xxl;
 }
 
 .foodCardListTitle {
