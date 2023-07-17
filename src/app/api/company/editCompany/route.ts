@@ -8,12 +8,12 @@ export async function PUT(req: Request) {
   const { id, company, companyInfo, companyAddress } =
     (await req.json()) as EditCompanyData;
 
-  if (!id)
-    throw new Error(
-      `Por favor, informe o id do estabelecimento para fazer alterações`
-    );
-
   try {
+    if (!id)
+      throw new Error(
+        `Por favor, informe o id do estabelecimento para fazer alterações`
+      );
+
     const companyData = await editCompanyService({
       id,
       company,

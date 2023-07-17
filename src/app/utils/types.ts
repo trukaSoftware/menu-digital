@@ -16,3 +16,9 @@ export type EditCompanyData = {
     address?: string;
   };
 };
+
+export type EditComplementsData = {
+  id: string;
+  name?: string;
+  maxAmount?: number;
+};

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { deleteCompanyService } from '../../services/company/deleteCompanyService';
+import { deleteComplementService } from '../../services/complement/deleteComplementService';
 
 export async function DELETE(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -8,11 +8,9 @@ export async function DELETE(request: Request) {
 
   try {
     if (!id)
-      throw new Error(
-        `Por favor, adicione o id do estabelecimento a ser deletado`
-      );
+      throw new Error(`Por favor, adicione o id do complemento a ser deletado`);
 
-    await deleteCompanyService(id);
+    await deleteComplementService(id);
 
     return NextResponse.json({ deleted: true });
   } catch (error) {
