@@ -6,12 +6,12 @@ export async function DELETE(request: Request) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get(`id`);
 
-  if (!id)
-    throw new Error(
-      `Por favor, adicione o id do estabelecimento a ser deletado`
-    );
-
   try {
+    if (!id)
+      throw new Error(
+        `Por favor, adicione o id do estabelecimento a ser deletado`
+      );
+
     await deleteCompanyService(id);
 
     return NextResponse.json({ deleted: true });

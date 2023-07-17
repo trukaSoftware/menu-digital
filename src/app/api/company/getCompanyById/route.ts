@@ -6,9 +6,9 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get(`id`);
 
-  if (!id) throw new Error(`Por favor, adicione o id a ser buscado`);
-
   try {
+    if (!id) throw new Error(`Por favor, adicione o id a ser buscado`);
+
     const companies = await getCompanyByIdService(id);
 
     return NextResponse.json({ companies });
