@@ -84,7 +84,7 @@ model ProductsComplements {
 
 model Complements {
   id            String       @id @default(uuid())
-  nome          String
+  name          String
   maxAmount     Int?
   products      ProductsComplements[]
   items         Items[]
@@ -94,7 +94,7 @@ model Complements {
 
 model Items {
   id            String       @id @default(uuid())
-  nome          String
+  name          String
   price         Decimal?     @db.Money
   complements   Complements  @relation(fields: [complementsId], references: [id], onDelete: Cascade)
   complementsId String
