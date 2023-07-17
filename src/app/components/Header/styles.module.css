@@ -15,5 +15,5 @@
 }
 
 .title {
-  @apply ml-2 text-base font-bold text-gray-900 lg:text-2xl;
+  @apply ml-2 text-lg font-bold text-gray-900 lg:text-2xl;
 }
