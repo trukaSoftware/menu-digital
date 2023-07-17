@@ -1,0 +1,51 @@
+.foodCardDialogTrigger {
+  width: 100%;
+}
+
+.foodCardDialogOverlay {
+  @apply fixed inset-0 bg-black/50;
+}
+
+.foodCardDialogContent {
+  @apply fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-xl rounded bg-white max-h-screen lg:h-2/3 lg:w-128 lg:max-w-none lg:rounded-lg;
+}
+
+.foodCardDialogClose {
+  @apply absolute top-2 right-2 w-9 h-9 flex items-center justify-center rounded-full bg-red-600 z-10;
+}
+
+.foodCardDialogDiscount {
+  @apply flex items-center justify-center absolute top-3 left-3 py-1.5 px-1 bg-red-600 rounded text-base text-white z-10 w-12;
+}
+
+.foodCardDialogDiscount > span {
+  @apply text-base text-white;
+}
+
+.foodCardDialogImageWrapper {
+  @apply w-full h-64 absolute top-0 right-0 lg:rounded-lg;
+}
+
+.foodCardDialogImage {
+  @apply object-cover lg:rounded-lg;
+}
+
+.foodCardImageSpace {
+  @apply w-full h-64;
+}
+
+.foodCardDialogInfo {
+  @apply p-3 flex flex-col gap-2 overflow-y-auto max-h-[calc(100%-16rem)];
+}
+
+.foodCardDialogTitle {
+  @apply text-lg font-bold text-gray-900;
+}
+
+.foodCardDialogDescription {
+  @apply text-gray-900 text-sm;
+}
+
+span.bigPriceClassName {
+  @apply text-lg;
+}
