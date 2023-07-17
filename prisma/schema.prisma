@@ -75,11 +75,11 @@ model Requests {
 
 model ProductsComplements {
   products         Products     @relation(fields: [productsId], references: [id])
-  complements      Complements  @relation(fields: [complementsId], references: [id])
+  complements      Complements  @relation(fields: [complementId], references: [id])
   productsId       String
-  complementsId    String
+  complementId    String
 
-  @@id([productsId, complementsId])
+  @@id([productsId, complementId])
 }
 
 model Complements {
@@ -96,8 +96,8 @@ model Items {
   id            String       @id @default(uuid())
   name          String
   price         Decimal?     @db.Money
-  complements   Complements  @relation(fields: [complementsId], references: [id], onDelete: Cascade)
-  complementsId String
+  complements   Complements  @relation(fields: [complementId], references: [id], onDelete: Cascade)
+  complementId String
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
 }
