@@ -18,6 +18,7 @@ const publicRoutes =
         `/api/complements/getComplementById`,
         `/api/items/createItem`,
         `/api/items/deleteItem`,
+        `/api/items/editItem`,
       ]
     : [`/`];
 
