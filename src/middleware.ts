@@ -15,6 +15,7 @@ const publicRoutes =
         `/api/complements/deleteComplement`,
         `/api/complements/editComplement`,
         `/api/complements/getComplements`,
+        `/api/complements/getComplementById`,
       ]
     : [`/`];
 
