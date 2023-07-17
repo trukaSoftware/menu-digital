@@ -13,7 +13,7 @@ export async function PUT(req: Request) {
         `Por favor, informe o id do complemento para fazer alterações`
       );
 
-    if (!name || !maxAmount)
+    if (!name && !maxAmount)
       throw new Error(
         `Por favor, informe ao menos um campo do complemento a ser alterado`
       );
