@@ -18,17 +18,11 @@ export const editComplementService = async ({
       throw new Error(`Registro não encontrado para o ID: ${id}`);
     }
 
-    await prisma.complements.update({
+    const updatedData = await prisma.complements.update({
       where: { id },
       data: {
         name: name || existingRegister.name,
         maxAmount: maxAmount || existingRegister.maxAmount,
-      },
-    });
-
-    const updatedData = await prisma.complements.findUnique({
-      where: {
-        id,
       },
     });
 
