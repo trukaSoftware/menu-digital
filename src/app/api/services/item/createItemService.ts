@@ -12,7 +12,7 @@ export const createItemService = async ({
       where: { complementId },
     });
 
-    if (itemExists) throw new Error(`item already exists`);
+    if (itemExists) throw new Error(`Item já existe`);
 
     const item = await prisma.items.create({
       data: {
