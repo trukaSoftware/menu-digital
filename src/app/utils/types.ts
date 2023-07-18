@@ -22,3 +22,9 @@ export type EditComplementsData = {
   name?: string;
   maxAmount?: number;
 };
+
+export type EditItemData = {
+  id: string;
+  name?: string;
+  price?: number;
+};

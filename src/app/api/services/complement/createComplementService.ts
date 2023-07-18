@@ -1,4 +1,4 @@
-import { ComplementData } from '@/app/utils/validations/complementsValidation';
+import { ComplementData } from '@/app/utils/validations/complementsDataValidation';
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 

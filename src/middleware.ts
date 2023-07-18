@@ -7,15 +7,20 @@ const publicRoutes =
     ? [
         `/`,
         `/api/company/createCompany`,
-        `/api/company/getCompanies`,
-        `/api/company/getCompanyById`,
-        `/api/company/editCompany`,
         `/api/company/deleteCompany`,
+        `/api/company/editCompany`,
+        `/api/company/getCompanyById`,
+        `/api/company/getCompanies`,
         `/api/complements/createComplement`,
         `/api/complements/deleteComplement`,
         `/api/complements/editComplement`,
-        `/api/complements/getComplements`,
         `/api/complements/getComplementById`,
+        `/api/complements/getComplements`,
+        `/api/items/createItem`,
+        `/api/items/deleteItem`,
+        `/api/items/editItem`,
+        `/api/items/getItemById`,
+        `/api/items/getItems`,
       ]
     : [`/`];
 

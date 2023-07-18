@@ -7,5 +7,5 @@ const complementSchema = object({
 
 export type ComplementData = InferType<typeof complementSchema>;
 
-export const validateComplementData = (companyData: ComplementData) =>
-  complementSchema.validate(companyData);
+export const validateComplementData = (complementData: ComplementData) =>
+  complementSchema.validate(complementData);

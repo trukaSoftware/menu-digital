@@ -1,14 +1,10 @@
-import { EditComplementsData } from '@/app/utils/types';
+import { EditItemData } from '@/app/utils/types';
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 
-export const editComplementService = async ({
-  id,
-  name,
-  maxAmount,
-}: EditComplementsData) => {
+export const editItemService = async ({ id, name, price }: EditItemData) => {
   try {
-    const existingRegister = await prisma.complements.findUnique({
+    const existingRegister = await prisma.items.findUnique({
       where: {
         id,
       },
@@ -18,11 +14,11 @@ export const editComplementService = async ({
       throw new Error(`Registro não encontrado para o ID: ${id}`);
     }
 
-    const updatedData = await prisma.complements.update({
+    const updatedData = await prisma.items.update({
       where: { id },
       data: {
         name: name || existingRegister.name,
-        maxAmount: maxAmount || existingRegister.maxAmount,
+        price: price || existingRegister.price,
       },
     });
 

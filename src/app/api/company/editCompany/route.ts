@@ -14,6 +14,11 @@ export async function PUT(req: Request) {
         `Por favor, informe o id do estabelecimento para fazer alterações`
       );
 
+    if (!company && !companyInfo && !companyAddress)
+      throw new Error(
+        `Por favor, informe ao menos um objeto da company a ser alterado`
+      );
+
     const companyData = await editCompanyService({
       id,
       company,
