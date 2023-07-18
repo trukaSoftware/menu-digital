@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 import FoodImageSvg from '../../../../public/images/food-image.svg';
+import { priceToBrazilCurrency } from '../../../utils/priceToBrazilCurrency';
 import styles from './styles.module.css';
 
 export interface FoodCardProps {
@@ -33,7 +34,7 @@ export default function FoodCard({
         <p className={styles.foodCardPricesWrapper}>
           {discountedPrice ? (
             <span className={`${styles.foodCardDiscountPrice}`}>
-              R$ {discountedPrice}
+              {priceToBrazilCurrency(discountedPrice)}
             </span>
           ) : null}
           <span
@@ -41,7 +42,7 @@ export default function FoodCard({
               discountedPrice ? styles.foodCardPriceScratched : ``
             }`}
           >
-            R$ {price}
+            {priceToBrazilCurrency(price)}
           </span>
         </p>
       </div>

@@ -6,7 +6,14 @@ import FoodCardList from '../components/FoodCardList';
 import Header from '../components/Header';
 import styles from './styles.module.css';
 
-const mockFoodCardList = [mockFoodCard, mockFoodCardWithoutDiscount];
+const mockFoodCardList = [
+  mockFoodCard,
+  mockFoodCardWithoutDiscount,
+  mockFoodCard,
+  mockFoodCard,
+  mockFoodCardWithoutDiscount,
+  mockFoodCard,
+];
 
 export default function Products() {
   return (
