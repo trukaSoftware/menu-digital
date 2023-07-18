@@ -22,10 +22,11 @@ export const createComplementService = async ({
 
     return complement.id;
   } catch (error) {
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError ||
+      error instanceof Error
+    ) {
       throw new Error(error.message);
     }
-
-    throw error;
   }
 };

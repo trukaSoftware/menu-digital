@@ -16,10 +16,11 @@ export const getCompanyByIdService = async (id: string) => {
 
     return companies;
   } catch (error) {
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError ||
+      error instanceof Error
+    ) {
       throw new Error(error.message);
     }
-
-    throw error;
   }
 };
