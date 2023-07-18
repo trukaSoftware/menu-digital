@@ -13,14 +13,14 @@ export const createCategoryService = async ({
 
     if (categoryExists) throw new Error(`Categoria já existe`);
 
-    const categoy = await prisma.productCategories.create({
+    const category = await prisma.productCategories.create({
       data: {
         companyId,
         name,
       },
     });
 
-    return categoy;
+    return category;
   } catch (error) {
     if (
       error instanceof Prisma.PrismaClientKnownRequestError ||
