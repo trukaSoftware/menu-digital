@@ -24,6 +24,7 @@ const publicRoutes =
         `/api/categories/createCategory`,
         `/api/categories/deleteCategory`,
         `/api/categories/editCategory`,
+        `/api/categories/getCategories`,
       ]
     : [`/`];
 
