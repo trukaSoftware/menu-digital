@@ -17,7 +17,5 @@ export async function DELETE(request: Request) {
     if (error instanceof Error) {
       return NextResponse.json({ message: error.message });
     }
-
-    throw error;
   }
 }

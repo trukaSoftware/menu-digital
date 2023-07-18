@@ -27,7 +27,5 @@ export async function POST(req: Request) {
     if (error instanceof Error) {
       return NextResponse.json({ message: error.message });
     }
-
-    return error;
   }
 }
