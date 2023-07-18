@@ -22,6 +22,7 @@ const publicRoutes =
         `/api/items/getItemById`,
         `/api/items/getItems`,
         `/api/categories/createCategory`,
+        `/api/categories/deleteCategory`,
       ]
     : [`/`];
 
