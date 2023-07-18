@@ -20,7 +20,7 @@ export const editCategoryService = async ({ id, name }: EditCategoryData) => {
 
     if (nameAlreadyRegistered)
       throw new Error(
-        `${name} já é o nome de uma categória existente, escolha outro nome`
+        `${name} já é o nome de uma categoria existente, escolha outro nome`
       );
 
     const updatedData = await prisma.productCategories.update({
