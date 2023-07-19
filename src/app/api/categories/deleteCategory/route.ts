@@ -1,15 +1,16 @@
 import { NextResponse } from 'next/server';
 
-import { deleteItemService } from '../../services/item/deleteItemService';
+import { deleteCategoryService } from '../../services/category/deleteCategoryService';
 
 export async function DELETE(request: Request) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get(`id`);
 
   try {
-    if (!id) throw new Error(`Por favor, adicione o id do item a ser deletado`);
+    if (!id)
+      throw new Error(`Por favor, adicione o id da categoria a ser deletada`);
 
-    await deleteItemService(id);
+    await deleteCategoryService(id);
 
     return NextResponse.json({ deleted: true });
   } catch (error) {

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 import FoodImageSvg from '../../../../public/images/food-image.svg';
-import { priceToBrazilCurrency } from '../../../utils/priceToBrazilCurrency';
+import { priceToBrazilCurrency } from '../../utils/priceToBrazilCurrency';
 import styles from './styles.module.css';
 
 export interface FoodCardProps {

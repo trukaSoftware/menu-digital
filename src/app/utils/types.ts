@@ -28,3 +28,8 @@ export type EditItemData = {
   name?: string;
   price?: number;
 };
+
+export type EditCategoryData = {
+  id: string;
+  name: string;
+};

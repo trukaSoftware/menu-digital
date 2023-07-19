@@ -11,7 +11,5 @@ export async function GET() {
     if (error instanceof Error) {
       return NextResponse.json({ message: error.message });
     }
-
-    return error;
   }
 }

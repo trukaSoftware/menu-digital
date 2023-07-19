@@ -1,20 +1,13 @@
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 
-export const getCompanyByIdService = async (id: string) => {
+export const getCategoryByIdService = async (id: string) => {
   try {
-    const companies = await prisma.company.findUnique({
+    const category = await prisma.productCategories.findUnique({
       where: { id },
-      include: {
-        info: {
-          include: {
-            address: true,
-          },
-        },
-      },
     });
 
-    return companies;
+    return category;
   } catch (error) {
     if (
       error instanceof Prisma.PrismaClientKnownRequestError ||

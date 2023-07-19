@@ -16,18 +16,16 @@ export async function PUT(req: Request) {
         `Por favor, informe ao menos um campo do item a ser alterado`
       );
 
-    const itemDate = await editItemService({
+    const itemData = await editItemService({
       id,
       name,
       price,
     });
 
-    return NextResponse.json({ itemDate });
+    return NextResponse.json({ itemData });
   } catch (error) {
     if (error instanceof Error) {
       return NextResponse.json({ message: error.message });
     }
-
-    return error;
   }
 }

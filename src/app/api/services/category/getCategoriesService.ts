@@ -1,16 +1,11 @@
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 
-export const getComplementsByIdService = async (id: string) => {
+export const getCategoriesService = async () => {
   try {
-    const complement = await prisma.complements.findUnique({
-      where: { id },
-      include: {
-        items: true,
-      },
-    });
+    const categories = await prisma.productCategories.findMany();
 
-    return complement;
+    return categories;
   } catch (error) {
     if (
       error instanceof Prisma.PrismaClientKnownRequestError ||
