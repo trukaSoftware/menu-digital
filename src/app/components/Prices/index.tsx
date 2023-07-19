@@ -18,12 +18,14 @@ export default function Prices({
   return (
     <p className={styles.foodCardPricesWrapper}>
       {discountedPrice ? (
-        <span className={`${styles.foodCardDiscountPrice} ${priceClassName}`}>
+        <span
+          className={`${styles.foodCardDiscountPrice} ${discountedPriceClassName}`}
+        >
           {priceToBrazilCurrency(discountedPrice)}
         </span>
       ) : null}
       <span
-        className={`${styles.foodCardRealPrice} ${discountedPriceClassName} ${
+        className={`${styles.foodCardRealPrice} ${priceClassName} ${
           discountedPrice ? styles.foodCardPriceScratched : ``
         }`}
       >
