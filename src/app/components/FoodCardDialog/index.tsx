@@ -24,11 +24,17 @@ export default function FoodCardDialog({ foodCard }: FoodCardDialogProps) {
       <Dialog.Portal>
         <Dialog.Overlay className={styles.foodCardDialogOverlay} />
         <Dialog.Content className={styles.foodCardDialogContent}>
-          <Dialog.Close className={styles.foodCardDialogClose}>
+          <Dialog.Close
+            className={styles.foodCardDialogClose}
+            aria-label="Fechar modal"
+          >
             <CgClose size={30} color="#fff" />
           </Dialog.Close>
           {foodCard?.discountPercentage ? (
-            <div className={styles.foodCardDialogDiscount}>
+            <div
+              className={styles.foodCardDialogDiscount}
+              data-testid="modal-discount-tag"
+            >
               <span>{foodCard.discountPercentage}%</span>
             </div>
           ) : null}
