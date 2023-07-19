@@ -1,3 +1,5 @@
+import { priceToBrazilCurrency } from '@/app/utils/priceToBrazilCurrency';
+
 import styles from './styles.module.css';
 
 export interface PricesProps {
@@ -17,7 +19,7 @@ export default function Prices({
     <p className={styles.foodCardPricesWrapper}>
       {discountedPrice ? (
         <span className={`${styles.foodCardDiscountPrice} ${priceClassName}`}>
-          R$ {discountedPrice}
+          {priceToBrazilCurrency(discountedPrice)}
         </span>
       ) : null}
       <span
@@ -25,7 +27,7 @@ export default function Prices({
           discountedPrice ? styles.foodCardPriceScratched : ``
         }`}
       >
-        R$ {price}
+        {priceToBrazilCurrency(price)}
       </span>
     </p>
   );
