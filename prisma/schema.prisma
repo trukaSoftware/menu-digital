@@ -77,7 +77,7 @@ model ProductsComplements {
   products         Products     @relation(fields: [productsId], references: [id])
   complements      Complements  @relation(fields: [complementId], references: [id])
   productsId       String
-  complementId    String
+  complementId     String
 
   @@id([productsId, complementId])
 }
@@ -115,6 +115,7 @@ model ProductCategories {
 model Products {
   id                    String              @id @default(uuid())
   name                  String              @db.VarChar(45)
+  description           String
   price                 Decimal             @db.Money
   discount              Int?
   companyId             String?
