@@ -129,6 +129,7 @@ model Products {
 
 model ProductImages {
   id        String   @id @default(uuid())
+  name      String
   imageUrl  String
   alt       String   @db.VarChar(500)
   productId String
