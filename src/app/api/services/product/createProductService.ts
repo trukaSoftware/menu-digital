@@ -54,7 +54,15 @@ export const createProductService = async ({
       where: { id: product.id },
       include: {
         productsImages: true,
-        complements: true,
+        complements: {
+          include: {
+            complements: {
+              include: {
+                items: true,
+              },
+            },
+          },
+        },
       },
     });
   } catch (error) {
