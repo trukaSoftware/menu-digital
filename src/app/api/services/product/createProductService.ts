@@ -40,7 +40,7 @@ export const createProductService = async ({
       });
     }
 
-    const imagesUrls = (images ? await uploadImages(images) : null)?.map(
+    const imagesUrls = (images ? await uploadImages(images, name) : null)?.map(
       (image) => ({ ...image, productId: product.id })
     );
 
