@@ -10,6 +10,7 @@ type UploadImagesData = {
 
 type UploadPreset = {
   folder: string;
+  public_id: string;
   width?: number;
   height?: number;
 };
@@ -26,10 +27,14 @@ const uploadBase64Image = async (
   return response.secure_url;
 };
 
-export const uploadImages = async (images: UploadImagesData[]) => {
-  const result = images.map(async (image) => {
+export const uploadImages = async (
+  images: UploadImagesData[],
+  public_id: string
+) => {
+  const result = images.map(async (image, index) => {
     const secure_url = await uploadBase64Image(image.file, {
       folder: `products`,
+      public_id: `${public_id}-${index}`,
       width: image.width || 300,
       height: image.height || 300,
     });
