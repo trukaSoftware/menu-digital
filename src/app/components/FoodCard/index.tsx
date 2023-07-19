@@ -24,7 +24,7 @@ export default function FoodCard({
   return (
     <article className={styles.foodCard}>
       <div className={styles.foodImageWrapper}>
-        <Image src={FoodImageSvg} alt="Foto da comida" fill />
+        <Image src={FoodImageSvg} alt={title} fill />
       </div>
       <div className={styles.foodCardTextContent}>
         <div className={styles.foodCardTextWrapper}>

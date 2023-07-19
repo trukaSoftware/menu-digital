@@ -41,7 +41,7 @@ export default function FoodCardDialog({ foodCard }: FoodCardDialogProps) {
           <div className={styles.foodCardDialogImageWrapper}>
             <Image
               src={FoodImageSvg}
-              alt="Foto da comida"
+              alt={foodCard.title}
               fill
               className={styles.foodCardDialogImage}
             />
