@@ -7,7 +7,7 @@
 }
 
 .foodCardDialogContent {
-  @apply fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-xl rounded bg-white max-h-screen lg:h-2/3 lg:w-128 lg:max-w-none lg:rounded-lg;
+  @apply fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full rounded bg-white max-h-screen md:h-2/3 md:w-128 md:rounded-lg;
 }
 
 .foodCardDialogClose {
@@ -23,11 +23,11 @@
 }
 
 .foodCardDialogImageWrapper {
-  @apply w-full h-64 absolute top-0 right-0 lg:rounded-lg;
+  @apply w-full h-64 absolute top-0 right-0 md:rounded-lg;
 }
 
 .foodCardDialogImage {
-  @apply object-cover lg:rounded-lg;
+  @apply object-cover md:rounded-lg;
 }
 
 .foodCardImageSpace {
