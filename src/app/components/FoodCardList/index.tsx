@@ -1,4 +1,5 @@
-import FoodCard, { FoodCardProps } from '../FoodCard';
+import { FoodCardProps } from '../FoodCard';
+import FoodCardDialog from '../FoodCardDialog';
 import styles from './styles.module.css';
 
 export interface FoodCardListProps {
@@ -12,7 +13,7 @@ export default function FoodCardList({ title, foodCards }: FoodCardListProps) {
       <h2 className={styles.foodCardListTitle}>{title}</h2>
       <div className={styles.foodCardListFoods}>
         {foodCards?.map((food) => (
-          <FoodCard {...food} key={food.title} />
+          <FoodCardDialog foodCard={food} key={food.title} />
         ))}
       </div>
     </section>

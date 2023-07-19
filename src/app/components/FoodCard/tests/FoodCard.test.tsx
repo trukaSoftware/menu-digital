@@ -1,10 +1,12 @@
 import { vi } from 'vitest';
 
+import {
+  foodCardMock,
+  foodCardWithoutDiscountMock,
+} from '@/app/mocks/foodCard';
 import { render, screen, cleanup } from '@testing-library/react';
 
 import FoodCard from '..';
-
-import { mockFoodCard, mockFoodCardWithoutDiscount } from '../mocks';
 
 describe(`FoodCard`, () => {
   afterAll(() => {
@@ -17,7 +19,7 @@ describe(`FoodCard`, () => {
   });
 
   it(`check if h3 is beeing rendered`, () => {
-    render(<FoodCard {...mockFoodCard} />);
+    render(<FoodCard {...foodCardMock} />);
 
     const heading = screen.getByRole(`heading`, {
       name: `Nome do Produto`,
@@ -28,7 +30,7 @@ describe(`FoodCard`, () => {
   });
 
   it(`when prop discountedPrice is not passed, shouldn't render discounted price`, () => {
-    render(<FoodCard {...mockFoodCardWithoutDiscount} />);
+    render(<FoodCard {...foodCardWithoutDiscountMock} />);
 
     const discountedPrice = screen.queryByText(`R$ 8,00`);
 
@@ -36,7 +38,7 @@ describe(`FoodCard`, () => {
   });
 
   it(`when prop discountedPrice is passed, should render discounted price`, () => {
-    render(<FoodCard {...mockFoodCard} />);
+    render(<FoodCard {...foodCardMock} />);
 
     const discountedPrice = screen.getByText(`R$ 8,00`);
 
@@ -44,7 +46,7 @@ describe(`FoodCard`, () => {
   });
 
   it(`when prop discountedPrice is not passed, original price shouldn't have style foodCardPriceScratched`, () => {
-    render(<FoodCard {...mockFoodCardWithoutDiscount} />);
+    render(<FoodCard {...foodCardWithoutDiscountMock} />);
 
     const originalPrice = screen.queryByText(`R$ 10,00`);
 
@@ -53,7 +55,7 @@ describe(`FoodCard`, () => {
   });
 
   it(`when prop discountedPrice is passed, original price should have style foodCardPriceScratched`, () => {
-    render(<FoodCard {...mockFoodCard} />);
+    render(<FoodCard {...foodCardMock} />);
 
     const originalPrice = screen.getByText(`R$ 10,00`);
 
@@ -62,7 +64,7 @@ describe(`FoodCard`, () => {
   });
 
   it(`when prop discountPercentage is not passed, shouldn't render discount percentage`, () => {
-    render(<FoodCard {...mockFoodCardWithoutDiscount} />);
+    render(<FoodCard {...foodCardWithoutDiscountMock} />);
 
     const discountPercentage = screen.queryByText(`%20`);
 
@@ -70,7 +72,7 @@ describe(`FoodCard`, () => {
   });
 
   it(`when prop discountPercentage is passed, should render discount percentage`, () => {
-    render(<FoodCard {...mockFoodCard} />);
+    render(<FoodCard {...foodCardMock} />);
 
     const discountPercentage = screen.getByText(`20%`);
 

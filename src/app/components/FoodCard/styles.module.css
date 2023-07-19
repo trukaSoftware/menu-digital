@@ -11,7 +11,7 @@
 }
 
 .foodCardTextWrapper {
-  @apply flex flex-col gap-1;
+  @apply flex flex-col gap-1 items-start;
 }
 
 .foodCardTitle {

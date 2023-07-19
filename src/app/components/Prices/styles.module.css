@@ -1,0 +1,15 @@
+.foodCardPricesWrapper {
+  @apply flex gap-1.5;
+}
+
+.foodCardDiscountPrice {
+  @apply text-green-600 font-semibold text-xs;
+}
+
+.foodCardRealPrice {
+  @apply font-semibold text-xs text-gray-900;
+}
+
+.foodCardPriceScratched {
+  @apply line-through text-gray-400;
+}

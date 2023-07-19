@@ -1,6 +1,6 @@
-import { FoodCardProps } from '..';
+import { FoodCardProps } from '../components/FoodCard';
 
-export const mockFoodCard = {
+export const foodCardMock = {
   title: `Nome do Produto`,
   description: `Descrição do produto`,
   foodImage: `/images/food-image.svg`,
@@ -9,7 +9,7 @@ export const mockFoodCard = {
   discountPercentage: 20,
 } as FoodCardProps;
 
-export const mockFoodCardWithoutDiscount = {
+export const foodCardWithoutDiscountMock = {
   title: `Nome do Produto`,
   description: `Descrição do produto`,
   foodImage: `/images/food-image.svg`,
