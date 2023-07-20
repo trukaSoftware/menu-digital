@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { EditeProductData } from '@/app/utils/types';
+import { EditProductData } from '@/app/utils/types';
 
 import { editProductService } from '../../services/product/editProductService';
 
@@ -13,7 +13,7 @@ export async function PUT(req: Request) {
     categoryId,
     complementsId,
     complementsToRemove,
-  } = (await req.json()) as EditeProductData;
+  } = (await req.json()) as EditProductData;
 
   try {
     if (!id)

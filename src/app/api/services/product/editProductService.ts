@@ -1,4 +1,4 @@
-import { EditeProductData } from '@/app/utils/types';
+import { EditProductData } from '@/app/utils/types';
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 
@@ -10,7 +10,7 @@ export const editProductService = async ({
   categoryId,
   complementsId,
   complementsToRemove,
-}: EditeProductData) => {
+}: EditProductData) => {
   try {
     const existingRegister = await prisma.products.findUnique({
       where: {
