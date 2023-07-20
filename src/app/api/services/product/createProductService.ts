@@ -9,7 +9,7 @@ export const createProductService = async ({
   price,
   categoryId,
   companyId,
-  complementId,
+  complementsId,
   discount,
   images,
 }: ProductData) => {
@@ -31,12 +31,14 @@ export const createProductService = async ({
       },
     });
 
-    if (complementId) {
-      await prisma.productsComplements.create({
-        data: {
-          complementId,
-          productsId: product.id,
-        },
+    if (complementsId) {
+      const productsComplemntsIds = complementsId.map((complementId) => ({
+        complementId,
+        productsId: product.id,
+      }));
+
+      await prisma.productsComplements.createMany({
+        data: productsComplemntsIds,
       });
     }
 
@@ -54,7 +56,7 @@ export const createProductService = async ({
       where: { id: product.id },
       include: {
         productsImages: true,
-        complements: {
+        productsComplements: {
           include: {
             complements: {
               include: {
