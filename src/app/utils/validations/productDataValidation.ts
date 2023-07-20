@@ -6,7 +6,7 @@ const productSchema = object({
   price: number().min(1).required(),
   categoryId: string().required(),
   companyId: string().required(),
-  complementId: string(),
+  complementsId: array(string().required()),
   discount: number(),
   images: array(
     object({
