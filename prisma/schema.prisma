@@ -83,13 +83,13 @@ model ProductsComplements {
 }
 
 model Complements {
-  id            String       @id @default(uuid())
-  name          String
-  maxAmount     Int?
-  products      ProductsComplements[]
-  items         Items[]
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
+  id                  String     @id @default(uuid())
+  name                String
+  maxAmount           Int?
+  productsComplements ProductsComplements[]
+  items               Items[]
+  createdAt           DateTime   @default(now())
+  updatedAt           DateTime   @updatedAt
 }
 
 model Items {
@@ -121,7 +121,7 @@ model Products {
   companyId             String?
   ProductCategoriesId   String?
   productsImages        ProductImages[]
-  complements           ProductsComplements[]
+  productsComplements   ProductsComplements[]
   company               Company?            @relation(fields: [companyId], references: [id], onDelete: Cascade)
   productCategories     ProductCategories?  @relation(fields: [ProductCategoriesId], references: [id], onDelete: Cascade)
   createdAt             DateTime            @default(now())
