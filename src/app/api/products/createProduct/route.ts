@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     price,
     categoryId,
     companyId,
-    complementId,
+    complementsId,
     discount,
     images,
   } = (await req.json()) as ProductData;
@@ -25,7 +25,7 @@ export async function POST(req: Request) {
       price,
       categoryId,
       companyId,
-      complementId,
+      complementsId,
       discount,
       images,
     });
@@ -36,7 +36,7 @@ export async function POST(req: Request) {
       price,
       categoryId,
       companyId,
-      complementId,
+      complementsId,
       discount,
       images,
     });
