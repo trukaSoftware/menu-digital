@@ -67,29 +67,29 @@ model Requests {
   products        String
   companyId       String     @unique
   branchId        String?    @unique
-  company         Company    @relation(fields: [companyId], references: [id])
-  branch          Branch?    @relation(fields: [branchId], references: [id])
+  company         Company    @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  branch          Branch?    @relation(fields: [branchId], references: [id], onDelete: Cascade)
   createdAt       DateTime   @default(now())
   updatedAt       DateTime   @updatedAt
 }
 
 model ProductsComplements {
-  products         Products     @relation(fields: [productsId], references: [id])
-  complements      Complements  @relation(fields: [complementId], references: [id])
+  products         Products     @relation(fields: [productsId], references: [id], onDelete: Cascade)
+  complements      Complements  @relation(fields: [complementId], references: [id], onDelete: Cascade)
   productsId       String
-  complementId    String
+  complementId     String
 
   @@id([productsId, complementId])
 }
 
 model Complements {
-  id            String       @id @default(uuid())
-  name          String
-  maxAmount     Int?
-  products      ProductsComplements[]
-  items         Items[]
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
+  id                  String     @id @default(uuid())
+  name                String
+  maxAmount           Int?
+  productsComplements ProductsComplements[]
+  items               Items[]
+  createdAt           DateTime   @default(now())
+  updatedAt           DateTime   @updatedAt
 }
 
 model Items {
@@ -97,7 +97,7 @@ model Items {
   name          String
   price         Decimal?     @db.Money
   complements   Complements  @relation(fields: [complementId], references: [id], onDelete: Cascade)
-  complementId String
+  complementId  String
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
 }
@@ -115,20 +115,22 @@ model ProductCategories {
 model Products {
   id                    String              @id @default(uuid())
   name                  String              @db.VarChar(45)
+  description           String
   price                 Decimal             @db.Money
   discount              Int?
   companyId             String?
-  ProductCategoriesId   String?
+  productCategoriesId   String?
   productsImages        ProductImages[]
-  complements           ProductsComplements[]
+  productsComplements   ProductsComplements[]
   company               Company?            @relation(fields: [companyId], references: [id], onDelete: Cascade)
-  productCategories     ProductCategories?  @relation(fields: [ProductCategoriesId], references: [id], onDelete: Cascade)
+  productCategories     ProductCategories?  @relation(fields: [productCategoriesId], references: [id], onDelete: Cascade)
   createdAt             DateTime            @default(now())
   updatedAt             DateTime            @updatedAt
 }
 
 model ProductImages {
   id        String   @id @default(uuid())
+  name      String
   imageUrl  String
   alt       String   @db.VarChar(500)
   productId String

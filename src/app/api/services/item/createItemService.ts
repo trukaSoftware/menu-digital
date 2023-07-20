@@ -9,7 +9,12 @@ export const createItemService = async ({
 }: ItemData) => {
   try {
     const itemExists = await prisma.items.findFirst({
-      where: { complementId },
+      where: {
+        AND: {
+          name,
+          complementId,
+        },
+      },
     });
 
     if (itemExists) throw new Error(`Item já existe`);
