@@ -25,7 +25,7 @@ export const createProductService = async ({
         name,
         description,
         price,
-        ProductCategoriesId: categoryId,
+        productCategoriesId: categoryId,
         companyId,
         discount,
       },
