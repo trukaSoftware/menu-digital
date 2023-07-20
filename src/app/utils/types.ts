@@ -33,3 +33,13 @@ export type EditCategoryData = {
   id: string;
   name: string;
 };
+
+export type EditProductData = {
+  id: string;
+  name?: string;
+  price?: string;
+  description?: string;
+  categoryId?: string;
+  complementsId?: string[];
+  complementsToRemove?: string[];
+};
