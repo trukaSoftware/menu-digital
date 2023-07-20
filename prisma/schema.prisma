@@ -119,11 +119,11 @@ model Products {
   price                 Decimal             @db.Money
   discount              Int?
   companyId             String?
-  ProductCategoriesId   String?
+  productCategoriesId   String?
   productsImages        ProductImages[]
   productsComplements   ProductsComplements[]
   company               Company?            @relation(fields: [companyId], references: [id], onDelete: Cascade)
-  productCategories     ProductCategories?  @relation(fields: [ProductCategoriesId], references: [id], onDelete: Cascade)
+  productCategories     ProductCategories?  @relation(fields: [productCategoriesId], references: [id], onDelete: Cascade)
   createdAt             DateTime            @default(now())
   updatedAt             DateTime            @updatedAt
 }
