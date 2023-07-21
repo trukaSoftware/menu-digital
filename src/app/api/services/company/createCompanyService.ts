@@ -11,9 +11,15 @@ export const createCompanyService = async ({
   cnpj,
   address,
   zipCode,
+  companyLogo,
+  companyTheme,
   phoneNumber,
   deliveryPhoneNumber,
 }: CompanyData) => {
+  const companyImages = [companyLogo, companyTheme];
+
+  const imagesUrls = await uploadImages(companyImages, name, `companies`);
+
   try {
     const company = await prisma.company.create({
       data: {
@@ -26,6 +32,8 @@ export const createCompanyService = async ({
             email,
             cnpj,
             phoneNumber,
+            companyLogoUrl: imagesUrls[0].imageUrl,
+            companyThemeUrl: imagesUrls[1].imageUrl,
             deliveryPhoneNumber: deliveryPhoneNumber || phoneNumber,
             address: {
               create: {
