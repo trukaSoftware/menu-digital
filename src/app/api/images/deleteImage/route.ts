@@ -8,7 +8,7 @@ export async function DELETE(request: Request) {
 
   try {
     if (!id)
-      throw new Error(`Por favor, adicione o id da imagem a ser deletado`);
+      throw new Error(`Por favor, adicione o id da imagem a ser deletada`);
 
     await deleteImageService(id);
 
