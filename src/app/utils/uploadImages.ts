@@ -34,7 +34,7 @@ export const uploadImages = async (
   const result = images.map(async (image, index) => {
     const secure_url = await uploadBase64Image(image.file, {
       folder: `products`,
-      public_id: `${public_id}-${index}`,
+      public_id: `${public_id}-${index}-${Date.now()}`,
       width: image.width || 300,
       height: image.height || 300,
     });

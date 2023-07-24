@@ -31,6 +31,8 @@ const publicRoutes =
         `/api/products/editProduct`,
         `/api/products/getProductById`,
         `/api/products/getProducts`,
+        `/api/images/addNewImage`,
+        `/api/images/deleteImage`,
       ]
     : [`/`];
 
