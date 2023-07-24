@@ -1,5 +1,6 @@
 import { createSlug } from '@/app/utils/createSlug';
 import { EditCompanyData } from '@/app/utils/types';
+import { updateUserMetadata } from '@/app/utils/updateUserMetadata';
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 
@@ -97,6 +98,11 @@ export const editCompanyService = async ({
           },
         },
       },
+    });
+
+    await updateUserMetadata({
+      id,
+      publicMetadata: { slug: `${company?.slug}` },
     });
 
     return updatedData;
