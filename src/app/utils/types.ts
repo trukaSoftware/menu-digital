@@ -43,3 +43,10 @@ export type EditProductData = {
   complementsId?: string[];
   complementsToRemove?: string[];
 };
+
+export type RouterParams = {
+  params: {
+    slug: string;
+    companyId: string;
+  };
+};
