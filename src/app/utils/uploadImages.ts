@@ -41,8 +41,8 @@ export const uploadImages = async (
     });
 
     return {
-      name: image.name,
-      alt: image.alt,
+      name: image.name || ``,
+      alt: image.alt || ``,
       imageUrl: secure_url,
     };
   });
