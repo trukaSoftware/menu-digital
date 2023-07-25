@@ -1,5 +1,6 @@
 import { createSlug } from '@/app/utils/createSlug';
 import { updateUserMetadata } from '@/app/utils/updateUserMetadata';
+import { uploadImages } from '@/app/utils/uploadImages';
 import { CompanyData } from '@/app/utils/validations/companyDataValidation';
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
