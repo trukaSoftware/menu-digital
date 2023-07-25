@@ -1,10 +1,7 @@
 import { createSlug } from '@/app/utils/createSlug';
 import { EditCompanyData } from '@/app/utils/types';
-<<<<<<< HEAD
 import { updateUserMetadata } from '@/app/utils/updateUserMetadata';
-=======
 import { uploadImages } from '@/app/utils/uploadImages';
->>>>>>> c740372 (refactor: add code to upload imagens new images of company)
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 
