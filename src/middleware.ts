@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { authMiddleware } from '@clerk/nextjs';
+import { authMiddleware, clerkClient } from '@clerk/nextjs';
 
 const publicRoutes =
   process.env.NODE_ENV === `development`
@@ -41,11 +41,15 @@ export default authMiddleware({
     if (req.nextUrl.pathname === `/` && !req.cookies.get(`__session`)) {
       return NextResponse.redirect(`${req.nextUrl.href}sign-in`);
     }
+  },
 
-    // TODO: The configs page should be unique for each session, so we have to pass the sessionId or tenantId to do this.
-
+  async afterAuth(auth, req) {
     if (req.nextUrl.pathname === `/` && req.cookies.get(`__session`)) {
-      return NextResponse.redirect(`${req.nextUrl.href}configs`); // ${req.nextUrl.href}tenantId/configs
+      const user = await clerkClient.users.getUser(`${auth.userId}`);
+
+      return NextResponse.redirect(
+        `${req.nextUrl.href}configs/${user.publicMetadata.slug}/${auth.userId}`
+      );
     }
   },
 

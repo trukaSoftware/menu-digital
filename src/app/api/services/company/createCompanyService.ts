@@ -1,4 +1,5 @@
 import { createSlug } from '@/app/utils/createSlug';
+import { updateUserMetadata } from '@/app/utils/updateUserMetadata';
 import { CompanyData } from '@/app/utils/validations/companyDataValidation';
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
@@ -36,6 +37,8 @@ export const createCompanyService = async ({
         },
       },
     });
+
+    await updateUserMetadata({ id, publicMetadata: { slug: company.slug } });
 
     return company.id;
   } catch (error) {
