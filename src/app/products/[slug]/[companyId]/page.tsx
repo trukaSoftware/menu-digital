@@ -18,6 +18,7 @@ const mockFoodCardList = [
 ];
 
 export default function Products({ params }: RouterParams) {
+  // params can be used to handle company tenant informations
   return (
     <>
       <Header />
