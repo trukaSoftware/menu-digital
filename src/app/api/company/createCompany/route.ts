@@ -14,6 +14,8 @@ export async function POST(req: Request) {
     cnpj,
     address,
     zipCode,
+    companyLogo,
+    companyTheme,
     phoneNumber,
     deliveryPhoneNumber,
   } = (await req.json()) as CompanyData;
@@ -26,6 +28,8 @@ export async function POST(req: Request) {
       cnpj,
       address,
       zipCode,
+      companyLogo,
+      companyTheme,
       phoneNumber,
       deliveryPhoneNumber,
     });
@@ -37,6 +41,8 @@ export async function POST(req: Request) {
       cnpj,
       address,
       zipCode,
+      companyLogo,
+      companyTheme,
       phoneNumber,
       deliveryPhoneNumber,
     });

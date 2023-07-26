@@ -10,6 +10,16 @@ export type EditCompanyData = {
     email?: string;
     phoneNumber?: string;
     deliveryPhoneNumber?: string;
+    companyLogo?: {
+      file: string;
+      width?: number;
+      height?: number;
+    };
+    companyTheme?: {
+      file: string;
+      width?: number;
+      height?: number;
+    };
   };
   companyAddress?: {
     zipCode?: string;

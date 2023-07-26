@@ -1,5 +1,6 @@
 import { createSlug } from '@/app/utils/createSlug';
 import { updateUserMetadata } from '@/app/utils/updateUserMetadata';
+import { uploadImages } from '@/app/utils/uploadImages';
 import { CompanyData } from '@/app/utils/validations/companyDataValidation';
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
@@ -11,9 +12,15 @@ export const createCompanyService = async ({
   cnpj,
   address,
   zipCode,
+  companyLogo,
+  companyTheme,
   phoneNumber,
   deliveryPhoneNumber,
 }: CompanyData) => {
+  const companyImages = [companyLogo, companyTheme];
+
+  const imagesUrls = await uploadImages(companyImages, name, `companies`);
+
   try {
     const company = await prisma.company.create({
       data: {
@@ -26,6 +33,8 @@ export const createCompanyService = async ({
             email,
             cnpj,
             phoneNumber,
+            companyLogoUrl: imagesUrls[0].imageUrl,
+            companyThemeUrl: imagesUrls[1].imageUrl,
             deliveryPhoneNumber: deliveryPhoneNumber || phoneNumber,
             address: {
               create: {

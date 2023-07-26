@@ -1,6 +1,7 @@
 import { createSlug } from '@/app/utils/createSlug';
 import { EditCompanyData } from '@/app/utils/types';
 import { updateUserMetadata } from '@/app/utils/updateUserMetadata';
+import { uploadImages } from '@/app/utils/uploadImages';
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 
@@ -41,6 +42,25 @@ export const editCompanyService = async ({
     }
 
     if (companyInfo) {
+      const { companyLogo, companyTheme } = companyInfo;
+
+      const companyImages =
+        companyLogo && companyTheme ? [companyLogo, companyTheme] : null;
+
+      let imagesUrls = [] as {
+        name: string | undefined;
+        alt: string | undefined;
+        imageUrl: string;
+      }[];
+
+      if (companyImages) {
+        imagesUrls = await uploadImages(
+          companyImages,
+          existingRegister.name,
+          `companies`
+        );
+      }
+
       const existingInfo = await prisma.info.findUnique({
         where: {
           id: infoId,
@@ -61,6 +81,9 @@ export const editCompanyService = async ({
           phoneNumber: companyInfo.phoneNumber || existingInfo.phoneNumber,
           deliveryPhoneNumber:
             companyInfo.deliveryPhoneNumber || existingInfo.deliveryPhoneNumber,
+          companyLogoUrl: imagesUrls[0].imageUrl || existingInfo.companyLogoUrl,
+          companyThemeUrl:
+            imagesUrls[1].imageUrl || existingInfo.companyThemeUrl,
         },
       });
     }
