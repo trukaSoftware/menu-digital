@@ -1,0 +1,16 @@
+.manageScreenHeader,
+.manageScreenHeaderWithRowReverse {
+  @apply flex relative justify-between items-center w-full h-fit px-4 py-4 bg-zinc-100 text-center;
+}
+
+.manageScreenHeaderWithRowReverse {
+  @apply flex-row-reverse;
+}
+
+.manageScreenHeaderLogo {
+  @apply rounded-full;
+}
+
+.manageScreenHeaderTitle {
+  @apply text-lg font-semibold text-gray-900;
+}
