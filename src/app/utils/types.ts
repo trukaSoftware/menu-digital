@@ -62,10 +62,10 @@ export type RouterParams = {
 };
 
 export interface CompanyProps {
-  companies: Companies;
+  company: Company;
 }
 
-export interface Companies {
+export interface Company {
   id: string;
   name: string;
   slug: string;

@@ -9,7 +9,7 @@ export default async function Configs({ params }: RouterParams) {
     `/company/getCompanyById?id=${params.companyId}`
   );
 
-  const { name, info } = result.data.companies;
+  const { name, info } = result.data.company;
   return (
     <div className={styles.configsContainer}>
       <ManageScreenHeader

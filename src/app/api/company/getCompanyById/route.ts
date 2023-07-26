@@ -9,9 +9,9 @@ export async function GET(request: Request) {
   try {
     if (!id) throw new Error(`Por favor, adicione o id a ser buscado`);
 
-    const companies = await getCompanyByIdService(id);
+    const company = await getCompanyByIdService(id);
 
-    return NextResponse.json({ companies });
+    return NextResponse.json({ company });
   } catch (error) {
     if (error instanceof Error) {
       return NextResponse.json({ message: error.message });
