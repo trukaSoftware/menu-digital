@@ -1,6 +1,11 @@
-import FoodCardList from '../components/FoodCardList';
-import Header from '../components/Header';
-import { foodCardMock, foodCardWithoutDiscountMock } from '../mocks/foodCard';
+import { RouterParams } from '@/app/utils/types';
+
+import FoodCardList from '../../../components/FoodCardList';
+import Header from '../../../components/Header';
+import {
+  foodCardMock,
+  foodCardWithoutDiscountMock,
+} from '../../../mocks/foodCard';
 import styles from './styles.module.css';
 
 const mockFoodCardList = [
@@ -12,7 +17,8 @@ const mockFoodCardList = [
   foodCardMock,
 ];
 
-export default function Products() {
+export default function Products({ params }: RouterParams) {
+  // params can be used to handle company tenant informations
   return (
     <>
       <Header />

@@ -1,17 +1,11 @@
 'use client';
 
+import { RouterParams } from '@/app/utils/types';
 import { UserButton } from '@clerk/nextjs';
 
 import styles from './styles.module.css';
 
-type ConfigData = {
-  params: {
-    slug: string;
-    companyId: string;
-  };
-};
-
-export default function Configs({ params }: ConfigData) {
+export default function Configs({ params }: RouterParams) {
   // params can be used to handle company tenant informations
   return (
     <div className={styles.configsContainer}>
