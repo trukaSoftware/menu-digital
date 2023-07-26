@@ -6,7 +6,7 @@ const withPWA = require('next-pwa')({
 
 const nextConfig = {
   images: {
-    domains: ['localhost'],
+    domains: ['localhost', 'res.cloudinary.com'],
   },
   reactStrictMode: true,
   swcMinify: true,
