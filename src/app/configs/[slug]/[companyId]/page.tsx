@@ -1,4 +1,5 @@
 import ManagementScreenHeader from '@/app/components/ManagementScreenHeader';
+import MenuComponent from '@/app/components/MenuComponent';
 import api from '@/app/utils/api';
 import { CompanyProps, RouterParams } from '@/app/utils/types';
 
@@ -16,6 +17,12 @@ export default async function Configs({ params }: RouterParams) {
         companyLogoUrl={info.companyLogoUrl}
         companyName={name}
       />
+      <main className={styles.configsMainContainer}>
+        <MenuComponent />
+        <button className={styles.configsSeeMyStoreButton} type="button">
+          Como sua loja está hoje
+        </button>
+      </main>
     </div>
   );
 }
