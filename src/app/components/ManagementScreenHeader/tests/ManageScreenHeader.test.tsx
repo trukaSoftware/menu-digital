@@ -3,12 +3,12 @@ import { vi } from 'vitest';
 import { UserButton } from '@clerk/nextjs';
 import { render, screen, cleanup } from '@testing-library/react';
 
-import ManageScreenHeader, { ManageScreenHeaderProps } from '..';
+import ManagementScreenHeader, { ManagementScreenHeaderProps } from '..';
 
 vi.mock(`@clerk/nextjs`);
 vi.mocked(UserButton).mockImplementation(() => <></>);
 
-describe(`ManageScreenHeader`, () => {
+describe(`ManagementScreenHeader`, () => {
   afterAll(() => {
     vi.clearAllMocks();
   });
@@ -22,27 +22,27 @@ describe(`ManageScreenHeader`, () => {
     companyLogoUrl: `/`,
     companyName: `Bar do Marcão`,
     hasBackButton: true,
-  } as ManageScreenHeaderProps;
+  } as ManagementScreenHeaderProps;
 
-  it(`if hasBackButton is not passed, an element with the class "manageScreenHeader" must be rendered`, () => {
+  it(`if hasBackButton is not passed, an element with the class "managementScreenHeader" must be rendered`, () => {
     const modifiedMockProps = {
       companyLogoUrl: `/`,
       companyName: `Bar do Marcão`,
-    } as ManageScreenHeaderProps;
+    } as ManagementScreenHeaderProps;
 
-    render(<ManageScreenHeader {...modifiedMockProps} />);
+    render(<ManagementScreenHeader {...modifiedMockProps} />);
 
-    const heading = screen.getByTestId(`manage-screen-header`);
+    const heading = screen.getByTestId(`management-screen-header`);
 
-    expect(heading).toHaveClass(`manageScreenHeader`);
+    expect(heading).toHaveClass(`managementScreenHeader`);
   });
 
-  it(`if hasBackButton is passed, an element with the class "manageScreenHeaderWithRowReverse" must be rendered`, () => {
-    render(<ManageScreenHeader {...mockProps} />);
+  it(`if hasBackButton is passed, an element with the class "managementScreenHeaderWithRowReverse" must be rendered`, () => {
+    render(<ManagementScreenHeader {...mockProps} />);
 
-    const heading = screen.getByTestId(`manage-screen-header`);
+    const heading = screen.getByTestId(`management-screen-header`);
 
-    expect(heading).toHaveClass(`manageScreenHeaderWithRowReverse`);
+    expect(heading).toHaveClass(`managementScreenHeaderWithRowReverse`);
   });
 
   it(`if the prop title is passed, an heading level 1 with the text of title prop must be rendered`, () => {
@@ -50,9 +50,9 @@ describe(`ManageScreenHeader`, () => {
       companyLogoUrl: `/`,
       title: `Sua Loja`,
       hasBackButton: true,
-    } as ManageScreenHeaderProps;
+    } as ManagementScreenHeaderProps;
 
-    render(<ManageScreenHeader {...modifiedMockProps} />);
+    render(<ManagementScreenHeader {...modifiedMockProps} />);
 
     const title = screen.getByRole(`heading`, {
       name: `Sua Loja`,
@@ -63,7 +63,7 @@ describe(`ManageScreenHeader`, () => {
   });
 
   it(`if the prop title is not passed, an heading level 1 with the text of companyName prop must be rendered`, () => {
-    render(<ManageScreenHeader {...mockProps} />);
+    render(<ManagementScreenHeader {...mockProps} />);
 
     const title = screen.getByRole(`heading`, {
       name: `Bar do Marcão`,
@@ -74,7 +74,7 @@ describe(`ManageScreenHeader`, () => {
   });
 
   it(`if hasBackButton is passed, an element with the role "link" and title "Voltar para página anterior" must be rendered`, () => {
-    render(<ManageScreenHeader {...mockProps} />);
+    render(<ManagementScreenHeader {...mockProps} />);
 
     const backLink = screen.getByRole(`link`);
 
@@ -86,9 +86,9 @@ describe(`ManageScreenHeader`, () => {
     const modifiedMockProps = {
       companyLogoUrl: `/`,
       companyName: `Bar do Marcão`,
-    } as ManageScreenHeaderProps;
+    } as ManagementScreenHeaderProps;
 
-    render(<ManageScreenHeader {...modifiedMockProps} />);
+    render(<ManagementScreenHeader {...modifiedMockProps} />);
 
     const backLink = screen.queryByRole(`link`);
 

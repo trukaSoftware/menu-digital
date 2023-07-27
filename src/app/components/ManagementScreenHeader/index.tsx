@@ -7,7 +7,7 @@ import { UserButton } from '@clerk/nextjs';
 
 import styles from './styles.module.css';
 
-export type ManageScreenHeaderProps = {
+export type ManagementScreenHeaderProps = {
   companyLogoUrl: string;
   companyName: string;
   title?: string;
@@ -15,13 +15,13 @@ export type ManageScreenHeaderProps = {
   backPage?: string;
 };
 
-export default function ManageScreenHeader({
+export default function ManagementScreenHeader({
   companyLogoUrl,
   companyName,
   title,
   hasBackButton = false,
   backPage,
-}: ManageScreenHeaderProps) {
+}: ManagementScreenHeaderProps) {
   return (
     <header
       data-testid="manage-screen-header"
