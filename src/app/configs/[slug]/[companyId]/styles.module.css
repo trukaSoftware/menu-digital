@@ -1,3 +1,11 @@
 .configsContainer {
-  @apply flex w-full h-screen bg-slate-50;
+  @apply flex flex-col w-full h-screen bg-gray-200 overflow-hidden;
+}
+
+.configsMainContainer {
+  @apply flex flex-col justify-between h-full m-2;
+}
+
+.configsSeeMyStoreButton {
+  @apply w-full h-11 bg-red-600 rounded text-white font-bold text-base;
 }
