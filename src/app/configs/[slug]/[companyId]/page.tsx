@@ -1,4 +1,4 @@
-import ManageScreenHeader from '@/app/components/ManageScreenHeader';
+import ManagementScreenHeader from '@/app/components/ManagementScreenHeader';
 import api from '@/app/utils/api';
 import { CompanyProps, RouterParams } from '@/app/utils/types';
 
@@ -12,7 +12,7 @@ export default async function Configs({ params }: RouterParams) {
   const { name, info } = result.data.company;
   return (
     <div className={styles.configsContainer}>
-      <ManageScreenHeader
+      <ManagementScreenHeader
         companyLogoUrl={info.companyLogoUrl}
         companyName={name}
       />
