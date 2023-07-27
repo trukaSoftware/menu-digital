@@ -1,0 +1,16 @@
+.managementScreenHeader,
+.managementScreenHeaderWithRowReverse {
+  @apply flex relative justify-between items-center w-full h-fit px-4 py-4 bg-zinc-100 text-center;
+}
+
+.managementScreenHeaderWithRowReverse {
+  @apply flex-row-reverse;
+}
+
+.managementScreenHeaderLogo {
+  @apply rounded-full;
+}
+
+.managementScreenHeaderTitle {
+  @apply text-lg font-semibold text-gray-900;
+}

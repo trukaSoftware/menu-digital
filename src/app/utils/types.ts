@@ -60,3 +60,41 @@ export type RouterParams = {
     companyId: string;
   };
 };
+
+export interface CompanyProps {
+  company: Company;
+}
+
+export interface Company {
+  id: string;
+  name: string;
+  slug: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+  info: Info;
+}
+
+export interface Info {
+  id: string;
+  cnpj: string;
+  email: string;
+  phoneNumber: string;
+  deliveryPhoneNumber: string;
+  companyLogoUrl: string;
+  companyThemeUrl: string;
+  companyId: string;
+  branchId: any;
+  createdAt: string;
+  updatedAt: string;
+  address: Address;
+}
+
+export interface Address {
+  id: string;
+  address: string;
+  zipCode: string;
+  infoId: string;
+  createdAt: string;
+  updatedAt: string;
+}
