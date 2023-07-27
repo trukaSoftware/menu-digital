@@ -1,0 +1,28 @@
+.menuComponentTitle {
+  @apply text-xl font-semibold text-gray-900;
+}
+
+.menuComponentContainerItems {
+  @apply flex justify-start items-center w-full mt-4 mb-4 gap-5 pl-4 pr-4 overflow-x-scroll;
+}
+
+.menuComponentContainerItems::-webkit-scrollbar {
+  display: none;
+}
+
+.menuComponentContainerItems {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.menuComponentItem {
+  @apply flex flex-col justify-center items-center;
+}
+
+.menuComponentIconContainer {
+  @apply flex justify-center items-center bg-red-800 w-16 h-16 rounded-lg mb-1 p-px;
+}
+
+.menuComponentItemText {
+  @apply text-sm font-semibold text-gray-900;
+}
