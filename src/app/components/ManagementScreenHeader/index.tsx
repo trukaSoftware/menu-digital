@@ -24,15 +24,15 @@ export default function ManagementScreenHeader({
 }: ManagementScreenHeaderProps) {
   return (
     <header
-      data-testid="manage-screen-header"
+      data-testid="management-screen-header"
       className={
         hasBackButton
-          ? styles.manageScreenHeaderWithRowReverse
-          : styles.manageScreenHeader
+          ? styles.managementScreenHeaderWithRowReverse
+          : styles.managementScreenHeader
       }
     >
       <Image
-        className={styles.manageScreenHeaderLogo}
+        className={styles.managementScreenHeaderLogo}
         src={companyLogoUrl}
         alt={`Imagem do estabelecimento ${companyName}`}
         width={44}
@@ -40,9 +40,9 @@ export default function ManagementScreenHeader({
       />
 
       {title ? (
-        <h1 className={styles.manageScreenHeaderTitle}>{title}</h1>
+        <h1 className={styles.managementScreenHeaderTitle}>{title}</h1>
       ) : (
-        <h1 className={styles.manageScreenHeaderTitle}>{companyName}</h1>
+        <h1 className={styles.managementScreenHeaderTitle}>{companyName}</h1>
       )}
 
       {hasBackButton ? (
