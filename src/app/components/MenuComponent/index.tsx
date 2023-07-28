@@ -1,5 +1,6 @@
 import { IconType } from 'react-icons';
 
+import DefaultDialog from '../DefaultDialog';
 import styles from './styles.module.css';
 
 interface MenuComponentProps {
@@ -8,6 +9,7 @@ interface MenuComponentProps {
     items: {
       menuIcon: IconType;
       itemText: string;
+      DialogBody: React.FunctionComponent;
     }[];
   }[];
 }
@@ -27,18 +29,23 @@ export default function MenuComponent({
           </h2>
           <div className={styles.menuComponentContainerItems}>
             {menuInformation.items.map((item) => (
-              <button
-                key={item.itemText}
-                className={styles.menuComponentItem}
-                type="button"
-              >
-                <div className={styles.menuComponentIconContainer}>
-                  <item.menuIcon size={32} color="E5E7EB" />
-                </div>
-                <span className={styles.menuComponentItemText}>
-                  {item.itemText}
-                </span>
-              </button>
+              <DefaultDialog key={item.itemText}>
+                {[
+                  <button
+                    className={styles.menuComponentItem}
+                    type="button"
+                    key={`button-${item.itemText}`}
+                  >
+                    <div className={styles.menuComponentIconContainer}>
+                      <item.menuIcon size={32} color="E5E7EB" />
+                    </div>
+                    <span className={styles.menuComponentItemText}>
+                      {item.itemText}
+                    </span>
+                  </button>,
+                  <item.DialogBody key={`dialogBody-${item.itemText}`} />,
+                ]}
+              </DefaultDialog>
             ))}
           </div>
         </div>
