@@ -1,0 +1,15 @@
+.defaultDialogContent {
+  @apply fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full rounded bg-white max-h-screen md:h-2/3 md:w-128 md:rounded-lg md:border md:border-gray-900;
+}
+
+.defaultDialogHeader {
+  @apply flex justify-between items-center w-full p-4 bg-gray-200 md:rounded-t-lg;
+}
+
+.defaultDialogTitle {
+  @apply text-base font-semibold text-gray-900;
+}
+
+.defaultDialogClose {
+  @apply absolute top-2 right-2 w-9 h-9 flex items-center justify-center z-10;
+}
