@@ -1,5 +1,7 @@
 import { FaGripLines, FaShoppingBasket } from 'react-icons/fa';
 
+import Header from '@/app/components/Header';
+
 export const menuItens = [
   {
     menuTitle: `Criar novo(a)`,
@@ -7,12 +9,12 @@ export const menuItens = [
       {
         menuIcon: FaShoppingBasket,
         itemText: `Produtos`,
-        // DialogBody: , aqui vai o componente que será renderizado no body do dialog
+        DialogBody: Header, // o Header ta sendo passado aqui só por enquanto
       },
       {
         menuIcon: FaGripLines,
         itemText: `Categorias`,
-        // DialogBody: , aqui vai o componente que será renderizado no body do dialog
+        DialogBody: Header, // o Header ta sendo passado aqui só por enquanto
       },
     ],
   },
@@ -22,12 +24,12 @@ export const menuItens = [
       {
         menuIcon: FaShoppingBasket,
         itemText: `Produtos`,
-        // DialogBody: , aqui vai o componente que será renderizado no body do dialog
+        DialogBody: Header, // o Header ta sendo passado aqui só por enquanto
       },
       {
         menuIcon: FaGripLines,
         itemText: `Categorias`,
-        // DialogBody: , aqui vai o componente que será renderizado no body do dialog
+        DialogBody: Header, // o Header ta sendo passado aqui só por enquanto
       },
     ],
   },
