@@ -1,44 +1,48 @@
-import { FaShoppingBasket, FaGripLines } from 'react-icons/fa';
+import { IconType } from 'react-icons';
 
 import styles from './styles.module.css';
 
-export default function MenuComponent() {
+interface MenuComponentProps {
+  menuInformations: {
+    menuTitle: string;
+    items: {
+      menuIcon: IconType;
+      itemText: string;
+    }[];
+  }[];
+}
+
+export default function MenuComponent({
+  menuInformations,
+}: MenuComponentProps) {
   return (
     <nav className={styles.menuComponentContainer}>
-      <div className={styles.menuComponentWrapper}>
-        <h2 className={styles.menuComponentTitle}>Criar novo(a)</h2>
-        <div className={styles.menuComponentContainerItems}>
-          <button className={styles.menuComponentItem} type="button">
-            <div className={styles.menuComponentIconContainer}>
-              <FaShoppingBasket size={32} color="E5E7EB" />
-            </div>
-            <span className={styles.menuComponentItemText}>Produto</span>
-          </button>
-          <button className={styles.menuComponentItem} type="button">
-            <div className={styles.menuComponentIconContainer}>
-              <FaGripLines size={32} color="E5E7EB" />
-            </div>
-            <span className={styles.menuComponentItemText}>Categoria</span>
-          </button>
+      {menuInformations.map((menuInformation) => (
+        <div
+          className={styles.menuComponentWrapper}
+          key={menuInformation.menuTitle}
+        >
+          <h2 className={styles.menuComponentTitle}>
+            {menuInformation.menuTitle}
+          </h2>
+          <div className={styles.menuComponentContainerItems}>
+            {menuInformation.items.map((item) => (
+              <button
+                key={item.itemText}
+                className={styles.menuComponentItem}
+                type="button"
+              >
+                <div className={styles.menuComponentIconContainer}>
+                  <item.menuIcon size={32} color="E5E7EB" />
+                </div>
+                <span className={styles.menuComponentItemText}>
+                  {item.itemText}
+                </span>
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
-      <div className={styles.menuComponentWrapper}>
-        <h2 className={styles.menuComponentTitle}>Gerenciar</h2>
-        <div className={styles.menuComponentContainerItems}>
-          <button className={styles.menuComponentItem} type="button">
-            <div className={styles.menuComponentIconContainer}>
-              <FaShoppingBasket size={32} color="E5E7EB" />
-            </div>
-            <span className={styles.menuComponentItemText}>Produto</span>
-          </button>
-          <button className={styles.menuComponentItem} type="button">
-            <div className={styles.menuComponentIconContainer}>
-              <FaGripLines size={32} color="E5E7EB" />
-            </div>
-            <span className={styles.menuComponentItemText}>Categoria</span>
-          </button>
-        </div>
-      </div>
+      ))}
     </nav>
   );
 }
