@@ -7,10 +7,12 @@ export const menuItens = [
       {
         menuIcon: FaShoppingBasket,
         itemText: `Produtos`,
+        // DialogBody: , aqui vai o componente que será renderizado no body do dialog
       },
       {
         menuIcon: FaGripLines,
         itemText: `Categorias`,
+        // DialogBody: , aqui vai o componente que será renderizado no body do dialog
       },
     ],
   },
@@ -20,10 +22,12 @@ export const menuItens = [
       {
         menuIcon: FaShoppingBasket,
         itemText: `Produtos`,
+        // DialogBody: , aqui vai o componente que será renderizado no body do dialog
       },
       {
         menuIcon: FaGripLines,
         itemText: `Categorias`,
+        // DialogBody: , aqui vai o componente que será renderizado no body do dialog
       },
     ],
   },
