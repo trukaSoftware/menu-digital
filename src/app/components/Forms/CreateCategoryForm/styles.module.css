@@ -1,0 +1,26 @@
+.createCategoryForm {
+  @apply p-4;
+}
+.createCategoryFormNameLabel {
+  @apply flex flex-col gap-2;
+}
+
+.createCategoryFormNameTitle {
+  @apply text-sm text-gray-900;
+}
+
+.createCategoryFormInputWrapper {
+  @apply flex w-full border border-gray-300 rounded;
+}
+
+.createCategoryFormIconWrapper {
+  @apply py-2.5 px-2 bg-gray-200 rounded-l;
+}
+
+.createCategoryFormIcon {
+  @apply text-gray-400;
+}
+
+.createCategoryFormNameInput {
+  @apply gap-2 w-full rounded-r rounded-b;
+}
