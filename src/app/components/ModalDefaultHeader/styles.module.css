@@ -1,0 +1,11 @@
+.createCategoryHeader {
+  @apply flex items-center h-14 w-full justify-between px-4 py-2 bg-gray-200;
+}
+
+.createCategoryTitle {
+  @apply text-base font-semibold text-gray-900;
+}
+
+.createCategoryCloseIcon {
+  @apply text-red-600;
+}
