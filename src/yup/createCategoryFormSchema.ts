@@ -7,6 +7,6 @@ const nameValidation = Yup.string().required(
 const productsIdsValidation = Yup.array().of(Yup.string());
 
 export const createCategoryFormSchema = Yup.object().shape({
-  name: nameValidation,
+  categoryName: nameValidation,
   productsIds: productsIdsValidation,
 });
