@@ -9,7 +9,7 @@ export default function CreateCategoryPortal() {
     <Dialog.Portal>
       <Dialog.Overlay className={styles.createCategoryOverLay} />
       <Dialog.Content className={styles.createCategoryContent}>
-        <ModalDefaultHeader />
+        <ModalDefaultHeader title="Criação de categoria" />
         <CreateCategoryForm />
       </Dialog.Content>
     </Dialog.Portal>

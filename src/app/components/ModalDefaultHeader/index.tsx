@@ -4,10 +4,14 @@ import { Close, Title } from '@radix-ui/react-dialog';
 
 import styles from './styles.module.css';
 
-export default function ModalDefaultHeader() {
+export interface ModalDefaultHeaderProps {
+  title: string;
+}
+
+export default function ModalDefaultHeader({ title }: ModalDefaultHeaderProps) {
   return (
     <div className={styles.createCategoryHeader}>
-      <Title className={styles.createCategoryTitle}>Criação de produto</Title>
+      <Title className={styles.createCategoryTitle}>{title}</Title>
       <Close>
         <CgClose size={30} className={styles.createCategoryCloseIcon} />
       </Close>
