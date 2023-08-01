@@ -8,11 +8,14 @@ import { CompanyProps, RouterParams } from '@/app/utils/types';
 import styles from './styles.module.css';
 
 export default async function Configs({ params }: RouterParams) {
+  const { slug, companyId } = params;
+
   const result = await api.get<CompanyProps>(
-    `/company/getCompanyById?id=${params.companyId}`
+    `/company/getCompanyById?id=${companyId}`
   );
 
   const { name, info } = result.data.company;
+
   return (
     <div className={styles.configsContainer}>
       <ManagementScreenHeader
@@ -20,8 +23,11 @@ export default async function Configs({ params }: RouterParams) {
         companyName={name}
       />
       <main className={styles.configsMainContainer}>
-        <MenuComponent menuInformations={menuItens} />
         <Teste />
+        <MenuComponent
+          menuInformations={menuItens}
+          companyInfos={{ slug, companyId }}
+        />
         <button className={styles.configsSeeMyStoreButton} type="button">
           Como sua loja está hoje
         </button>
