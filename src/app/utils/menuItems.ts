@@ -8,11 +8,13 @@ export const menuItens = [
     items: [
       {
         menuIcon: FaShoppingBasket,
+        dialogHeadLineText: `Criação de produto`,
         itemText: `Produtos`,
         DialogBody: Header, // o Header ta sendo passado aqui só por enquanto
       },
       {
         menuIcon: FaGripLines,
+        dialogHeadLineText: `Criação de categoria`,
         itemText: `Categorias`,
         DialogBody: Header, // o Header ta sendo passado aqui só por enquanto
       },
@@ -24,12 +26,12 @@ export const menuItens = [
       {
         menuIcon: FaShoppingBasket,
         itemText: `Produtos`,
-        DialogBody: Header, // o Header ta sendo passado aqui só por enquanto
+        managementPageHref: `/manageProducts`,
       },
       {
         menuIcon: FaGripLines,
         itemText: `Categorias`,
-        DialogBody: Header, // o Header ta sendo passado aqui só por enquanto
+        managementPageHref: `/manageCategories`,
       },
     ],
   },
