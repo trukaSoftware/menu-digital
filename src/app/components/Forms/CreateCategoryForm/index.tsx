@@ -1,13 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { CgSpinner } from 'react-icons/cg';
-import { FaGripLines } from 'react-icons/fa';
+import { FaGripLines, FaSearch } from 'react-icons/fa';
 
 import { InferType } from 'yup';
 
+import { useProducts } from '@/hooks/useProducts';
 import { createCategoryFormSchema } from '@/yup/createCategoryFormSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import DefaultInput from '../../DefaultInput';
 import styles from './styles.module.css';
 
 type CreateCategoryFormData = InferType<typeof createCategoryFormSchema>;
@@ -23,36 +25,61 @@ export default function CreateCategoryForm() {
   } = useForm<any>(formOptions);
 
   const [isSubmiting, setIsSubmiting] = useState(false);
+  const [searchProductName, setSearchProductName] = useState<string>(``);
 
-  const onLoginSubmit = (data: CreateCategoryFormData) => {
+  const { products } = useProducts();
+
+  const onSubmit = async (data: CreateCategoryFormData) => {
+    setIsSubmiting(true);
     console.log(data);
+    setIsSubmiting(false);
   };
+
+  console.log(products);
 
   return (
     <form
-      onSubmit={handleSubmit(onLoginSubmit)}
+      onSubmit={handleSubmit(onSubmit)}
       className={styles.createCategoryForm}
     >
       <div className={styles.createCategoryFormInputs}>
-        <label htmlFor="name" className={styles.createCategoryFormNameLabel}>
-          <span className={styles.createCategoryFormNameTitle}>Nome*</span>
-          <div className={styles.createCategoryFormInputWrapper}>
-            <div className={styles.createCategoryFormIconWrapper}>
-              <FaGripLines
-                size={20}
-                className={styles.createCategoryFormIcon}
-              />
-            </div>
-            <input
-              id="name"
-              type="text"
-              className={styles.createCategoryFormNameInput}
-              {...register(`rememberMe`)}
-            />
+        <DefaultInput
+          Icon={
+            <FaGripLines size={20} className={styles.createCategoryFormIcon} />
+          }
+          labelText="Nome da categoria*"
+          register={register(`categoryName`)}
+          name="categoryName"
+        />
+        <p className={styles.addProductToCategoryTitle}>
+          Adicionar produtos a categoria
+        </p>
+        <div className={styles.searchProductInputWrapper}>
+          <div className={styles.searchProductIconWrapper}>
+            <FaSearch size={20} className={styles.searchProductIcon} />
           </div>
-        </label>
+          <input
+            type="text"
+            className={styles.searchProductInput}
+            onChange={(e) => setSearchProductName(e.target.value)}
+            placeholder="Pesquisar produto por nome..."
+          />
+        </div>
+        <div className={styles.searchProductsList}>
+          <label htmlFor="idDoProduto1" className={styles.searchProductItem}>
+            <input
+              type="checkbox"
+              value="idDoProduto1"
+              id="idDoProduto1"
+              className={styles.searchProductItemCheckbox}
+              {...register(`products`)}
+            />
+            <span className={styles.newCheckBox} />
+            <span>Nome do produto</span>
+          </label>
+        </div>
       </div>
-      <button className="border-none " type="submit">
+      <button className={styles.submitButton} type="submit">
         {isSubmiting ? (
           <CgSpinner className="text-white animate-spin-fast" size={26} />
         ) : (
