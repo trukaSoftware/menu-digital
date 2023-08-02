@@ -23,7 +23,7 @@ export default function FormInputLabel({
   register,
 }: FormInputProps) {
   return (
-    <label htmlFor={id}>
+    <label htmlFor={id} className={styles.formInputLabel}>
       <span className={styles.formInputTitle}>{title}</span>
       <div className={styles.formInputWrapper}>
         <div className={styles.formInputIcon}>{iconImage}</div>
