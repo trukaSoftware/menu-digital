@@ -17,21 +17,21 @@ import styles from './styles.module.css';
 
 type CreateCategoryFormData = InferType<typeof createCategoryFormSchema>;
 
-export interface CreateCategoryFormProsp {
+export interface CreateCategoryFormProps {
   companyId: string;
 }
 
 export default function CreateCategoryForm({
   companyId,
-}: CreateCategoryFormProsp) {
-  const formOptions = {
-    resolver: yupResolver(createCategoryFormSchema),
-  };
+}: CreateCategoryFormProps) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<any>(formOptions);
+  } = useForm({
+    resolver: yupResolver(createCategoryFormSchema),
+    mode: `onChange`,
+  });
 
   const [isSubmiting, setIsSubmiting] = useState(false);
   const [searchProductName, setSearchProductName] = useState<string>(``);
@@ -87,6 +87,7 @@ export default function CreateCategoryForm({
           labelText="Nome da categoria*"
           register={register(`categoryName`)}
           name="categoryName"
+          error={errors.categoryName?.message}
         />
         <p className={styles.addProductToCategoryTitle}>
           Adicionar produtos a categoria
