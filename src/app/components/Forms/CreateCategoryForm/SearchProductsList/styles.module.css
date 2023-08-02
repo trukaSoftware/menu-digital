@@ -1,0 +1,32 @@
+.searchProductsList {
+  @apply p-2 border border-gray-300 rounded h-72 w-full overflow-y-auto;
+}
+
+.searchProductItem {
+  @apply flex relative items-center;
+}
+
+.searchProductItemCheckbox {
+  @apply appearance-none opacity-0 w-0 h-0;
+}
+
+.newCheckBox {
+  @apply top-0 left-0 w-5 h-5 border border-gray-300 rounded mr-2 after:content-[''] after:absolute after:hidden;
+}
+
+.searchProductItem input:checked ~ .newCheckBox {
+  @apply after:block;
+}
+
+.searchProductItem .newCheckBox:after {
+  position: absolute;
+  left: 7px;
+  top: 5px;
+  width: 7px;
+  height: 12px;
+  border: solid green;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
