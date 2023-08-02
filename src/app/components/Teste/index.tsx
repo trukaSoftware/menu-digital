@@ -4,11 +4,11 @@ import { Root, Trigger } from '@radix-ui/react-dialog';
 
 import CreateCategoryPortal from '../CreateCategoryPortal';
 
-export default function Teste() {
+export default function Teste({ companyId }: any) {
   return (
     <Root>
       <Trigger>abrir categoria</Trigger>
-      <CreateCategoryPortal />
+      <CreateCategoryPortal companyId={companyId} />
     </Root>
   );
 }
