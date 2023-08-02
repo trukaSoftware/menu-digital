@@ -1,0 +1,27 @@
+.defaultInputFormNameLabel {
+  @apply flex flex-col gap-2;
+}
+
+.defaultInputFormNameTitle {
+  @apply text-sm text-gray-900;
+}
+
+.defaultInputFormInputWrapper {
+  @apply flex w-full border border-gray-300 rounded gap-2;
+}
+
+.defaultInputFormIconWrapper {
+  @apply py-2.5 px-2 bg-gray-200 rounded-l;
+}
+
+.defaultInputFormIcon {
+  @apply text-gray-400;
+}
+
+.defaultInputFormNameInput {
+  @apply gap-2 w-full rounded-r rounded-b focus:outline-none;
+}
+
+.defaultInputErrorMessage {
+  @apply text-sm text-red-500 font-medium;
+}
