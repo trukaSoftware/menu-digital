@@ -1,6 +1,4 @@
-import { CgSpinner } from 'react-icons/cg';
-
-import styles from './styles.module.css';
+import Spinner from '../Spinner';
 
 export interface ButtonSubmitProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -19,11 +17,7 @@ export default function ButtonSubmit({
 
   return (
     <button type="submit" {...rest}>
-      {isSubmiting ? (
-        <CgSpinner className={styles.submiteButtonSpinner} size={28} />
-      ) : (
-        buttonText
-      )}
+      {isSubmiting ? <Spinner size={28} /> : buttonText}
     </button>
   );
 }
