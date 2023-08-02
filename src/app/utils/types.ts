@@ -1,3 +1,7 @@
+import { InferType } from 'yup';
+
+import { createCompanyFormValidation } from '../yup/createCompanyFormValidation';
+
 export type EditCompanyData = {
   id: string;
   company?: {
@@ -98,3 +102,5 @@ export interface Address {
   createdAt: string;
   updatedAt: string;
 }
+
+export type CreateCompanyData = InferType<typeof createCompanyFormValidation>;
