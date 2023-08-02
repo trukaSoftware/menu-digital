@@ -13,6 +13,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import ButtonSubmit from '../../ButtonSubmit';
 import DefaultInput from '../../DefaultInput';
+import SearchProductsList from './SearchProductsList';
 import styles from './styles.module.css';
 
 type CreateCategoryFormData = InferType<typeof createCategoryFormSchema>;
@@ -36,6 +37,7 @@ export default function CreateCategoryForm({
   const [isSubmiting, setIsSubmiting] = useState(false);
   const [searchProductName, setSearchProductName] = useState<string>(``);
   const [requestError, setRequestError] = useState(false);
+  const [registredWithSucess, setRegistredWithSucess] = useState(false);
 
   const { products } = useProducts();
   const filteredProducts = products.filter((product) =>
@@ -46,16 +48,21 @@ export default function CreateCategoryForm({
 
   const onSubmit = async (data: CreateCategoryFormData) => {
     setIsSubmiting(true);
-    // const createdCategory = await createCategory({
-    //   name: data.categoryName,
-    //   companyId,
-    // });
 
-    const newCategoryId = `957ee80-7ad7-4052-a3f2-2e747a9239`;
+    const createdCategory = await createCategory({
+      name: data.categoryName,
+      companyId,
+    });
 
-    console.log(`ids dos produtos`, data.productsIds);
-    try {
-      if (data.productsIds) {
+    if (!createdCategory?.id) {
+      setIsSubmiting(false);
+      return setRequestError(true);
+    }
+
+    const newCategoryId = createdCategory.id;
+
+    if (data.productsIds) {
+      try {
         data.productsIds.forEach(async (productId) => {
           const editedProduct = await editProduct({
             id: productId as string,
@@ -63,14 +70,17 @@ export default function CreateCategoryForm({
           });
 
           if (!editedProduct?.id) {
-            setRequestError(true);
+            setIsSubmiting(false);
+            return setRequestError(true);
           }
         });
+      } catch {
+        setRequestError(true);
+      } finally {
+        setIsSubmiting(false);
       }
-    } catch {
-      console.log(`caiu aqui`);
     }
-
+    setRegistredWithSucess(true);
     setIsSubmiting(false);
   };
 
@@ -103,29 +113,18 @@ export default function CreateCategoryForm({
             placeholder="Pesquisar produto por nome..."
           />
         </div>
-        <div className={styles.searchProductsList}>
-          {filteredProducts.map((product) => (
-            <label
-              htmlFor={product.id}
-              className={styles.searchProductItem}
-              key={product.id}
-            >
-              <input
-                type="checkbox"
-                value={product.id}
-                id={product.id}
-                className={styles.searchProductItemCheckbox}
-                {...register(`productsIds`)}
-              />
-              <span className={styles.newCheckBox} />
-              <span>{product.name}</span>
-            </label>
-          ))}
-        </div>
+        <SearchProductsList
+          filteredProducts={filteredProducts}
+          register={register(`productsIds`)}
+        />
       </div>
       <ButtonSubmit
         isSubmiting={isSubmiting}
-        text="Criar categoria"
+        text={
+          registredWithSucess
+            ? `Categoria criada com sucesso ✔️`
+            : `Criar categoria`
+        }
         submitError={requestError}
         className={styles.submitButton}
       />
