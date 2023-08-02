@@ -7,7 +7,7 @@ import CreateCategoryPortal from '../CreateCategoryPortal';
 export default function Teste({ companyId }: any) {
   return (
     <Root>
-      <Trigger>abrir categoria</Trigger>
+      <Trigger>Criar categoria</Trigger>
       <CreateCategoryPortal companyId={companyId} />
     </Root>
   );
