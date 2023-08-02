@@ -39,7 +39,7 @@ export default function CreateCategoryForm({
   const [requestError, setRequestError] = useState(false);
   const [registredWithSucess, setRegistredWithSucess] = useState(false);
 
-  const { products } = useProducts();
+  const { products, gettingProducts } = useProducts();
   const filteredProducts = products.filter((product) =>
     removeAccent(product.name.toLowerCase()).includes(
       removeAccent(searchProductName.toLowerCase())
@@ -116,6 +116,7 @@ export default function CreateCategoryForm({
         <SearchProductsList
           filteredProducts={filteredProducts}
           register={register(`productsIds`)}
+          gettingProducts={gettingProducts}
         />
       </div>
       <ButtonSubmit
