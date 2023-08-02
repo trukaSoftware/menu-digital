@@ -64,5 +64,5 @@
 }
 
 .submitButton {
-  @apply w-full py-2.5 bg-red-600 border-none text-white rounded;
+  @apply w-full py-2.5 bg-red-600 border-none text-white rounded flex items-center justify-center h-11;
 }
