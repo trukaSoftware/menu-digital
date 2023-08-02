@@ -1,0 +1,27 @@
+.formInputLabel {
+  @apply pt-2;
+}
+
+.formInputTitle {
+  @apply text-sm pt-1 font-normal;
+}
+
+.formInputWrapper {
+  @apply flex pt-2;
+}
+
+.formInputIcon {
+  @apply text-xl w-9 h-9 p-2 bg-gray-200 rounded-l-md border-t border-b border-l border-gray-300 text-gray-400;
+}
+
+.formInput {
+  @apply border-t border-b border-r border-gray-300 text-gray-400 text-base rounded-r-md pl-2 w-full bg-white;
+}
+
+.formInputValue {
+  @apply border-t border-b border-r border-gray-300 text-gray-900 text-base rounded-r-md pl-2 w-full bg-white;
+}
+
+.formErrorText{
+  @apply text-xs text-red-600 pb-1;
+}
