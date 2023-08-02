@@ -1,0 +1,36 @@
+.companyHeader {
+  @apply w-full bg-gray-200 p-4 gap-4 h-14;
+}
+
+.companyTitle {
+  @apply text-gray-900 text-base font-semibold;
+}
+
+.companyMain {
+  @apply flex flex-col h-full py-4 px-2 bg-white;
+}
+
+.companyForm {
+  @apply px-2;
+}
+
+.companyInformationText {
+  @apply text-xs pb-2;
+}
+
+.companyImageInputWrapper {
+  @apply flex gap-2 content-between flex-1;
+}
+
+.labelInputChecked {
+  @apply flex items-center border-t border-b border-r border-green-600  bg-green-600 text-white text-base rounded-r-md pl-2 h-9 w-full;
+}
+
+.labelInput {
+  @apply flex items-center border-t border-b border-r border-gray-300 text-gray-400 text-base rounded-r-md pl-2 h-9 w-full;
+}
+
+.companySubmitButton {
+  @apply bg-red-600 py-3 mt-6 text-white font-bold text-base flex justify-center rounded w-full;
+}
+
