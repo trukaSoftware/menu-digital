@@ -13,7 +13,7 @@ export interface FormInputProps {
   register: UseFormRegisterReturn;
 }
 
-export default function FormInputLabel({
+export default function FormInput({
   title,
   errorMessage,
   iconImage,
