@@ -1,0 +1,15 @@
+.imageInput {
+  @apply flex flex-nowrap flex-1;
+}
+
+.inputIcon {
+  @apply text-xl w-9 h-9 p-2 bg-gray-200 rounded-l-md border-t border-b border-l border-gray-300 text-gray-400;
+}
+
+.input {
+  display: none;
+}
+
+.teste {
+  @apply text-xs text-white pb-1;
+}
