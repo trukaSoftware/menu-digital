@@ -49,20 +49,20 @@ export default function CreateCategoryForm({
   const onSubmit = async (data: CreateCategoryFormData) => {
     setIsSubmiting(true);
 
-    const createdCategory = await createCategory({
-      name: data.categoryName,
-      companyId,
-    });
+    try {
+      const createdCategory = await createCategory({
+        name: data.categoryName,
+        companyId,
+      });
 
-    if (!createdCategory?.id) {
-      setIsSubmiting(false);
-      return setRequestError(true);
-    }
+      if (!createdCategory?.id) {
+        setIsSubmiting(false);
+        return setRequestError(true);
+      }
 
-    const newCategoryId = createdCategory.id;
+      const newCategoryId = createdCategory.id;
 
-    if (data.productsIds) {
-      try {
+      if (data.productsIds) {
         data.productsIds.forEach(async (productId) => {
           const editedProduct = await editProduct({
             id: productId as string,
@@ -74,12 +74,13 @@ export default function CreateCategoryForm({
             return setRequestError(true);
           }
         });
-      } catch {
-        setRequestError(true);
-      } finally {
-        setIsSubmiting(false);
       }
+    } catch {
+      setRequestError(true);
+    } finally {
+      setIsSubmiting(false);
     }
+
     setRegistredWithSucess(true);
     setIsSubmiting(false);
   };
@@ -98,6 +99,7 @@ export default function CreateCategoryForm({
           register={register(`categoryName`)}
           name="categoryName"
           error={errors.categoryName?.message}
+          placeholder="Mais vendidos"
         />
         <p className={styles.addProductToCategoryTitle}>
           Adicionar produtos a categoria
