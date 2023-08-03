@@ -27,30 +27,32 @@ export default function SearchProductsList({
         </div>
       ) : null}
 
-      {!gettingProducts && filteredProducts.length > 0 ? (
-        filteredProducts.map((product) => (
-          <label
-            htmlFor={product.id}
-            className={styles.searchProductItem}
-            key={product.id}
-          >
-            <input
-              type="checkbox"
-              value={product.id}
-              id={product.id}
-              className={styles.searchProductItemCheckbox}
-              {...register}
-            />
-            <span className={styles.newCheckBox} />
-            <span>{product.name}</span>
-          </label>
-        ))
-      ) : (
-        <div className={styles.noProductsFound}>
-          <MdOutlineSearchOff size={28} />
-          <p>Nenhum produto encontrado</p>
-        </div>
-      )}
+      {!gettingProducts &&
+        (filteredProducts.length > 0 ? (
+          filteredProducts.map((product) => (
+            <label
+              htmlFor={product.id}
+              className={styles.searchProductItem}
+              key={`${product.id}-label`}
+            >
+              <input
+                type="checkbox"
+                value={product.id}
+                id={product.id}
+                className={styles.searchProductItemCheckbox}
+                key={`${product.id}-input`}
+                {...register}
+              />
+              <span className={styles.newCheckBox} />
+              <span>{product.name}</span>
+            </label>
+          ))
+        ) : (
+          <div className={styles.noProductsFound}>
+            <MdOutlineSearchOff size={28} />
+            <p>Nenhum produto encontrado</p>
+          </div>
+        ))}
     </div>
   );
 }
