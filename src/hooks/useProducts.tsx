@@ -11,7 +11,7 @@ export function useProducts() {
   const getProductsResponse = async () => {
     const data = await getter<ProductResponse>(`/api/products/getProducts`);
 
-    setProducts(data.data.products);
+    setProducts(data?.data?.products);
     setGettingProducts(false);
   };
 

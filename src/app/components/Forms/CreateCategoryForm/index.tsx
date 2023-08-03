@@ -40,11 +40,15 @@ export default function CreateCategoryForm({
   const [registredWithSucess, setRegistredWithSucess] = useState(false);
 
   const { products, gettingProducts } = useProducts();
-  const filteredProducts = products.filter((product) =>
-    removeAccent(product.name.toLowerCase()).includes(
-      removeAccent(searchProductName.toLowerCase())
-    )
-  );
+
+  const filteredProducts =
+    products?.length > 0
+      ? products.filter((product) =>
+          removeAccent(product?.name?.toLowerCase())?.includes(
+            removeAccent(searchProductName?.toLowerCase())
+          )
+        )
+      : [];
 
   const onSubmit = async (data: CreateCategoryFormData) => {
     setIsSubmiting(true);
