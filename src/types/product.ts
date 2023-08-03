@@ -10,8 +10,8 @@ export interface Product {
   discount: null;
   companyId: string;
   productCategoriesId: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
   productsImages: ProductsImage[];
   productsComplements: ProductsComplement[];
 }
@@ -26,8 +26,8 @@ export interface Complements {
   id: string;
   name: string;
   maxAmount: number;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
   items: any[];
 }
 
@@ -37,8 +37,8 @@ export interface ProductsImage {
   imageUrl: string;
   alt: string;
   productId: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface EditProductPayload {
