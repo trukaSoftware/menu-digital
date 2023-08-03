@@ -2,6 +2,8 @@ import { FaGripLines, FaShoppingBasket } from 'react-icons/fa';
 
 import Header from '@/app/components/Header';
 
+import CreateProductForm from '../components/CreateProductForm';
+
 export const menuItens = [
   {
     menuTitle: `Criar novo(a)`,
@@ -10,7 +12,7 @@ export const menuItens = [
         menuIcon: FaShoppingBasket,
         dialogHeadLineText: `Criação de produto`,
         itemText: `Produtos`,
-        DialogBody: Header, // o Header ta sendo passado aqui só por enquanto
+        DialogBody: CreateProductForm, // o Header ta sendo passado aqui só por enquanto
       },
       {
         menuIcon: FaGripLines,
