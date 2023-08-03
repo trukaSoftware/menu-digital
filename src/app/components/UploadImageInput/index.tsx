@@ -7,27 +7,26 @@ interface UploadImageInputProps {
   handleFileChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   iconImage: ReactNode;
   id: string;
-  style: string;
   imageName?: string;
 }
 
-export default function uploadImageInput({
+export default function UploadImageInput({
   iconImage,
   handleFileChange,
   title,
   id,
-  style,
   imageName,
 }: UploadImageInputProps) {
   return (
     <>
-      <div className={styles.imageInput}>
-        <div className={styles.inputIcon}>{iconImage}</div>
-        <label htmlFor={id} className={style}>
-          <span>
-            {title}
+      <div className={styles.uploadImageInputContainer}>
+        <div className={styles.uploadImageIcon}>{iconImage}</div>
+        <label htmlFor={id} className={styles.uploadImageLabel}>
+          {imageName ? (
             <p className={styles.fileUploadedName}>{imageName}</p>
-          </span>
+          ) : (
+            title
+          )}
           <input
             id={id}
             type="file"
