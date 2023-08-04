@@ -5,12 +5,10 @@ import { productsMocks } from '@/app/mocks/products';
 import { render, screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import CreateCategoryForm, { CreateCategoryFormProps } from '..';
+import CreateCategoryForm from '..';
 
 vi.mock(`axios`);
 const mockedAxios = axios as jest.Mocked<typeof axios>;
-
-const mockProps = { companyId: `123` } as CreateCategoryFormProps;
 
 describe(`CreateCategoryForm`, () => {
   afterAll(() => {
@@ -23,7 +21,7 @@ describe(`CreateCategoryForm`, () => {
   });
 
   it(`When trying to send form without filling the category name input should render error`, async () => {
-    render(<CreateCategoryForm {...mockProps} />);
+    render(<CreateCategoryForm />);
 
     const submitButton = screen.getByRole(`button`, {
       name: `Criar categoria`,
@@ -42,7 +40,8 @@ describe(`CreateCategoryForm`, () => {
     mockedAxios.get.mockResolvedValueOnce({
       data: { products: productsMocks },
     });
-    render(<CreateCategoryForm {...mockProps} />);
+
+    render(<CreateCategoryForm />);
 
     const submitButton = screen.getByRole(`button`, {
       name: `Criar categoria`,
