@@ -1,0 +1,42 @@
+.searchProductsList {
+  @apply p-2 border border-gray-300 rounded h-72 w-full overflow-y-auto;
+}
+
+.searchingProducts {
+  @apply flex flex-col gap-2 items-center justify-center h-full;
+}
+
+.searchingProducts > p {
+  @apply text-gray-600;
+}
+
+.searchProductItem {
+  @apply flex relative items-center;
+}
+
+.searchProductItemCheckbox {
+  @apply appearance-none opacity-0 w-0 h-0;
+}
+
+.newCheckBox {
+  @apply top-0 left-0 w-5 h-5 border border-gray-300 rounded mr-2 after:content-[''] after:absolute after:hidden after:border-solid after:border-green-600 after:h-3 after:rotate-45;
+}
+
+.searchProductItem input:checked ~ .newCheckBox {
+  @apply after:block;
+}
+
+.searchProductItem .newCheckBox:after {
+  left: 7px;
+  top: 5px;
+  width: 7px;
+  border-width: 0 3px 3px 0;
+}
+
+.noProductsFound {
+  @apply flex items-center justify-center h-full text-gray-900;
+}
+
+.noProductsFound > p {
+  @apply text-base;
+}

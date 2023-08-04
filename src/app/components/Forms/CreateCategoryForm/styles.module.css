@@ -1,0 +1,35 @@
+.createCategoryForm {
+  @apply flex flex-col h-[calc(100%_-_56px)] justify-between p-4;
+}
+
+.createCategoryFormInputs {
+  @apply flex flex-col gap-2;
+}
+
+.createCategoryFormIcon {
+  @apply text-gray-400;
+}
+
+.addProductToCategoryTitle {
+  @apply text-gray-900 text-sm;
+}
+
+.searchProductInputWrapper {
+  @apply flex w-full border border-gray-300 rounded gap-2 py-2.5 px-2;
+}
+
+.searchProductIconWrapper {
+  @apply flex justify-center items-center;
+}
+
+.searchProductIcon {
+  @apply text-gray-400;
+}
+
+.searchProductInput {
+  @apply w-full focus:outline-none placeholder:text-gray-400 placeholder:font-medium placeholder:text-sm;
+}
+
+.submitButton {
+  @apply w-full py-2.5 bg-red-600 border-none text-white rounded flex items-center justify-center h-11;
+}

@@ -54,6 +54,7 @@ export default authMiddleware({
   },
 
   publicRoutes,
+  debug: process.env.NODE_ENV === `development`,
 });
 
 export const config = {
