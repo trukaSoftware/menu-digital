@@ -10,6 +10,11 @@ import CreateCategoryForm from '..';
 vi.mock(`axios`);
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
+vi.mock(`@clerk/nextjs`, () => ({
+  __esModule: true,
+  useUser: () => ({ user: { id: `1` } }),
+}));
+
 describe(`CreateCategoryForm`, () => {
   afterAll(() => {
     vi.clearAllMocks();
