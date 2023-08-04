@@ -9,6 +9,7 @@ import { editProduct } from '@/app/utils/api/editProduct';
 import { removeAccent } from '@/app/utils/removeAccent';
 import { useProducts } from '@/hooks/useProducts';
 import { createCategoryFormSchema } from '@/yup/createCategoryFormSchema';
+import { useUser } from '@clerk/nextjs';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import ButtonSubmit from '../../ButtonSubmit';
@@ -18,13 +19,7 @@ import styles from './styles.module.css';
 
 type CreateCategoryFormData = InferType<typeof createCategoryFormSchema>;
 
-export interface CreateCategoryFormProps {
-  companyId: string;
-}
-
-export default function CreateCategoryForm({
-  companyId,
-}: CreateCategoryFormProps) {
+export default function CreateCategoryForm() {
   const {
     register,
     handleSubmit,
@@ -38,6 +33,7 @@ export default function CreateCategoryForm({
   const [searchProductName, setSearchProductName] = useState<string>(``);
   const [requestError, setRequestError] = useState(false);
   const [registredWithSucess, setRegistredWithSucess] = useState(false);
+  const { user } = useUser();
 
   const { products, gettingProducts } = useProducts();
 
@@ -56,7 +52,7 @@ export default function CreateCategoryForm({
     try {
       const createdCategory = await createCategory({
         name: data.categoryName,
-        companyId,
+        companyId: user?.id,
       });
 
       if (!createdCategory?.id) {

@@ -21,7 +21,7 @@ export default async function Configs({ params }: RouterParams) {
       />
       <main className={styles.configsMainContainer}>
         <MenuComponent menuInformations={menuItens} />
-        <Teste companyId={params.companyId} />
+        <Teste />
         <button className={styles.configsSeeMyStoreButton} type="button">
           Como sua loja está hoje
         </button>

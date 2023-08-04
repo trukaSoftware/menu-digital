@@ -39,7 +39,7 @@ describe(`SearchProductsList`, () => {
     expect(screen.getByText(/nenhum produto encontrado/i)).toBeInTheDocument();
   });
 
-  it(`If gettingProducts prop is false and filteredProducts is empty shouldn't load p with text "Nenhum produto encontrado"`, () => {
+  it(`If gettingProducts prop is true and filteredProducts is empty shouldn't load p with text "Nenhum produto encontrado"`, () => {
     render(
       <SearchProductsList
         {...mockProps}

@@ -1,6 +1,6 @@
 export interface CategoryPayload {
   name: string;
-  companyId: string;
+  companyId: string | undefined;
 }
 
 export interface CreateCategoryReturn {
