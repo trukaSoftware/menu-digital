@@ -57,7 +57,7 @@ export default function CreateCompany() {
 
   const email = user?.emailAddresses[0].emailAddress;
 
-  const submit = (data: CreateCompanyData) => {
+  const submit = async (data: CreateCompanyData) => {
     const { cnpj, phoneNumber, deliveryPhoneNumber, zipCode } = data;
     const formatedForm = {
       ...data,
@@ -76,6 +76,7 @@ export default function CreateCompany() {
         file: selectedCoverCape,
       },
     };
+
     return console.log(formatedForm);
   };
 
