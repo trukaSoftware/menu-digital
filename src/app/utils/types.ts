@@ -98,3 +98,11 @@ export interface Address {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface ImageProps {
+  file: string;
+  name: string;
+  alt: string;
+  width?: number;
+  height?: number;
+}
