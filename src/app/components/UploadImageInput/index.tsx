@@ -23,7 +23,7 @@ export default function UploadImageInput({
         <div className={styles.uploadImageIcon}>{iconImage}</div>
         <label htmlFor={id} className={styles.uploadImageLabel}>
           {imageName ? (
-            <p className={styles.fileUploadedName}>{imageName}</p>
+            <span className={styles.fileUploadedName}>{imageName}</span>
           ) : (
             title
           )}
