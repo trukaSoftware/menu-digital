@@ -26,9 +26,10 @@ export default function MenuComponent({
           {companyInfos ? (
             menuItens.map((item) => (
               <Link
+                title={`${item.itemText}`}
                 className={styles.menuComponentItem}
                 href={`${item.managementPageHref}/${companyInfos.slug}/${companyInfos.companyId}`}
-                key={`item-${Date.now}`}
+                key={`item-${Math.floor(new Date().valueOf() * Math.random())}`}
               >
                 <div className={styles.menuComponentIconContainer}>
                   <item.menuIcon size={32} color="E5E7EB" />
