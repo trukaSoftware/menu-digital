@@ -1,5 +1,5 @@
 .defaultSelectWrapper {
-  @apply relative w-full;
+  @apply relative w-full bg-red-400;
 }
 
 .defaultSelectContainerTriggerAndIcon {
@@ -15,8 +15,7 @@
 }
 
 .defaultSelectContent {
-  @apply absolute top-16 left-0.5 bg-white rounded px-2 py-1 border border-gray-300 shadow-lg;
-  width: calc(100vw - 5%);
+  @apply absolute top-16 bg-white rounded px-2 py-1 border border-gray-300 shadow-lg;
 }
 
 .defaultSelectItem {
