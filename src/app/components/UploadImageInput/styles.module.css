@@ -15,5 +15,5 @@
 }
 
 .fileUploadedName {
-  @apply text-xs text-gray-500 py-1 px-1;
+  @apply w-full h-full text-xs text-gray-500 py-1 px-1;
 }
