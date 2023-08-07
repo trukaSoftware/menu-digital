@@ -1,0 +1,28 @@
+.defaultSelectWrapper {
+  @apply relative w-full;
+}
+
+.defaultSelectContainerTriggerAndIcon {
+  @apply flex justify-center items-center w-full border border-gray-300 rounded gap-2;
+}
+
+.defaultSelectContainerIcon {
+  @apply py-2.5 px-2 bg-gray-200 rounded-l;
+}
+
+.defaultSelectTrigger {
+  @apply flex justify-start text-gray-400 items-center w-full;
+}
+
+.defaultSelectContent {
+  @apply absolute top-16 left-0.5 bg-white rounded px-2 py-1 border border-gray-300 shadow-lg;
+  width: calc(100vw - 5%);
+}
+
+.defaultSelectItem {
+  @apply flex items-center w-full gap-1;
+}
+
+.defaultSelectErrorMessage {
+  @apply text-sm text-red-500 font-medium;
+}
