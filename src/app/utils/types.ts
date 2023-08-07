@@ -1,3 +1,7 @@
+import { InferType } from 'yup';
+
+import { createCompanyFormValidation } from './yup/createCompanyFormValidation';
+
 export type EditCompanyData = {
   id: string;
   company?: {
@@ -116,4 +120,6 @@ export interface CreateCompanyData {
   name: string;
   phoneNumber: string;
   zipCode: string;
+  fileLogo?: string | undefined;
+  fileCoverCape?: string | undefined;
 }
