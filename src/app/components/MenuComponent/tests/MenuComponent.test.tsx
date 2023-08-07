@@ -15,78 +15,38 @@ describe(`MenuComponent`, () => {
   });
 
   const mockProps = {
-    menuInformations: [
-      {
-        menuTitle: `Criar novo(a)`,
-        items: [
-          {
-            menuIcon: vi.fn(),
-            dialogHeadLineText: `Criação de produto`,
-            itemText: `Produtos`,
-            DialogBody: vi.fn().mockImplementation(() => <span>test</span>),
-          },
-          {
-            menuIcon: vi.fn(),
-            dialogHeadLineText: `Criação de categoria`,
-            itemText: `Categorias`,
-            DialogBody: vi.fn().mockImplementation(() => <span>test</span>),
-          },
-        ],
-      },
-    ],
+    menuTitle: `Gerenciar`,
     companyInfos: {
       slug: `mockSlug`,
       companyId: `mockCompanyId`,
     },
   } as MenuComponentProps;
 
-  it(`if DialogBody is passed and the button Produtos is clicked should open a dialog with headline text "Criação de produto"`, async () => {
+  it(`if MenuComponent is called with menuTitle equal to "Gerenciar", a heading level 2 with the text "Gerenciar" should be rendered`, () => {
     render(<MenuComponent {...mockProps} />);
 
-    const createProductButton = screen.getByRole(`button`, {
-      name: /Produtos/i,
-    });
+    const title = screen.getByRole(`heading`, { level: 2 });
 
-    fireEvent.click(createProductButton);
-
-    expect(await screen.findByText(`Criação de produto`)).toBeInTheDocument();
+    expect(title).toHaveTextContent(`Gerenciar`);
   });
 
-  it(`if DialogBody is passed and the button Categorias is clicked should open a dialog with headline text "Criação de categoria"`, async () => {
-    render(<MenuComponent {...mockProps} />);
-
-    const createCategoryButton = screen.getByRole(`button`, {
-      name: /Categorias/i,
-    });
-
-    fireEvent.click(createCategoryButton);
-
-    expect(await screen.findByText(`Criação de categoria`)).toBeInTheDocument();
-  });
-
-  it(`if DialogBody is not passed, should have a Link element with text "Produtos" and href "/manageProducts/mockSlug/mockCompanyId"`, async () => {
+  it(`if MenuComponent is called with menuTitle equal to "Criar novo(a)", a heading level 2 with the text "Criar novo(a)" should be rendered`, () => {
     const modifieldMockProps = {
-      menuInformations: [
-        {
-          menuTitle: `Gerenciar`,
-          items: [
-            {
-              menuIcon: vi.fn(),
-              itemText: `Produtos`,
-              managementPageHref: `/manageProducts`,
-            },
-          ],
-        },
-      ],
-      companyInfos: {
-        slug: `mockSlug`,
-        companyId: `mockCompanyId`,
-      },
-    } as MenuComponentProps;
+      ...mockProps,
+      menuTitle: `Criar novo(a)`,
+    };
 
     render(<MenuComponent {...modifieldMockProps} />);
 
-    const linkToManageProductsPage = screen.getByRole(`link`);
+    const title = screen.getByRole(`heading`, { level: 2 });
+
+    expect(title).toHaveTextContent(`Criar novo(a)`);
+  });
+
+  it(`if MenuComponent is called with companyInfos, should have a Link element with text "Produtos" and href "/manageProducts/mockSlug/mockCompanyId"`, async () => {
+    render(<MenuComponent {...mockProps} />);
+
+    const linkToManageProductsPage = screen.getByTitle(`Produtos`);
 
     expect(linkToManageProductsPage).toBeInTheDocument();
     expect(linkToManageProductsPage).toHaveTextContent(`Produtos`);
@@ -98,18 +58,7 @@ describe(`MenuComponent`, () => {
 
   it(`if DialogBody is not passed, should have a Link element with text "Categorias" and href "/manageCategories/mockSlug/mockCompanyId"`, async () => {
     const modifieldMockProps = {
-      menuInformations: [
-        {
-          menuTitle: `Gerenciar`,
-          items: [
-            {
-              menuIcon: vi.fn(),
-              itemText: `Categorias`,
-              managementPageHref: `/manageCategories`,
-            },
-          ],
-        },
-      ],
+      ...mockProps,
       companyInfos: {
         slug: `mockSlug`,
         companyId: `mockCompanyId`,
@@ -118,7 +67,7 @@ describe(`MenuComponent`, () => {
 
     render(<MenuComponent {...modifieldMockProps} />);
 
-    const linkToManageCategoriesPage = screen.getByRole(`link`);
+    const linkToManageCategoriesPage = screen.getByTitle(`Categorias`);
 
     expect(linkToManageCategoriesPage).toBeInTheDocument();
     expect(linkToManageCategoriesPage).toHaveTextContent(`Categorias`);
@@ -126,5 +75,31 @@ describe(`MenuComponent`, () => {
       `href`,
       `/manageCategories/mockSlug/mockCompanyId`
     );
+
+    it(`if MenuComponent is called without companyInfos and the button Produtos is clicked should open a dialog with headline text "Criação de produto"`, async () => {
+      render(<MenuComponent {...mockProps} />);
+
+      const createProductButton = screen.getByRole(`button`, {
+        name: /Produtos/i,
+      });
+
+      fireEvent.click(createProductButton);
+
+      expect(await screen.findByText(`Criação de produto`)).toBeInTheDocument();
+    });
+
+    it(`if MenuComponent is called without companyInfos and the button Categorias is clicked should open a dialog with headline text "Criação de categoria"`, async () => {
+      render(<MenuComponent {...mockProps} />);
+
+      const createCategoryButton = screen.getByRole(`button`, {
+        name: /Categorias/i,
+      });
+
+      fireEvent.click(createCategoryButton);
+
+      expect(
+        await screen.findByText(`Criação de categoria`)
+      ).toBeInTheDocument();
+    });
   });
 });
