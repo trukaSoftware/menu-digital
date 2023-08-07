@@ -106,3 +106,14 @@ export interface ImageProps {
   width?: number;
   height?: number;
 }
+
+export interface CreateCompanyData {
+  address: string;
+  cnpj: string;
+  deliveryPhoneNumber: string;
+  email: string;
+  id: string;
+  name: string;
+  phoneNumber: string;
+  zipCode: string;
+}
