@@ -1,40 +1,14 @@
 import { FaGripLines, FaShoppingBasket } from 'react-icons/fa';
 
-import Header from '@/app/components/Header';
-
-import CreateProductForm from '../components/CreateProductForm';
-
 export const menuItens = [
   {
-    menuTitle: `Criar novo(a)`,
-    items: [
-      {
-        menuIcon: FaShoppingBasket,
-        dialogHeadLineText: `Criação de produto`,
-        itemText: `Produtos`,
-        DialogBody: CreateProductForm, // o Header ta sendo passado aqui só por enquanto
-      },
-      {
-        menuIcon: FaGripLines,
-        dialogHeadLineText: `Criação de categoria`,
-        itemText: `Categorias`,
-        DialogBody: Header, // o Header ta sendo passado aqui só por enquanto
-      },
-    ],
+    menuIcon: FaShoppingBasket,
+    itemText: `Produtos`,
+    managementPageHref: `/manageProducts`,
   },
   {
-    menuTitle: `Gerenciar`,
-    items: [
-      {
-        menuIcon: FaShoppingBasket,
-        itemText: `Produtos`,
-        managementPageHref: `/manageProducts`,
-      },
-      {
-        menuIcon: FaGripLines,
-        itemText: `Categorias`,
-        managementPageHref: `/manageCategories`,
-      },
-    ],
+    menuIcon: FaGripLines,
+    itemText: `Categorias`,
+    managementPageHref: `/manageCategories`,
   },
 ];
