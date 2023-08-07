@@ -1,5 +1,5 @@
 .defaultSelectWrapper {
-  @apply relative w-full bg-red-400;
+  @apply relative w-full;
 }
 
 .defaultSelectContainerTriggerAndIcon {
