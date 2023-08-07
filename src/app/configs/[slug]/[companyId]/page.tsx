@@ -21,11 +21,13 @@ export default async function Configs({ params }: RouterParams) {
         companyName={name}
       />
       <main className={styles.configsMainContainer}>
-        <MenuComponent menuTitle="Criar novo(a)" />
-        <MenuComponent
-          menuTitle="Gerenciar"
-          companyInfos={{ slug, companyId }}
-        />
+        <div className={styles.configsMainMenuContainer}>
+          <MenuComponent menuTitle="Criar novo(a)" />
+          <MenuComponent
+            menuTitle="Gerenciar"
+            companyInfos={{ slug, companyId }}
+          />
+        </div>
 
         <button className={styles.configsSeeMyStoreButton} type="button">
           Como sua loja está hoje
