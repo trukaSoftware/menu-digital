@@ -76,7 +76,7 @@ describe(`FoodCard`, () => {
   it(`when prop discountPercentage is not passed, shouldn't render discount percentage`, () => {
     render(<EditableFoodCard {...mockPropsWithoutDiscount} />);
 
-    const discountPercentage = screen.queryByText(`%20`);
+    const discountPercentage = screen.queryByText(`20%`);
 
     expect(discountPercentage).not.toBeInTheDocument();
   });
