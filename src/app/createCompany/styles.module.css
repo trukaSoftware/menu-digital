@@ -33,3 +33,16 @@
 .companySubmitButton {
   @apply bg-red-600 py-3 mt-6 text-white font-bold text-base flex justify-center rounded w-full;
 }
+
+
+label.createCompanyLabel span {
+  @apply last:text-xs mb-2;
+}
+
+label.createCompanyLabel {
+  @apply gap-0;
+}
+
+label.deliveryPhoneLabel span {
+  @apply last:mb-0;
+}
