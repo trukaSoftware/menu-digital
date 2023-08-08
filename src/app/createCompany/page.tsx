@@ -16,15 +16,11 @@ import {
 import { useUser } from '@clerk/nextjs';
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import ButtonSubmit from '../components/ButtonSubmit';
 import DefaultInput from '../components/DefaultInput';
 import UploadImageInput from '../components/UploadImageInput';
+import { createCompany } from '../utils/api/createCompany';
 import { convertFileToBase64 } from '../utils/convertFileToBase64';
-import {
-  formatPhoneNumber,
-  formatZipCode,
-  formatCnpj,
-  formatCpf,
-} from '../utils/formatCreateCompanyForm';
 import { CreateCompanyData } from '../utils/types';
 import { createCompanyFormValidation } from '../utils/yup/createCompanyFormValidation';
 import styles from './styles.module.css';
@@ -35,6 +31,8 @@ export default function CreateCompany() {
   const [selectedCoverCape, setSelectedCoverCape] = useState(``);
   const [selectedLogoName, setSelectedLogoName] = useState(``);
   const [selectedCoverCapeName, setSelectedCoverCapeName] = useState(``);
+  const [isSubmiting, setIsSubmiting] = useState(false);
+  const [requestError, setRequestError] = useState(false);
 
   const {
     register,
@@ -58,26 +56,33 @@ export default function CreateCompany() {
   const email = user?.emailAddresses[0].emailAddress;
 
   const submit = async (data: CreateCompanyData) => {
-    const { cnpj, phoneNumber, deliveryPhoneNumber, zipCode } = data;
-    const formatedForm = {
-      ...data,
-      id: user?.id,
-      cnpj: cnpj?.length === 14 ? formatCnpj(cnpj) : formatCpf(`${cnpj}`),
-      phoneNumber: formatPhoneNumber(phoneNumber),
-      deliveryPhoneNumber: !deliveryPhoneNumber
-        ? formatPhoneNumber(phoneNumber)
-        : formatPhoneNumber(deliveryPhoneNumber),
-      zipCode: formatZipCode(zipCode),
-      email,
-      companyLogo: {
-        file: selectedLogo,
-      },
-      companyTheme: {
-        file: selectedCoverCape,
-      },
-    };
+    setIsSubmiting(true);
 
-    return console.log(formatedForm);
+    try {
+      const createdCompany = await createCompany({
+        ...data,
+        id: user?.id,
+        deliveryPhoneNumber: !data?.deliveryPhoneNumber
+          ? data?.phoneNumber
+          : data.deliveryPhoneNumber,
+        email,
+        companyLogo: {
+          file: selectedLogo,
+        },
+        companyTheme: {
+          file: selectedCoverCape,
+        },
+      });
+
+      if (!createdCompany?.companyId) {
+        setIsSubmiting(false);
+        return setRequestError(true);
+      }
+    } catch {
+      setRequestError(true);
+    } finally {
+      setIsSubmiting(false);
+    }
   };
 
   return (
@@ -89,7 +94,8 @@ export default function CreateCompany() {
         <form onSubmit={handleSubmit(submit)}>
           <div className={styles.companyForm}>
             <DefaultInput
-              Icon={<FaAddressCard />}
+              labelClassName={styles.createCompanyLabel}
+              Icon={<FaAddressCard size={20} color="#9ca3af" />}
               name="name"
               error={errors.name?.message}
               labelText="Nome do restaurante*"
@@ -97,16 +103,18 @@ export default function CreateCompany() {
               placeholder="Nome do restaurante"
             />
             <DefaultInput
-              Icon={<FaRegBuilding />}
+              labelClassName={styles.createCompanyLabel}
+              Icon={<FaRegBuilding size={20} color="#9ca3af" />}
               name="cnpj"
               error={errors.cnpj?.message}
-              labelText="CNPJ/CPF"
+              labelText="CNPJ/CPF*"
               register={register(`cnpj`)}
               placeholder="Somente números"
               type="number"
             />
             <DefaultInput
-              Icon={<FaPhoneAlt />}
+              labelClassName={styles.createCompanyLabel}
+              Icon={<FaPhoneAlt size={20} color="#9ca3af" />}
               name="phoneNumber"
               labelText="Telefone*"
               error={errors.phoneNumber?.message}
@@ -115,7 +123,8 @@ export default function CreateCompany() {
               type="number"
             />
             <DefaultInput
-              Icon={<FaPhoneVolume />}
+              labelClassName={`${styles.createCompanyLabel} ${styles.deliveryPhoneLabel}`}
+              Icon={<FaPhoneVolume size={20} color="#9ca3af" />}
               name="deliveryPhoneNumber"
               labelText="Telefone de delivery"
               error={errors.deliveryPhoneNumber?.message}
@@ -138,7 +147,7 @@ export default function CreateCompany() {
                 handleFileChange={(event) =>
                   handleFileChange(event, setSelectedLogoName, setSelectedLogo)
                 }
-                iconImage={<FaFileUpload />}
+                iconImage={<FaFileUpload size={20} />}
                 imageName={selectedLogoName}
               />
               <UploadImageInput
@@ -156,12 +165,13 @@ export default function CreateCompany() {
                     setSelectedCoverCape
                   )
                 }
-                iconImage={<FaImage />}
+                iconImage={<FaImage size={20} />}
                 imageName={selectedCoverCapeName}
               />
             </div>
             <DefaultInput
-              Icon={<FaMapPin />}
+              labelClassName={styles.createCompanyLabel}
+              Icon={<FaMapPin size={20} color="#9ca3af" />}
               name="zipCode"
               labelText="CEP*"
               error={errors.zipCode?.message}
@@ -170,7 +180,8 @@ export default function CreateCompany() {
               type="number"
             />
             <DefaultInput
-              Icon={<FaMapMarkerAlt />}
+              labelClassName={styles.createCompanyLabel}
+              Icon={<FaMapMarkerAlt size={20} color="#9ca3af" />}
               name="address"
               labelText="Endereço*"
               error={errors.address?.message}
@@ -178,9 +189,12 @@ export default function CreateCompany() {
               placeholder="Ex: Rua 1, nº 1, casa 1 - Bairro luz"
             />
           </div>
-          <button type="submit" className={styles.companySubmitButton}>
-            Finalizar cadastro
-          </button>
+          <ButtonSubmit
+            isSubmiting={isSubmiting}
+            text="Finalizar cadastro"
+            submitError={requestError}
+            className={styles.companySubmitButton}
+          />
         </form>
       </div>
     </>
