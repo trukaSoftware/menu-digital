@@ -1,0 +1,55 @@
+.editableFoodCard {
+  @apply flex gap-2 relative p-2 border-b border-gray-300 w-full lg:border lg:rounded-lg lg:w-full lg:p-0;
+}
+
+.editableFoodImageWrapper {
+  @apply w-24 h-24 relative lg:w-36 lg:h-36 lg:m-4;
+}
+
+.editableFoodCardTextContent {
+  @apply flex flex-col w-7/12 justify-between lg:py-4;
+}
+
+.editableFoodCardTextWrapper {
+  @apply flex flex-col gap-1 items-start;
+}
+
+.editableFoodCardTitle {
+  @apply text-gray-900 font-bold text-sm lg:text-base;
+}
+
+.editableFoodCardDescription {
+  @apply text-gray-900 text-xs lg:text-sm;
+}
+
+.editableFoodCardPricesWrapper {
+  @apply flex gap-1.5;
+}
+
+.editableFoodCardDiscountPrice {
+  @apply text-green-600 font-semibold text-xs lg:text-sm;
+}
+
+.editableFoodCardRealPrice {
+  @apply font-semibold text-xs text-gray-900 lg:text-sm;
+}
+
+.editableFoodCardPriceScratched {
+  @apply line-through text-gray-400;
+}
+
+.editableFoodCardDiscountTag {
+  @apply absolute top-1 right-1 p-1 bg-red-600 rounded text-xs text-white lg:py-1 lg:px-2 lg:top-2 lg:right-2;
+}
+
+.editableFoodCardDelBtn {
+  @apply text-sm text-red-600 font-medium lg:text-sm flex gap-x-1 items-center;
+}
+
+.editableFoodCardEditBtn {
+  @apply text-sm text-gray-900 font-medium lg:text-sm flex gap-x-1 items-center;
+}
+
+.editableFoodButtonsWrapper {
+  @apply w-full flex justify-end p-2 gap-x-4;
+}
