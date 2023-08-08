@@ -94,6 +94,7 @@ export default function CreateCompany() {
               error={errors.name?.message}
               labelText="Nome do restaurante*"
               register={register(`name`)}
+              placeholder="Nome do restaurante"
             />
             <DefaultInput
               Icon={<FaRegBuilding />}
@@ -101,6 +102,8 @@ export default function CreateCompany() {
               error={errors.cnpj?.message}
               labelText="CNPJ/CPF"
               register={register(`cnpj`)}
+              placeholder="Somente números"
+              type="number"
             />
             <DefaultInput
               Icon={<FaPhoneAlt />}
@@ -108,6 +111,8 @@ export default function CreateCompany() {
               labelText="Telefone*"
               error={errors.phoneNumber?.message}
               register={register(`phoneNumber`)}
+              placeholder="Somente números, com DDD"
+              type="number"
             />
             <DefaultInput
               Icon={<FaPhoneVolume />}
@@ -115,6 +120,8 @@ export default function CreateCompany() {
               labelText="Telefone de delivery"
               error={errors.deliveryPhoneNumber?.message}
               register={register(`deliveryPhoneNumber`)}
+              placeholder="Somente números, com DDD"
+              type="number"
             />
             <p className={styles.companyInformationText}>
               **Caso não seja passado, usaremos o telefone
@@ -159,6 +166,8 @@ export default function CreateCompany() {
               labelText="CEP*"
               error={errors.zipCode?.message}
               register={register(`zipCode`)}
+              placeholder="Somente números"
+              type="number"
             />
             <DefaultInput
               Icon={<FaMapMarkerAlt />}
@@ -166,6 +175,7 @@ export default function CreateCompany() {
               labelText="Endereço*"
               error={errors.address?.message}
               register={register(`address`)}
+              placeholder="Ex: Rua 1, nº 1, casa 1 - Bairro luz"
             />
           </div>
           <button type="submit" className={styles.companySubmitButton}>
