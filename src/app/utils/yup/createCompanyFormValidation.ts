@@ -9,7 +9,8 @@ export const createCompanyFormValidation = yup.object().shape({
         return false;
       }
       return value.length === 14 || value.length === 11;
-    }),
+    })
+    .required(),
   phoneNumber: yup
     .string()
     .min(10, `*Esse campo é obrigatório`)
