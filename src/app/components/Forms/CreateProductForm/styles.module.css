@@ -3,7 +3,7 @@
 }
 
 .createProductForm {
-  @apply flex flex-col justify-between h-4/5 min-h-[92%];
+  @apply flex flex-col justify-between h-4/5 min-h-[92%] overflow-auto;
 }
 
 .createProductFormcontainerInputs {
