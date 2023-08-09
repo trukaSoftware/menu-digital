@@ -36,7 +36,7 @@ describe(`DefaultInput`, () => {
     expect(inputElement.type).toBe(`text`);
   });
 
-  it(`should render the Icon`, () => {
+  it(`should render the passed Icon`, () => {
     render(
       <DefaultInput
         Icon={<span data-testid="mock-icon">Icon</span>}

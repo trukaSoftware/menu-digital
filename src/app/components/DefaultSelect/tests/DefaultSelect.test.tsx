@@ -58,14 +58,15 @@ describe(`DefaultSelect`, () => {
     vi.resetAllMocks();
   });
 
+  const mockField: ControllerRenderProps<any, 'categoryId'> = {
+    onChange: vi.fn(),
+    onBlur: vi.fn(),
+    value: ``,
+    name: `categoryId`,
+    ref: null as unknown as RefCallBack,
+  };
+
   it(`should render the component with categories`, async () => {
-    const mockField: ControllerRenderProps<any, 'categoryId'> = {
-      onChange: vi.fn(),
-      onBlur: vi.fn(),
-      value: ``,
-      name: `categoryId`,
-      ref: null as unknown as RefCallBack,
-    };
     const mockError: FieldError | undefined = undefined;
 
     render(<DefaultSelect field={mockField} error={mockError} />);
@@ -82,13 +83,6 @@ describe(`DefaultSelect`, () => {
   });
 
   it(`if error, should render the component with error message`, () => {
-    const mockField: ControllerRenderProps<any, 'categoryId'> = {
-      onChange: vi.fn(),
-      onBlur: vi.fn(),
-      value: ``,
-      name: `categoryId`,
-      ref: null as unknown as RefCallBack,
-    };
     const mockError: FieldError = {
       type: `required`,
       message: `This field is required`,

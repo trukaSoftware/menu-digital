@@ -16,10 +16,11 @@ describe(`UploadImageInput`, () => {
 
   const mockHandleFileChange = vi.fn();
 
+  const id = `upload-input`;
+
   it(`should render the component with title and icon`, () => {
     const title = `Upload Image`;
     const iconImage = <span data-testid="mock-icon">Icon</span>;
-    const id = `upload-input`;
 
     render(
       <UploadImageInput
@@ -38,7 +39,7 @@ describe(`UploadImageInput`, () => {
 
   it(`should render the element with className "fileUploadedName" if the image name if provided`, () => {
     const imageName = `example.jpg`;
-    const id = `upload-input`;
+
     render(
       <UploadImageInput
         title="Upload Image"
@@ -56,7 +57,6 @@ describe(`UploadImageInput`, () => {
   });
 
   it(`should call handleFileChange when file input changes`, async () => {
-    const id = `upload-input`;
     render(
       <UploadImageInput
         title="Upload Image"

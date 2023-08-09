@@ -122,7 +122,7 @@ describe(`CreateProductForm`, () => {
     ).toBeInTheDocument();
   });
 
-  it(`When trying to sending form filling the all fields of product form shouldn't render error`, async () => {
+  it(`When sending form filling the all fields of product form shouldn't render error`, async () => {
     render(<CreateProductForm {...mockProps} />);
 
     const submitButton = screen.getByRole(`button`, {

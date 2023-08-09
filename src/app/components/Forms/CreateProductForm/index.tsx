@@ -3,8 +3,8 @@
 import { ChangeEvent, useState } from 'react';
 import { Controller, useForm, useWatch } from 'react-hook-form';
 import { BsFillImageFill } from 'react-icons/bs';
-import { FaCarrot } from 'react-icons/fa';
 import { LiaMoneyBillWaveSolid } from 'react-icons/lia';
+import { MdOutlineFastfood } from 'react-icons/md';
 
 import { createProduct } from '@/app/utils/api/createProduct';
 import { ImageProps } from '@/app/utils/types';
@@ -119,7 +119,7 @@ export default function CreateProductForm({
       >
         <div className={styles.createProductFormcontainerInputs}>
           <DefaultInput
-            Icon={<FaCarrot />}
+            Icon={<MdOutlineFastfood />}
             name="name"
             placeholder="Hamburguer"
             labelText="Nome*"

@@ -35,11 +35,11 @@ export default function DefaultSelect({ field, error }: DefaultSelectProps) {
             className={styles.defaultSelectTrigger}
             aria-label="Categorias"
           >
-            {gettingCategories ? (
-              <Select.Value placeholder="Buscando categorias..." />
-            ) : (
-              <Select.Value placeholder="Categorias" />
-            )}
+            <Select.Value
+              placeholder={
+                gettingCategories ? `Buscando categorias...` : `Categorias`
+              }
+            />
           </Select.Trigger>
         </div>
         <Select.Portal>
@@ -49,7 +49,7 @@ export default function DefaultSelect({ field, error }: DefaultSelectProps) {
                 <Select.Label className="SelectLabel">
                   Escolha uma categoria
                 </Select.Label>
-                {categories.map((category) => (
+                {categories?.map((category) => (
                   <Select.Item
                     value={category.id}
                     className={styles.defaultSelectItem}

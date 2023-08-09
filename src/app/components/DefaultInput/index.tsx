@@ -7,7 +7,6 @@ export interface DefaultInputProps
   Icon: JSX.Element;
   labelText?: string;
   name: string;
-  type?: string;
   register: UseFormRegisterReturn;
   error: string | undefined;
 }
@@ -15,7 +14,6 @@ export interface DefaultInputProps
 export default function DefaultInput({
   Icon,
   name,
-  type = `text`,
   labelText,
   register,
   error,
@@ -30,7 +28,6 @@ export default function DefaultInput({
         <div className={styles.defaultInputFormIconWrapper}>{Icon}</div>
         <input
           id={name}
-          type={type}
           className={styles.defaultInputFormNameInput}
           {...register}
           {...rest}
