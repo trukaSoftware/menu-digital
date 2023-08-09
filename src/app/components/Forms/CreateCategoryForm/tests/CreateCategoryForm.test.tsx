@@ -2,8 +2,7 @@ import axios from 'axios';
 import { vi } from 'vitest';
 
 import { productsMocks } from '@/app/mocks/products';
-import { render, screen, cleanup } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 
 import CreateCategoryForm from '..';
 
@@ -25,14 +24,18 @@ describe(`CreateCategoryForm`, () => {
     vi.resetAllMocks();
   });
 
+  const mockProps = {
+    setShowDialog: vi.fn(),
+  };
+
   it(`When trying to send form without filling the category name input should render error`, async () => {
-    render(<CreateCategoryForm />);
+    render(<CreateCategoryForm {...mockProps} />);
 
     const submitButton = screen.getByRole(`button`, {
       name: `Criar categoria`,
     });
 
-    userEvent.click(submitButton);
+    fireEvent.click(submitButton);
 
     expect(
       await screen.findByText(
@@ -46,17 +49,19 @@ describe(`CreateCategoryForm`, () => {
       data: { products: productsMocks },
     });
 
-    render(<CreateCategoryForm />);
+    render(<CreateCategoryForm {...mockProps} />);
 
     const submitButton = screen.getByRole(`button`, {
       name: `Criar categoria`,
     });
 
-    const categoryNameInput = screen.getByPlaceholderText(`Mais vendidos`);
+    const categoryNameInput = await screen.findByPlaceholderText(
+      `Mais vendidos`
+    );
 
-    await userEvent.type(categoryNameInput, `Mais vendidos`);
+    fireEvent.input(categoryNameInput, `Mais vendidos`);
 
-    await userEvent.click(submitButton);
+    fireEvent.click(submitButton);
 
     expect(
       screen.queryByText(
