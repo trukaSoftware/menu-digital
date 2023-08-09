@@ -130,7 +130,7 @@ export default function CreateProductForm({
             htmlFor="description"
             className={styles.createProductFormlabel}
           >
-            <span className={styles.createProductFormTitle}>Descrição</span>
+            <span className={styles.createProductFormTitle}>Descrição*</span>
             <textarea
               className={styles.createProductFormTextArea}
               id="description"
@@ -172,8 +172,8 @@ export default function CreateProductForm({
           isSubmiting={isSubmiting}
           text={
             registredWithSucess
-              ? `Categoria criada com sucesso ✔️`
-              : `Criar categoria`
+              ? `Produto criado com sucesso ✔️`
+              : `Criar produto`
           }
           submitError={requestError}
           className={styles.createProductFormSubmitButton}
