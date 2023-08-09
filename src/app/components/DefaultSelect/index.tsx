@@ -7,7 +7,7 @@ import * as Select from '@radix-ui/react-select';
 
 import styles from './styles.module.css';
 
-export interface DefaultSelect
+export interface DefaultSelectProps
   extends React.SelectHTMLAttributes<HTMLSelectElement> {
   field: ControllerRenderProps<
     {
@@ -21,7 +21,7 @@ export interface DefaultSelect
   error: FieldError | undefined;
 }
 
-export default function DefaultSelect({ field, error }: DefaultSelect) {
+export default function DefaultSelect({ field, error }: DefaultSelectProps) {
   const { categories, gettingCategories } = useCategories();
 
   return (
