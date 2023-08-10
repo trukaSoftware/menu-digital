@@ -1,5 +1,11 @@
+import { ImageProps } from '@/app/utils/types';
+
 export interface ProductResponse {
   products: Product[];
+}
+
+export interface CreateProductResponse {
+  product: Product;
 }
 
 export interface Product {
@@ -14,6 +20,15 @@ export interface Product {
   updatedAt: string;
   productsImages: ProductsImage[];
   productsComplements: ProductsComplement[];
+}
+
+export interface ProductPayload {
+  name: string;
+  description: string;
+  price: number;
+  categoryId: string;
+  companyId: string;
+  images?: ImageProps[];
 }
 
 export interface ProductsComplement {

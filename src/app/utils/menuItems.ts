@@ -2,29 +2,13 @@ import { FaGripLines, FaShoppingBasket } from 'react-icons/fa';
 
 export const menuItens = [
   {
-    menuTitle: `Criar novo(a)`,
-    items: [
-      {
-        menuIcon: FaShoppingBasket,
-        itemText: `Produtos`,
-      },
-      {
-        menuIcon: FaGripLines,
-        itemText: `Categorias`,
-      },
-    ],
+    menuIcon: FaShoppingBasket,
+    itemText: `Produtos`,
+    managementPageHref: `/manageProducts`,
   },
   {
-    menuTitle: `Gerenciar`,
-    items: [
-      {
-        menuIcon: FaShoppingBasket,
-        itemText: `Produtos`,
-      },
-      {
-        menuIcon: FaGripLines,
-        itemText: `Categorias`,
-      },
-    ],
+    menuIcon: FaGripLines,
+    itemText: `Categorias`,
+    managementPageHref: `/manageCategories`,
   },
 ];

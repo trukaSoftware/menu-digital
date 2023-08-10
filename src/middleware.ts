@@ -44,12 +44,16 @@ export default authMiddleware({
   },
 
   async afterAuth(auth, req) {
-    if (req.nextUrl.pathname === `/` && req.cookies.get(`__session`)) {
-      const user = await clerkClient.users.getUser(`${auth.userId}`);
+    try {
+      if (req.nextUrl.pathname === `/` && req.cookies.get(`__session`)) {
+        const user = await clerkClient.users.getUser(`${auth.userId}`);
 
-      return NextResponse.redirect(
-        `${req.nextUrl.href}configs/${user.publicMetadata.slug}/${auth.userId}`
-      );
+        return NextResponse.redirect(
+          `${req.nextUrl.href}configs/${user.publicMetadata.slug}/${auth.userId}`
+        );
+      }
+    } catch (error) {
+      return NextResponse.redirect(`${req.nextUrl.href}sign-in`);
     }
   },
 

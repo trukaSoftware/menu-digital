@@ -1,0 +1,11 @@
+.menuComponentItem {
+  @apply flex flex-col justify-center items-center;
+}
+
+.menuComponentIconContainer {
+  @apply flex justify-center items-center bg-red-800 w-16 h-16 rounded-lg mb-1 p-px;
+}
+
+.menuComponentItemText {
+  @apply text-sm font-semibold text-gray-900;
+}

@@ -28,7 +28,6 @@ export default function DefaultInput({
         <div className={styles.defaultInputFormIconWrapper}>{Icon}</div>
         <input
           id={name}
-          type="text"
           className={styles.defaultInputFormNameInput}
           {...register}
           {...rest}

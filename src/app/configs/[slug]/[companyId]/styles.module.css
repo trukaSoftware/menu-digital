@@ -6,6 +6,10 @@
   @apply flex flex-col justify-between h-full m-2;
 }
 
+.configsMainMenuContainer {
+  @apply flex flex-col justify-start h-full;
+}
+
 .configsSeeMyStoreButton {
   @apply w-full h-11 bg-red-600 rounded text-white font-bold text-base;
 }

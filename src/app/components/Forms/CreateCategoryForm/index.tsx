@@ -19,7 +19,13 @@ import styles from './styles.module.css';
 
 type CreateCategoryFormData = InferType<typeof createCategoryFormSchema>;
 
-export default function CreateCategoryForm() {
+interface CreateCategoryProps {
+  setShowDialog: (value: boolean) => void;
+}
+
+export default function CreateCategoryForm({
+  setShowDialog,
+}: CreateCategoryProps) {
   const {
     register,
     handleSubmit,
@@ -78,6 +84,7 @@ export default function CreateCategoryForm() {
     } catch {
       setRequestError(true);
     } finally {
+      setShowDialog(false);
       setIsSubmiting(false);
     }
 

@@ -1,9 +1,13 @@
-.imageInput {
-  @apply flex flex-nowrap flex-1;
+.uploadImageInputContainer {
+  @apply flex flex-nowrap flex-1 border border-gray-300 rounded-lg;
 }
 
-.inputIcon {
-  @apply text-xl w-9 h-9 p-2 bg-gray-200 rounded-l-md border-t border-b border-l border-gray-300 text-gray-400;
+.uploadImageIcon {
+  @apply flex justify-center items-center text-sm w-9 h-9 py-2 bg-gray-200 rounded-l-md text-gray-400;
+}
+
+.uploadImageLabel {
+  @apply flex text-gray-400 w-full h-9 py-1 px-2;
 }
 
 .input {
@@ -11,5 +15,5 @@
 }
 
 .fileUploadedName {
-  @apply text-xs text-white pb-1;
+  @apply w-full h-full text-xs text-gray-500 py-1 px-1;
 }

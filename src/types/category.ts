@@ -3,7 +3,7 @@ export interface CategoryPayload {
   companyId: string | undefined;
 }
 
-export interface CreateCategoryReturn {
+export interface CategoryReturn {
   id: string;
   name: string;
   companyId: string;
@@ -12,5 +12,9 @@ export interface CreateCategoryReturn {
 }
 
 export interface CreateCategoryResponse {
-  category: CreateCategoryReturn;
+  category: CategoryReturn;
+}
+
+export interface GetCategoriesResponse {
+  categories: CategoryReturn[];
 }
