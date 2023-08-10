@@ -14,61 +14,42 @@ describe(`UploadImageInput`, () => {
     vi.resetAllMocks();
   });
 
-  const mockHandleFileChange = vi.fn();
-
-  const id = `upload-input`;
+  const mockProps = {
+    id: `upload-input`,
+    title: `Upload Image`,
+    iconImage: <span data-testid="mock-icon">Icon</span>,
+    handleFileChange: vi.fn(),
+  };
 
   it(`should render the component with title and icon`, () => {
-    const title = `Upload Image`;
-    const iconImage = <span data-testid="mock-icon">Icon</span>;
+    render(<UploadImageInput {...mockProps} />);
 
-    render(
-      <UploadImageInput
-        title={title}
-        handleFileChange={mockHandleFileChange}
-        iconImage={iconImage}
-        id={id}
-      />
-    );
-
-    const titleElement = screen.getByText(title);
+    const titleElement = screen.getByText(mockProps.title);
     expect(titleElement).toBeInTheDocument();
     const iconElement = screen.getByTestId(`mock-icon`);
     expect(iconElement).toBeInTheDocument();
   });
 
   it(`should render the element with className "fileUploadedName" if the image name if provided`, () => {
-    const imageName = `example.jpg`;
+    const modifiedMockProps = {
+      ...mockProps,
+      imageName: `Example.jpg`,
+    };
 
-    render(
-      <UploadImageInput
-        title="Upload Image"
-        handleFileChange={mockHandleFileChange}
-        iconImage={<span>Icon</span>}
-        id={id}
-        imageName={imageName}
-      />
-    );
+    render(<UploadImageInput {...modifiedMockProps} />);
 
-    const imageNameElement = screen.getByText(imageName);
+    const imageNameElement = screen.getByText(modifiedMockProps.imageName);
 
     expect(imageNameElement).toBeInTheDocument();
     expect(imageNameElement).toHaveClass(`fileUploadedName`);
   });
 
   it(`should call handleFileChange when file input changes`, async () => {
-    render(
-      <UploadImageInput
-        title="Upload Image"
-        handleFileChange={mockHandleFileChange}
-        iconImage={<span>Icon</span>}
-        id={id}
-      />
-    );
+    render(<UploadImageInput {...mockProps} />);
     const fileInput = screen.getByLabelText(`Upload Image`);
 
     fireEvent.change(fileInput);
 
-    expect(mockHandleFileChange).toHaveBeenCalledTimes(1);
+    expect(mockProps.handleFileChange).toHaveBeenCalledTimes(1);
   });
 });

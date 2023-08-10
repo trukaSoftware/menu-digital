@@ -8,6 +8,7 @@ interface UploadImageInputProps {
   iconImage: ReactNode;
   id: string;
   imageName?: string;
+  labelClassName?: string;
 }
 
 export default function UploadImageInput({
@@ -16,12 +17,16 @@ export default function UploadImageInput({
   title,
   id,
   imageName,
+  labelClassName = ``,
 }: UploadImageInputProps) {
   return (
     <>
       <div className={styles.uploadImageInputContainer}>
         <div className={styles.uploadImageIcon}>{iconImage}</div>
-        <label htmlFor={id} className={styles.uploadImageLabel}>
+        <label
+          htmlFor={id}
+          className={`${styles.uploadImageLabel} ${labelClassName}`}
+        >
           {imageName ? (
             <span className={styles.fileUploadedName}>{imageName}</span>
           ) : (

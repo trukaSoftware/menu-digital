@@ -33,7 +33,7 @@ export default function CreateProductForm({
   const [registredWithSucess, setRegistredWithSucess] = useState(false);
   const [imagePlaceholder, setImagePlaceholder] = useState<string>(``);
   const [productImage, setProductImage] = useState<ImageProps>(
-    [] as unknown as ImageProps
+    {} as unknown as ImageProps
   );
   const { user } = useUser();
 
@@ -159,6 +159,9 @@ export default function CreateProductForm({
             title="Imagem"
             id="image"
             imageName={imagePlaceholder}
+            labelClassName={
+              productImage.file ? styles.hasImageOnInput : undefined
+            }
           />
           <Controller
             control={control}
