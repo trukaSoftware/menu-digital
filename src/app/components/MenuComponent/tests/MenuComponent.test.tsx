@@ -11,6 +11,8 @@ vi.mock(`@clerk/nextjs`, () => ({
   useUser: () => ({ user: { id: `1` } }),
 }));
 
+vi.mock(`axios`);
+
 vi.mock(`@/app/components/DefaultSelect`);
 vi.mocked(DefaultSelect).mockImplementation(() => <></>);
 
