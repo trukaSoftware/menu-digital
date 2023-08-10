@@ -2,12 +2,17 @@ import { vi } from 'vitest';
 
 import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 
+import DefaultSelect from '../../DefaultSelect';
+
 import MenuComponent, { MenuComponentProps } from '..';
 
 vi.mock(`@clerk/nextjs`, () => ({
   __esModule: true,
   useUser: () => ({ user: { id: `1` } }),
 }));
+
+vi.mock(`@/app/components/DefaultSelect`);
+vi.mocked(DefaultSelect).mockImplementation(() => <></>);
 
 describe(`MenuComponent`, () => {
   afterAll(() => {
