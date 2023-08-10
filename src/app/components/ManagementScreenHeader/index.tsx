@@ -1,4 +1,4 @@
-import { SlArrowLeft } from 'react-icons/sl';
+import { IoIosArrowBack } from 'react-icons/io';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -25,11 +25,7 @@ export default function ManagementScreenHeader({
   return (
     <header
       data-testid="management-screen-header"
-      className={
-        hasBackButton
-          ? styles.managementScreenHeaderWithRowReverse
-          : styles.managementScreenHeader
-      }
+      className={styles.managementScreenHeaderWithRowReverse}
     >
       <Image
         className={styles.managementScreenHeaderLogo}
@@ -51,7 +47,7 @@ export default function ManagementScreenHeader({
           title="Voltar para página anterior"
           href={backPage || ``}
         >
-          <SlArrowLeft size="32" color="DC2626" />
+          <IoIosArrowBack size="32" color="DC2626" />
         </Link>
       ) : (
         <UserButton afterSignOutUrl="/sign-in" />
