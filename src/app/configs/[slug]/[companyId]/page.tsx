@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import ManagementScreenHeader from '@/app/components/ManagementScreenHeader';
 import MenuComponent from '@/app/components/MenuComponent';
 import api from '@/app/utils/api';
@@ -29,9 +31,12 @@ export default async function Configs({ params }: RouterParams) {
           />
         </div>
 
-        <button className={styles.configsSeeMyStoreButton} type="button">
+        <Link
+          href={`sua-loja/${slug}/${companyId}`}
+          className={styles.configsSeeMyStoreButton}
+        >
           Como sua loja está hoje
-        </button>
+        </Link>
       </main>
     </div>
   );
