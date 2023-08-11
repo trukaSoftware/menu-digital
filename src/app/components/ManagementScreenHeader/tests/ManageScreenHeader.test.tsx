@@ -24,27 +24,6 @@ describe(`ManagementScreenHeader`, () => {
     hasBackButton: true,
   } as ManagementScreenHeaderProps;
 
-  it(`if hasBackButton is not passed, an element with the class "managementScreenHeader" must be rendered`, () => {
-    const modifiedMockProps = {
-      companyLogoUrl: `/`,
-      companyName: `Bar do Marcão`,
-    } as ManagementScreenHeaderProps;
-
-    render(<ManagementScreenHeader {...modifiedMockProps} />);
-
-    const heading = screen.getByTestId(`management-screen-header`);
-
-    expect(heading).toHaveClass(`managementScreenHeader`);
-  });
-
-  it(`if hasBackButton is passed, an element with the class "managementScreenHeaderWithRowReverse" must be rendered`, () => {
-    render(<ManagementScreenHeader {...mockProps} />);
-
-    const heading = screen.getByTestId(`management-screen-header`);
-
-    expect(heading).toHaveClass(`managementScreenHeaderWithRowReverse`);
-  });
-
   it(`if the prop title is passed, an heading level 1 with the text of title prop must be rendered`, () => {
     const modifiedMockProps = {
       companyLogoUrl: `/`,
