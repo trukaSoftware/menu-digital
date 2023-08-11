@@ -26,7 +26,7 @@ export const getCategoriesService = async (companyId: string) => {
       },
     });
 
-    const tratedCategories = categories.map((category) => ({
+    const treatedCategories = categories.map((category) => ({
       ...category,
       categoryProducts: category.product,
       product: undefined,
