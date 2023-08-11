@@ -1,8 +1,9 @@
-import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
+import { FaRegEdit } from 'react-icons/fa';
 
 import Image from 'next/image';
 
 import FoodImageSvg from '../../../../public/images/food-image.svg';
+import DeleteProductDialog from '../Dialogs/DeleteProductDialog';
 import Prices from '../Prices';
 import styles from './styles.module.css';
 
@@ -23,6 +24,7 @@ export default function EditableFoodCard({
   price,
   discountedPrice,
   discountPercentage,
+  id,
 }: EditableFoodCardProps) {
   return (
     <div>
@@ -44,10 +46,7 @@ export default function EditableFoodCard({
         ) : null}
       </article>
       <div className={styles.editableFoodButtonsWrapper}>
-        <button type="button" className={styles.editableFoodCardDelBtn}>
-          <span>Excluir</span>
-          <FaRegTrashAlt size={18} />
-        </button>
+        <DeleteProductDialog productId={id} />
         <button type="button" className={styles.editableFoodCardEditBtn}>
           <span>Editar</span>
           <FaRegEdit size={18} />
