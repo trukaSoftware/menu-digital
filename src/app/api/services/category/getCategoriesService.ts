@@ -32,7 +32,7 @@ export const getCategoriesService = async (companyId: string) => {
       product: undefined,
     }));
 
-    return tratedCategories;
+    return treatedCategories;
   } catch (error) {
     if (
       error instanceof Prisma.PrismaClientKnownRequestError ||
