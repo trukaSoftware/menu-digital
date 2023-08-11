@@ -1,9 +1,10 @@
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 
-export const getProductsService = async () => {
+export const getProductsService = async (companyId: string) => {
   try {
     const products = await prisma.products.findMany({
+      where: { companyId },
       include: {
         productsImages: true,
         productsComplements: {
