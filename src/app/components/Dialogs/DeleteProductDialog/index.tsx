@@ -3,6 +3,9 @@
 import { useState } from 'react';
 import { FaRegTrashAlt } from 'react-icons/fa';
 
+import axios from 'axios';
+
+import api from '@/app/utils/api';
 import { Root, Trigger, Portal, Content, Close } from '@radix-ui/react-dialog';
 
 import DefaultOverlay from '../DefaultOverlay';
@@ -16,6 +19,21 @@ export default function DeleteProductDialog({
   productId,
 }: DeleteProductDialogProps) {
   const [showDialog, setShowDialog] = useState(false);
+  const [deleteError, setDeleteError] = useState(``);
+
+  const deleteProudct = async () => {
+    try {
+      const deletedProduct = await axios.delete(
+        `/api/products/deleteProduct?id=${productId}`
+      );
+
+      if (deletedProduct.data?.deleted) {
+        setShowDialog(false);
+      }
+    } catch {
+      setDeleteError(`Falha ao deletar produto`);
+    }
+  };
 
   return (
     <Root open={showDialog} onOpenChange={setShowDialog}>
@@ -31,8 +49,12 @@ export default function DeleteProductDialog({
             <span> irreversível</span>.
           </p>
           <div className={styles.deleteProductDialogButtons}>
-            <button type="button" className={styles.deleteProductDialogDelBtn}>
-              Sim
+            <button
+              type="button"
+              className={styles.deleteProductDialogDelBtn}
+              onClick={deleteProudct}
+            >
+              {deleteError || `Sim`}
             </button>
             <Close
               type="button"
