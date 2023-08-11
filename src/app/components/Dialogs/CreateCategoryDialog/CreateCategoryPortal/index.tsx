@@ -2,6 +2,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 
 import CreateCategoryForm from '../../../Forms/CreateCategoryForm';
 import ModalDefaultHeader from '../../../ModalDefaultHeader';
+import DefaultOverlay from '../../DefaultOverlay';
 import styles from './styles.module.css';
 
 interface CreateCategoryFormProps {
@@ -13,7 +14,7 @@ export default function CreateCategoryPortal({
 }: CreateCategoryFormProps) {
   return (
     <Dialog.Portal>
-      <Dialog.Overlay className={styles.createCategoryOverLay} />
+      <DefaultOverlay />
       <Dialog.Content className={styles.createCategoryContent}>
         <ModalDefaultHeader title="Criação de categoria" />
         <CreateCategoryForm setShowDialog={setShowDialog} />
