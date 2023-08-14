@@ -13,6 +13,8 @@ import {
   FaImage,
 } from 'react-icons/fa';
 
+import { useRouter } from 'next/navigation';
+
 import { useUser } from '@clerk/nextjs';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -21,11 +23,13 @@ import DefaultInput from '../components/DefaultInput';
 import UploadImageInput from '../components/UploadImageInput';
 import { createCompany } from '../utils/api/createCompany';
 import { convertFileToBase64 } from '../utils/convertFileToBase64';
+import { formatCnpj, formatCpf } from '../utils/formatCreateCompanyForm';
 import { CreateCompanyData } from '../utils/types';
 import { createCompanyFormValidation } from '../utils/yup/createCompanyFormValidation';
 import styles from './styles.module.css';
 
 export default function CreateCompany() {
+  const router = useRouter();
   const { user } = useUser();
   const [selectedLogo, setSelectedLogo] = useState(``);
   const [selectedCoverCape, setSelectedCoverCape] = useState(``);
@@ -62,6 +66,10 @@ export default function CreateCompany() {
       const createdCompany = await createCompany({
         ...data,
         id: user?.id,
+        cnpj:
+          data.cnpj.length === 14
+            ? formatCnpj(data.cnpj)
+            : formatCpf(data.cnpj),
         deliveryPhoneNumber: !data?.deliveryPhoneNumber
           ? data?.phoneNumber
           : data.deliveryPhoneNumber,
@@ -78,6 +86,7 @@ export default function CreateCompany() {
         setIsSubmiting(false);
         return setRequestError(true);
       }
+      router.push(`/configs/${user?.publicMetadata.slug}/${user?.id}`);
     } catch {
       setRequestError(true);
     } finally {
