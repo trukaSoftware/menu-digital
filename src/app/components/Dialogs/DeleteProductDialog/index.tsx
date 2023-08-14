@@ -5,7 +5,6 @@ import { FaRegTrashAlt } from 'react-icons/fa';
 
 import axios from 'axios';
 
-import api from '@/app/utils/api';
 import { Root, Trigger, Portal, Content, Close } from '@radix-ui/react-dialog';
 
 import DefaultOverlay from '../DefaultOverlay';
@@ -13,10 +12,12 @@ import styles from './styles.module.css';
 
 export interface DeleteProductDialogProps {
   productId: string;
+  removeProductFromList: (productId: string) => void;
 }
 
 export default function DeleteProductDialog({
   productId,
+  removeProductFromList,
 }: DeleteProductDialogProps) {
   const [showDialog, setShowDialog] = useState(false);
   const [deleteError, setDeleteError] = useState(``);
@@ -28,6 +29,7 @@ export default function DeleteProductDialog({
       );
 
       if (deletedProduct.data?.deleted) {
+        removeProductFromList(productId);
         setShowDialog(false);
       }
     } catch {
