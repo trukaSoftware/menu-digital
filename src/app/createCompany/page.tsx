@@ -21,6 +21,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import ButtonSubmit from '../components/ButtonSubmit';
 import DefaultInput from '../components/DefaultInput';
 import UploadImageInput from '../components/UploadImageInput';
+import { mockedImage } from '../mocks/imageMock';
 import { createCompany } from '../utils/api/createCompany';
 import { convertFileToBase64 } from '../utils/convertFileToBase64';
 import { formatCnpj, formatCpf } from '../utils/formatCreateCompanyForm';
@@ -78,7 +79,7 @@ export default function CreateCompany() {
           file: selectedLogo,
         },
         companyTheme: {
-          file: selectedCoverCape,
+          file: selectedCoverCape || mockedImage,
         },
       });
 

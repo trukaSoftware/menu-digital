@@ -11,7 +11,7 @@ const companySchema = object({
     height: number(),
   }).required(),
   companyTheme: object({
-    file: string(),
+    file: string().required(),
     width: number(),
     height: number(),
   }).required(),
