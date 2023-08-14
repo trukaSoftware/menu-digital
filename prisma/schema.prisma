@@ -36,7 +36,7 @@ model Branch {
 
 model Info {
   id                  String   @id @default(uuid())
-  cnpj                String   @db.VarChar(14)
+  cnpj                String   @db.VarChar(18)
   email               String   @db.VarChar(45)
   phoneNumber         String   @db.VarChar(14)
   deliveryPhoneNumber String?
