@@ -147,7 +147,7 @@ export default function CreateCompany() {
             </p>
             <div className={styles.companyImageInputWrapper}>
               <UploadImageInput
-                style={
+                labelClassName={
                   selectedLogo !== ``
                     ? styles.labelInputChecked
                     : styles.labelInput
@@ -162,7 +162,7 @@ export default function CreateCompany() {
                 imageName={selectedLogoName}
               />
               <UploadImageInput
-                style={
+                labelClassName={
                   selectedCoverCape !== ``
                     ? styles.labelInputChecked
                     : styles.labelInput
