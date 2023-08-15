@@ -12,11 +12,13 @@ import styles from './styles.module.css';
 
 export interface DeleteProductDialogProps {
   productId: string;
-  removeProductFromList: (productId: string) => void;
+  categoryId: string;
+  removeProductFromList: (productId: string, categoryId: string) => void;
 }
 
 export default function DeleteProductDialog({
   productId,
+  categoryId,
   removeProductFromList,
 }: DeleteProductDialogProps) {
   const [showDialog, setShowDialog] = useState(false);
@@ -29,7 +31,7 @@ export default function DeleteProductDialog({
       );
 
       if (deletedProduct.data?.deleted) {
-        removeProductFromList(productId);
+        removeProductFromList(productId, categoryId);
         setShowDialog(false);
       }
     } catch {

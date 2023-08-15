@@ -15,7 +15,8 @@ export interface EditableFoodCardProps {
   discountedPrice?: number;
   discountPercentage?: number;
   id: string;
-  removeProductFromList: (productId: string) => void;
+  categoryId: string;
+  removeProductFromList: (productId: string, categoryId: string) => void;
 }
 
 export default function EditableFoodCard({
@@ -26,6 +27,7 @@ export default function EditableFoodCard({
   discountedPrice,
   discountPercentage,
   id,
+  categoryId,
   removeProductFromList,
 }: EditableFoodCardProps) {
   return (
@@ -50,6 +52,7 @@ export default function EditableFoodCard({
       <div className={styles.editableFoodButtonsWrapper}>
         <DeleteProductDialog
           productId={id}
+          categoryId={categoryId}
           removeProductFromList={removeProductFromList}
         />
         <button type="button" className={styles.editableFoodCardEditBtn}>

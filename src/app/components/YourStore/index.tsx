@@ -2,39 +2,74 @@
 
 import { useState } from 'react';
 
-import { Product } from '@/types/product';
+import { GetCategoryReturn } from '@/types/category';
 
 import EditableFoodCard from '../EditableFoodCard';
 import styles from './styles.module.css';
 
 export interface YourStoreProps {
-  products: Product[];
+  categories: GetCategoryReturn[];
 }
 
-export default function YourStore({ products }: YourStoreProps) {
-  const [productsToLoad, setProductsToLoad] = useState(products);
+export default function YourStore({ categories }: YourStoreProps) {
+  const [categoriesWithProducts, setProductsToLoad] = useState(categories);
+  const onlyCategoriesWithProducts = categoriesWithProducts.filter(
+    (category) => category.categoryProducts.length > 0
+  );
 
-  const removeProductFromList = (productId: string) => {
-    const newProductsList = productsToLoad.filter(
-      (product) => product.id !== productId
+  const removeProductFromList = (productId: string, categoryId: string) => {
+    const indexOfTheCategory = categoriesWithProducts.findIndex(
+      (category) => category.id === categoryId
     );
 
-    setProductsToLoad(newProductsList);
+    const newProductsList = categoriesWithProducts[
+      indexOfTheCategory
+    ].categoryProducts.filter((product) => product.id !== productId);
+
+    const newCategoriesList = categoriesWithProducts.map((category) =>
+      category.id === categoryId
+        ? { ...category, categoryProducts: newProductsList }
+        : category
+    );
+
+    setProductsToLoad(newCategoriesList);
   };
 
   return (
     <section className={styles.yourStoreProductsList}>
-      {productsToLoad.map((product) => (
-        <EditableFoodCard
-          description={product.description}
-          foodImage={product?.productsImages[0].imageUrl}
-          price={+product.price}
-          title={product.name}
-          id={product.id}
-          removeProductFromList={removeProductFromList}
-          key={product.id}
-        />
-      ))}
+      {onlyCategoriesWithProducts.length > 0
+        ? onlyCategoriesWithProducts.map((category) => (
+            <>
+              <h2>{category.name}</h2>
+              {category.categoryProducts.map((product) => (
+                <EditableFoodCard
+                  description={product.description}
+                  foodImage={product?.productsImages[0].imageUrl}
+                  price={+product.price}
+                  title={product.name}
+                  id={product.id}
+                  removeProductFromList={removeProductFromList}
+                  key={product.id}
+                  categoryId={category.id}
+                />
+              ))}
+            </>
+          ))
+        : null}
+      {/* {productsToLoad.map((product) => (
+        <>
+          <h2>{product.name}</h2>
+          <EditableFoodCard
+            description={product.description}
+            foodImage={product?.productsImages[0].imageUrl}
+            price={+product.price}
+            title={product.name}
+            id={product.id}
+            removeProductFromList={removeProductFromList}
+            key={product.id}
+          />
+        </>
+      ))} */}
     </section>
   );
 }

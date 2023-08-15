@@ -1,7 +1,7 @@
 import ManagementScreenHeader from '@/app/components/ManagementScreenHeader';
 import YourStore from '@/app/components/YourStore';
 import api from '@/app/utils/api';
-import { getProducts } from '@/app/utils/api/getProducts';
+import { getCategories } from '@/app/utils/api/getCategories';
 import { CompanyProps, RouterParams } from '@/app/utils/types';
 
 import styles from './styles.module.css';
@@ -13,7 +13,7 @@ export default async function Page({ params }: RouterParams) {
 
   const { name, info } = result.data.company;
 
-  const { products } = await getProducts();
+  const { categories } = await getCategories(params.companyId);
 
   return (
     <div>
@@ -24,7 +24,7 @@ export default async function Page({ params }: RouterParams) {
         title="Sua loja"
       />
       <main className={styles.yourStoreContent}>
-        <YourStore products={products} />
+        <YourStore categories={categories} />
       </main>
     </div>
   );
