@@ -1,6 +1,7 @@
 import { vi } from 'vitest';
 
 import { createImageMock } from '@/app/testsUtils/createImageMock';
+import { createCompany } from '@/app/utils/api/createCompany';
 import { render, screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -28,6 +29,11 @@ vi.mock(`@clerk/nextjs`, () => ({
       ],
     },
   }),
+}));
+
+vi.mock(`@/app/utils/api/createCompany`);
+vi.mocked(createCompany).mockImplementation(async () => ({
+  companyId: `mockId`,
 }));
 
 describe(`CreateCompany`, () => {
@@ -228,54 +234,47 @@ describe(`CreateCompany`, () => {
     ).toBeInTheDocument();
   });
 
-  it.todo(
-    `When trying to send form filling all inputs correctly should change page`,
-    async () => {
-      render(<CreateCompany />);
+  it(`When trying to send form filling all inputs correctly should change page`, async () => {
+    render(<CreateCompany />);
 
-      const submitButton = screen.getByRole(`button`, {
-        name: `Finalizar cadastro`,
-      });
+    const submitButton = screen.getByRole(`button`, {
+      name: `Finalizar cadastro`,
+    });
 
-      const companyNameInput = screen.getByLabelText(`Nome do restaurante*`);
+    const companyNameInput = screen.getByLabelText(`Nome do restaurante*`);
 
-      await userEvent.type(companyNameInput, `restaurante`);
+    await userEvent.type(companyNameInput, `restaurante`);
 
-      const cnpjInput = screen.getByLabelText(`CNPJ/CPF*`);
+    const cnpjInput = screen.getByLabelText(`CNPJ/CPF*`);
 
-      await userEvent.type(cnpjInput, `12345678912`);
+    await userEvent.type(cnpjInput, `12345678912`);
 
-      const phoneNumberInput = screen.getByLabelText(`Telefone*`);
+    const phoneNumberInput = screen.getByLabelText(`Telefone*`);
 
-      await userEvent.type(phoneNumberInput, `21999999999`);
+    await userEvent.type(phoneNumberInput, `21999999999`);
 
-      const logoInput = screen.getByTestId(`logoInput`);
+    const logoInput = screen.getByTestId(`logoInput`);
 
-      const logoImageFile = createImageMock();
+    const logoImageFile = createImageMock();
 
-      await userEvent.upload(logoInput, logoImageFile);
+    await userEvent.upload(logoInput, logoImageFile);
 
-      const coverCapeInput = screen.getByTestId(`coverCapeInput`);
+    const coverCapeInput = screen.getByTestId(`coverCapeInput`);
 
-      const coverCapeImageFile = createImageMock();
+    const coverCapeImageFile = createImageMock();
 
-      await userEvent.upload(coverCapeInput, coverCapeImageFile);
+    await userEvent.upload(coverCapeInput, coverCapeImageFile);
 
-      const zipCodeInput = screen.getByLabelText(`CEP*`);
+    const zipCodeInput = screen.getByLabelText(`CEP*`);
 
-      await userEvent.type(zipCodeInput, `99999999`);
+    await userEvent.type(zipCodeInput, `99999999`);
 
-      const addressInput = screen.getByLabelText(`Endereço*`);
+    const addressInput = screen.getByLabelText(`Endereço*`);
 
-      await userEvent.type(addressInput, `endereço`);
+    await userEvent.type(addressInput, `endereço`);
 
-      await userEvent.click(submitButton);
+    await userEvent.click(submitButton);
 
-      const companyName = await screen.findByRole(`heading`, {
-        name: `restaurante`,
-      });
-
-      expect(companyName).toBeInTheDocument();
-    }
-  );
+    expect(createCompany).toHaveBeenCalledTimes(1);
+  });
 });
