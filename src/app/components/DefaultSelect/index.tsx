@@ -3,6 +3,7 @@ import { BsCheck } from 'react-icons/bs';
 import { FaGripLines } from 'react-icons/fa';
 
 import { useCategories } from '@/hooks/useCategories';
+import { useUser } from '@clerk/nextjs';
 import * as Select from '@radix-ui/react-select';
 
 import styles from './styles.module.css';
@@ -22,7 +23,8 @@ export interface DefaultSelectProps
 }
 
 export default function DefaultSelect({ field, error }: DefaultSelectProps) {
-  const { categories, gettingCategories } = useCategories();
+  const { user } = useUser();
+  const { categories, gettingCategories } = useCategories(user?.id || ``);
 
   return (
     <Select.Root onValueChange={field.onChange} {...field}>
