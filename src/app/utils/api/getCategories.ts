@@ -1,14 +1,14 @@
 import { GetCategoryReturn } from '@/types/category';
 
-import { getter } from './getter';
+import api from '@/app/utils/api';
 
 export interface GetCategoriesAxiosResponse {
   categories: GetCategoryReturn[];
 }
 
 export async function getCategories(companyId: string) {
-  const data = await getter<GetCategoriesAxiosResponse>(
-    `/api/categories/getCategories?id=${companyId}`
+  const data = await api.get<GetCategoriesAxiosResponse>(
+    `/categories/getCategories?id=${companyId}`
   );
 
   return {
