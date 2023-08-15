@@ -153,6 +153,7 @@ export default function CreateCompany() {
                     : styles.labelInput
                 }
                 id="logo"
+                testId="logoInput"
                 title={selectedLogoName ? `Logo:` : `Logo`}
                 handleFileChange={(event) =>
                   handleFileChange(event, setSelectedLogoName, setSelectedLogo)
@@ -167,6 +168,7 @@ export default function CreateCompany() {
                     : styles.labelInput
                 }
                 id="coverCape"
+                testId="coverCapeInput"
                 title={selectedCoverCapeName ? `Capa:` : `Capa`}
                 handleFileChange={(event) =>
                   handleFileChange(

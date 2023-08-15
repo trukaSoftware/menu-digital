@@ -9,6 +9,7 @@ interface UploadImageInputProps {
   id: string;
   imageName?: string;
   labelClassName?: string;
+  testId?: string;
 }
 
 export default function UploadImageInput({
@@ -18,6 +19,7 @@ export default function UploadImageInput({
   id,
   imageName,
   labelClassName = ``,
+  testId,
 }: UploadImageInputProps) {
   return (
     <>
@@ -33,6 +35,7 @@ export default function UploadImageInput({
             title
           )}
           <input
+            data-testid={testId}
             id={id}
             type="file"
             onChange={handleFileChange}
