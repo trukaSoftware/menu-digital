@@ -1,7 +1,3 @@
-import { InferType } from 'yup';
-
-import { createCompanyFormValidation } from './yup/createCompanyFormValidation';
-
 export type EditCompanyData = {
   id: string;
   company?: {
@@ -114,9 +110,9 @@ export interface ImageProps {
 export interface CreateCompanyData {
   address: string;
   cnpj: string;
-  deliveryPhoneNumber: string;
-  email: string;
-  id: string;
+  deliveryPhoneNumber?: string;
+  email?: string;
+  id?: string;
   name: string;
   phoneNumber: string;
   zipCode: string;
