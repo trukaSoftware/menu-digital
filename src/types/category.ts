@@ -1,4 +1,4 @@
-import { ProductResponse } from './product';
+import { Product } from './product';
 
 export interface CategoryPayload {
   name: string;
@@ -8,7 +8,7 @@ export interface CategoryPayload {
 export interface GetCategoryReturn {
   id: string;
   name: string;
-  categoryProducts: ProductResponse;
+  categoryProducts: Product[];
 }
 
 export interface CategoryReturn {
