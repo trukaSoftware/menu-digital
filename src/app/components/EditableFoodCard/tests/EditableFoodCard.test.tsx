@@ -6,19 +6,23 @@ import {
 } from '@/app/mocks/foodCard';
 import { render, screen, cleanup } from '@testing-library/react';
 
-import EditableFoodCard from '..';
+import EditableFoodCard, { EditableFoodCardProps } from '..';
 
 const mockProps = {
   ...foodCardMock,
   id: `1`,
-};
+  removeProductFromList: vi.fn(),
+  categoryId: `1`,
+} as EditableFoodCardProps;
 
 const mockPropsWithoutDiscount = {
   ...foodCardWithoutDiscountMock,
   id: `1`,
-};
+  removeProductFromList: vi.fn(),
+  categoryId: `1`,
+} as EditableFoodCardProps;
 
-describe(`FoodCard`, () => {
+describe(`EditableFoodCard`, () => {
   afterAll(() => {
     vi.clearAllMocks();
   });

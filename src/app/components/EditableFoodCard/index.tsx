@@ -1,6 +1,5 @@
 import Image from 'next/image';
 
-import FoodImageSvg from '../../../../public/images/food-image.svg';
 import DeleteProductDialog from '../Dialogs/DeleteProductDialog';
 import EditProductDialog from '../Dialogs/EditProductDialog';
 import Prices from '../Prices';
