@@ -1,0 +1,15 @@
+.editableCategoryTitleContent {
+  @apply flex justify-between mb-3;
+}
+
+.editableCategoryTitleButtonsWrapper {
+  @apply flex gap-x-4;
+}
+
+.editableCategoryTitle {
+  @apply text-lg font-semibold text-gray-900;
+}
+
+.editableCategoryTitleDeleteButton {
+  @apply text-red-500;
+}
