@@ -22,6 +22,11 @@ vi.mock(`@/hooks/useCategories`, () => ({
   }),
 }));
 
+vi.mock(`@clerk/nextjs`, () => ({
+  __esModule: true,
+  useUser: () => ({ user: { id: `1` } }),
+}));
+
 vi.mock(`@radix-ui/react-select`, () => ({
   Root: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
   Trigger: ({ children }: { children: React.ReactNode }) => (
