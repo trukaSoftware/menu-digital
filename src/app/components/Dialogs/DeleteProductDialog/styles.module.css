@@ -2,6 +2,10 @@
   @apply text-sm text-red-600 font-medium lg:text-sm flex gap-x-1 items-center;
 }
 
+.deleteProductDialogOverlay {
+  @apply fixed inset-0 bg-black/50;
+}
+
 .deleteProductDialogContent {
   @apply w-72 h-48 bg-white fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 rounded flex flex-col justify-between items-center;
 }

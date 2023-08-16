@@ -2,7 +2,6 @@ import * as Dialog from '@radix-ui/react-dialog';
 
 import CreateProductForm from '../../../Forms/CreateProductForm';
 import ModalDefaultHeader from '../../../ModalDefaultHeader';
-import DefaultOverlay from '../../DefaultOverlay';
 import styles from './styles.module.css';
 
 interface CreateProductFormProps {
@@ -14,7 +13,7 @@ export default function CreateProductPortal({
 }: CreateProductFormProps) {
   return (
     <Dialog.Portal>
-      <DefaultOverlay />
+      <Dialog.Overlay className={styles.createProductOverlay} />
       <Dialog.Content className={styles.createProductContent}>
         <ModalDefaultHeader title="Criação de produto" />
         <CreateProductForm setShowDialog={setShowDialog} />

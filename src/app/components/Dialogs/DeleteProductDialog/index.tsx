@@ -5,9 +5,15 @@ import { FaRegTrashAlt } from 'react-icons/fa';
 
 import axios from 'axios';
 
-import { Root, Trigger, Portal, Content, Close } from '@radix-ui/react-dialog';
+import {
+  Root,
+  Trigger,
+  Portal,
+  Content,
+  Close,
+  Overlay,
+} from '@radix-ui/react-dialog';
 
-import DefaultOverlay from '../DefaultOverlay';
 import styles from './styles.module.css';
 
 export interface DeleteProductDialogProps {
@@ -46,7 +52,7 @@ export default function DeleteProductDialog({
         <FaRegTrashAlt size={18} />
       </Trigger>
       <Portal>
-        <DefaultOverlay />
+        <Overlay className={styles.deleteProductDialogOverlay} />
         <Content className={styles.deleteProductDialogContent}>
           <p className={styles.deleteProductDialogText}>
             Deseja realmente excluir esse produto? Essa ação é
