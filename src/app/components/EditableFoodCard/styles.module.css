@@ -6,6 +6,10 @@
   @apply w-24 h-24 relative lg:w-36 lg:h-36 lg:m-4;
 }
 
+.editableFoodImageWrapper > img {
+  @apply rounded;
+}
+
 .editableFoodCardTextContent {
   @apply flex flex-col w-7/12 justify-between lg:py-4;
 }

@@ -1,9 +1,8 @@
-import { FaRegEdit } from 'react-icons/fa';
-
 import Image from 'next/image';
 
 import FoodImageSvg from '../../../../public/images/food-image.svg';
 import DeleteProductDialog from '../Dialogs/DeleteProductDialog';
+import EditProductDialog from '../Dialogs/EditProductDialog';
 import Prices from '../Prices';
 import styles from './styles.module.css';
 
@@ -34,7 +33,7 @@ export default function EditableFoodCard({
     <div>
       <article className={styles.editableFoodCard}>
         <div className={styles.editableFoodImageWrapper}>
-          <Image src={FoodImageSvg} alt={title} fill />
+          <Image src={foodImage} alt={title} fill />
         </div>
         <div className={styles.editableFoodCardTextContent}>
           <div className={styles.editableFoodCardTextWrapper}>
@@ -55,10 +54,7 @@ export default function EditableFoodCard({
           categoryId={categoryId}
           removeProductFromList={removeProductFromList}
         />
-        <button type="button" className={styles.editableFoodCardEditBtn}>
-          <span>Editar</span>
-          <FaRegEdit size={18} />
-        </button>
+        <EditProductDialog />
       </div>
     </div>
   );
