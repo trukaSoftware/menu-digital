@@ -5,6 +5,7 @@ import {
   foodCardWithoutDiscountMock,
 } from '@/app/mocks/foodCard';
 import { render, screen, cleanup } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import EditableFoodCard, { EditableFoodCardProps } from '..';
 
@@ -101,5 +102,19 @@ describe(`EditableFoodCard`, () => {
 
     expect(editBtn).toBeInTheDocument();
     expect(delBtn).toBeInTheDocument();
+  });
+
+  it(`should open delete modal when clicking on the modal button`, async () => {
+    render(<EditableFoodCard {...mockProps} />);
+
+    const delBtn = screen.getByRole(`button`, { name: `Excluir` });
+
+    await userEvent.click(delBtn);
+
+    expect(
+      screen.getByText(`Deseja realmente excluir esse produto?`, {
+        exact: false,
+      })
+    ).toBeInTheDocument();
   });
 });
