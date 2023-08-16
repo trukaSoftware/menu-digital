@@ -16,7 +16,7 @@ export default async function Page({ params }: RouterParams) {
   const { categories } = await getCategories(params.companyId);
 
   return (
-    <div>
+    <div className={styles.yourStore}>
       <ManagementScreenHeader
         companyLogoUrl={info.companyLogoUrl}
         companyName={name}
