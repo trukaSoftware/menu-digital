@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import { GetCategoryReturn } from '@/types/category';
 
+import EditableCategoryTitle from '../EditableCategoryTitle';
 import EditableFoodCard from '../EditableFoodCard';
 import styles from './styles.module.css';
 
@@ -39,8 +40,11 @@ export default function YourStore({ categories }: YourStoreProps) {
     <section className={styles.yourStoreProductsList}>
       {onlyCategoriesWithProducts.length > 0
         ? onlyCategoriesWithProducts.map((category) => (
-            <>
-              <h2>{category.name}</h2>
+            <div
+              key={category.id}
+              className={styles.yourStoreCategoryContainer}
+            >
+              <EditableCategoryTitle categoryName={category.name} />
               {category.categoryProducts.map((product) => (
                 <EditableFoodCard
                   description={product.description}
@@ -53,23 +57,9 @@ export default function YourStore({ categories }: YourStoreProps) {
                   categoryId={category.id}
                 />
               ))}
-            </>
+            </div>
           ))
         : null}
-      {/* {productsToLoad.map((product) => (
-        <>
-          <h2>{product.name}</h2>
-          <EditableFoodCard
-            description={product.description}
-            foodImage={product?.productsImages[0].imageUrl}
-            price={+product.price}
-            title={product.name}
-            id={product.id}
-            removeProductFromList={removeProductFromList}
-            key={product.id}
-          />
-        </>
-      ))} */}
     </section>
   );
 }
