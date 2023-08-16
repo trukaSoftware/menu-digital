@@ -24,5 +24,5 @@ export interface CreateCategoryResponse {
 }
 
 export interface GetCategoriesResponse {
-  categories: CategoryReturn[];
+  categories: GetCategoryReturn[];
 }

@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 
-import { GetCategoryReturn } from '@/types/category';
+import { GetCategoriesResponse, GetCategoryReturn } from '@/types/category';
 
 import { getCategories } from '@/app/utils/api/getCategories';
+import { getter } from '@/app/utils/api/getter';
 
 export function useCategories(companyId: string) {
   const [categories, setCategories] = useState<GetCategoryReturn[]>([]);
@@ -10,9 +11,11 @@ export function useCategories(companyId: string) {
 
   useEffect(() => {
     const getCategoriesResponse = async () => {
-      const { categories: categoriesReturn } = await getCategories(companyId);
+      const { data } = await getter<GetCategoriesResponse>(
+        `/api/categories/getCategories?id=${companyId}`
+      );
 
-      setCategories(categoriesReturn);
+      setCategories(data.categories);
       setGettingCategories(false);
     };
 
