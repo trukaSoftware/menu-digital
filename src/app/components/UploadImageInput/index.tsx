@@ -2,14 +2,15 @@ import { ReactNode } from 'react';
 
 import styles from './styles.module.css';
 
-interface UploadImageInputProps {
+interface UploadImageInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   title: string;
   handleFileChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   iconImage: ReactNode;
   id: string;
   imageName?: string;
   labelClassName?: string;
-  testId?: string;
+  error?: string;
 }
 
 export default function UploadImageInput({
@@ -19,10 +20,11 @@ export default function UploadImageInput({
   id,
   imageName,
   labelClassName = ``,
-  testId,
+  error,
+  ...rest
 }: UploadImageInputProps) {
   return (
-    <>
+    <div className={styles.uploadImageInputWrapper}>
       <div className={styles.uploadImageInputContainer}>
         <div className={styles.uploadImageIcon}>{iconImage}</div>
         <label
@@ -35,14 +37,15 @@ export default function UploadImageInput({
             title
           )}
           <input
-            data-testid={testId}
             id={id}
             type="file"
             onChange={handleFileChange}
             className={styles.input}
+            {...rest}
           />
         </label>
       </div>
-    </>
+      {error ? <span className={styles.uploadImageError}>{error}</span> : null}
+    </div>
   );
 }
