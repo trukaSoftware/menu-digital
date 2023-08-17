@@ -9,6 +9,7 @@ export interface DefaultInputProps
   name: string;
   register: UseFormRegisterReturn;
   error: string | undefined;
+  labelClassName?: string;
 }
 
 export default function DefaultInput({
@@ -17,10 +18,14 @@ export default function DefaultInput({
   labelText,
   register,
   error,
+  labelClassName = ``,
   ...rest
 }: DefaultInputProps) {
   return (
-    <label htmlFor={name} className={styles.defaultInputFormNameLabel}>
+    <label
+      htmlFor={name}
+      className={`${styles.defaultInputFormNameLabel} ${labelClassName}`}
+    >
       {labelText ? (
         <span className={styles.defaultInputFormNameTitle}>{labelText}</span>
       ) : null}

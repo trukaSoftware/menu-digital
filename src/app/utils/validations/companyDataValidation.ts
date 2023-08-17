@@ -1,12 +1,10 @@
 import { object, string, InferType, number } from 'yup';
 
-const cnpjRegex = /^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$|^\d{14}$/;
-
 const companySchema = object({
   id: string().required(),
   name: string().required(),
   email: string().email().required(),
-  cnpj: string().matches(cnpjRegex, `CNPJ inválido`).required(),
+  cnpj: string().required(),
   companyLogo: object({
     file: string().required(),
     width: number(),

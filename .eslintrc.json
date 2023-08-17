@@ -39,6 +39,7 @@
     "default-param-last": "off",
     "import/no-named-as-default": "off",
     "react/jsx-no-useless-fragment": "off",
+    "import/order": "off",
     "import-helpers/order-imports": [
       "warn",
       {
