@@ -160,6 +160,32 @@ describe(`CreateCompany`, () => {
     ).toBeInTheDocument();
   });
 
+  it(`When trying to send form without logo image should render error`, async () => {
+    render(<CreateCompany />);
+
+    const submitButton = screen.getByRole(`button`, {
+      name: `Finalizar cadastro`,
+    });
+
+    const companyNameInput = screen.getByLabelText(`Nome do restaurante*`);
+
+    await userEvent.type(companyNameInput, `restaurante`);
+
+    const cnpjInput = screen.getByLabelText(`CNPJ/CPF*`);
+
+    await userEvent.type(cnpjInput, `12345678912`);
+
+    const phoneNumberInput = screen.getByLabelText(`Telefone*`);
+
+    await userEvent.type(phoneNumberInput, `21999999999`);
+
+    await userEvent.click(submitButton);
+
+    expect(
+      await screen.findByText(`*A logo é obrigatória.`)
+    ).toBeInTheDocument();
+  });
+
   it(`When trying to send form without filling the zipCode input should render error`, async () => {
     render(<CreateCompany />);
 
