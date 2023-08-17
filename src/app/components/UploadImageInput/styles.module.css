@@ -1,3 +1,7 @@
+.uploadImageInputWrapper {
+  @apply w-full;
+}
+
 .uploadImageInputContainer {
   @apply flex flex-nowrap flex-1 border border-gray-300 rounded-lg;
 }
@@ -15,5 +19,9 @@
 }
 
 .fileUploadedName {
-  @apply w-full h-full text-xs text-gray-500 py-1 px-1;
+  @apply w-full h-full text-xs text-white py-1 px-1;
+}
+
+.uploadImageError {
+  @apply text-xs text-red-500 font-medium;
 }
