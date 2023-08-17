@@ -38,6 +38,7 @@ export default function CreateCompany() {
   const [selectedCoverCapeName, setSelectedCoverCapeName] = useState(``);
   const [isSubmiting, setIsSubmiting] = useState(false);
   const [requestError, setRequestError] = useState(false);
+  const [logoImageError, setLogoImageError] = useState(``);
 
   const {
     register,
@@ -56,6 +57,7 @@ export default function CreateCompany() {
     setFileName(String(file?.name));
     const fileToBase64 = await convertFileToBase64(file);
     setFile(String(fileToBase64));
+    setLogoImageError(``);
   };
 
   const email = user?.emailAddresses[0].emailAddress;
@@ -148,27 +150,24 @@ export default function CreateCompany() {
             <div className={styles.companyImageInputWrapper}>
               <UploadImageInput
                 labelClassName={
-                  selectedLogo !== ``
-                    ? styles.labelInputChecked
-                    : styles.labelInput
+                  selectedLogo !== `` ? styles.labelInputChecked : ``
                 }
                 id="logo"
-                testId="logoInput"
+                data-testId="logoInput"
                 title={selectedLogoName ? `Logo:` : `Logo`}
                 handleFileChange={(event) =>
                   handleFileChange(event, setSelectedLogoName, setSelectedLogo)
                 }
                 iconImage={<FaFileUpload size={20} />}
                 imageName={selectedLogoName}
+                error={logoImageError}
               />
               <UploadImageInput
                 labelClassName={
-                  selectedCoverCape !== ``
-                    ? styles.labelInputChecked
-                    : styles.labelInput
+                  selectedCoverCape !== `` ? styles.labelInputChecked : ``
                 }
                 id="coverCape"
-                testId="coverCapeInput"
+                data-testId="coverCapeInput"
                 title={selectedCoverCapeName ? `Capa:` : `Capa`}
                 handleFileChange={(event) =>
                   handleFileChange(
@@ -206,6 +205,9 @@ export default function CreateCompany() {
             text="Finalizar cadastro"
             submitError={requestError}
             className={styles.companySubmitButton}
+            onClick={() => {
+              setLogoImageError(selectedLogo ? `` : `*A logo é obrigatória.`);
+            }}
           />
         </form>
       </div>
