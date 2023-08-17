@@ -1,12 +1,12 @@
 import * as yup from 'yup';
 
 export const createCompanyFormValidation = yup.object().shape({
-  name: yup.string().required(`*O Nome do restaurante é obrigatório.`),
+  name: yup.string().required(`O Nome do restaurante é obrigatório.`),
   cnpj: yup
     .string()
     .test(
       `len`,
-      `*O CNPJ/CPF é obrigatório e deve ser válido.`,
+      `O CNPJ/CPF é obrigatório e deve ser válido.`,
       (value?: string) => {
         if (!value || value.length === 0) {
           return false;
@@ -17,14 +17,14 @@ export const createCompanyFormValidation = yup.object().shape({
     .required(),
   phoneNumber: yup
     .string()
-    .min(10, `*O Telefone é obrigatório.`)
-    .max(11, `*O número de telefone deve ser válido.`)
+    .min(10, `O Telefone é obrigatório.`)
+    .max(11, `O número de telefone deve ser válido.`)
     .required(),
   deliveryPhoneNumber: yup
     .string()
     .test(
       `len`,
-      `*O número de telefone deve ser válido ou estar vázio.`,
+      `O número de telefone deve ser válido ou estar vázio.`,
       (value?: string) => {
         if (!value || value.length === 0) {
           return true;
@@ -34,10 +34,10 @@ export const createCompanyFormValidation = yup.object().shape({
     ),
   zipCode: yup
     .string()
-    .min(8, `*O CEP é obrigatório.`)
-    .max(8, `*Digite um CEP válido.`)
+    .min(8, `O CEP é obrigatório.`)
+    .max(8, `Digite um CEP válido.`)
     .required(),
-  address: yup.string().required(`*O Endereço é obrigatório.`),
+  address: yup.string().required(`O Endereço é obrigatório.`),
   fileLogo: yup.string(),
   fileCoverCape: yup.string(),
 });

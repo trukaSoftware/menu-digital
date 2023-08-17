@@ -55,7 +55,7 @@ export default function CreateCompany() {
   ) => {
     const file = event.target.files?.[0];
     setFileName(String(file?.name));
-    const fileToBase64 = await convertFileToBase64(file);
+    const fileToBase64 = await convertFileToBase64(file, setLogoImageError);
     setFile(String(fileToBase64));
     setLogoImageError(``);
   };
@@ -145,7 +145,7 @@ export default function CreateCompany() {
               type="number"
             />
             <p className={styles.companyInformationText}>
-              **Caso não seja passado, usaremos o telefone
+              Caso não seja passado, usaremos o telefone
             </p>
             <div className={styles.companyImageInputWrapper}>
               <UploadImageInput
@@ -206,7 +206,7 @@ export default function CreateCompany() {
             submitError={requestError}
             className={styles.companySubmitButton}
             onClick={() => {
-              setLogoImageError(selectedLogo ? `` : `*A logo é obrigatória.`);
+              setLogoImageError(selectedLogo ? `` : `A logo é obrigatória.`);
             }}
           />
         </form>

@@ -260,7 +260,7 @@ describe(`CreateCompany`, () => {
     ).toBeInTheDocument();
   });
 
-  it(`When trying to send form filling all inputs correctly should change page`, async () => {
+  it(`When trying to send form filling all inputs correctly, createCompany func should have been called 1 time`, async () => {
     render(<CreateCompany />);
 
     const submitButton = screen.getByRole(`button`, {

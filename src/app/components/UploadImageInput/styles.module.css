@@ -19,7 +19,7 @@
 }
 
 .fileUploadedName {
-  @apply w-full h-full text-xs text-white py-1 px-1;
+  @apply w-full h-full text-xs text-white p-1;
 }
 
 .uploadImageError {
