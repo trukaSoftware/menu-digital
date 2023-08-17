@@ -41,7 +41,7 @@ export default function DeleteProductDialog({
         setShowDialog(false);
       }
     } catch {
-      setDeleteError(`Falha ao deletar produto`);
+      setDeleteError(`Falha ao deletar o produto`);
     }
   };
 
@@ -55,7 +55,7 @@ export default function DeleteProductDialog({
         <Overlay className={styles.deleteProductDialogOverlay} />
         <Content className={styles.deleteProductDialogContent}>
           <p className={styles.deleteProductDialogText}>
-            Deseja realmente excluir esse produto? Essa ação é
+            Deseja realmente excluir este produto? Essa ação é
             <span> irreversível</span>.
           </p>
           <div className={styles.deleteProductDialogButtons}>

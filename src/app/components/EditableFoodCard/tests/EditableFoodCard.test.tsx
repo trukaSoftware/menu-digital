@@ -112,7 +112,7 @@ describe(`EditableFoodCard`, () => {
     await userEvent.click(delBtn);
 
     expect(
-      screen.getByText(`Deseja realmente excluir esse produto?`, {
+      screen.getByText(`Deseja realmente excluir este produto?`, {
         exact: false,
       })
     ).toBeInTheDocument();
