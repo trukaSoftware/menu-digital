@@ -56,7 +56,7 @@ describe(`CreateCompany`, () => {
     await userEvent.click(submitButton);
 
     expect(
-      await screen.findByText(`*O Nome do restaurante é obrigatório.`)
+      await screen.findByText(`O Nome do restaurante é obrigatório.`)
     ).toBeInTheDocument();
   });
 
@@ -73,7 +73,7 @@ describe(`CreateCompany`, () => {
     await userEvent.click(submitButton);
 
     expect(
-      await screen.findByText(`*O CNPJ/CPF é obrigatório e deve ser válido.`)
+      await screen.findByText(`O CNPJ/CPF é obrigatório e deve ser válido.`)
     ).toBeInTheDocument();
   });
 
@@ -95,7 +95,7 @@ describe(`CreateCompany`, () => {
     await userEvent.click(submitButton);
 
     expect(
-      await screen.findByText(`*O CNPJ/CPF é obrigatório e deve ser válido.`)
+      await screen.findByText(`O CNPJ/CPF é obrigatório e deve ser válido.`)
     ).toBeInTheDocument();
   });
 
@@ -117,7 +117,7 @@ describe(`CreateCompany`, () => {
     await userEvent.click(submitButton);
 
     expect(
-      await screen.findByText(`*O Telefone é obrigatório.`)
+      await screen.findByText(`O Telefone é obrigatório.`)
     ).toBeInTheDocument();
   });
 
@@ -135,7 +135,7 @@ describe(`CreateCompany`, () => {
     await userEvent.click(submitButton);
 
     expect(
-      await screen.findByText(`*O número de telefone deve ser válido.`)
+      await screen.findByText(`O número de telefone deve ser válido.`)
     ).toBeInTheDocument();
   });
 
@@ -155,7 +155,7 @@ describe(`CreateCompany`, () => {
 
     expect(
       await screen.findByText(
-        `*O número de telefone deve ser válido ou estar vázio.`
+        `O número de telefone deve ser válido ou estar vázio.`
       )
     ).toBeInTheDocument();
   });
@@ -182,7 +182,7 @@ describe(`CreateCompany`, () => {
     await userEvent.click(submitButton);
 
     expect(
-      await screen.findByText(`*A logo é obrigatória.`)
+      await screen.findByText(`A logo é obrigatória.`)
     ).toBeInTheDocument();
   });
 
@@ -207,9 +207,7 @@ describe(`CreateCompany`, () => {
 
     await userEvent.click(submitButton);
 
-    expect(
-      await screen.findByText(`*O CEP é obrigatório.`)
-    ).toBeInTheDocument();
+    expect(await screen.findByText(`O CEP é obrigatório.`)).toBeInTheDocument();
   });
 
   it(`When trying to send form filling a wrong zipCode, should render error`, async () => {
@@ -226,7 +224,7 @@ describe(`CreateCompany`, () => {
     await userEvent.click(submitButton);
 
     expect(
-      await screen.findByText(`*Digite um CEP válido.`)
+      await screen.findByText(`Digite um CEP válido.`)
     ).toBeInTheDocument();
   });
 
@@ -256,7 +254,7 @@ describe(`CreateCompany`, () => {
     await userEvent.click(submitButton);
 
     expect(
-      await screen.findByText(`*O Endereço é obrigatório.`)
+      await screen.findByText(`O Endereço é obrigatório.`)
     ).toBeInTheDocument();
   });
 
