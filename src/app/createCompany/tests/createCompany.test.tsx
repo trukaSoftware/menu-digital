@@ -46,7 +46,7 @@ describe(`CreateCompany`, () => {
     vi.resetAllMocks();
   });
 
-  it(`When trying to send form without filling the company name input should render error`, async () => {
+  it(`When trying to send form without filling the company name input, should render error`, async () => {
     render(<CreateCompany />);
 
     const submitButton = screen.getByRole(`button`, {
@@ -60,7 +60,7 @@ describe(`CreateCompany`, () => {
     ).toBeInTheDocument();
   });
 
-  it(`When trying to send form without filling the CNPJ/CPF input should render error`, async () => {
+  it(`When trying to send form without filling the CNPJ/CPF input, should render error`, async () => {
     render(<CreateCompany />);
 
     const submitButton = screen.getByRole(`button`, {
@@ -77,7 +77,7 @@ describe(`CreateCompany`, () => {
     ).toBeInTheDocument();
   });
 
-  it(`When trying to send form filling a wrong CNPJ/CPF should render error`, async () => {
+  it(`When trying to send form filling a wrong CNPJ/CPF, should render error`, async () => {
     render(<CreateCompany />);
 
     const submitButton = screen.getByRole(`button`, {
@@ -99,7 +99,7 @@ describe(`CreateCompany`, () => {
     ).toBeInTheDocument();
   });
 
-  it(`When trying to send form without filling the phone number input should render error`, async () => {
+  it(`When trying to send form without filling the phone number input, should render error`, async () => {
     render(<CreateCompany />);
 
     const submitButton = screen.getByRole(`button`, {
@@ -121,7 +121,7 @@ describe(`CreateCompany`, () => {
     ).toBeInTheDocument();
   });
 
-  it(`When trying to send form filling a wrong phone number should render error`, async () => {
+  it(`When trying to send form filling a wrong phone number, should render error`, async () => {
     render(<CreateCompany />);
 
     const submitButton = screen.getByRole(`button`, {
@@ -139,7 +139,7 @@ describe(`CreateCompany`, () => {
     ).toBeInTheDocument();
   });
 
-  it(`When trying to send form filling a wrong delivery phone number should render error`, async () => {
+  it(`When trying to send form filling a wrong delivery phone number, should render error`, async () => {
     render(<CreateCompany />);
 
     const submitButton = screen.getByRole(`button`, {
@@ -160,7 +160,7 @@ describe(`CreateCompany`, () => {
     ).toBeInTheDocument();
   });
 
-  it(`When trying to send form without logo image should render error`, async () => {
+  it(`When trying to send form without logo image, should render error`, async () => {
     render(<CreateCompany />);
 
     const submitButton = screen.getByRole(`button`, {
@@ -186,7 +186,7 @@ describe(`CreateCompany`, () => {
     ).toBeInTheDocument();
   });
 
-  it(`When trying to send form without filling the zipCode input should render error`, async () => {
+  it(`When trying to send form without filling the zipCode input, should render error`, async () => {
     render(<CreateCompany />);
 
     const submitButton = screen.getByRole(`button`, {
@@ -212,7 +212,7 @@ describe(`CreateCompany`, () => {
     ).toBeInTheDocument();
   });
 
-  it(`When trying to send form filling a wrong zipCode should render error`, async () => {
+  it(`When trying to send form filling a wrong zipCode, should render error`, async () => {
     render(<CreateCompany />);
 
     const submitButton = screen.getByRole(`button`, {
@@ -230,7 +230,7 @@ describe(`CreateCompany`, () => {
     ).toBeInTheDocument();
   });
 
-  it(`When trying to send form without filling the address input should render error`, async () => {
+  it(`When trying to send form without filling the address input, should render error`, async () => {
     render(<CreateCompany />);
 
     const submitButton = screen.getByRole(`button`, {

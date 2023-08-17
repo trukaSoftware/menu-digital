@@ -116,6 +116,6 @@ export interface CreateCompanyData {
   name: string;
   phoneNumber: string;
   zipCode: string;
-  fileLogo?: string | undefined;
-  fileCoverCape?: string | undefined;
+  fileLogo?: string;
+  fileCoverCape?: string;
 }
