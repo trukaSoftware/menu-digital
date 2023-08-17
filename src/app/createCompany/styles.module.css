@@ -23,7 +23,7 @@
 }
 
 .labelInputChecked {
-  @apply flex items-center border-t border-b border-r border-green-600  bg-green-600 text-white text-base rounded-r-md pl-2 h-9 w-full;
+  @apply flex items-center border-t border-b border-r border-green-500  bg-green-500 text-white text-base rounded-r-md pl-2 h-9 w-full;
 }
 
 .labelInput {
