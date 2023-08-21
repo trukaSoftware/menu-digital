@@ -1,11 +1,9 @@
-import { RouterParams } from '@/app/utils/types';
+import { RouterParams } from '@/utils/types';
 
-import FoodCardList from '../../../components/FoodCardList';
-import Header from '../../../components/Header';
-import {
-  foodCardMock,
-  foodCardWithoutDiscountMock,
-} from '../../../mocks/foodCard';
+import { foodCardMock, foodCardWithoutDiscountMock } from '@/mocks/foodCard';
+
+import FoodCardList from '../../../../components/FoodCardList';
+import Header from '../../../../components/Header';
 import styles from './styles.module.css';
 
 const mockFoodCardList = [

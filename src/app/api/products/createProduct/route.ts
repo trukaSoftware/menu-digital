@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
 
 import {
-  validateProductData,
   ProductData,
-} from '../../../utils/validations/productDataValidation';
+  validateProductData,
+} from '@/utils/validations/productDataValidation';
+
 import { createProductService } from '../../services/product/createProductService';
 
 export async function POST(req: Request) {

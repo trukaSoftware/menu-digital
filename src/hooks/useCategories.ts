@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { GetCategoriesResponse, GetCategoryReturn } from '@/types/category';
 
-import { getCategories } from '@/app/utils/api/getCategories';
-import { getter } from '@/app/utils/api/getter';
+import { getter } from '@/utils/api/getter';
 
 export function useCategories(companyId: string) {
   const [categories, setCategories] = useState<GetCategoryReturn[]>([]);

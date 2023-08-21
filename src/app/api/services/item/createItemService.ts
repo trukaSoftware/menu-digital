@@ -1,4 +1,5 @@
-import { ItemData } from '@/app/utils/validations/itemDataValidation';
+import { ItemData } from '@/utils/validations/itemDataValidation';
+
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 

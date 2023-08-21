@@ -1,4 +1,5 @@
-import { EditComplementsData } from '@/app/utils/types';
+import { EditComplementsData } from '@/utils/types';
+
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 

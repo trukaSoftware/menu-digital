@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { EditComplementsData } from '@/app/utils/types';
+import { EditComplementsData } from '@/utils/types';
 
 import { editComplementService } from '../../services/complement/editComplementService';
 

@@ -1,4 +1,4 @@
-import { RouterParams } from '@/app/utils/types';
+import { RouterParams } from '@/utils/types';
 
 import styles from './styles.module.css';
 

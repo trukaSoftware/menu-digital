@@ -1,8 +1,9 @@
-import ManagementScreenHeader from '@/app/components/ManagementScreenHeader';
-import YourStore from '@/app/components/YourStore';
-import api from '@/app/utils/api';
-import { getCategories } from '@/app/utils/api/getCategories';
-import { CompanyProps, RouterParams } from '@/app/utils/types';
+import ManagementScreenHeader from '@/components/ManagementScreenHeader';
+import YourStore from '@/components/YourStore';
+
+import api from '@/utils/api';
+import { getCategories } from '@/utils/api/getCategories';
+import { CompanyProps, RouterParams } from '@/utils/types';
 
 import styles from './styles.module.css';
 

@@ -1,4 +1,5 @@
-import { EditCategoryData } from '@/app/utils/types';
+import { EditCategoryData } from '@/utils/types';
+
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 

@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
 
 import {
-  validateImageData,
   ImageData,
-} from '../../../utils/validations/imageDataValidation';
+  validateImageData,
+} from '@/utils/validations/imageDataValidation';
+
 import { addNewImageService } from '../../services/image/addNewImageService';
 
 export async function POST(req: Request) {

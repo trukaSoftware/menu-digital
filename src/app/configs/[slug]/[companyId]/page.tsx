@@ -1,9 +1,10 @@
 import Link from 'next/link';
 
-import ManagementScreenHeader from '@/app/components/ManagementScreenHeader';
-import MenuComponent from '@/app/components/MenuComponent';
-import api from '@/app/utils/api';
-import { CompanyProps, RouterParams } from '@/app/utils/types';
+import ManagementScreenHeader from '@/components/ManagementScreenHeader';
+import MenuComponent from '@/components/MenuComponent';
+
+import api from '@/utils/api';
+import { CompanyProps, RouterParams } from '@/utils/types';
 
 import styles from './styles.module.css';
 
