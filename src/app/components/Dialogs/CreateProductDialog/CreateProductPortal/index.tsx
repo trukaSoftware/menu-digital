@@ -13,7 +13,7 @@ export default function CreateProductPortal({
 }: CreateProductFormProps) {
   return (
     <Dialog.Portal>
-      <Dialog.Overlay className={styles.createProductOverLay} />
+      <Dialog.Overlay className={styles.createProductOverlay} />
       <Dialog.Content className={styles.createProductContent}>
         <ModalDefaultHeader title="Criação de produto" />
         <CreateProductForm setShowDialog={setShowDialog} />

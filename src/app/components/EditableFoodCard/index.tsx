@@ -1,8 +1,7 @@
-import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
-
 import Image from 'next/image';
 
-import FoodImageSvg from '../../../../public/images/food-image.svg';
+import DeleteProductDialog from '../Dialogs/DeleteProductDialog';
+import EditProductDialog from '../Dialogs/EditProductDialog';
 import Prices from '../Prices';
 import styles from './styles.module.css';
 
@@ -14,6 +13,8 @@ export interface EditableFoodCardProps {
   discountedPrice?: number;
   discountPercentage?: number;
   id: string;
+  categoryId: string;
+  removeProductFromList: (productId: string, categoryId: string) => void;
 }
 
 export default function EditableFoodCard({
@@ -23,12 +24,15 @@ export default function EditableFoodCard({
   price,
   discountedPrice,
   discountPercentage,
+  id,
+  categoryId,
+  removeProductFromList,
 }: EditableFoodCardProps) {
   return (
     <div>
       <article className={styles.editableFoodCard}>
         <div className={styles.editableFoodImageWrapper}>
-          <Image src={FoodImageSvg} alt={title} fill />
+          <Image src={foodImage} alt={title} fill />
         </div>
         <div className={styles.editableFoodCardTextContent}>
           <div className={styles.editableFoodCardTextWrapper}>
@@ -44,14 +48,12 @@ export default function EditableFoodCard({
         ) : null}
       </article>
       <div className={styles.editableFoodButtonsWrapper}>
-        <button type="button" className={styles.editableFoodCardDelBtn}>
-          <span>Excluir</span>
-          <FaRegTrashAlt size={18} />
-        </button>
-        <button type="button" className={styles.editableFoodCardEditBtn}>
-          <span>Editar</span>
-          <FaRegEdit size={18} />
-        </button>
+        <DeleteProductDialog
+          productId={id}
+          categoryId={categoryId}
+          removeProductFromList={removeProductFromList}
+        />
+        <EditProductDialog />
       </div>
     </div>
   );

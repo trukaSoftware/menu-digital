@@ -1,7 +1,7 @@
-.createProductOverLay {
-  @apply fixed inset-0 bg-black/50;
-}
-
 .createProductContent {
   @apply fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full rounded bg-white max-h-screen md:h-2/3 md:w-128 md:rounded-lg;
+}
+
+.createProductOverlay {
+  @apply fixed inset-0 bg-black/50;
 }

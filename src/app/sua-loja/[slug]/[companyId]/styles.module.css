@@ -1,0 +1,7 @@
+.yourStore {
+  @apply bg-white h-screen;
+}
+
+.yourStoreContent {
+  @apply bg-white;
+}

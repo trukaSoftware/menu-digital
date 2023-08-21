@@ -1,0 +1,3 @@
+.yourStoreCategoryContainer {
+  @apply flex flex-col mx-3 my-2;
+}

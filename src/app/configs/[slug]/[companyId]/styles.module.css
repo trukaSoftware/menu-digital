@@ -11,5 +11,5 @@
 }
 
 .configsSeeMyStoreButton {
-  @apply w-full h-11 bg-red-600 rounded text-white font-bold text-base;
+  @apply flex items-center justify-center w-full h-11 bg-red-600 rounded text-white font-bold text-base;
 }

@@ -1,0 +1,35 @@
+.deleteProductDialogTrigger {
+  @apply text-sm text-red-600 font-medium lg:text-sm flex gap-x-1 items-center;
+}
+
+.deleteProductDialogOverlay {
+  @apply fixed inset-0 bg-black/50;
+}
+
+.deleteProductDialogContent {
+  @apply w-72 h-48 bg-white fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 rounded flex flex-col justify-between items-center;
+}
+
+.deleteProductDialogText {
+  @apply text-center text-base text-gray-900 font-semibold;
+}
+
+.deleteProductDialogText span {
+  @apply text-red-600;
+}
+
+.deleteProductDialogButtons {
+  @apply h-10 w-full flex gap-x-2;
+}
+
+.deleteProductDialogButtons button {
+  @apply h-full w-1/2 rounded font-semibold;
+}
+
+.deleteProductDialogDelBtn {
+  @apply bg-gray-200 border border-gray-300 text-gray-600;
+}
+
+.deleteProductDialogCancelBtn {
+  @apply bg-red-600 text-white;
+}

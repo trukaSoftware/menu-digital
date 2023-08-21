@@ -1,6 +1,14 @@
+import { Product } from './product';
+
 export interface CategoryPayload {
   name: string;
   companyId: string | undefined;
+}
+
+export interface GetCategoryReturn {
+  id: string;
+  name: string;
+  categoryProducts: Product[];
 }
 
 export interface CategoryReturn {
@@ -16,5 +24,5 @@ export interface CreateCategoryResponse {
 }
 
 export interface GetCategoriesResponse {
-  categories: CategoryReturn[];
+  categories: GetCategoryReturn[];
 }
