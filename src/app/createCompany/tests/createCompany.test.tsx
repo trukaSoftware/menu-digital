@@ -2,7 +2,7 @@ import { vi } from 'vitest';
 
 import { createCompany } from '@/utils/api/createCompany';
 
-import { createImageMock } from '@/app/testsUtils/createImageMock';
+import { createImageMock } from '@/testsUtils/createImageMock';
 import { render, screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
