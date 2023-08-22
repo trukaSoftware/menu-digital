@@ -21,6 +21,11 @@ const mockPropsWithoutDiscount = {
   categoryId: `1`,
 } as EditableFoodCardProps;
 
+vi.mock(`@clerk/nextjs`, () => ({
+  __esModule: true,
+  useUser: () => ({ user: { id: `1` } }),
+}));
+
 describe(`EditableFoodCard`, () => {
   afterAll(() => {
     vi.clearAllMocks();
@@ -111,6 +116,20 @@ describe(`EditableFoodCard`, () => {
 
     expect(
       screen.getByText(`Deseja realmente excluir este produto?`, {
+        exact: false,
+      })
+    ).toBeInTheDocument();
+  });
+
+  it(`should open edit modal when clicking on the modal button`, async () => {
+    render(<EditableFoodCard {...mockProps} />);
+
+    const editBtn = screen.getByRole(`button`, { name: `Editar` });
+
+    await userEvent.click(editBtn);
+
+    expect(
+      await screen.getByText(`Edição de produto`, {
         exact: false,
       })
     ).toBeInTheDocument();
