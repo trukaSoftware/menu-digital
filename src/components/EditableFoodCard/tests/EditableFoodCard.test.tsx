@@ -1,21 +1,20 @@
 import { vi } from 'vitest';
 
-import { foodCardMock, foodCardWithoutDiscountMock } from '@/mocks/foodCard';
+import { productMock } from '@/mocks/products';
 import { render, screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import EditableFoodCard, { EditableFoodCardProps } from '..';
 
 const mockProps = {
-  ...foodCardMock,
+  product: productMock,
   id: `1`,
   removeProductFromList: vi.fn(),
   categoryId: `1`,
 } as EditableFoodCardProps;
 
 const mockPropsWithoutDiscount = {
-  ...foodCardWithoutDiscountMock,
-  id: `1`,
+  product: { ...productMock, discount: undefined },
   removeProductFromList: vi.fn(),
   categoryId: `1`,
 } as EditableFoodCardProps;
@@ -34,7 +33,7 @@ describe(`EditableFoodCard`, () => {
     render(<EditableFoodCard {...mockProps} />);
 
     const heading = screen.getByRole(`heading`, {
-      name: `Nome do Produto`,
+      name: `Pão`,
       level: 3,
     });
 
@@ -52,7 +51,7 @@ describe(`EditableFoodCard`, () => {
   it(`when prop discountedPrice is passed, should render discounted price`, () => {
     render(<EditableFoodCard {...mockProps} />);
 
-    const discountedPrice = screen.getByText(`R$ 8,00`);
+    const discountedPrice = screen.getByText(`R$ 12,00`);
 
     expect(discountedPrice).toBeInTheDocument();
   });
@@ -60,7 +59,7 @@ describe(`EditableFoodCard`, () => {
   it(`when prop discountedPrice is not passed, original price shouldn't have style foodCardPriceScratched`, () => {
     render(<EditableFoodCard {...mockPropsWithoutDiscount} />);
 
-    const originalPrice = screen.queryByText(`R$ 10,00`);
+    const originalPrice = screen.queryByText(`R$ 12,00`);
 
     expect(originalPrice).toBeInTheDocument();
     expect(originalPrice).not.toHaveClass(`foodCardPriceScratched`);
@@ -69,7 +68,7 @@ describe(`EditableFoodCard`, () => {
   it(`when prop discountedPrice is passed, original price should have style foodCardPriceScratched`, () => {
     render(<EditableFoodCard {...mockProps} />);
 
-    const originalPrice = screen.getByText(`R$ 10,00`);
+    const originalPrice = screen.getByText(`R$ 12,00`);
 
     expect(originalPrice).toBeInTheDocument();
     expect(originalPrice).toHaveClass(`foodCardPriceScratched`);
