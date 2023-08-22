@@ -13,7 +13,7 @@ export interface Product {
   name: string;
   description: string;
   price: string;
-  discount: null;
+  discount?: number;
   companyId: string;
   productCategoriesId: string;
   createdAt: string;
