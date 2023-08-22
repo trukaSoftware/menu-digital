@@ -11,12 +11,14 @@ export interface EditableFoodCardProps {
   product: Product;
   categoryId: string;
   removeProductFromList: (productId: string, categoryId: string) => void;
+  editProductFromList: (newProduct: Product, categoryId: string) => void;
 }
 
 export default function EditableFoodCard({
   product,
   categoryId,
   removeProductFromList,
+  editProductFromList,
 }: EditableFoodCardProps) {
   return (
     <div>
@@ -49,7 +51,11 @@ export default function EditableFoodCard({
           categoryId={categoryId}
           removeProductFromList={removeProductFromList}
         />
-        <EditProductDialog product={product} categoryId={categoryId} />
+        <EditProductDialog
+          product={product}
+          categoryId={categoryId}
+          editProductFromList={editProductFromList}
+        />
       </div>
     </div>
   );

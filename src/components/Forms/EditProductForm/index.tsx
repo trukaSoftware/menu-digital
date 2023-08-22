@@ -27,12 +27,14 @@ export interface EditProductFormProps {
   setShowDialog: (value: boolean) => void;
   product: Product;
   categoryId: string;
+  editProductFromList: (newProduct: Product, categoryId: string) => void;
 }
 
 export default function EditProductForm({
   setShowDialog,
   product,
   categoryId,
+  editProductFromList,
 }: EditProductFormProps) {
   const [requestError, setRequestError] = useState(false);
   const [isSubmiting, setIsSubmiting] = useState(false);
@@ -80,6 +82,7 @@ export default function EditProductForm({
         setIsSubmiting(false);
         return setRequestError(true);
       }
+      editProductFromList(editedProduct, categoryId);
     } catch (error) {
       setRequestError(true);
     } finally {

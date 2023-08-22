@@ -10,12 +10,14 @@ const mockProps = {
   product: productMock,
   id: `1`,
   removeProductFromList: vi.fn(),
+  editProductFromList: vi.fn(),
   categoryId: `1`,
 } as EditableFoodCardProps;
 
 const mockPropsWithoutDiscount = {
   product: { ...productMock, discount: undefined },
   removeProductFromList: vi.fn(),
+  editProductFromList: vi.fn(),
   categoryId: `1`,
 } as EditableFoodCardProps;
 

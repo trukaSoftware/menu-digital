@@ -11,12 +11,14 @@ export interface EditProductPortalProps {
   setShowDialog: (value: boolean) => void;
   product: Product;
   categoryId: string;
+  editProductFromList: (newProduct: Product, categoryId: string) => void;
 }
 
 export default function EditProductPortal({
   setShowDialog,
   product,
   categoryId,
+  editProductFromList,
 }: EditProductPortalProps) {
   return (
     <Portal>
@@ -27,6 +29,7 @@ export default function EditProductPortal({
           setShowDialog={setShowDialog}
           product={product}
           categoryId={categoryId}
+          editProductFromList={editProductFromList}
         />
       </Content>
     </Portal>
