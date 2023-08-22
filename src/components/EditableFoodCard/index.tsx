@@ -49,7 +49,7 @@ export default function EditableFoodCard({
           categoryId={categoryId}
           removeProductFromList={removeProductFromList}
         />
-        <EditProductDialog product={product} />
+        <EditProductDialog product={product} categoryId={categoryId} />
       </div>
     </div>
   );
