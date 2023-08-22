@@ -1,4 +1,4 @@
-import { ImageProps } from '@/app/utils/types';
+import { ImageProps } from '@/utils/types';
 
 export interface ProductResponse {
   products: Product[];

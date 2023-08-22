@@ -1,4 +1,5 @@
-import { EditItemData } from '@/app/utils/types';
+import { EditItemData } from '@/utils/types';
+
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 

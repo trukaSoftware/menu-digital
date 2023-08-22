@@ -1,4 +1,5 @@
-import { CategoryData } from '@/app/utils/validations/categoryDataValidation';
+import { CategoryData } from '@/utils/validations/categoryDataValidation';
+
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 

@@ -1,7 +1,8 @@
 import { vi } from 'vitest';
 
+import { createCompany } from '@/utils/api/createCompany';
+
 import { createImageMock } from '@/app/testsUtils/createImageMock';
-import { createCompany } from '@/app/utils/api/createCompany';
 import { render, screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -31,7 +32,7 @@ vi.mock(`@clerk/nextjs`, () => ({
   }),
 }));
 
-vi.mock(`@/app/utils/api/createCompany`);
+vi.mock(`@/utils/api/createCompany`);
 vi.mocked(createCompany).mockImplementation(async () => ({
   companyId: `mockId`,
 }));

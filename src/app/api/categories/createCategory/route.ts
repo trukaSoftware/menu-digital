@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
 
 import {
-  validateCategoryData,
   CategoryData,
-} from '../../../utils/validations/categoryDataValidation';
+  validateCategoryData,
+} from '@/utils/validations/categoryDataValidation';
+
 import { createCategoryService } from '../../services/category/createCategoryService';
 
 export async function POST(req: Request) {

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { EditCategoryData } from '@/app/utils/types';
+import { EditCategoryData } from '@/utils/types';
 
 import { editCategoryService } from '../../services/category/editCategoryService';
 

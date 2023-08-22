@@ -1,7 +1,8 @@
-import { createSlug } from '@/app/utils/createSlug';
-import { EditCompanyData } from '@/app/utils/types';
-import { updateUserMetadata } from '@/app/utils/updateUserMetadata';
-import { uploadImages } from '@/app/utils/uploadImages';
+import { createSlug } from '@/utils/createSlug';
+import { EditCompanyData } from '@/utils/types';
+import { updateUserMetadata } from '@/utils/updateUserMetadata';
+import { uploadImages } from '@/utils/uploadImages';
+
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 

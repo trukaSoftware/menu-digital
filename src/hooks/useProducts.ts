@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { Product, ProductResponse } from '@/types/product';
 
-import { getter } from '@/app/utils/api/getter';
+import { getter } from '@/utils/api/getter';
 
 export function useProducts() {
   const [products, setProducts] = useState<Product[]>([]);

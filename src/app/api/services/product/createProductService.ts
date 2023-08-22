@@ -1,5 +1,6 @@
-import { uploadImages } from '@/app/utils/uploadImages';
-import { ProductData } from '@/app/utils/validations/productDataValidation';
+import { uploadImages } from '@/utils/uploadImages';
+import { ProductData } from '@/utils/validations/productDataValidation';
+
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 

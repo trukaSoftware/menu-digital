@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { EditProductData } from '@/app/utils/types';
+import { EditProductData } from '@/utils/types';
 
 import { editProductService } from '../../services/product/editProductService';
 

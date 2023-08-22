@@ -15,18 +15,19 @@ import {
 
 import { useRouter } from 'next/navigation';
 
+import { createCompany } from '@/utils/api/createCompany';
+import { convertFileToBase64 } from '@/utils/convertFileToBase64';
+import { formatCnpj, formatCpf } from '@/utils/formatCreateCompanyForm';
+import { CreateCompanyData } from '@/utils/types';
+import { createCompanyFormValidation } from '@/utils/yup/createCompanyFormValidation';
+
+import { mockedImage } from '@/mocks/imageMock';
 import { useUser } from '@clerk/nextjs';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import ButtonSubmit from '../components/ButtonSubmit';
-import DefaultInput from '../components/DefaultInput';
-import UploadImageInput from '../components/UploadImageInput';
-import { mockedImage } from '../mocks/imageMock';
-import { createCompany } from '../utils/api/createCompany';
-import { convertFileToBase64 } from '../utils/convertFileToBase64';
-import { formatCnpj, formatCpf } from '../utils/formatCreateCompanyForm';
-import { CreateCompanyData } from '../utils/types';
-import { createCompanyFormValidation } from '../utils/yup/createCompanyFormValidation';
+import ButtonSubmit from '../../components/ButtonSubmit';
+import DefaultInput from '../../components/DefaultInput';
+import UploadImageInput from '../../components/UploadImageInput';
 import styles from './styles.module.css';
 
 export default function CreateCompany() {
