@@ -47,11 +47,7 @@ export default function YourStore({ categories }: YourStoreProps) {
               <EditableCategoryTitle categoryName={category.name} />
               {category.categoryProducts.map((product) => (
                 <EditableFoodCard
-                  description={product.description}
-                  foodImage={product?.productsImages[0].imageUrl}
-                  price={+product.price}
-                  title={product.name}
-                  id={product.id}
+                  product={product}
                   removeProductFromList={removeProductFromList}
                   key={product.id}
                   categoryId={category.id}
