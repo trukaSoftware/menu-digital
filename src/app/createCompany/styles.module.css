@@ -1,5 +1,5 @@
 .createCompanyWrapper {
-  @apply w-full h-screen bg-gray-300 md:flex flex-col justify-center items-center;
+  @apply w-full h-screen bg-gray-300 md:flex md:flex-col md:justify-center md:items-center;
 }
 
 .companyHeader {
@@ -11,7 +11,7 @@
 }
 
 .companyMain {
-  @apply flex flex-col w-full max-w-2xl py-4 px-2 bg-white rounded;
+  @apply flex flex-col w-full max-w-2xl py-4 px-2 bg-white rounded md:shadow-xl;
 }
 
 .companyForm {
