@@ -107,7 +107,7 @@ export default function CreateCompany() {
   };
 
   return (
-    <>
+    <div className={styles.createCompanyWrapper}>
       <div className={styles.companyHeader}>
         <h1 className={styles.companyTitle}>Vamos criar seu restaurante?</h1>
       </div>
@@ -220,6 +220,6 @@ export default function CreateCompany() {
           />
         </form>
       </div>
-    </>
+    </div>
   );
 }
