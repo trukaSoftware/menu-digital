@@ -1,22 +1,13 @@
+import {
+  AddNewImagePayload,
+  AddNewImageResponse,
+  DelImageResponse,
+} from '@/types/imageApi';
 import { ProductsImage } from '@/types/product';
 
 import { ImageProps } from '../types';
 import { del } from './del';
 import { post } from './post';
-
-export interface AddNewImagePayload {
-  id: string;
-  images: ImageProps[];
-}
-
-export interface AddNewImageResponse {
-  message: string;
-  productsImages: ProductsImage[];
-}
-
-export interface DelImageResponse {
-  deleted: boolean;
-}
 
 export interface UpdateProductImageReturn {
   error: boolean;
