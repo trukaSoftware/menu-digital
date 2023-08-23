@@ -9,6 +9,7 @@ import { MdOutlineFastfood } from 'react-icons/md';
 import { Product } from '@/types/product';
 
 import { editProduct } from '@/utils/api/editProduct';
+import { updateProductImage } from '@/utils/api/updateProductImage';
 import { ImageProps } from '@/utils/types';
 import {
   productSchema,
@@ -39,10 +40,10 @@ export default function EditProductForm({
   const [requestError, setRequestError] = useState(false);
   const [isSubmiting, setIsSubmiting] = useState(false);
   const [registredWithSucess, setRegistredWithSucess] = useState(false);
-  // const [imagePlaceholder, setImagePlaceholder] = useState<string>(``);
-  // const [productImage, setProductImage] = useState<ImageProps>(
-  //   {} as unknown as ImageProps
-  // );
+  const [imagePlaceholder, setImagePlaceholder] = useState<string>(``);
+  const [productImage, setProductImage] = useState<ImageProps>(
+    {} as unknown as ImageProps
+  );
   const {
     handleSubmit,
     register,
@@ -59,10 +60,10 @@ export default function EditProductForm({
     },
   });
 
-  // const productName = useWatch({
-  //   control,
-  //   name: `name`,
-  // });
+  const productName = useWatch({
+    control,
+    name: `name`,
+  });
 
   const onSubmit = async (values: ProductData) => {
     setIsSubmiting(true);
@@ -78,50 +79,59 @@ export default function EditProductForm({
         ...editProductPayload,
       });
 
-      if (!editedProduct?.id) {
+      const updateImage = await updateProductImage(
+        product.id,
+        product.productsImages[0].id,
+        [productImage]
+      );
+
+      if (!editedProduct?.id || !updateImage) {
         setIsSubmiting(false);
         return setRequestError(true);
       }
+
       editProductFromList(editedProduct, categoryId);
     } catch (error) {
+      setIsSubmiting(false);
       setRequestError(true);
     } finally {
-      setShowDialog(false);
       setIsSubmiting(false);
     }
 
     setRegistredWithSucess(true);
-    setIsSubmiting(false);
+    setTimeout(() => {
+      setShowDialog(false);
+    }, 2000);
   };
 
-  // const toBase64 = (file: File | undefined) =>
-  //   new Promise((resolve, reject) => {
-  //     // vai sair daqui
-  //     if (file) {
-  //       const reader = new FileReader();
-  //       reader.readAsDataURL(file);
-  //       reader.onload = () => resolve(reader.result);
-  //       reader.onerror = reject;
-  //     }
-  //   });
+  const toBase64 = (file: File | undefined) =>
+    new Promise((resolve, reject) => {
+      // vai sair daqui
+      if (file) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+      }
+    });
 
-  // const handleImage = async (event: ChangeEvent<HTMLInputElement>) => {
-  //   try {
-  //     const file = event.target.files?.[0];
+  const handleImage = async (event: ChangeEvent<HTMLInputElement>) => {
+    try {
+      const file = event.target.files?.[0];
 
-  //     const fileParsetToBase64 = await toBase64(file);
+      const fileParsetToBase64 = await toBase64(file);
 
-  //     setImagePlaceholder(`${productName}-${Date.now()} ✔️`);
+      setImagePlaceholder(`${productName}-${Date.now()} ✔️`);
 
-  //     setProductImage({
-  //       file: `${fileParsetToBase64}`,
-  //       name: `${productName}-${Date.now()}`,
-  //       alt: `Imagem do produto ${productName}`,
-  //     });
-  //   } catch (error) {
-  //     setRequestError(true);
-  //   }
-  // };
+      setProductImage({
+        file: `${fileParsetToBase64}`,
+        name: `${productName}-${Date.now()}`,
+        alt: `Imagem do produto ${productName}`,
+      });
+    } catch (error) {
+      setRequestError(true);
+    }
+  };
 
   return (
     <div className={styles.createProductFormContainer}>
@@ -165,7 +175,7 @@ export default function EditProductForm({
             register={register(`price`)}
             error={errors.price?.message}
           />
-          {/* <UploadImageInput
+          <UploadImageInput
             iconImage={<BsFillImageFill color="#6B7280" />}
             handleFileChange={handleImage}
             title="Imagem"
@@ -174,7 +184,7 @@ export default function EditProductForm({
             labelClassName={
               productImage.file ? styles.hasImageOnInput : undefined
             }
-          /> */}
+          />
           <Controller
             control={control}
             name="categoryId"
