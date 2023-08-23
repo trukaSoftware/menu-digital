@@ -10,6 +10,7 @@ import { Product } from '@/types/product';
 
 import { editProduct } from '@/utils/api/editProduct';
 import { updateProductImage } from '@/utils/api/updateProductImage';
+import { convertFileToBase64 } from '@/utils/convertFileToBase64';
 import { ImageProps } from '@/utils/types';
 import {
   productSchema,
@@ -44,6 +45,8 @@ export default function EditProductForm({
   const [productImage, setProductImage] = useState<ImageProps>(
     {} as unknown as ImageProps
   );
+  const [productImageError, setProductImageError] = useState(``);
+
   const {
     handleSubmit,
     register,
@@ -109,22 +112,14 @@ export default function EditProductForm({
     }, 2000);
   };
 
-  const toBase64 = (file: File | undefined) =>
-    new Promise((resolve, reject) => {
-      // vai sair daqui
-      if (file) {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = reject;
-      }
-    });
-
   const handleImage = async (event: ChangeEvent<HTMLInputElement>) => {
     try {
       const file = event.target.files?.[0];
 
-      const fileParsetToBase64 = await toBase64(file);
+      const fileParsetToBase64 = await convertFileToBase64(
+        file,
+        setProductImageError
+      );
 
       setImagePlaceholder(`${productName}-${Date.now()} ✔️`);
 
@@ -189,6 +184,7 @@ export default function EditProductForm({
             labelClassName={
               productImage.file ? styles.hasImageOnInput : undefined
             }
+            error={productImageError}
           />
           <Controller
             control={control}

@@ -7,6 +7,7 @@ import { LiaMoneyBillWaveSolid } from 'react-icons/lia';
 import { MdOutlineFastfood } from 'react-icons/md';
 
 import { createProduct } from '@/utils/api/createProduct';
+import { convertFileToBase64 } from '@/utils/convertFileToBase64';
 import { ImageProps } from '@/utils/types';
 import {
   productSchema,
@@ -36,6 +37,7 @@ export default function CreateProductForm({
   const [productImage, setProductImage] = useState<ImageProps>(
     {} as unknown as ImageProps
   );
+  const [productImageError, setProductImageError] = useState(``);
   const { user } = useUser();
 
   const {
@@ -83,22 +85,14 @@ export default function CreateProductForm({
     setIsSubmiting(false);
   };
 
-  const toBase64 = (file: File | undefined) =>
-    new Promise((resolve, reject) => {
-      // vai sair daqui
-      if (file) {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = reject;
-      }
-    });
-
   const handleImage = async (event: ChangeEvent<HTMLInputElement>) => {
     try {
       const file = event.target.files?.[0];
 
-      const fileParsetToBase64 = await toBase64(file);
+      const fileParsetToBase64 = await convertFileToBase64(
+        file,
+        setProductImageError
+      );
 
       setImagePlaceholder(`${productName}-${Date.now()} ✔️`);
 
@@ -163,6 +157,7 @@ export default function CreateProductForm({
             labelClassName={
               productImage.file ? styles.hasImageOnInput : undefined
             }
+            error={productImageError}
           />
           <Controller
             control={control}
