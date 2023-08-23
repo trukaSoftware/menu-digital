@@ -6,6 +6,8 @@ import userEvent from '@testing-library/user-event';
 
 import EditableFoodCard, { EditableFoodCardProps } from '..';
 
+vi.mock(`axios`);
+
 const mockProps = {
   product: productMock,
   id: `1`,
