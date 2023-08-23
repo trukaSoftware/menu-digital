@@ -16,12 +16,15 @@ export async function POST(req: Request) {
       images,
     });
 
-    await addNewImageService({
+    const productsImages = await addNewImageService({
       id,
       images,
     });
 
-    return NextResponse.json({ message: `Imagens adicionadas com sucesso` });
+    return NextResponse.json({
+      message: `Imagens adicionadas com sucesso`,
+      productsImages,
+    });
   } catch (error) {
     if (error instanceof Error) {
       return NextResponse.json({ message: error.message });

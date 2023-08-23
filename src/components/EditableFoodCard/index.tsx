@@ -25,7 +25,7 @@ export default function EditableFoodCard({
       <article className={styles.editableFoodCard}>
         <div className={styles.editableFoodImageWrapper}>
           <Image
-            src={product?.productsImages[0].imageUrl}
+            src={product?.productsImages[0]?.imageUrl}
             alt={product.name}
             fill
           />

@@ -85,12 +85,14 @@ export default function EditProductForm({
         [productImage]
       );
 
-      if (!editedProduct?.id || !updateImage) {
+      const updatedProduct = { ...editedProduct, productsImages: updateImage };
+
+      if (!editedProduct?.id) {
         setIsSubmiting(false);
         return setRequestError(true);
       }
 
-      editProductFromList(editedProduct, categoryId);
+      editProductFromList(updatedProduct, categoryId);
     } catch (error) {
       setIsSubmiting(false);
       setRequestError(true);

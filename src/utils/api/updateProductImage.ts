@@ -1,3 +1,5 @@
+import { ProductsImage } from '@/types/product';
+
 import { ImageProps } from '../types';
 import { del } from './del';
 import { post } from './post';
@@ -9,6 +11,7 @@ export interface AddNewImagePayload {
 
 export interface AddNewImageResponse {
   message: string;
+  productsImages: ProductsImage[];
 }
 
 export interface DelImageResponse {
@@ -36,7 +39,7 @@ export const updateProductImage = async (
     );
 
     if (delOldImage.data.deleted === true) {
-      return true;
+      return productNewImage.data.productsImages;
     }
   }
 
