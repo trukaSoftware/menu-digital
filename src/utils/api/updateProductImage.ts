@@ -18,11 +18,16 @@ export interface DelImageResponse {
   deleted: boolean;
 }
 
+export interface UpdateProductImageReturn {
+  error: boolean;
+  productsImages: ProductsImage[];
+}
+
 export const updateProductImage = async (
   productId: string,
   oldImageId: string,
   images: ImageProps[]
-) => {
+): Promise<UpdateProductImageReturn> => {
   const productNewImage = await post<AddNewImageResponse, AddNewImagePayload>(
     `/api/images/addNewImage`,
     {
@@ -39,9 +44,12 @@ export const updateProductImage = async (
     );
 
     if (delOldImage.data.deleted === true) {
-      return productNewImage.data.productsImages;
+      return {
+        error: false,
+        productsImages: productNewImage.data.productsImages,
+      };
     }
   }
 
-  return false;
+  return { error: true, productsImages: productNewImage.data.productsImages };
 };
