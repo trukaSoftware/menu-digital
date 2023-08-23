@@ -39,6 +39,16 @@ describe(`EditProductForm`, () => {
   } as EditProductFormProps;
 
   it(`When trying to send form and put axios request does not return the product id should render error text on button`, async () => {
+    mockedAxios.put.mockResolvedValueOnce({
+      data: { productData: undefined },
+    });
+    mockedAxios.post.mockResolvedValueOnce({
+      data: { message: `error` },
+    });
+    mockedAxios.delete.mockResolvedValueOnce({
+      data: { deleted: false },
+    });
+
     render(<EditProductForm {...mockProps} />);
 
     const submitButton = screen.getByRole(`button`, {
