@@ -129,7 +129,7 @@ describe(`EditableFoodCard`, () => {
     await userEvent.click(editBtn);
 
     expect(
-      await screen.getByText(`Edição de produto`, {
+      screen.getByText(`Edição de produto`, {
         exact: false,
       })
     ).toBeInTheDocument();
