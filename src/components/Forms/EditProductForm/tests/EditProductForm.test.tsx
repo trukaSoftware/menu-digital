@@ -39,116 +39,112 @@ describe(`EditProductForm`, () => {
   } as EditProductFormProps;
 
   it(`When trying to send form and put axios request does not return the product id should render error text on button`, async () => {
-    // mockedAxios.put.mockResolvedValueOnce({
-    //   data: { productData: undefined },
-    // });
-    // mockedAxios.post.mockResolvedValueOnce({
-    //   data: { message: `error` },
-    // });
-    // mockedAxios.delete.mockResolvedValueOnce({
-    //   data: { deleted: false },
-    // });
-    // render(<EditProductForm {...mockProps} />);
-    // const submitButton = screen.getByRole(`button`, {
-    //   name: `Editar produto`,
-    // });
-    // const productNameInput = screen.getByPlaceholderText(`Hamburguer`);
-    // fireEvent.change(productNameInput, ``);
-    // fireEvent.click(submitButton);
-    // expect(
-    //   await screen.findByRole(`button`, {
-    //     name: `Erro ao enviar, tente novamente.`,
-    //   })
-    // ).toBeInTheDocument();
+    render(<EditProductForm {...mockProps} />);
+
+    const submitButton = screen.getByRole(`button`, {
+      name: `Editar produto`,
+    });
+
+    const productNameInput = screen.getByPlaceholderText(`Hamburguer`);
+
+    fireEvent.change(productNameInput, ``);
+
+    fireEvent.click(submitButton);
+
+    expect(
+      await screen.findByRole(`button`, {
+        name: `Erro ao enviar, tente novamente.`,
+      })
+    ).toBeInTheDocument();
   });
 
-  // it(`When trying to send form and post axios request return message prop diffrent from "Imagens adicionadas com sucesso" should render "Erro ao enviar, tente novamente." on send button`, async () => {
-  //   mockedAxios.put.mockResolvedValueOnce({
-  //     data: { productData: productMock },
-  //   });
-  //   mockedAxios.post.mockResolvedValueOnce({
-  //     data: { message: `mensagem de erro` },
-  //   });
-  //   mockedAxios.delete.mockResolvedValueOnce({
-  //     data: { deleted: true },
-  //   });
+  it(`When trying to send form and post axios request return message prop diffrent from "Imagens adicionadas com sucesso" should render "Erro ao enviar, tente novamente." on send button`, async () => {
+    mockedAxios.put.mockResolvedValueOnce({
+      data: { productData: productMock },
+    });
+    mockedAxios.post.mockResolvedValueOnce({
+      data: { message: `mensagem de erro` },
+    });
+    mockedAxios.delete.mockResolvedValueOnce({
+      data: { deleted: true },
+    });
 
-  //   render(<EditProductForm {...mockProps} />);
+    render(<EditProductForm {...mockProps} />);
 
-  //   const submitButton = screen.getByRole(`button`, {
-  //     name: `Editar produto`,
-  //   });
+    const submitButton = screen.getByRole(`button`, {
+      name: `Editar produto`,
+    });
 
-  //   const productNameInput = screen.getByPlaceholderText(`Hamburguer`);
+    const productNameInput = screen.getByPlaceholderText(`Hamburguer`);
 
-  //   fireEvent.change(productNameInput, ``);
+    fireEvent.change(productNameInput, ``);
 
-  //   fireEvent.click(submitButton);
+    fireEvent.click(submitButton);
 
-  //   expect(
-  //     await screen.findByRole(`button`, {
-  //       name: `Erro ao enviar, tente novamente.`,
-  //     })
-  //   ).toBeInTheDocument();
-  // });
+    expect(
+      await screen.findByRole(`button`, {
+        name: `Erro ao enviar, tente novamente.`,
+      })
+    ).toBeInTheDocument();
+  });
 
-  // it(`When trying to send form and delete axios request return deleted prop equals to false should render "Erro ao enviar, tente novamente." on send button`, async () => {
-  //   mockedAxios.put.mockResolvedValueOnce({
-  //     data: { productData: productMock },
-  //   });
-  //   mockedAxios.post.mockResolvedValueOnce({
-  //     data: { message: `Imagens adicionadas com sucesso` },
-  //   });
-  //   mockedAxios.delete.mockResolvedValueOnce({
-  //     data: { deleted: false },
-  //   });
+  it(`When trying to send form and delete axios request return deleted prop equals to false should render "Erro ao enviar, tente novamente." on send button`, async () => {
+    mockedAxios.put.mockResolvedValueOnce({
+      data: { productData: productMock },
+    });
+    mockedAxios.post.mockResolvedValueOnce({
+      data: { message: `Imagens adicionadas com sucesso` },
+    });
+    mockedAxios.delete.mockResolvedValueOnce({
+      data: { deleted: false },
+    });
 
-  //   render(<EditProductForm {...mockProps} />);
+    render(<EditProductForm {...mockProps} />);
 
-  //   const submitButton = screen.getByRole(`button`, {
-  //     name: `Editar produto`,
-  //   });
+    const submitButton = screen.getByRole(`button`, {
+      name: `Editar produto`,
+    });
 
-  //   const productNameInput = screen.getByPlaceholderText(`Hamburguer`);
+    const productNameInput = screen.getByPlaceholderText(`Hamburguer`);
 
-  //   fireEvent.change(productNameInput, ``);
+    fireEvent.change(productNameInput, ``);
 
-  //   fireEvent.click(submitButton);
+    fireEvent.click(submitButton);
 
-  //   expect(
-  //     await screen.findByRole(`button`, {
-  //       name: `Erro ao enviar, tente novamente.`,
-  //     })
-  //   ).toBeInTheDocument();
-  // });
+    expect(
+      await screen.findByRole(`button`, {
+        name: `Erro ao enviar, tente novamente.`,
+      })
+    ).toBeInTheDocument();
+  });
 
-  // it(`When trying to send form and no error occurs should render text "Produto editado com sucesso ✔️" on submit button`, async () => {
-  //   mockedAxios.put.mockResolvedValueOnce({
-  //     data: { productData: productMock },
-  //   });
-  //   mockedAxios.post.mockResolvedValueOnce({
-  //     data: { message: `Imagens adicionadas com sucesso` },
-  //   });
-  //   mockedAxios.delete.mockResolvedValueOnce({
-  //     data: { deleted: true },
-  //   });
+  it(`When trying to send form and no error occurs should render text "Produto editado com sucesso ✔️" on submit button`, async () => {
+    mockedAxios.put.mockResolvedValueOnce({
+      data: { productData: productMock },
+    });
+    mockedAxios.post.mockResolvedValueOnce({
+      data: { message: `Imagens adicionadas com sucesso` },
+    });
+    mockedAxios.delete.mockResolvedValueOnce({
+      data: { deleted: true },
+    });
 
-  //   render(<EditProductForm {...mockProps} />);
+    render(<EditProductForm {...mockProps} />);
 
-  //   const submitButton = screen.getByRole(`button`, {
-  //     name: `Editar produto`,
-  //   });
+    const submitButton = screen.getByRole(`button`, {
+      name: `Editar produto`,
+    });
 
-  //   const productNameInput = screen.getByPlaceholderText(`Hamburguer`);
+    const productNameInput = screen.getByPlaceholderText(`Hamburguer`);
 
-  //   fireEvent.change(productNameInput, ``);
+    fireEvent.change(productNameInput, ``);
 
-  //   fireEvent.click(submitButton);
+    fireEvent.click(submitButton);
 
-  //   expect(
-  //     await screen.findByRole(`button`, {
-  //       name: `Produto editado com sucesso ✔️`,
-  //     })
-  //   ).toBeInTheDocument();
-  // });
+    expect(
+      await screen.findByRole(`button`, {
+        name: `Produto editado com sucesso ✔️`,
+      })
+    ).toBeInTheDocument();
+  });
 });
