@@ -1,5 +1,7 @@
+import axios from 'axios';
 import { vi } from 'vitest';
 
+import { categories } from '@/mocks/categories';
 import { productMock } from '@/mocks/products';
 import { render, screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -7,6 +9,7 @@ import userEvent from '@testing-library/user-event';
 import EditableFoodCard, { EditableFoodCardProps } from '..';
 
 vi.mock(`axios`);
+const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 const mockProps = {
   product: productMock,
@@ -29,6 +32,12 @@ vi.mock(`@clerk/nextjs`, () => ({
 }));
 
 describe(`EditableFoodCard`, () => {
+  beforeEach(() => {
+    mockedAxios.get.mockResolvedValueOnce({
+      data: { categories, gettingCategories: false },
+    });
+  });
+
   afterAll(() => {
     vi.clearAllMocks();
   });
