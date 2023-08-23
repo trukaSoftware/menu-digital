@@ -17,6 +17,7 @@ import { useRouter } from 'next/navigation';
 
 import { createCompany } from '@/utils/api/createCompany';
 import { convertFileToBase64 } from '@/utils/convertFileToBase64';
+import { createSlug } from '@/utils/createSlug';
 import { formatCnpj, formatCpf } from '@/utils/formatCreateCompanyForm';
 import { CreateCompanyData } from '@/utils/types';
 import { createCompanyFormValidation } from '@/utils/yup/createCompanyFormValidation';
@@ -90,7 +91,14 @@ export default function CreateCompany() {
         setIsSubmiting(false);
         return setRequestError(true);
       }
-      router.push(`/configs/${user?.publicMetadata.slug}/${user?.id}`);
+
+      router.push(
+        `/configs/${
+          user?.publicMetadata.slug
+            ? user?.publicMetadata.slug
+            : createSlug(data.name)
+        }/${user?.id}`
+      );
     } catch {
       setRequestError(true);
     } finally {

@@ -48,9 +48,13 @@ export default authMiddleware({
       if (req.nextUrl.pathname === `/` && req.cookies.get(`__session`)) {
         const user = await clerkClient.users.getUser(`${auth.userId}`);
 
-        return NextResponse.redirect(
-          `${req.nextUrl.href}configs/${user.publicMetadata.slug}/${auth.userId}`
-        );
+        if (user.publicMetadata.slug) {
+          return NextResponse.redirect(
+            `${req.nextUrl.href}configs/${user.publicMetadata.slug}/${auth.userId}`
+          );
+        }
+
+        return NextResponse.redirect(`${req.nextUrl.href}createCompany`);
       }
     } catch (error) {
       return NextResponse.redirect(`${req.nextUrl.href}sign-in`);
