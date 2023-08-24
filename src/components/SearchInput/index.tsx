@@ -4,16 +4,16 @@ import styles from './styles.module.css';
 
 export interface SearchInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
-  uniqueId: string;
+  id: string;
 }
 
-export default function SearchInput({ uniqueId, ...rest }: SearchInputProps) {
+export default function SearchInput({ id, ...rest }: SearchInputProps) {
   return (
-    <label className={styles.searchInputWrapper} htmlFor={uniqueId}>
+    <label className={styles.searchInputWrapper} htmlFor={id}>
       <div className={styles.searchInputIcon}>
         <FaSearch />
       </div>
-      <input className={styles.searchInput} id={uniqueId} {...rest} />
+      <input className={styles.searchInput} id={id} {...rest} />
     </label>
   );
 }
