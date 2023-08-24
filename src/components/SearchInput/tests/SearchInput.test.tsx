@@ -15,7 +15,9 @@ describe(`DefaultInput`, () => {
   });
 
   it(`should render the input element with the correct type`, () => {
-    render(<SearchInput placeholder="Hamburguer" type="text" />);
+    render(
+      <SearchInput placeholder="Hamburguer" uniqueId="search" type="text" />
+    );
 
     const inputElement = screen.getByPlaceholderText(
       `Hamburguer`
@@ -27,7 +29,7 @@ describe(`DefaultInput`, () => {
 
   it(`should render placeholder text if provided`, () => {
     const placeholderText = `This is the placeholder`;
-    render(<SearchInput placeholder={placeholderText} />);
+    render(<SearchInput uniqueId="search" placeholder={placeholderText} />);
     const placeholderElement = screen.getByPlaceholderText(placeholderText);
     expect(placeholderElement).toBeInTheDocument();
   });
