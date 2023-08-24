@@ -3,6 +3,7 @@
 import { useState } from 'react';
 
 import { GetCategoryReturn } from '@/types/category';
+import { Product } from '@/types/product';
 
 import EditableCategoryTitle from '../EditableCategoryTitle';
 import EditableFoodCard from '../EditableFoodCard';
@@ -36,6 +37,26 @@ export default function YourStore({ categories }: YourStoreProps) {
     setProductsToLoad(newCategoriesList);
   };
 
+  const editProductFromList = (newProduct: Product, categoryId: string) => {
+    const indexOfTheCategory = categoriesWithProducts.findIndex(
+      (category) => category.id === categoryId
+    );
+
+    const newProductsList = categoriesWithProducts[
+      indexOfTheCategory
+    ].categoryProducts.map((product) =>
+      product.id === newProduct.id ? newProduct : product
+    );
+
+    const newCategoriesList = categoriesWithProducts.map((category) =>
+      category.id === categoryId
+        ? { ...category, categoryProducts: newProductsList }
+        : category
+    );
+
+    setProductsToLoad(newCategoriesList);
+  };
+
   return (
     <section className={styles.yourStoreProductsList}>
       {onlyCategoriesWithProducts.length > 0
@@ -47,12 +68,9 @@ export default function YourStore({ categories }: YourStoreProps) {
               <EditableCategoryTitle categoryName={category.name} />
               {category.categoryProducts.map((product) => (
                 <EditableFoodCard
-                  description={product.description}
-                  foodImage={product?.productsImages[0].imageUrl}
-                  price={+product.price}
-                  title={product.name}
-                  id={product.id}
+                  product={product}
                   removeProductFromList={removeProductFromList}
+                  editProductFromList={editProductFromList}
                   key={product.id}
                   categoryId={category.id}
                 />

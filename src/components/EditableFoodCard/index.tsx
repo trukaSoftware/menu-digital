@@ -1,59 +1,61 @@
 import Image from 'next/image';
 
+import { Product } from '@/types/product';
+
 import DeleteProductDialog from '../Dialogs/DeleteProductDialog';
 import EditProductDialog from '../Dialogs/EditProductDialog';
 import Prices from '../Prices';
 import styles from './styles.module.css';
 
 export interface EditableFoodCardProps {
-  title: string;
-  description: string;
-  foodImage: string;
-  price: number;
-  discountedPrice?: number;
-  discountPercentage?: number;
-  id: string;
+  product: Product;
   categoryId: string;
   removeProductFromList: (productId: string, categoryId: string) => void;
+  editProductFromList: (newProduct: Product, categoryId: string) => void;
 }
 
 export default function EditableFoodCard({
-  title,
-  description,
-  foodImage,
-  price,
-  discountedPrice,
-  discountPercentage,
-  id,
+  product,
   categoryId,
   removeProductFromList,
+  editProductFromList,
 }: EditableFoodCardProps) {
   return (
     <div>
       <article className={styles.editableFoodCard}>
         <div className={styles.editableFoodImageWrapper}>
-          <Image src={foodImage} alt={title} fill />
+          <Image
+            src={product?.productsImages[0]?.imageUrl}
+            alt={product.name}
+            fill
+          />
         </div>
         <div className={styles.editableFoodCardTextContent}>
           <div className={styles.editableFoodCardTextWrapper}>
-            <h3 className={styles.editableFoodCardTitle}>{title}</h3>
-            <p className={styles.editableFoodCardDescription}>{description}</p>
+            <h3 className={styles.editableFoodCardTitle}>{product.name}</h3>
+            <p className={styles.editableFoodCardDescription}>
+              {product.description}
+            </p>
           </div>
-          <Prices price={price} discountedPrice={discountedPrice} />
+          <Prices price={+product.price} discountedPrice={product.discount} />
         </div>
-        {discountPercentage ? (
+        {product.discount ? (
           <div className={styles.editableFoodCardDiscountTag}>
-            {discountPercentage}%
+            {product.discount}%
           </div>
         ) : null}
       </article>
       <div className={styles.editableFoodButtonsWrapper}>
         <DeleteProductDialog
-          productId={id}
+          productId={product.id}
           categoryId={categoryId}
           removeProductFromList={removeProductFromList}
         />
-        <EditProductDialog />
+        <EditProductDialog
+          product={product}
+          categoryId={categoryId}
+          editProductFromList={editProductFromList}
+        />
       </div>
     </div>
   );

@@ -34,14 +34,14 @@ export const productMock = {
   name: `Pão`,
   description: `Rasga tudo mas é bão`,
   price: `12`,
-  discount: null,
+  discount: 20,
   companyId: `user_2TAnaTdaUI6K5SKHTrwKmv5EsGF`,
   productCategoriesId: `810640e3-a1ec-414b-ad14-deb1dd3f2989`,
   createdAt: `2023-08-02T18:08:35.658Z`,
   updatedAt: `2023-08-02T18:08:35.658Z`,
   productsImages: productsImagesMock,
   productsComplements: productsComplementsMock,
-};
+} as Product;
 
 export const productsMocks = [
   productMock,
@@ -51,7 +51,7 @@ export const productsMocks = [
       name: `Guaraná Antartica`,
       description: `Rasga tudo mas é bão`,
       price: `12`,
-      discount: null,
+      discount: 20,
       companyId: `user_2TAnaTdaUI6K5SKHTrwKmv5EsGF`,
       productCategoriesId: `810640e3-a1ec-414b-ad14-deb1dd3f2989`,
       createdAt: `2023-08-02T18:08:58.591Z`,
@@ -87,7 +87,6 @@ export const productsMocks = [
       name: `Guaraná Jesus`,
       description: `Rasga tudo mas é bão`,
       price: `12`,
-      discount: null,
       companyId: `user_2TAnaTdaUI6K5SKHTrwKmv5EsGF`,
       productCategoriesId: `810640e3-a1ec-414b-ad14-deb1dd3f2989`,
       createdAt: `2023-08-02T18:09:05.888Z`,
@@ -123,7 +122,6 @@ export const productsMocks = [
       name: `Smash burguer`,
       description: `Rasga tudo mas é bão`,
       price: `12`,
-      discount: null,
       companyId: `user_2TAnaTdaUI6K5SKHTrwKmv5EsGF`,
       productCategoriesId: `810640e3-a1ec-414b-ad14-deb1dd3f2989`,
       createdAt: `2023-08-02T18:09:27.260Z`,

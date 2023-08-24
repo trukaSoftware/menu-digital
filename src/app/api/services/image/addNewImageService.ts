@@ -20,9 +20,11 @@ export const addNewImageService = async ({ id, images }: ImageData) => {
       (await uploadImages(images, products.name)) || null
     )?.map((image) => ({ ...image, productId: products.id }));
 
-    return prisma.productImages.createMany({
+    await prisma.productImages.createMany({
       data: imagesUrls,
     });
+
+    return imagesUrls;
   } catch (error) {
     if (
       error instanceof Prisma.PrismaClientKnownRequestError ||

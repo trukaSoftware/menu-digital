@@ -6,7 +6,10 @@ import { BsFillImageFill } from 'react-icons/bs';
 import { LiaMoneyBillWaveSolid } from 'react-icons/lia';
 import { MdOutlineFastfood } from 'react-icons/md';
 
-import { createProduct } from '@/utils/api/createProduct';
+import { Product } from '@/types/product';
+
+import { editProduct } from '@/utils/api/editProduct';
+import { updateProductImage } from '@/utils/api/updateProductImage';
 import { convertFileToBase64 } from '@/utils/convertFileToBase64';
 import { ImageProps } from '@/utils/types';
 import {
@@ -14,7 +17,6 @@ import {
   ProductData,
 } from '@/utils/validations/createProductFormValidation';
 
-import { useUser } from '@clerk/nextjs';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import ButtonSubmit from '../../ButtonSubmit';
@@ -23,13 +25,19 @@ import DefaultSelect from '../../DefaultSelect';
 import UploadImageInput from '../../UploadImageInput';
 import styles from './styles.module.css';
 
-export interface createProductForm {
+export interface EditProductFormProps {
   setShowDialog: (value: boolean) => void;
+  product: Product;
+  categoryId: string;
+  editProductFromList: (newProduct: Product, categoryId: string) => void;
 }
 
-export default function CreateProductForm({
+export default function EditProductForm({
   setShowDialog,
-}: createProductForm) {
+  product,
+  categoryId,
+  editProductFromList,
+}: EditProductFormProps) {
   const [requestError, setRequestError] = useState(false);
   const [isSubmiting, setIsSubmiting] = useState(false);
   const [registredWithSucess, setRegistredWithSucess] = useState(false);
@@ -38,7 +46,6 @@ export default function CreateProductForm({
     {} as unknown as ImageProps
   );
   const [productImageError, setProductImageError] = useState(``);
-  const { user } = useUser();
 
   const {
     handleSubmit,
@@ -48,6 +55,12 @@ export default function CreateProductForm({
   } = useForm<ProductData>({
     resolver: yupResolver(productSchema),
     mode: `onChange`,
+    defaultValues: {
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      categoryId,
+    },
   });
 
   const productName = useWatch({
@@ -58,31 +71,45 @@ export default function CreateProductForm({
   const onSubmit = async (values: ProductData) => {
     setIsSubmiting(true);
 
-    const createProductPayload = {
+    const editProductPayload = {
       ...values,
       price: Number(values.price),
-      companyId: `${user?.id}`,
-      images: [productImage],
     };
 
     try {
-      const createdProduct = await createProduct({
-        ...createProductPayload,
+      const editedProduct = await editProduct({
+        id: product.id,
+        ...editProductPayload,
       });
 
-      if (!createdProduct?.id) {
+      const updateImage = await updateProductImage(
+        product.id,
+        product.productsImages[0].id,
+        [productImage]
+      );
+
+      if (!editedProduct?.id || updateImage.error) {
         setIsSubmiting(false);
         return setRequestError(true);
       }
+
+      const updatedProduct = {
+        ...editedProduct,
+        productsImages: updateImage.productsImages,
+      };
+
+      editProductFromList(updatedProduct, categoryId);
     } catch (error) {
+      setIsSubmiting(false);
       setRequestError(true);
     } finally {
-      setShowDialog(false);
       setIsSubmiting(false);
     }
 
     setRegistredWithSucess(true);
-    setIsSubmiting(false);
+    setTimeout(() => {
+      setShowDialog(false);
+    }, 2000);
   };
 
   const handleImage = async (event: ChangeEvent<HTMLInputElement>) => {
@@ -171,8 +198,8 @@ export default function CreateProductForm({
           isSubmiting={isSubmiting}
           text={
             registredWithSucess
-              ? `Produto criado com sucesso ✔️`
-              : `Criar produto`
+              ? `Produto editado com sucesso ✔️`
+              : `Editar produto`
           }
           submitError={requestError}
           className={styles.createProductFormSubmitButton}

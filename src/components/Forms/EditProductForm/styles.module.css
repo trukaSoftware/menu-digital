@@ -1,0 +1,35 @@
+.createProductFormContainer {
+  @apply py-4 px-2 h-full;
+}
+
+.createProductForm {
+  @apply flex flex-col justify-between h-4/5 min-h-[92%] overflow-auto;
+}
+
+.createProductFormcontainerInputs {
+  @apply flex flex-col gap-y-2;
+}
+
+.createProductFormlabel {
+  @apply flex flex-col gap-2;
+}
+
+.createProductFormTitle {
+  @apply text-sm text-gray-900;
+}
+
+.createProductFormTextArea {
+  @apply border border-gray-300 p-2;
+}
+
+.createProductFormErrorMessage {
+  @apply text-sm text-red-500 font-medium;
+}
+
+.createProductFormSubmitButton {
+  @apply w-full h-11 min-h-[2.75rem] flex justify-center items-center bg-red-600 text-white rounded mt-6;
+}
+
+.hasImageOnInput {
+  @apply bg-green-500;
+}
