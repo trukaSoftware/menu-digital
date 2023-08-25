@@ -59,7 +59,11 @@ export default function DeleteCategoryDialog({
 
   return (
     <Root open={showDialog} onOpenChange={setShowDialog}>
-      <Trigger type="button" className={styles.deleteCategoryDialogTrigger}>
+      <Trigger
+        type="button"
+        className={styles.deleteCategoryDialogTrigger}
+        aria-label="Excluir categoria"
+      >
         <FaRegTrashAlt size={18} />
       </Trigger>
       <Portal>
