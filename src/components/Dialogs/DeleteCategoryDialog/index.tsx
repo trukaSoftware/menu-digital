@@ -33,7 +33,7 @@ export default function DeleteCategoryDialog({
 
   const deleteProudct = async () => {
     try {
-      setTimeout(() => setIsDeleting(true), 2000);
+      setIsDeleting(true);
 
       const deletedProduct = await axios.delete(
         `/api/categories/deleteCategory?id=${categoryId}`
@@ -43,7 +43,6 @@ export default function DeleteCategoryDialog({
         removeCategoryFromList(categoryId);
         setShowDialog(false);
       }
-      setIsDeleting(false);
     } catch {
       setIsDeleting(false);
       setDeleteError(`Falha ❌`);
@@ -64,13 +63,13 @@ export default function DeleteCategoryDialog({
             <span> irreversível</span>.
           </p>
           <div className={styles.deleteCategoryDialogButtons}>
-            <button
-              type="button"
+            <ButtonSubmit
+              isSubmiting={isDeleting}
               className={styles.deleteCategoryDialogDelBtn}
+              text={deleteError || `Sim`}
               onClick={deleteProudct}
-            >
-              {deleteError || `Sim`}
-            </button>
+              type="button"
+            />
             <Close
               type="button"
               className={styles.deleteCategoryDialogCancelBtn}
