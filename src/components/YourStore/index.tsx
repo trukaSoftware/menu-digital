@@ -14,7 +14,8 @@ export interface YourStoreProps {
 }
 
 export default function YourStore({ categories }: YourStoreProps) {
-  const [categoriesWithProducts, setProductsToLoad] = useState(categories);
+  const [categoriesWithProducts, setCategoriesWithProducts] =
+    useState(categories);
   const onlyCategoriesWithProducts = categoriesWithProducts.filter(
     (category) => category.categoryProducts.length > 0
   );
@@ -34,7 +35,35 @@ export default function YourStore({ categories }: YourStoreProps) {
         : category
     );
 
-    setProductsToLoad(newCategoriesList);
+    setCategoriesWithProducts(newCategoriesList);
+  };
+
+  const editProductFromList = (newProduct: Product, categoryId: string) => {
+    const indexOfTheCategory = categoriesWithProducts.findIndex(
+      (category) => category.id === categoryId
+    );
+
+    const newProductsList = categoriesWithProducts[
+      indexOfTheCategory
+    ].categoryProducts.map((product) =>
+      product.id === newProduct.id ? newProduct : product
+    );
+
+    const newCategoriesList = categoriesWithProducts.map((category) =>
+      category.id === categoryId
+        ? { ...category, categoryProducts: newProductsList }
+        : category
+    );
+
+    setCategoriesWithProducts(newCategoriesList);
+  };
+
+  const removeCategoryFromList = (categoryToDeleteId: string) => {
+    const newCategoryList = categoriesWithProducts.filter(
+      (category) => category.id !== categoryToDeleteId
+    );
+
+    setCategoriesWithProducts(newCategoryList);
   };
 
   const editProductFromList = (newProduct: Product, categoryId: string) => {
@@ -65,7 +94,11 @@ export default function YourStore({ categories }: YourStoreProps) {
               key={category.id}
               className={styles.yourStoreCategoryContainer}
             >
-              <EditableCategoryTitle categoryName={category.name} />
+              <EditableCategoryTitle
+                categoryName={category.name}
+                categoryId={category.id}
+                removeCategoryFromList={removeCategoryFromList}
+              />
               {category.categoryProducts.map((product) => (
                 <EditableFoodCard
                   product={product}
