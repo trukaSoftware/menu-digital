@@ -31,10 +31,15 @@ export default function DeleteCategoryDialog({
   const [deleteError, setDeleteError] = useState(``);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const deleteProudct = async () => {
-    try {
-      setIsDeleting(true);
+  const deletedFailed = () => {
+    setIsDeleting(false);
+    setDeleteError(`Falha ❌`);
+    setTimeout(() => setDeleteError(``), 3000);
+  };
 
+  const deleteProudct = async () => {
+    setIsDeleting(true);
+    try {
       const deletedProduct = await axios.delete(
         `/api/categories/deleteCategory?id=${categoryId}`
       );
@@ -42,11 +47,13 @@ export default function DeleteCategoryDialog({
       if (deletedProduct.data?.deleted) {
         removeCategoryFromList(categoryId);
         setShowDialog(false);
+
+        return;
       }
+
+      deletedFailed();
     } catch {
-      setIsDeleting(false);
-      setDeleteError(`Falha ❌`);
-      setTimeout(() => setDeleteError(``), 3000);
+      deletedFailed();
     }
   };
 
