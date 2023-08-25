@@ -27,7 +27,7 @@
 }
 
 .deleteProductDialogDelBtn {
-  @apply bg-gray-200 border border-gray-300 text-gray-600;
+  @apply bg-gray-200 border border-gray-300 text-gray-600 flex items-center justify-center;
 }
 
 .deleteProductDialogCancelBtn {

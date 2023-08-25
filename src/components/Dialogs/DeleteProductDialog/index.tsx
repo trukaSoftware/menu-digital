@@ -5,6 +5,8 @@ import { FaRegTrashAlt } from 'react-icons/fa';
 
 import axios from 'axios';
 
+import ButtonSubmit from '@/components/ButtonSubmit';
+
 import {
   Root,
   Trigger,
@@ -29,8 +31,17 @@ export default function DeleteProductDialog({
 }: DeleteProductDialogProps) {
   const [showDialog, setShowDialog] = useState(false);
   const [deleteError, setDeleteError] = useState(``);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const deleteFailed = () => {
+    setIsDeleting(false);
+    setDeleteError(`Falha ❌`);
+    setTimeout(() => setDeleteError(``), 3000);
+  };
 
   const deleteProudct = async () => {
+    setIsDeleting(true);
+
     try {
       const deletedProduct = await axios.delete(
         `/api/products/deleteProduct?id=${productId}`
@@ -39,9 +50,12 @@ export default function DeleteProductDialog({
       if (deletedProduct.data?.deleted) {
         removeProductFromList(productId, categoryId);
         setShowDialog(false);
+        return;
       }
+
+      deleteFailed();
     } catch {
-      setDeleteError(`Falha ao deletar o produto`);
+      deleteFailed();
     }
   };
 
@@ -59,13 +73,13 @@ export default function DeleteProductDialog({
             <span> irreversível</span>.
           </p>
           <div className={styles.deleteProductDialogButtons}>
-            <button
+            <ButtonSubmit
               type="button"
+              text={deleteError || `Sim`}
               className={styles.deleteProductDialogDelBtn}
               onClick={deleteProudct}
-            >
-              {deleteError || `Sim`}
-            </button>
+              isSubmiting={isDeleting}
+            />
             <Close
               type="button"
               className={styles.deleteProductDialogCancelBtn}
