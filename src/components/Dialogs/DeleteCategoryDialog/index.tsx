@@ -51,7 +51,7 @@ export default function DeleteCategoryDialog({
         return;
       }
 
-      deletedFailed();
+      throw new Error(`Fail when try to delete a category`);
     } catch {
       deletedFailed();
     }

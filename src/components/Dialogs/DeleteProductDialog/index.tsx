@@ -53,7 +53,7 @@ export default function DeleteProductDialog({
         return;
       }
 
-      deleteFailed();
+      throw new Error(`Fail when try to delete a product`);
     } catch {
       deleteFailed();
     }
