@@ -82,11 +82,11 @@ export default function EditProductForm({
         ...editProductPayload,
       });
 
-      const updateImage = await updateProductImage(
-        product.id,
-        product.productsImages[0].id,
-        [productImage]
-      );
+      const updateImage = productImage.file
+        ? await updateProductImage(product.id, product.productsImages[0].id, [
+            productImage,
+          ])
+        : { error: false, productsImages: product.productsImages };
 
       if (!editedProduct?.id || updateImage.error) {
         setIsSubmiting(false);
