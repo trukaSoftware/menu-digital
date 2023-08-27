@@ -9,8 +9,8 @@ datasource db {
 
 model Company {
   id                      String              @id @default(uuid())
-  name                    String              @db.VarChar(45)
-  slug                    String              @db.VarChar(45)
+  name                    String              @db.VarChar(255)
+  slug                    String              @db.VarChar(255)
   status                  CompanyStatus       @default(ACTIVE)
   info                    Info?
   requests                Requests?
@@ -23,8 +23,8 @@ model Company {
 
 model Branch {
   id        String        @id @default(uuid())
-  name      String        @db.VarChar(45)
-  slug      String        @db.VarChar(45)
+  name      String        @db.VarChar(255)
+  slug      String        @db.VarChar(255)
   status    CompanyStatus @default(ACTIVE)
   companyId String
   info      Info?
@@ -36,9 +36,9 @@ model Branch {
 
 model Info {
   id                  String   @id @default(uuid())
-  cnpj                String   @db.VarChar(18)
-  email               String   @db.VarChar(45)
-  phoneNumber         String   @db.VarChar(14)
+  cnpj                String   @db.VarChar(255)
+  email               String   @db.VarChar(255)
+  phoneNumber         String   @db.VarChar(255)
   deliveryPhoneNumber String?
   companyLogoUrl      String?
   companyThemeUrl     String?
@@ -54,7 +54,7 @@ model Info {
 model Address {
   id        String   @id @default(uuid())
   address   String   @db.VarChar(255)
-  zipCode   String   @db.VarChar(10)
+  zipCode   String   @db.VarChar(255)
   infoId    String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -104,7 +104,7 @@ model Items {
 
 model ProductCategories {
   id             String          @id @default(uuid())
-  name           String          @db.VarChar(45)
+  name           String          @db.VarChar(255)
   companyId      String?
   company        Company?        @relation(fields: [companyId], references: [id], onDelete: Cascade)
   product        Products[]
@@ -114,7 +114,7 @@ model ProductCategories {
 
 model Products {
   id                    String              @id @default(uuid())
-  name                  String              @db.VarChar(45)
+  name                  String              @db.VarChar(255)
   description           String
   price                 Decimal             @db.Money
   discount              Int?
