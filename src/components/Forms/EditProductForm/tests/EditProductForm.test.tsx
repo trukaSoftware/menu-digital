@@ -3,9 +3,12 @@ import { vi } from 'vitest';
 
 import { categories } from '@/mocks/categories';
 import { productMock } from '@/mocks/products';
+import { createImageMock } from '@/testsUtils/createImageMock';
 import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 
 import EditProductForm, { EditProductFormProps } from '..';
+
+import userEvent from '@testing-library/user-event';
 
 vi.mock(`axios`);
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -75,6 +78,12 @@ describe(`EditProductForm`, () => {
       name: `Editar produto`,
     });
 
+    const productImageInput = screen.getByTestId(`productImageInput`);
+
+    const logoImageFile = createImageMock();
+
+    await userEvent.upload(productImageInput, logoImageFile);
+
     const productNameInput = screen.getByPlaceholderText(`Hamburguer`);
 
     fireEvent.change(productNameInput, ``);
@@ -104,6 +113,12 @@ describe(`EditProductForm`, () => {
     const submitButton = screen.getByRole(`button`, {
       name: `Editar produto`,
     });
+
+    const productImageInput = screen.getByTestId(`productImageInput`);
+
+    const logoImageFile = createImageMock();
+
+    await userEvent.upload(productImageInput, logoImageFile);
 
     const productNameInput = screen.getByPlaceholderText(`Hamburguer`);
 
