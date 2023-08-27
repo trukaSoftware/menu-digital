@@ -55,19 +55,25 @@ export default function ProductsWithSearchInput({
         onChange={(e) => setSearchInputValue(e.target.value)}
         value={searchInputValue}
       />
-      {products.length > 0 ? (
-        products.map((product) => (
-          <EditableFoodCard
-            product={product}
-            removeProductFromList={removeProductFromList}
-            editProductFromList={editProductFromList}
-            key={product.id}
-            categoryId={product.productCategoriesId}
-          />
-        ))
-      ) : (
-        <p>Não existem produtos cadastrados</p>
-      )}
+      <div className={styles.productsWithSearchInputContainerProducts}>
+        {products.length > 0 ? (
+          products
+            .filter((product) => product.name.includes(searchInputValue))
+            .map((product) => (
+              <EditableFoodCard
+                product={product}
+                removeProductFromList={removeProductFromList}
+                editProductFromList={editProductFromList}
+                key={product.id}
+                categoryId={product.productCategoriesId}
+              />
+            ))
+        ) : (
+          <p className={styles.productsWithSearchInputEmptyText}>
+            Não existem produtos cadastrados
+          </p>
+        )}
+      </div>
     </div>
   );
 }
