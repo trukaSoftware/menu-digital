@@ -11,7 +11,6 @@ export type ManagementScreenHeaderProps = {
   companyLogoUrl: string;
   companyName: string;
   title?: string;
-  hasBackButton?: boolean;
   backPage?: string;
 };
 
@@ -19,7 +18,6 @@ export default function ManagementScreenHeader({
   companyLogoUrl,
   companyName,
   title,
-  hasBackButton = false,
   backPage,
 }: ManagementScreenHeaderProps) {
   return (
@@ -41,7 +39,7 @@ export default function ManagementScreenHeader({
         <h1 className={styles.managementScreenHeaderTitle}>{companyName}</h1>
       )}
 
-      {hasBackButton ? (
+      {backPage ? (
         <Link
           role="link"
           title="Voltar para página anterior"
