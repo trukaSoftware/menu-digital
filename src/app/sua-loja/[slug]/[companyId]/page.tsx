@@ -21,7 +21,7 @@ export default async function Page({ params }: RouterParams) {
       <ManagementScreenHeader
         companyLogoUrl={info.companyLogoUrl}
         companyName={name}
-        hasBackButton
+        backPage="/"
         title="Sua loja"
       />
       <main className={styles.yourStoreContent}>
