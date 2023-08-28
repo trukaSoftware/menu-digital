@@ -28,8 +28,7 @@ export default function ProductsWithSearchInput({
     };
 
     getProductsData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [companyId]);
 
   const removeProductFromList = (productId: string) => {
     const newProductsList = products.filter(
