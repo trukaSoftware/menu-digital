@@ -18,22 +18,20 @@ import {
 
 import styles from './styles.module.css';
 
-export interface DeleteProductDialogProps {
-  productId: string;
+export interface DeleteCategoryDialogProps {
   categoryId: string;
-  removeProductFromList: (productId: string, categoryId: string) => void;
+  removeCategoryFromList: (categoryId: string) => void;
 }
 
-export default function DeleteProductDialog({
-  productId,
+export default function DeleteCategoryDialog({
   categoryId,
-  removeProductFromList,
-}: DeleteProductDialogProps) {
+  removeCategoryFromList,
+}: DeleteCategoryDialogProps) {
   const [showDialog, setShowDialog] = useState(false);
   const [deleteError, setDeleteError] = useState(``);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const deleteFailed = () => {
+  const deletedFailed = () => {
     setIsDeleting(false);
     setDeleteError(`Falha ❌`);
     setTimeout(() => setDeleteError(``), 3000);
@@ -41,48 +39,51 @@ export default function DeleteProductDialog({
 
   const deleteProudct = async () => {
     setIsDeleting(true);
-
     try {
       const deletedProduct = await axios.delete(
-        `/api/products/deleteProduct?id=${productId}`
+        `/api/categories/deleteCategory?id=${categoryId}`
       );
 
       if (deletedProduct.data?.deleted) {
-        removeProductFromList(productId, categoryId);
+        removeCategoryFromList(categoryId);
         setShowDialog(false);
+
         return;
       }
 
-      throw new Error(`Fail when try to delete a product`);
+      throw new Error(`Fail when try to delete a category`);
     } catch {
-      deleteFailed();
+      deletedFailed();
     }
   };
 
   return (
     <Root open={showDialog} onOpenChange={setShowDialog}>
-      <Trigger type="button" className={styles.deleteProductDialogTrigger}>
-        <span>Excluir</span>
+      <Trigger
+        type="button"
+        className={styles.deleteCategoryDialogTrigger}
+        aria-label="Excluir categoria"
+      >
         <FaRegTrashAlt size={18} />
       </Trigger>
       <Portal>
-        <Overlay className={styles.deleteProductDialogOverlay} />
-        <Content className={styles.deleteProductDialogContent}>
-          <p className={styles.deleteProductDialogText}>
-            Deseja realmente excluir este produto? Essa ação é
+        <Overlay className={styles.deleteCategoryDialogOverlay} />
+        <Content className={styles.deleteCategoryDialogContent}>
+          <p className={styles.deleteCategoryDialogText}>
+            Deseja realmente excluir esta categoria? Essa ação é
             <span> irreversível</span>.
           </p>
-          <div className={styles.deleteProductDialogButtons}>
+          <div className={styles.deleteCategoryDialogButtons}>
             <ButtonSubmit
-              type="button"
-              text={deleteError || `Sim`}
-              className={styles.deleteProductDialogDelBtn}
-              onClick={deleteProudct}
               isSubmiting={isDeleting}
+              className={styles.deleteCategoryDialogDelBtn}
+              text={deleteError || `Sim`}
+              onClick={deleteProudct}
+              type="button"
             />
             <Close
               type="button"
-              className={styles.deleteProductDialogCancelBtn}
+              className={styles.deleteCategoryDialogCancelBtn}
             >
               Não
             </Close>

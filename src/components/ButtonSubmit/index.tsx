@@ -3,7 +3,7 @@ import Spinner from '../Spinner';
 export interface ButtonSubmitProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isSubmiting: boolean;
-  submitError: boolean;
+  submitError?: boolean;
   text: string;
 }
 

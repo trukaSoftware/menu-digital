@@ -1,35 +1,39 @@
-.deleteProductDialogTrigger {
+.deleteCategoryDialogTrigger {
   @apply text-sm text-red-600 font-medium lg:text-sm flex gap-x-1 items-center;
 }
 
-.deleteProductDialogOverlay {
+.deleteCategoryDialogOverlay {
   @apply fixed inset-0 bg-black/50;
 }
 
-.deleteProductDialogContent {
+.deleteCategoryDialogContent {
   @apply w-72 h-48 bg-white fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 rounded flex flex-col justify-between items-center;
 }
 
-.deleteProductDialogText {
+.deleteCategoryDialogText {
   @apply text-center text-base text-gray-900 font-semibold;
 }
 
-.deleteProductDialogText span {
+.deleteCategoryDialogText span {
   @apply text-red-600;
 }
 
-.deleteProductDialogButtons {
+.deleteCategoryDialogButtons {
   @apply h-10 w-full flex gap-x-2;
 }
 
-.deleteProductDialogButtons button {
+.deleteCategoryDialogButtons button {
   @apply h-full w-1/2 rounded font-semibold;
 }
 
-.deleteProductDialogDelBtn {
+.deleteCategoryDialogDelBtn {
   @apply bg-gray-200 border border-gray-300 text-gray-600 flex items-center justify-center;
 }
 
-.deleteProductDialogCancelBtn {
+.deleteCategoryDialogDelBtn svg {
+  @apply text-red-600;
+}
+
+.deleteCategoryDialogCancelBtn {
   @apply bg-red-600 text-white;
 }
