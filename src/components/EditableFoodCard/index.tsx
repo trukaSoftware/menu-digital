@@ -21,7 +21,7 @@ export default function EditableFoodCard({
   editProductFromList,
 }: EditableFoodCardProps) {
   return (
-    <div>
+    <div data-testid="products">
       <article className={styles.editableFoodCard}>
         <div className={styles.editableFoodImageWrapper}>
           <Image
