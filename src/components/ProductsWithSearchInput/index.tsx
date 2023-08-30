@@ -51,13 +51,15 @@ export default function ProductsWithSearchInput({
       <SearchInput
         id="search-product"
         placeholder="Pesquisar produto por nome..."
-        onChange={(e) => setSearchInputValue(e.target.value)}
+        onChange={(e) => setSearchInputValue(e.target.value.toLowerCase())}
         value={searchInputValue}
       />
       <div className={styles.productsWithSearchInputContainerProducts}>
         {products.length > 0 ? (
           products
-            .filter((product) => product.name.includes(searchInputValue))
+            .filter((product) =>
+              product.name.toLowerCase().includes(searchInputValue)
+            )
             .map((product) => (
               <EditableFoodCard
                 product={product}
