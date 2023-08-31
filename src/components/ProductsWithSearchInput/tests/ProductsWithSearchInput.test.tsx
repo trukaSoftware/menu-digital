@@ -29,7 +29,7 @@ describe(`Prices`, () => {
     expect(await screen.findByText(`Guaraná Antartica`)).toBeInTheDocument();
   });
 
-  it(`When ProductsWithSearchInput is called and not have products on products array, the text "Não existem produtos cadastrados" should be rendered`, async () => {
+  it(`When ProductsWithSearchInput is called and there is no products on products array, the text "Não existem produtos cadastrados" should be rendered`, async () => {
     vi.mocked(getProducts).mockImplementation(async () => ({
       products: [],
     }));
