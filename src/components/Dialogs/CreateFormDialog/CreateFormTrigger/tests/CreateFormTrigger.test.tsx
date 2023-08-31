@@ -40,7 +40,7 @@ describe(`CreateFormTrigger`, () => {
     expect(await screen.findByText(`Criação de produto`)).toBeInTheDocument();
   });
 
-  it(`When CreateFormTrigger is called with formType prop equal to product-form, should be rendered the CreateProductPortal component`, async () => {
+  it(`When CreateFormTrigger is called with formType prop equal to category-form, should be rendered the CreateCategoryPortal component`, async () => {
     vi.mocked(CreateCategoryPortal).mockImplementation(() => (
       <p>Criação de categoria</p>
     ));
