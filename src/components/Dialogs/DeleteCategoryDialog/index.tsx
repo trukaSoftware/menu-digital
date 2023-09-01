@@ -2,11 +2,13 @@
 
 import { useState } from 'react';
 import { FaRegTrashAlt } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
 
 import axios from 'axios';
 
 import ButtonSubmit from '@/components/ButtonSubmit';
 
+import { deleteCategory } from '@/redux/features/categories-slice';
 import {
   Root,
   Trigger,
@@ -20,13 +22,13 @@ import styles from './styles.module.css';
 
 export interface DeleteCategoryDialogProps {
   categoryId: string;
-  removeCategoryFromList: (categoryId: string) => void;
 }
 
 export default function DeleteCategoryDialog({
   categoryId,
-  removeCategoryFromList,
 }: DeleteCategoryDialogProps) {
+  const dispatch = useDispatch();
+
   const [showDialog, setShowDialog] = useState(false);
   const [deleteError, setDeleteError] = useState(``);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -37,7 +39,7 @@ export default function DeleteCategoryDialog({
     setTimeout(() => setDeleteError(``), 3000);
   };
 
-  const deleteProudct = async () => {
+  const deleteCategoryOnClick = async () => {
     setIsDeleting(true);
     try {
       const deletedProduct = await axios.delete(
@@ -45,7 +47,7 @@ export default function DeleteCategoryDialog({
       );
 
       if (deletedProduct.data?.deleted) {
-        removeCategoryFromList(categoryId);
+        dispatch(deleteCategory({ categoryId }));
         setShowDialog(false);
 
         return;
@@ -78,7 +80,7 @@ export default function DeleteCategoryDialog({
               isSubmiting={isDeleting}
               className={styles.deleteCategoryDialogDelBtn}
               text={deleteError || `Sim`}
-              onClick={deleteProudct}
+              onClick={deleteCategoryOnClick}
               type="button"
             />
             <Close

@@ -17,6 +17,10 @@ interface EditProductPayload {
   oldCategoryId: string;
 }
 
+interface DeleteCategoryPayload {
+  categoryId: string;
+}
+
 const initialState = {
   categories: [],
 } as CategoryState;
@@ -27,6 +31,13 @@ const categoriesSlice = createSlice({
   reducers: {
     setCategories: (state, action: PayloadAction<GetCategoryReturn[]>) => {
       state.categories = action.payload;
+    },
+    deleteCategory: (state, action: PayloadAction<DeleteCategoryPayload>) => {
+      const newCategoryList = state.categories.filter(
+        (category) => category.id !== action.payload.categoryId
+      );
+
+      state.categories = newCategoryList;
     },
     removeProductFromCategories: (
       state,
@@ -120,6 +131,7 @@ const categoriesSlice = createSlice({
 
 export const {
   setCategories,
+  deleteCategory,
   removeProductFromCategories,
   editProductFromCategories,
 } = categoriesSlice.actions;
