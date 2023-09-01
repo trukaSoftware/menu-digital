@@ -21,14 +21,14 @@ describe(`ManagementScreenHeader`, () => {
   const mockProps = {
     companyLogoUrl: `/`,
     companyName: `Bar do Marcão`,
-    hasBackButton: true,
+    backPage: `/`,
   } as ManagementScreenHeaderProps;
 
   it(`if the prop title is passed, an heading level 1 with the text of title prop must be rendered`, () => {
     const modifiedMockProps = {
       companyLogoUrl: `/`,
       title: `Sua Loja`,
-      hasBackButton: true,
+      backPage: `/`,
     } as ManagementScreenHeaderProps;
 
     render(<ManagementScreenHeader {...modifiedMockProps} />);

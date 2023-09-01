@@ -82,11 +82,11 @@ export default function EditProductForm({
         ...editProductPayload,
       });
 
-      const updateImage = await updateProductImage(
-        product.id,
-        product.productsImages[0].id,
-        [productImage]
-      );
+      const updateImage = productImage.file
+        ? await updateProductImage(product.id, product.productsImages[0].id, [
+            productImage,
+          ])
+        : { error: false, productsImages: product.productsImages };
 
       if (!editedProduct?.id || updateImage.error) {
         setIsSubmiting(false);
@@ -176,6 +176,7 @@ export default function EditProductForm({
             error={errors.price?.message}
           />
           <UploadImageInput
+            data-testId="productImageInput"
             iconImage={<BsFillImageFill color="#6B7280" />}
             handleFileChange={handleImage}
             title="Imagem"

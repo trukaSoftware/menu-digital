@@ -1,0 +1,7 @@
+.createFormTriggerWrapper {
+  @apply flex justify-between items-center w-full py-2 px-4;
+}
+
+.createFormTrigger {
+  @apply flex items-center text-green-700 text-base gap-1;
+}
