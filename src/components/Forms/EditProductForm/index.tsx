@@ -5,6 +5,7 @@ import { Controller, useForm, useWatch } from 'react-hook-form';
 import { BsFillImageFill } from 'react-icons/bs';
 import { LiaMoneyBillWaveSolid } from 'react-icons/lia';
 import { MdOutlineFastfood } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
 
 import { Product } from '@/types/product';
 
@@ -17,6 +18,7 @@ import {
   ProductData,
 } from '@/utils/validations/createProductFormValidation';
 
+import { editProductFromCategories } from '@/redux/features/categories-slice';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import ButtonSubmit from '../../ButtonSubmit';
@@ -29,15 +31,15 @@ export interface EditProductFormProps {
   setShowDialog: (value: boolean) => void;
   product: Product;
   categoryId: string;
-  editProductFromList: (newProduct: Product, categoryId: string) => void;
 }
 
 export default function EditProductForm({
   setShowDialog,
   product,
   categoryId,
-  editProductFromList,
 }: EditProductFormProps) {
+  const dispatch = useDispatch();
+
   const [requestError, setRequestError] = useState(false);
   const [isSubmiting, setIsSubmiting] = useState(false);
   const [registredWithSucess, setRegistredWithSucess] = useState(false);
@@ -93,12 +95,14 @@ export default function EditProductForm({
         return setRequestError(true);
       }
 
-      const updatedProduct = {
+      const newProduct = {
         ...editedProduct,
         productsImages: updateImage.productsImages,
       };
 
-      editProductFromList(updatedProduct, categoryId);
+      dispatch(
+        editProductFromCategories({ newProduct, oldCategoryId: categoryId })
+      );
     } catch (error) {
       setIsSubmiting(false);
       setRequestError(true);

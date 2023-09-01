@@ -2,11 +2,13 @@
 
 import { useState } from 'react';
 import { FaRegTrashAlt } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
 
 import axios from 'axios';
 
 import ButtonSubmit from '@/components/ButtonSubmit';
 
+import { removeProductFromCategories } from '@/redux/features/categories-slice';
 import {
   Root,
   Trigger,
@@ -21,17 +23,16 @@ import styles from './styles.module.css';
 export interface DeleteProductDialogProps {
   productId: string;
   categoryId: string;
-  removeProductFromList: (productId: string, categoryId: string) => void;
 }
 
 export default function DeleteProductDialog({
   productId,
   categoryId,
-  removeProductFromList,
 }: DeleteProductDialogProps) {
   const [showDialog, setShowDialog] = useState(false);
   const [deleteError, setDeleteError] = useState(``);
   const [isDeleting, setIsDeleting] = useState(false);
+  const dispatch = useDispatch();
 
   const deleteFailed = () => {
     setIsDeleting(false);
@@ -48,7 +49,7 @@ export default function DeleteProductDialog({
       );
 
       if (deletedProduct.data?.deleted) {
-        removeProductFromList(productId, categoryId);
+        dispatch(removeProductFromCategories({ productId, categoryId }));
         setShowDialog(false);
         return;
       }
