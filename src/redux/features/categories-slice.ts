@@ -59,11 +59,11 @@ const categoriesSlice = createSlice({
           category.id === action.payload.newProduct.productCategoriesId
       );
 
-      const categorieDidNotChanged =
+      const categoryDidNotChanged =
         action.payload.oldCategoryId ===
         action.payload.newProduct.productCategoriesId;
 
-      if (categorieDidNotChanged) {
+      if (categoryDidNotChanged) {
         const newProductsList = state.categories[
           indexOfTheNewCategory
         ].categoryProducts.map((product) =>
