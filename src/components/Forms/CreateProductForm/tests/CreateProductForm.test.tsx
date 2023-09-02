@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { vi } from 'vitest';
 
-import { categories } from '@/mocks/categories';
+import { categoriesMock } from '@/mocks/categories';
 import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 
 import CreateProductForm from '..';
@@ -17,7 +17,7 @@ vi.mock(`@clerk/nextjs`, () => ({
 describe(`CreateProductForm`, () => {
   beforeEach(() => {
     mockedAxios.get.mockResolvedValueOnce({
-      data: { categories, gettingCategories: false },
+      data: { categories: categoriesMock, gettingCategories: false },
     });
   });
 

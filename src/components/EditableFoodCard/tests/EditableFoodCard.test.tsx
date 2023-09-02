@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { vi } from 'vitest';
 
-import { categories } from '@/mocks/categories';
+import { categoriesMock } from '@/mocks/categories';
 import { productMock } from '@/mocks/products';
 import { renderWithRedux } from '@/testsUtils/providers';
 import { screen, cleanup } from '@testing-library/react';
@@ -35,7 +35,7 @@ vi.mock(`@clerk/nextjs`, () => ({
 describe(`EditableFoodCard`, () => {
   beforeEach(() => {
     mockedAxios.get.mockResolvedValueOnce({
-      data: { categories, gettingCategories: false },
+      data: { categories: categoriesMock, gettingCategories: false },
     });
   });
 

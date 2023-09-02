@@ -63,8 +63,6 @@ export default function ProductsWithSearchInput({
             .map((product) => (
               <EditableFoodCard
                 product={product}
-                removeProductFromList={removeProductFromList}
-                editProductFromList={editProductFromList}
                 key={product.id}
                 categoryId={product.productCategoriesId}
               />
