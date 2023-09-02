@@ -1,6 +1,7 @@
 import { vi } from 'vitest';
 
-import { render, screen, cleanup } from '@testing-library/react';
+import { renderWithRedux } from '@/testsUtils/providers';
+import { screen, cleanup } from '@testing-library/react';
 
 import EditableCategoryTitle, { EditableCategoryTitleProps } from '..';
 
@@ -23,7 +24,7 @@ describe(`EditableCategoryTitle`, () => {
   });
 
   it(`Should render delete category dialog when clicking in delete category trigger button`, async () => {
-    render(<EditableCategoryTitle {...mockProps} />);
+    renderWithRedux(<EditableCategoryTitle {...mockProps} />);
 
     expect(screen.queryByRole(`dialog`)).not.toBeInTheDocument();
 

@@ -3,7 +3,8 @@ import { vi } from 'vitest';
 
 import { categories } from '@/mocks/categories';
 import { productMock } from '@/mocks/products';
-import { render, screen, cleanup } from '@testing-library/react';
+import { renderWithRedux } from '@/testsUtils/providers';
+import { screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import EditableFoodCard, { EditableFoodCardProps } from '..';
@@ -48,7 +49,7 @@ describe(`EditableFoodCard`, () => {
   });
 
   it(`check if h3 is beeing rendered`, () => {
-    render(<EditableFoodCard {...mockProps} />);
+    renderWithRedux(<EditableFoodCard {...mockProps} />);
 
     const heading = screen.getByRole(`heading`, {
       name: `Pão`,
@@ -59,7 +60,7 @@ describe(`EditableFoodCard`, () => {
   });
 
   it(`when prop discountedPrice is not passed, shouldn't render discounted price`, () => {
-    render(<EditableFoodCard {...mockPropsWithoutDiscount} />);
+    renderWithRedux(<EditableFoodCard {...mockPropsWithoutDiscount} />);
 
     const discountedPrice = screen.queryByText(`R$ 8,00`);
 
@@ -67,7 +68,7 @@ describe(`EditableFoodCard`, () => {
   });
 
   it(`when prop discountedPrice is passed, should render discounted price`, () => {
-    render(<EditableFoodCard {...mockProps} />);
+    renderWithRedux(<EditableFoodCard {...mockProps} />);
 
     const discountedPrice = screen.getByText(`R$ 12,00`);
 
@@ -75,7 +76,7 @@ describe(`EditableFoodCard`, () => {
   });
 
   it(`when prop discountedPrice is not passed, original price shouldn't have style foodCardPriceScratched`, () => {
-    render(<EditableFoodCard {...mockPropsWithoutDiscount} />);
+    renderWithRedux(<EditableFoodCard {...mockPropsWithoutDiscount} />);
 
     const originalPrice = screen.queryByText(`R$ 12,00`);
 
@@ -84,7 +85,7 @@ describe(`EditableFoodCard`, () => {
   });
 
   it(`when prop discountedPrice is passed, original price should have style foodCardPriceScratched`, () => {
-    render(<EditableFoodCard {...mockProps} />);
+    renderWithRedux(<EditableFoodCard {...mockProps} />);
 
     const originalPrice = screen.getByText(`R$ 12,00`);
 
@@ -93,7 +94,7 @@ describe(`EditableFoodCard`, () => {
   });
 
   it(`when prop discountPercentage is not passed, shouldn't render discount percentage`, () => {
-    render(<EditableFoodCard {...mockPropsWithoutDiscount} />);
+    renderWithRedux(<EditableFoodCard {...mockPropsWithoutDiscount} />);
 
     const discountPercentage = screen.queryByText(`20%`);
 
@@ -101,7 +102,7 @@ describe(`EditableFoodCard`, () => {
   });
 
   it(`when prop discountPercentage is passed, should render discount percentage`, () => {
-    render(<EditableFoodCard {...mockProps} />);
+    renderWithRedux(<EditableFoodCard {...mockProps} />);
 
     const discountPercentage = screen.getByText(`20%`);
 
@@ -109,7 +110,7 @@ describe(`EditableFoodCard`, () => {
   });
 
   it(`should load buttons with text "Editar" and "Excluir"`, () => {
-    render(<EditableFoodCard {...mockProps} />);
+    renderWithRedux(<EditableFoodCard {...mockProps} />);
 
     const editBtn = screen.getByRole(`button`, { name: `Editar` });
     const delBtn = screen.getByRole(`button`, { name: `Excluir` });
@@ -119,7 +120,7 @@ describe(`EditableFoodCard`, () => {
   });
 
   it(`should open delete modal when clicking on the modal button`, async () => {
-    render(<EditableFoodCard {...mockProps} />);
+    renderWithRedux(<EditableFoodCard {...mockProps} />);
 
     const delBtn = screen.getByRole(`button`, { name: `Excluir` });
 
@@ -133,7 +134,7 @@ describe(`EditableFoodCard`, () => {
   });
 
   it(`should open edit modal when clicking on the modal button`, async () => {
-    render(<EditableFoodCard {...mockProps} />);
+    renderWithRedux(<EditableFoodCard {...mockProps} />);
 
     const editBtn = screen.getByRole(`button`, { name: `Editar` });
 

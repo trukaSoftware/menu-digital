@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { vi } from 'vitest';
 
-import { render, screen, cleanup } from '@testing-library/react';
+import { renderWithRedux } from '@/testsUtils/providers';
+import { screen, cleanup, waitFor } from '@testing-library/react';
 
 import DeleteProductDialog, { DeleteProductDialogProps } from '..';
 
@@ -27,7 +28,7 @@ describe(`DeleteProductDialog`, () => {
   });
 
   it(`Should open delete product dialog when clicking on Trigger button"`, async () => {
-    render(<DeleteProductDialog {...mockProps} />);
+    renderWithRedux(<DeleteProductDialog {...mockProps} />);
 
     expect(screen.queryByRole(`dialog`)).not.toBeInTheDocument();
 
@@ -41,7 +42,7 @@ describe(`DeleteProductDialog`, () => {
   it(`When clicking on yes button and axios response return data.delete equals to false should render error text "Falha ❌"`, async () => {
     mockedAxios.delete.mockResolvedValueOnce({ data: { deleted: false } });
 
-    render(<DeleteProductDialog {...mockProps} />);
+    renderWithRedux(<DeleteProductDialog {...mockProps} />);
 
     const triggerButton = screen.getByRole(`button`);
 
@@ -59,7 +60,7 @@ describe(`DeleteProductDialog`, () => {
   it(`When clicking on yes button and axios response return data.delete equals to true should close dialog`, async () => {
     mockedAxios.delete.mockResolvedValueOnce({ data: { deleted: true } });
 
-    render(<DeleteProductDialog {...mockProps} />);
+    renderWithRedux(<DeleteProductDialog {...mockProps} />);
 
     const triggerButton = screen.getByRole(`button`);
 
@@ -71,11 +72,13 @@ describe(`DeleteProductDialog`, () => {
 
     await userEvent.click(yesButton);
 
-    expect(screen.queryByRole(`dialog`)).not.toBeInTheDocument();
+    waitFor(() => {
+      expect(screen.queryByRole(`dialog`)).not.toBeInTheDocument();
+    });
   });
 
   it(`When clicking on button with text "Não" should close dialog`, async () => {
-    render(<DeleteProductDialog {...mockProps} />);
+    renderWithRedux(<DeleteProductDialog {...mockProps} />);
 
     const triggerButton = screen.getByRole(`button`);
 

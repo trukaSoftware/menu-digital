@@ -1,10 +1,11 @@
 import { vi } from 'vitest';
 
-import { productsMocks } from '@/mocks/products';
-import { render, screen, cleanup } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-
 import { getProducts } from '@/utils/api/getProducts';
+
+import { productsMocks } from '@/mocks/products';
+import { renderWithRedux } from '@/testsUtils/providers';
+import { screen, cleanup } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import ProductsWithSearchInput from '..';
 
@@ -24,7 +25,7 @@ describe(`Prices`, () => {
   });
 
   it(`When ProductsWithSearchInput is called and has products on products array, the products should be rendered`, async () => {
-    render(<ProductsWithSearchInput companyId="mockId" />);
+    renderWithRedux(<ProductsWithSearchInput companyId="mockId" />);
 
     expect(await screen.findByText(`Guaraná Antartica`)).toBeInTheDocument();
   });
@@ -34,7 +35,7 @@ describe(`Prices`, () => {
       products: [],
     }));
 
-    render(<ProductsWithSearchInput companyId="mockId" />);
+    renderWithRedux(<ProductsWithSearchInput companyId="mockId" />);
 
     expect(
       await screen.findByText(`Não existem produtos cadastrados`)
@@ -48,7 +49,7 @@ describe(`Prices`, () => {
       products: productsMocks,
     }));
 
-    render(<ProductsWithSearchInput companyId="mockId" />);
+    renderWithRedux(<ProductsWithSearchInput companyId="mockId" />);
 
     const products = await screen.findAllByTestId(`products`);
 
