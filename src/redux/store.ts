@@ -1,16 +1,27 @@
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 
-import { configureStore } from '@reduxjs/toolkit';
+import {
+  PreloadedState,
+  combineReducers,
+  configureStore,
+} from '@reduxjs/toolkit';
 
 import categoriesReducer from './features/categories-slice';
 
-export const store = configureStore({
-  reducer: {
-    categoriesReducer,
-  },
+export const rootReducer = combineReducers({
+  categoriesReducer,
 });
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export const setupStore = (preloadedState?: PreloadedState<RootState>) =>
+  configureStore({
+    reducer: rootReducer,
+    preloadedState,
+  });
+
+export const store = setupStore();
+
+export type AppStore = ReturnType<typeof setupStore>;
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppDispatch = AppStore['dispatch'];
 
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
