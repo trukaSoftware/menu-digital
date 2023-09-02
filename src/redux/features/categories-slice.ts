@@ -135,4 +135,5 @@ export const {
   removeProductFromCategories,
   editProductFromCategories,
 } = categoriesSlice.actions;
+
 export default categoriesSlice.reducer;
