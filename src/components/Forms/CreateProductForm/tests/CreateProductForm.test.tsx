@@ -145,7 +145,7 @@ describe(`CreateProductForm`, () => {
 
     fireEvent.click(productSelectInput);
 
-    const option = await screen.findByText(/Caldinho/i);
+    const option = await screen.findByText(/Reuniao/i);
 
     expect(option).toBeInTheDocument();
 
