@@ -7,9 +7,11 @@ import {
 } from '@reduxjs/toolkit';
 
 import categoriesReducer from './features/categories-slice';
+import productsReducer from './features/products-slice';
 
 export const rootReducer = combineReducers({
   categoriesReducer,
+  productsReducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) =>
