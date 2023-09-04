@@ -21,7 +21,5 @@ export default function CategoriesPreLoader({
     isMounted.current = true;
   }
 
-  store.dispatch(setCategories(categories));
-
   return null;
 }
