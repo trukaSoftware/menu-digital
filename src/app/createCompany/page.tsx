@@ -162,7 +162,7 @@ export default function CreateCompany() {
                   selectedLogo !== `` ? styles.labelInputChecked : ``
                 }
                 id="logo"
-                data-testId="logoInput"
+                testId="logoInput"
                 title={selectedLogoName ? `Logo:` : `Logo`}
                 handleFileChange={(event) =>
                   handleFileChange(event, setSelectedLogoName, setSelectedLogo)
@@ -176,7 +176,7 @@ export default function CreateCompany() {
                   selectedCoverCape !== `` ? styles.labelInputChecked : ``
                 }
                 id="coverCape"
-                data-testId="coverCapeInput"
+                testId="coverCapeInput"
                 title={selectedCoverCapeName ? `Capa:` : `Capa`}
                 handleFileChange={(event) =>
                   handleFileChange(
