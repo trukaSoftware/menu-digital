@@ -19,6 +19,7 @@ import {
 } from '@/utils/validations/createProductFormValidation';
 
 import { editProductFromCategories } from '@/redux/features/categories-slice';
+import { editProductFromList } from '@/redux/features/products-slice';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import ButtonSubmit from '../../ButtonSubmit';
@@ -95,14 +96,18 @@ export default function EditProductForm({
         return setRequestError(true);
       }
 
-      const newProduct = {
+      const newProduct: Product = {
         ...editedProduct,
         productsImages: updateImage.productsImages,
       };
 
-      dispatch(
-        editProductFromCategories({ newProduct, oldCategoryId: categoryId })
-      );
+      if (window.location.href.includes(`manageProducts`)) {
+        dispatch(editProductFromList({ newProduct }));
+      } else {
+        dispatch(
+          editProductFromCategories({ newProduct, oldCategoryId: categoryId })
+        );
+      }
     } catch (error) {
       setIsSubmiting(false);
       setRequestError(true);
