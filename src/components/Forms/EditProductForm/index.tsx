@@ -177,7 +177,7 @@ export default function EditProductForm({
             error={errors.price?.message}
           />
           <UploadImageInput
-            testId="productImageInput"
+            data-testid="productImageInput"
             iconImage={<BsFillImageFill color="#6B7280" />}
             handleFileChange={handleImage}
             title="Imagem"
