@@ -170,13 +170,14 @@ export default function EditProductForm({
             Icon={<LiaMoneyBillWaveSolid />}
             name="price"
             type="number"
-            placeholder="25,00"
+            step="0.01"
+            placeholder="25.00"
             labelText="Preço*"
             register={register(`price`)}
             error={errors.price?.message}
           />
           <UploadImageInput
-            data-testId="productImageInput"
+            testId="productImageInput"
             iconImage={<BsFillImageFill color="#6B7280" />}
             handleFileChange={handleImage}
             title="Imagem"
