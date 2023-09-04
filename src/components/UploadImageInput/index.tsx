@@ -11,7 +11,6 @@ interface UploadImageInputProps
   imageName?: string;
   labelClassName?: string;
   error?: string;
-  testId?: string;
 }
 
 export default function UploadImageInput({
@@ -22,7 +21,6 @@ export default function UploadImageInput({
   imageName,
   labelClassName = ``,
   error,
-  testId,
   ...rest
 }: UploadImageInputProps) {
   return (
@@ -43,7 +41,6 @@ export default function UploadImageInput({
             type="file"
             onChange={handleFileChange}
             className={styles.input}
-            data-testid={testId}
             {...rest}
           />
         </label>
