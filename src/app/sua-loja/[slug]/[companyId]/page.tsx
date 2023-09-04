@@ -1,5 +1,5 @@
-import CategoriesPreLoader from '@/components/CategoriesPreLoader';
 import ManagementScreenHeader from '@/components/ManagementScreenHeader';
+import CategoriesPreLoader from '@/components/PreLoaders/CategoriesPreLoader';
 import YourStore from '@/components/YourStore';
 
 import api from '@/utils/api';
