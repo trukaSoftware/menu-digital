@@ -21,9 +21,9 @@ interface DeleteCategoryPayload {
   categoryId: string;
 }
 
-const initialState = {
+const initialState: CategoryState = {
   categories: [],
-} as CategoryState;
+};
 
 const categoriesSlice = createSlice({
   name: `categories`,
