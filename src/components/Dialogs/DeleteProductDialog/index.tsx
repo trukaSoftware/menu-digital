@@ -9,6 +9,7 @@ import axios from 'axios';
 import ButtonSubmit from '@/components/ButtonSubmit';
 
 import { removeProductFromCategories } from '@/redux/features/categories-slice';
+import { removeProductFromList } from '@/redux/features/products-slice';
 import {
   Root,
   Trigger,
@@ -49,7 +50,12 @@ export default function DeleteProductDialog({
       );
 
       if (deletedProduct.data?.deleted) {
-        dispatch(removeProductFromCategories({ productId, categoryId }));
+        if (window.location.href.includes(`manageProducts`)) {
+          dispatch(removeProductFromList({ productId }));
+        } else {
+          dispatch(removeProductFromCategories({ productId, categoryId }));
+        }
+
         setShowDialog(false);
         return;
       }
