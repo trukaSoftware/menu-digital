@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { vi } from 'vitest';
 
+import { categoriesMock } from '@/mocks/categories';
+import { productMock } from '@/mocks/products';
 import { renderWithRedux } from '@/testsUtils/providers';
 import { screen, cleanup, waitFor } from '@testing-library/react';
 
@@ -12,8 +14,8 @@ vi.mock(`axios`);
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 const mockProps = {
-  productId: `1`,
-  categoryId: `1`,
+  productId: productMock.id,
+  categoryId: productMock.productCategoriesId,
   removeProductFromList: vi.fn(),
 } as DeleteProductDialogProps;
 
@@ -60,7 +62,13 @@ describe(`DeleteProductDialog`, () => {
   it(`When clicking on yes button and axios response return data.delete equals to true should close dialog`, async () => {
     mockedAxios.delete.mockResolvedValueOnce({ data: { deleted: true } });
 
-    renderWithRedux(<DeleteProductDialog {...mockProps} />);
+    renderWithRedux(<DeleteProductDialog {...mockProps} />, {
+      preloadedState: {
+        categoriesReducer: {
+          categories: categoriesMock,
+        },
+      },
+    });
 
     const triggerButton = screen.getByRole(`button`);
 
@@ -72,7 +80,7 @@ describe(`DeleteProductDialog`, () => {
 
     await userEvent.click(yesButton);
 
-    waitFor(() => {
+    await waitFor(() => {
       expect(screen.queryByRole(`dialog`)).not.toBeInTheDocument();
     });
   });
