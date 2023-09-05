@@ -1,0 +1,31 @@
+/* .dropdownWrapper {
+  @apply ;
+} */
+
+.dropdownCheckbox {
+  @apply hidden;
+}
+
+.dropdownCategoryWrapper {
+  @apply flex justify-between;
+}
+
+.dropdownCategoryImageWrapper {
+  @apply flex gap-2 mb-1;
+}
+
+.dropdownCategoryImage {
+  @apply flex justify-center items-center text-gray-400;
+}
+
+.dropdownCategoryName {
+  @apply font-semibold text-gray-900 text-lg;
+}
+
+.dropdownCategoryContent {
+  @apply flex flex-col gap-y-1 px-2 border-b border-gray-400 mb-3;
+}
+
+.dropdownCategoryContentHidden {
+  @apply gap-y-1 px-2 border-b border-gray-400 max-h-0 overflow-hidden mb-3;
+}
