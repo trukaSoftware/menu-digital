@@ -157,9 +157,7 @@ describe(`EditProductForm`, () => {
       data: { categories: categoriesMock, gettingCategories: false },
     });
 
-    renderWithRedux(<EditProductForm {...mockProps} />, {
-      preloadedState: { categoriesReducer: { categories: categoriesMock } },
-    });
+    renderWithRedux(<EditProductForm {...mockProps} />);
 
     const submitButton = screen.getByRole(`button`, {
       name: `Editar produto`,

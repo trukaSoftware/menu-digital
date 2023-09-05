@@ -25,15 +25,17 @@ describe(`When ProductsWithSearchInput is called and`, () => {
   });
 
   it(`has products on products array, the products should be rendered`, async () => {
-    renderWithRedux(<ProductsWithSearchInput />, {
-      preloadedState: { productsReducer: { products: productsMocks } },
-    });
+    renderWithRedux(<ProductsWithSearchInput />);
 
     expect(await screen.findByText(`Guaraná Antartica`)).toBeInTheDocument();
   });
 
   it(`there is no products on products array, the text "Não existem produtos cadastrados" should be rendered`, async () => {
-    renderWithRedux(<ProductsWithSearchInput />);
+    renderWithRedux(<ProductsWithSearchInput />, {
+      preloadedState: {
+        productsReducer: { products: [] },
+      },
+    });
 
     expect(
       await screen.findByText(`Não existem produtos cadastrados`)
@@ -43,9 +45,7 @@ describe(`When ProductsWithSearchInput is called and`, () => {
   });
 
   it(`has products and the user search on input, only products with searched text should be rendering`, async () => {
-    renderWithRedux(<ProductsWithSearchInput />, {
-      preloadedState: { productsReducer: { products: productsMocks } },
-    });
+    renderWithRedux(<ProductsWithSearchInput />);
 
     const products = await screen.findAllByTestId(`products`);
 
