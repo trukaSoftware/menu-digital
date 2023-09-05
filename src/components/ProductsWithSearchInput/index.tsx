@@ -10,9 +10,7 @@ import styles from './styles.module.css';
 
 export default function ProductsWithSearchInput() {
   const [searchInputValue, setSearchInputValue] = useState(``);
-  const reduxProducts = useAppSelector(
-    (state) => state.productsReducer.products
-  );
+  const products = useAppSelector((state) => state.productsReducer.products);
 
   return (
     <div className={styles.productsWithSearchInputContainer}>
@@ -23,8 +21,8 @@ export default function ProductsWithSearchInput() {
         value={searchInputValue}
       />
       <div className={styles.productsWithSearchInputContainerProducts}>
-        {reduxProducts.length > 0 ? (
-          reduxProducts
+        {products.length > 0 ? (
+          products
             .filter((product) =>
               product.name.toLowerCase().includes(searchInputValue)
             )

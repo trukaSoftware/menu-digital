@@ -13,11 +13,11 @@ export interface YourStoreProps {
 }
 
 export default function YourStore() {
-  const reduxCategories = useAppSelector(
+  const categories = useAppSelector(
     (state) => state.categoriesReducer.categories
   );
 
-  const onlyCategoriesWithProducts = reduxCategories.filter(
+  const onlyCategoriesWithProducts = categories.filter(
     (category) => category.categoryProducts.length > 0
   );
 
