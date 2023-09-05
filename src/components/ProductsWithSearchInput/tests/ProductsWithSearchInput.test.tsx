@@ -1,10 +1,11 @@
 import { vi } from 'vitest';
 
-import { productsMocks } from '@/mocks/products';
-import { render, screen, cleanup } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-
 import { getProducts } from '@/utils/api/getProducts';
+
+import { productsMocks } from '@/mocks/products';
+import { renderWithRedux } from '@/testsUtils/providers';
+import { screen, cleanup } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import ProductsWithSearchInput from '..';
 
@@ -13,7 +14,7 @@ vi.mocked(getProducts).mockImplementation(async () => ({
   products: productsMocks,
 }));
 
-describe(`Prices`, () => {
+describe(`When ProductsWithSearchInput is called and`, () => {
   afterAll(() => {
     vi.clearAllMocks();
   });
@@ -23,18 +24,18 @@ describe(`Prices`, () => {
     vi.resetAllMocks();
   });
 
-  it(`When ProductsWithSearchInput is called and has products on products array, the products should be rendered`, async () => {
-    render(<ProductsWithSearchInput companyId="mockId" />);
+  it(`has products on products array, the products should be rendered`, async () => {
+    renderWithRedux(<ProductsWithSearchInput />);
 
     expect(await screen.findByText(`Guaraná Antartica`)).toBeInTheDocument();
   });
 
-  it(`When ProductsWithSearchInput is called and there is no products on products array, the text "Não existem produtos cadastrados" should be rendered`, async () => {
-    vi.mocked(getProducts).mockImplementation(async () => ({
-      products: [],
-    }));
-
-    render(<ProductsWithSearchInput companyId="mockId" />);
+  it(`there is no products on products array, the text "Não existem produtos cadastrados" should be rendered`, async () => {
+    renderWithRedux(<ProductsWithSearchInput />, {
+      preloadedState: {
+        productsReducer: { products: [] },
+      },
+    });
 
     expect(
       await screen.findByText(`Não existem produtos cadastrados`)
@@ -43,12 +44,8 @@ describe(`Prices`, () => {
     expect(screen.queryByText(`Guaraná Antartica`)).not.toBeInTheDocument();
   });
 
-  it(`When ProductsWithSearchInput is called and has products and the user search on input, only products with searched text should be rendering`, async () => {
-    vi.mocked(getProducts).mockImplementation(async () => ({
-      products: productsMocks,
-    }));
-
-    render(<ProductsWithSearchInput companyId="mockId" />);
+  it(`has products and the user search on input, only products with searched text should be rendering`, async () => {
+    renderWithRedux(<ProductsWithSearchInput />);
 
     const products = await screen.findAllByTestId(`products`);
 

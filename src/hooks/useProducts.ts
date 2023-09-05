@@ -4,20 +4,22 @@ import { Product, ProductResponse } from '@/types/product';
 
 import { getter } from '@/utils/api/getter';
 
-export function useProducts() {
+export function useProducts(companyId: string) {
   const [products, setProducts] = useState<Product[]>([]);
   const [gettingProducts, setGettingProducts] = useState(true);
 
-  const getProductsResponse = async () => {
-    const data = await getter<ProductResponse>(`/api/products/getProducts`);
-
-    setProducts(data?.data?.products);
-    setGettingProducts(false);
-  };
-
   useEffect(() => {
+    const getProductsResponse = async () => {
+      const data = await getter<ProductResponse>(
+        `/api/products/getProducts?id=${companyId}`
+      );
+
+      setProducts(data?.data?.products);
+      setGettingProducts(false);
+    };
+
     getProductsResponse();
-  }, []);
+  }, [companyId]);
 
   return { products, gettingProducts };
 }

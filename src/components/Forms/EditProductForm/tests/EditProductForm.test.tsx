@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { vi } from 'vitest';
 
-import { categories } from '@/mocks/categories';
+import { categoriesMock } from '@/mocks/categories';
 import { productMock } from '@/mocks/products';
 import { createImageMock } from '@/testsUtils/createImageMock';
-import { render, screen, cleanup, fireEvent } from '@testing-library/react';
+import { renderWithRedux } from '@/testsUtils/providers';
+import { screen, cleanup, fireEvent } from '@testing-library/react';
 
 import EditProductForm, { EditProductFormProps } from '..';
 
@@ -12,6 +13,14 @@ import userEvent from '@testing-library/user-event';
 
 vi.mock(`axios`);
 const mockedAxios = axios as jest.Mocked<typeof axios>;
+
+vi.mock(`@/hooks/useCategories`, () => ({
+  __esModule: true,
+  useCategories: () => ({
+    categories: categoriesMock,
+    gettingCategories: false,
+  }),
+}));
 
 vi.mock(`@clerk/nextjs`, () => ({
   __esModule: true,
@@ -21,7 +30,7 @@ vi.mock(`@clerk/nextjs`, () => ({
 describe(`EditProductForm`, () => {
   beforeEach(() => {
     mockedAxios.get.mockResolvedValueOnce({
-      data: { categories, gettingCategories: false },
+      data: { categories: categoriesMock, gettingCategories: false },
     });
   });
 
@@ -36,13 +45,13 @@ describe(`EditProductForm`, () => {
 
   const mockProps = {
     setShowDialog: vi.fn(),
-    categoryId: `1`,
+    categoryId: `810640e3-a1ec-414b-ad14-deb1dd3f2989`,
     editProductFromList: vi.fn(),
     product: productMock,
   } as EditProductFormProps;
 
   it(`When trying to send form and put axios request does not return the product id should render error text on button`, async () => {
-    render(<EditProductForm {...mockProps} />);
+    renderWithRedux(<EditProductForm {...mockProps} />);
 
     const submitButton = screen.getByRole(`button`, {
       name: `Editar produto`,
@@ -72,7 +81,7 @@ describe(`EditProductForm`, () => {
       data: { deleted: true },
     });
 
-    render(<EditProductForm {...mockProps} />);
+    renderWithRedux(<EditProductForm {...mockProps} />);
 
     const submitButton = screen.getByRole(`button`, {
       name: `Editar produto`,
@@ -108,7 +117,7 @@ describe(`EditProductForm`, () => {
       data: { deleted: false },
     });
 
-    render(<EditProductForm {...mockProps} />);
+    renderWithRedux(<EditProductForm {...mockProps} />);
 
     const submitButton = screen.getByRole(`button`, {
       name: `Editar produto`,
@@ -144,7 +153,11 @@ describe(`EditProductForm`, () => {
       data: { deleted: true },
     });
 
-    render(<EditProductForm {...mockProps} />);
+    mockedAxios.get.mockResolvedValueOnce({
+      data: { categories: categoriesMock, gettingCategories: false },
+    });
+
+    renderWithRedux(<EditProductForm {...mockProps} />);
 
     const submitButton = screen.getByRole(`button`, {
       name: `Editar produto`,

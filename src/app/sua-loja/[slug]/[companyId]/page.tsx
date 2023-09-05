@@ -1,4 +1,5 @@
 import ManagementScreenHeader from '@/components/ManagementScreenHeader';
+import CategoriesPreLoader from '@/components/PreLoaders/CategoriesPreLoader';
 import YourStore from '@/components/YourStore';
 
 import api from '@/utils/api';
@@ -18,6 +19,7 @@ export default async function Page({ params }: RouterParams) {
 
   return (
     <div className={styles.yourStore}>
+      <CategoriesPreLoader categories={categories} />
       <ManagementScreenHeader
         companyLogoUrl={info.companyLogoUrl}
         companyName={name}
@@ -25,7 +27,7 @@ export default async function Page({ params }: RouterParams) {
         title="Sua loja"
       />
       <main className={styles.yourStoreContent}>
-        <YourStore categories={categories} />
+        <YourStore />
       </main>
     </div>
   );

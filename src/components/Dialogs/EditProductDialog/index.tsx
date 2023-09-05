@@ -11,13 +11,11 @@ import styles from './styles.module.css';
 export interface EditProductDialogProps {
   product: Product;
   categoryId: string;
-  editProductFromList: (newProduct: Product, categoryId: string) => void;
 }
 
 export default function EditProductDialog({
   product,
   categoryId,
-  editProductFromList,
 }: EditProductDialogProps) {
   const [showDialog, setShowDialog] = useState(false);
 
@@ -31,7 +29,6 @@ export default function EditProductDialog({
         product={product}
         setShowDialog={setShowDialog}
         categoryId={categoryId}
-        editProductFromList={editProductFromList}
       />
     </Root>
   );

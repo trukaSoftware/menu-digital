@@ -10,15 +10,11 @@ import styles from './styles.module.css';
 export interface EditableFoodCardProps {
   product: Product;
   categoryId: string;
-  removeProductFromList: (productId: string, categoryId: string) => void;
-  editProductFromList: (newProduct: Product, categoryId: string) => void;
 }
 
 export default function EditableFoodCard({
   product,
   categoryId,
-  removeProductFromList,
-  editProductFromList,
 }: EditableFoodCardProps) {
   return (
     <div data-testid="products">
@@ -46,16 +42,8 @@ export default function EditableFoodCard({
         ) : null}
       </article>
       <div className={styles.editableFoodButtonsWrapper}>
-        <DeleteProductDialog
-          productId={product.id}
-          categoryId={categoryId}
-          removeProductFromList={removeProductFromList}
-        />
-        <EditProductDialog
-          product={product}
-          categoryId={categoryId}
-          editProductFromList={editProductFromList}
-        />
+        <DeleteProductDialog productId={product.id} categoryId={categoryId} />
+        <EditProductDialog product={product} categoryId={categoryId} />
       </div>
     </div>
   );

@@ -1,50 +1,16 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import { Product } from '@/types/product';
-
-import { getProducts } from '@/utils/api/getProducts';
+import { useAppSelector } from '@/redux/store';
 
 import EditableFoodCard from '../EditableFoodCard';
 import SearchInput from '../SearchInput';
 import styles from './styles.module.css';
 
-interface ProductsWithSearchInput {
-  companyId: string;
-}
-
-export default function ProductsWithSearchInput({
-  companyId,
-}: ProductsWithSearchInput) {
+export default function ProductsWithSearchInput() {
   const [searchInputValue, setSearchInputValue] = useState(``);
-  const [products, setProducts] = useState([] as Product[]);
-
-  useEffect(() => {
-    const getProductsData = async () => {
-      const companyProductsResults = await getProducts(companyId);
-
-      setProducts(companyProductsResults.products);
-    };
-
-    getProductsData();
-  }, [companyId]);
-
-  const removeProductFromList = (productId: string) => {
-    const newProductsList = products.filter(
-      (product) => product.id !== productId
-    );
-
-    setProducts(newProductsList);
-  };
-
-  const editProductFromList = (newProduct: Product) => {
-    const newProductsList = products.map((product) =>
-      product.id === newProduct.id ? newProduct : product
-    );
-
-    setProducts(newProductsList);
-  };
+  const products = useAppSelector((state) => state.productsReducer.products);
 
   return (
     <div className={styles.productsWithSearchInputContainer}>
@@ -63,8 +29,6 @@ export default function ProductsWithSearchInput({
             .map((product) => (
               <EditableFoodCard
                 product={product}
-                removeProductFromList={removeProductFromList}
-                editProductFromList={editProductFromList}
                 key={product.id}
                 categoryId={product.productCategoriesId}
               />

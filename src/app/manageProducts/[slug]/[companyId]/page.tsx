@@ -1,8 +1,10 @@
 import CreateFormTrigger from '@/components/Dialogs/CreateFormDialog/CreateFormTrigger';
 import ManagementScreenHeader from '@/components/ManagementScreenHeader';
+import ProductsPreLoader from '@/components/PreLoaders/ProductsPreLoader';
 import ProductsWithSearchInput from '@/components/ProductsWithSearchInput';
 
 import api from '@/utils/api';
+import { getProducts } from '@/utils/api/getProducts';
 import { CompanyProps, RouterParams } from '@/utils/types';
 
 import styles from './styles.module.css';
@@ -18,6 +20,8 @@ export default async function ManageProducts({ params }: RouterParams) {
 
   const { companyLogoUrl } = info;
 
+  const { products } = await getProducts(companyId);
+
   return (
     <div className={styles.manageProductsWrapper}>
       <ManagementScreenHeader
@@ -25,9 +29,10 @@ export default async function ManageProducts({ params }: RouterParams) {
         companyName={name}
         backPage="/"
       />
+      <ProductsPreLoader products={products} />
 
       <CreateFormTrigger title="Produtos" formType="product-form" />
-      <ProductsWithSearchInput companyId={companyId} />
+      <ProductsWithSearchInput />
     </div>
   );
 }

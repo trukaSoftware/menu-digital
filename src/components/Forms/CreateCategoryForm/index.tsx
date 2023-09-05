@@ -42,7 +42,7 @@ export default function CreateCategoryForm({
   const [registredWithSucess, setRegistredWithSucess] = useState(false);
   const { user } = useUser();
 
-  const { products, gettingProducts } = useProducts();
+  const { products, gettingProducts } = useProducts(user?.id as string);
 
   const filteredProducts =
     products?.length > 0
