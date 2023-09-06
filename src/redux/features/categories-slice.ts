@@ -1,7 +1,9 @@
 import { GetCategoryReturn } from '@/types/category';
 import { Product } from '@/types/product';
 
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+import { RootState } from '../store';
 
 export interface CategoryState {
   categories: GetCategoryReturn[];
@@ -137,3 +139,13 @@ export const {
 } = categoriesSlice.actions;
 
 export default categoriesSlice.reducer;
+
+const getCategories = (state: RootState) => state.categoriesReducer.categories;
+
+const getCategoryById = (_state: RootState, categoryId: string) => categoryId;
+
+export const categoryByIdSelector = createSelector(
+  [getCategories, getCategoryById],
+  (categories, categoryId) =>
+    categories.find((category) => category.id === categoryId)
+);
