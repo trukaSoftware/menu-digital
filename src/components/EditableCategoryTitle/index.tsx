@@ -4,7 +4,7 @@ import DeleteCategoryDialog from '../Dialogs/DeleteCategoryDialog';
 import styles from './styles.module.css';
 
 export interface EditableCategoryTitleProps {
-  categoryName?: string;
+  categoryName: string;
   categoryId: string;
 }
 
