@@ -11,11 +11,11 @@
 }
 
 .dropdownCategoryImageWrapper {
-  @apply flex gap-2 mb-1;
+  @apply flex gap-2 w-full;
 }
 
 .dropdownCategoryImage {
-  @apply flex justify-center items-center text-gray-400;
+  @apply items-center text-gray-400;
 }
 
 .dropdownCategoryName {
