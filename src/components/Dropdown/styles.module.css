@@ -15,7 +15,7 @@
 }
 
 .dropdownCategoryImage {
-  @apply items-center text-gray-400;
+  @apply flex justify-center mb-3 items-center text-gray-400;
 }
 
 .dropdownCategoryName {
