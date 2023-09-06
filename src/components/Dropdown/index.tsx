@@ -63,14 +63,12 @@ export default function Dropdown({ removeCategoryFromList }: DropdownProps) {
               className={styles.dropdownCheckbox}
               onClick={() => toggleDropdown(index)}
             />
-            <div className={styles.dropdownCategoryWrapper}>
-              <div className={styles.dropdownCategoryImageWrapper}>
-                <div className={styles.dropdownCategoryImage}>
-                  {showDropdown === index ? <FaChevronUp /> : <FaChevronDown />}
-                </div>
-                <h2 className={styles.dropdownCategoryName}>{category.name}</h2>
+            <div className={styles.dropdownCategoryImageWrapper}>
+              <div className={styles.dropdownCategoryImage}>
+                {showDropdown === index ? <FaChevronUp /> : <FaChevronDown />}
               </div>
               <EditableCategoryTitle
+                categoryName={category.name}
                 categoryId={category.id}
                 removeCategoryFromList={removeCategoryFromList}
               />
