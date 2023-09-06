@@ -1,42 +1,28 @@
 import { useState } from 'react';
+import { UseFormRegisterReturn } from 'react-hook-form';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 import { GetCategoryReturn } from '@/types/category';
+import { Product } from '@/types/product';
 
 import EditableCategoryTitle from '../EditableCategoryTitle';
+import SearchProductsList from '../Forms/CreateCategoryForm/SearchProductsList';
 import SearchInput from '../SearchInput';
 import styles from './styles.module.css';
 
 export interface DropdownProps {
-  removeCategoryFromList: (categoryId: string) => void;
   categories: GetCategoryReturn[];
+  filteredProducts: Product[];
+  register: UseFormRegisterReturn;
+  gettingProducts: boolean;
 }
 
-const mockTeste = [
-  {
-    name: `Mais vendidos`,
-    id: `1`,
-    categoryProducts: [`Kiut`, `Hamburguer`, `Batata frita`],
-  },
-  {
-    name: `Comidas`,
-    id: `2`,
-    categoryProducts: [
-      `Kiut`,
-      `Hamburguer`,
-      `Batata frita`,
-      `Barata corada`,
-      `Batata rostie`,
-    ],
-  },
-  {
-    name: `Bebidas`,
-    id: `3`,
-    categoryProducts: [`Kiut`, `Hamburguer`, `Batata frita`],
-  },
-];
-
-export default function Dropdown({ removeCategoryFromList }: DropdownProps) {
+export default function Dropdown({
+  categories,
+  filteredProducts,
+  gettingProducts,
+  register,
+}: DropdownProps) {
   const [showDropdown, setShowDropdown] = useState<number | null>(null);
   const [search, setSearch] = useState(``);
 
@@ -44,6 +30,7 @@ export default function Dropdown({ removeCategoryFromList }: DropdownProps) {
     if (showDropdown === index) {
       return setShowDropdown(null);
     }
+    setSearch(``);
     setShowDropdown(index);
   };
 
@@ -54,7 +41,7 @@ export default function Dropdown({ removeCategoryFromList }: DropdownProps) {
 
   return (
     <>
-      {mockTeste.map((category, index) => (
+      {categories.map((category, index) => (
         <div key={category.id} className={styles.dropdownWrapper}>
           <label htmlFor={category.name}>
             <input
@@ -70,7 +57,6 @@ export default function Dropdown({ removeCategoryFromList }: DropdownProps) {
               <EditableCategoryTitle
                 categoryName={category.name}
                 categoryId={category.id}
-                removeCategoryFromList={removeCategoryFromList}
               />
             </div>
           </label>
@@ -85,18 +71,24 @@ export default function Dropdown({ removeCategoryFromList }: DropdownProps) {
               id={String(index)}
               placeholder="Pesquisar produto por nome..."
               onChange={handleSearch}
+              value={search}
             />
-            {(search
-              ? category.categoryProducts.filter((product) =>
-                  product.toLocaleLowerCase().includes(search)
-                )
-              : category.categoryProducts
-            ).map((product) => (
-              <label htmlFor={product} key={product}>
-                <input type="checkbox" name="" id={product} />
-                <span className={styles.dropdownProductName}>{product}</span>
-              </label>
-            ))}
+            {showDropdown === index && search && (
+              <SearchProductsList
+                filteredProducts={filteredProducts.filter((product) =>
+                  product.name.toLocaleLowerCase().includes(search)
+                )}
+                gettingProducts={gettingProducts}
+                register={register}
+              />
+            )}
+            {showDropdown === index && !search && (
+              <SearchProductsList
+                filteredProducts={filteredProducts}
+                gettingProducts={gettingProducts}
+                register={register}
+              />
+            )}
           </div>
         </div>
       ))}
