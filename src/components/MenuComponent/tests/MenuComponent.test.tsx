@@ -1,6 +1,7 @@
 import { vi } from 'vitest';
 
 import { render, screen, cleanup, fireEvent } from '@testing-library/react';
+import { renderWithRedux } from '@/testsUtils/providers';
 
 import DefaultSelect from '../../DefaultSelect';
 
@@ -83,7 +84,7 @@ describe(`MenuComponent`, () => {
   });
 
   it(`if MenuComponent is called without companyInfos and the button Produtos is clicked should open a dialog with headline text "Criação de produto"`, async () => {
-    render(<MenuComponent {...modifieldMockProps} />);
+    renderWithRedux(<MenuComponent {...modifieldMockProps} />);
 
     const createProductButton = screen.getByRole(`button`, {
       name: /Produtos/i,

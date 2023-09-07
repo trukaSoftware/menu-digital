@@ -5,6 +5,7 @@ import { Controller, useForm, useWatch } from 'react-hook-form';
 import { BsFillImageFill } from 'react-icons/bs';
 import { LiaMoneyBillWaveSolid } from 'react-icons/lia';
 import { MdOutlineFastfood } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
 
 import { createProduct } from '@/utils/api/createProduct';
 import { convertFileToBase64 } from '@/utils/convertFileToBase64';
@@ -14,6 +15,8 @@ import {
   ProductData,
 } from '@/utils/validations/createProductFormValidation';
 
+import { setProducts } from '@/redux/features/products-slice';
+import { useAppSelector } from '@/redux/store';
 import { useUser } from '@clerk/nextjs';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -39,6 +42,9 @@ export default function CreateProductForm({
   );
   const [productImageError, setProductImageError] = useState(``);
   const { user } = useUser();
+  const dispatch = useDispatch();
+
+  const products = useAppSelector((state) => state.productsReducer.products);
 
   const {
     handleSubmit,
@@ -74,6 +80,8 @@ export default function CreateProductForm({
         setIsSubmiting(false);
         return setRequestError(true);
       }
+
+      dispatch(setProducts([...products, createdProduct]));
     } catch (error) {
       setRequestError(true);
     } finally {
