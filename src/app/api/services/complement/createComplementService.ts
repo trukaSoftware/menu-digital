@@ -1,7 +1,6 @@
-import { ComplementData } from '@/utils/validations/complementsDataValidation';
-
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
+import { ComplementData } from '@yup/back/complementsDataValidation';
 
 export const createComplementService = async ({
   name,

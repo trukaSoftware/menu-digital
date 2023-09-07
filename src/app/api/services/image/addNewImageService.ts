@@ -1,8 +1,8 @@
 import { uploadImages } from '@/utils/uploadImages';
-import { ImageData } from '@/utils/validations/imageDataValidation';
 
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
+import { ImageData } from '@yup/back/imageDataValidation';
 
 export const addNewImageService = async ({ id, images }: ImageData) => {
   try {

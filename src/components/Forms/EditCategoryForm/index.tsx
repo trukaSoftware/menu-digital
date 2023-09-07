@@ -11,9 +11,9 @@ import { removeAccent } from '@/utils/removeAccent';
 import { useProducts } from '@/hooks/useProducts';
 import { categoryByIdSelector } from '@/redux/features/categories-slice';
 import { useAppSelector } from '@/redux/store';
-import { createCategoryFormSchema } from '@/yup/createCategoryFormSchema';
 import { useUser } from '@clerk/nextjs';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { createCategoryFormSchema } from '@yup/front/createCategoryFormSchema';
 
 import ButtonSubmit from '../../ButtonSubmit';
 import DefaultInput from '../../DefaultInput';
@@ -34,6 +34,7 @@ export default function EditCategoryForm({
   const category = useAppSelector((state) =>
     categoryByIdSelector(state, categoryId)
   );
+  const productsIds = category?.categoryProducts?.map((product) => product.id);
 
   const {
     register,
@@ -44,7 +45,7 @@ export default function EditCategoryForm({
     mode: `onChange`,
     defaultValues: {
       categoryName: category?.name,
-      productsIds: category?.categoryProducts?.map((product) => product.id),
+      productsIds,
     },
   });
 
@@ -68,38 +69,41 @@ export default function EditCategoryForm({
   const onSubmit = async (data: EditCategoryFormData) => {
     setIsSubmiting(true);
 
-    try {
-      const createdCategory = await createCategory({
-        name: data.categoryName,
-        companyId: user?.id,
-      });
+    console.log(data);
+    console.log(productsIds);
 
-      if (!createdCategory?.id) {
-        setIsSubmiting(false);
-        return setRequestError(true);
-      }
+    // try {
+    //   const createdCategory = await createCategory({
+    //     name: data.categoryName,
+    //     companyId: user?.id,
+    //   });
 
-      const newCategoryId = createdCategory.id;
+    //   if (!createdCategory?.id) {
+    //     setIsSubmiting(false);
+    //     return setRequestError(true);
+    //   }
 
-      if (data.productsIds) {
-        data.productsIds.forEach(async (productId) => {
-          const editedProduct = await editProduct({
-            id: productId as string,
-            categoryId: newCategoryId,
-          });
+    //   const newCategoryId = createdCategory.id;
 
-          if (!editedProduct?.id) {
-            setIsSubmiting(false);
-            return setRequestError(true);
-          }
-        });
-      }
-    } catch {
-      setRequestError(true);
-    } finally {
-      setShowDialog(false);
-      setIsSubmiting(false);
-    }
+    //   if (data.productsIds) {
+    //     data.productsIds.forEach(async (productId) => {
+    //       const editedProduct = await editProduct({
+    //         id: productId as string,
+    //         categoryId: newCategoryId,
+    //       });
+
+    //       if (!editedProduct?.id) {
+    //         setIsSubmiting(false);
+    //         return setRequestError(true);
+    //       }
+    //     });
+    //   }
+    // } catch {
+    //   setRequestError(true);
+    // } finally {
+    //   setShowDialog(false);
+    //   setIsSubmiting(false);
+    // }
 
     setRegistredWithSucess(true);
     setIsSubmiting(false);

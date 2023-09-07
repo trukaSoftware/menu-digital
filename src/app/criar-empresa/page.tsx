@@ -20,11 +20,11 @@ import { convertFileToBase64 } from '@/utils/convertFileToBase64';
 import { createSlug } from '@/utils/createSlug';
 import { formatCnpj, formatCpf } from '@/utils/formatCreateCompanyForm';
 import { CreateCompanyData } from '@/utils/types';
-import { createCompanyFormValidation } from '@/utils/yup/createCompanyFormValidation';
 
 import { mockedImage } from '@/mocks/imageMock';
 import { useUser } from '@clerk/nextjs';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { createCompanyFormSchema } from '@yup/front/createCompanyFormSchema';
 
 import ButtonSubmit from '../../components/ButtonSubmit';
 import DefaultInput from '../../components/DefaultInput';
@@ -47,7 +47,7 @@ export default function CreateCompany() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(createCompanyFormValidation),
+    resolver: yupResolver(createCompanyFormSchema),
   });
 
   const handleFileChange = async (

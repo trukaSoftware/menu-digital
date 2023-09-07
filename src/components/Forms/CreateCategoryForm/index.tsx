@@ -9,9 +9,9 @@ import { editProduct } from '@/utils/api/editProduct';
 import { removeAccent } from '@/utils/removeAccent';
 
 import { useProducts } from '@/hooks/useProducts';
-import { createCategoryFormSchema } from '@/yup/createCategoryFormSchema';
 import { useUser } from '@clerk/nextjs';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { createCategoryFormSchema } from '@yup/front/createCategoryFormSchema';
 
 import ButtonSubmit from '../../ButtonSubmit';
 import DefaultInput from '../../DefaultInput';

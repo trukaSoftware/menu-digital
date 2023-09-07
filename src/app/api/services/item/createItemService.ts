@@ -1,7 +1,6 @@
-import { ItemData } from '@/utils/validations/itemDataValidation';
-
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
+import { ItemData } from '@yup/back/itemDataValidation';
 
 export const createItemService = async ({
   complementId,

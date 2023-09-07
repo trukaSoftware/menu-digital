@@ -1,10 +1,10 @@
 import { createSlug } from '@/utils/createSlug';
 import { updateUserMetadata } from '@/utils/updateUserMetadata';
 import { uploadImages } from '@/utils/uploadImages';
-import { CompanyData } from '@/utils/validations/companyDataValidation';
 
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
+import { CompanyData } from '@yup/back/companyDataValidation';
 
 export const createCompanyService = async ({
   id,

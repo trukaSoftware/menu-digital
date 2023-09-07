@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import {
   CompanyData,
   validateCompanyData,
-} from '@/utils/validations/companyDataValidation';
+} from '@yup/back/companyDataValidation';
 
 import { createCompanyService } from '../../services/company/createCompanyService';
 
