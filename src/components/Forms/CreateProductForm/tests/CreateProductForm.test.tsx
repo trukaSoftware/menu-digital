@@ -2,7 +2,8 @@ import axios from 'axios';
 import { vi } from 'vitest';
 
 import { categoriesMock } from '@/mocks/categories';
-import { render, screen, cleanup, fireEvent } from '@testing-library/react';
+import { screen, cleanup, fireEvent } from '@testing-library/react';
+import { renderWithRedux } from '@/testsUtils/providers';
 
 import CreateProductForm from '..';
 
@@ -35,7 +36,7 @@ describe(`CreateProductForm`, () => {
   };
 
   it(`When trying to send form without filling the product name input should render error`, async () => {
-    render(<CreateProductForm {...mockProps} />);
+    renderWithRedux(<CreateProductForm {...mockProps} />);
 
     const submitButton = screen.getByRole(`button`, {
       name: `Criar produto`,
@@ -51,7 +52,7 @@ describe(`CreateProductForm`, () => {
   });
 
   it(`When trying to send form without filling the product description input should render error`, async () => {
-    render(<CreateProductForm {...mockProps} />);
+    renderWithRedux(<CreateProductForm {...mockProps} />);
 
     const submitButton = screen.getByRole(`button`, {
       name: `Criar produto`,
@@ -71,7 +72,7 @@ describe(`CreateProductForm`, () => {
   });
 
   it(`When trying to send form without filling the product price input should render error`, async () => {
-    render(<CreateProductForm {...mockProps} />);
+    renderWithRedux(<CreateProductForm {...mockProps} />);
 
     const submitButton = screen.getByRole(`button`, {
       name: `Criar produto`,
@@ -95,7 +96,7 @@ describe(`CreateProductForm`, () => {
   });
 
   it(`When trying to send form without choosing an option of the product category select should render error`, async () => {
-    render(<CreateProductForm {...mockProps} />);
+    renderWithRedux(<CreateProductForm {...mockProps} />);
 
     const submitButton = screen.getByRole(`button`, {
       name: `Criar produto`,
@@ -123,7 +124,7 @@ describe(`CreateProductForm`, () => {
   });
 
   it(`When sending form filling the all fields of product form shouldn't render error`, async () => {
-    render(<CreateProductForm {...mockProps} />);
+    renderWithRedux(<CreateProductForm {...mockProps} />);
 
     const submitButton = screen.getByRole(`button`, {
       name: `Criar produto`,
