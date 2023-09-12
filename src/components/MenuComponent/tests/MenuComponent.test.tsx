@@ -57,7 +57,7 @@ describe(`MenuComponent`, () => {
     expect(title).toHaveTextContent(`Criar novo(a)`);
   });
 
-  it(`if MenuComponent is called with companyInfos, should have a Link element with text "Produtos" and href "/manageProducts/mockSlug/mockProductId"`, async () => {
+  it(`if MenuComponent is called with companyInfos, should have a Link element with text "Produtos" and href "/gerenciar-produtos/mockSlug/mockProductId"`, async () => {
     render(<MenuComponent {...mockProps} />);
 
     const linkToManageProductsPage = screen.getByTitle(`Produtos`);
@@ -66,11 +66,11 @@ describe(`MenuComponent`, () => {
     expect(linkToManageProductsPage).toHaveTextContent(`Produtos`);
     expect(linkToManageProductsPage).toHaveAttribute(
       `href`,
-      `/manageProducts/mockSlug/mockCompanyId`
+      `/gerenciar-produtos/mockSlug/mockCompanyId`
     );
   });
 
-  it(`if MenuComponent is called with companyInfos, should have a Link element with text "Categorias" and href "/manageCategories/mockSlug/mockCompanyId"`, async () => {
+  it(`if MenuComponent is called with companyInfos, should have a Link element with text "Categorias" and href "/gerenciar-categorias/mockSlug/mockCompanyId"`, async () => {
     render(<MenuComponent {...mockProps} />);
 
     const linkToManageCategoriesPage = screen.getByTitle(`Categorias`);
@@ -79,7 +79,7 @@ describe(`MenuComponent`, () => {
     expect(linkToManageCategoriesPage).toHaveTextContent(`Categorias`);
     expect(linkToManageCategoriesPage).toHaveAttribute(
       `href`,
-      `/manageCategories/mockSlug/mockCompanyId`
+      `/gerenciar-categorias/mockSlug/mockCompanyId`
     );
   });
 

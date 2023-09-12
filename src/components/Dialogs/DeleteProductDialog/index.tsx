@@ -50,7 +50,7 @@ export default function DeleteProductDialog({
       );
 
       if (deletedProduct.data?.deleted) {
-        if (window.location.href.includes(`manageProducts`)) {
+        if (window.location.href.includes(`gerenciar-produtos`)) {
           dispatch(removeProductFromList({ productId }));
         } else {
           dispatch(removeProductFromCategories({ productId, categoryId }));

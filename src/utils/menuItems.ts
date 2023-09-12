@@ -4,11 +4,11 @@ export const menuItens = [
   {
     menuIcon: FaShoppingBasket,
     itemText: `Produtos`,
-    managementPageHref: `/manageProducts`,
+    managementPageHref: `/gerenciar-produtos`,
   },
   {
     menuIcon: FaGripLines,
     itemText: `Categorias`,
-    managementPageHref: `/manageCategories`,
+    managementPageHref: `/gerenciar-categorias`,
   },
 ];
