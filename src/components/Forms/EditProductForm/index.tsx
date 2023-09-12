@@ -101,7 +101,7 @@ export default function EditProductForm({
         productsImages: updateImage.productsImages,
       };
 
-      if (window.location.href.includes(`manageProducts`)) {
+      if (window.location.href.includes(`gerenciar-produtos`)) {
         dispatch(editProductFromList({ newProduct }));
       } else {
         dispatch(

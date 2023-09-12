@@ -93,7 +93,7 @@ export default function CreateCompany() {
       }
 
       router.push(
-        `/configs/${
+        `/configuracoes/${
           user?.publicMetadata.slug
             ? user?.publicMetadata.slug
             : createSlug(data.name)

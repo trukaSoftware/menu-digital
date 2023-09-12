@@ -50,11 +50,11 @@ export default authMiddleware({
 
         if (user.publicMetadata.slug) {
           return NextResponse.redirect(
-            `${req.nextUrl.href}configs/${user.publicMetadata.slug}/${auth.userId}`
+            `${req.nextUrl.href}configuracoes/${user.publicMetadata.slug}/${auth.userId}`
           );
         }
 
-        return NextResponse.redirect(`${req.nextUrl.href}createCompany`);
+        return NextResponse.redirect(`${req.nextUrl.href}criar-empresa`);
       }
     } catch (error) {
       return NextResponse.redirect(`${req.nextUrl.href}sign-in`);
