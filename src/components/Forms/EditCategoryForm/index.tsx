@@ -1,15 +1,19 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaGripLines, FaSearch } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
 
 import { InferType } from 'yup';
 
-import { createCategory } from '@/utils/api/createCategory';
-import { editProduct } from '@/utils/api/editProduct';
+import { editManyProductsCategory } from '@/utils/api/editManyProductsCategory';
 import { removeAccent } from '@/utils/removeAccent';
+import { EditManyProductsCategoryData } from '@/utils/types';
 
 import { useProducts } from '@/hooks/useProducts';
-import { categoryByIdSelector } from '@/redux/features/categories-slice';
+import {
+  categoryByIdSelector,
+  setCategories,
+} from '@/redux/features/categories-slice';
 import { useAppSelector } from '@/redux/store';
 import { useUser } from '@clerk/nextjs';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -35,6 +39,7 @@ export default function EditCategoryForm({
     categoryByIdSelector(state, categoryId)
   );
   const productsIds = category?.categoryProducts?.map((product) => product.id);
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -68,42 +73,44 @@ export default function EditCategoryForm({
 
   const onSubmit = async (data: EditCategoryFormData) => {
     setIsSubmiting(true);
+    const productsToRemoveId =
+      productsIds?.filter(
+        (productId) => !data.productsIds?.includes(productId)
+      ) || [];
 
-    console.log(data);
-    console.log(productsIds);
+    const productsToAddId =
+      data.productsIds?.filter(
+        (productId) => !productsIds?.includes(productId as string)
+      ) || [];
 
-    // try {
-    //   const createdCategory = await createCategory({
-    //     name: data.categoryName,
-    //     companyId: user?.id,
-    //   });
+    try {
+      const shouldEditCategoryName = data.categoryName !== category?.name;
+      const shouldEditProductsCategoryId =
+        productsToRemoveId.length > 0 ||
+        productsToAddId.length > 0 ||
+        shouldEditCategoryName;
 
-    //   if (!createdCategory?.id) {
-    //     setIsSubmiting(false);
-    //     return setRequestError(true);
-    //   }
+      if (shouldEditProductsCategoryId) {
+        const editManyProductsCategoryPayload = {
+          id: categoryId,
+          newCategoryName: shouldEditCategoryName ? data.categoryName : ``,
+          productsToAddId,
+          productsToRemoveId,
+        } as EditManyProductsCategoryData;
 
-    //   const newCategoryId = createdCategory.id;
+        const updatedCategories = await editManyProductsCategory(
+          editManyProductsCategoryPayload,
+          user?.id as string
+        );
 
-    //   if (data.productsIds) {
-    //     data.productsIds.forEach(async (productId) => {
-    //       const editedProduct = await editProduct({
-    //         id: productId as string,
-    //         categoryId: newCategoryId,
-    //       });
-
-    //       if (!editedProduct?.id) {
-    //         setIsSubmiting(false);
-    //         return setRequestError(true);
-    //       }
-    //     });
-    //   }
-    // } catch {
-    //   setRequestError(true);
-    // } finally {
-    //   setShowDialog(false);
-    //   setIsSubmiting(false);
-    // }
+        dispatch(setCategories(updatedCategories));
+      }
+    } catch {
+      setRequestError(true);
+    } finally {
+      setShowDialog(false);
+      setIsSubmiting(false);
+    }
 
     setRegistredWithSucess(true);
     setIsSubmiting(false);

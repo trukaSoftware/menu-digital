@@ -26,3 +26,7 @@ export interface CreateCategoryResponse {
 export interface GetCategoriesResponse {
   categories: GetCategoryReturn[];
 }
+
+export interface EditManyProductsCategoryResponse {
+  updatedCategories: GetCategoryReturn[];
+}
