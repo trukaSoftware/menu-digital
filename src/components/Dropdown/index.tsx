@@ -73,18 +73,15 @@ export default function Dropdown({
               onChange={handleSearch}
               value={search}
             />
-            {showDropdown === index && search && (
+            {showDropdown === index && (
               <SearchProductsList
-                filteredProducts={filteredProducts.filter((product) =>
-                  product.name.toLocaleLowerCase().includes(search)
-                )}
-                gettingProducts={gettingProducts}
-                register={register}
-              />
-            )}
-            {showDropdown === index && !search && (
-              <SearchProductsList
-                filteredProducts={filteredProducts}
+                filteredProducts={
+                  search
+                    ? filteredProducts.filter((product) =>
+                        product.name.toLocaleLowerCase().includes(search)
+                      )
+                    : filteredProducts
+                }
                 gettingProducts={gettingProducts}
                 register={register}
               />
