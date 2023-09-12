@@ -25,7 +25,7 @@ export async function PUT(req: Request) {
       );
 
     if (newCategoryName) {
-      editCategoryService({ id, name: newCategoryName });
+      await editCategoryService({ id, name: newCategoryName });
     }
 
     if (productsToAddId.length > 0) {
