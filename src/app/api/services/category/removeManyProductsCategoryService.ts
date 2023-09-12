@@ -1,12 +1,15 @@
-import { EditManyProductsCategoryData } from '@/utils/types';
-
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
+
+interface RemoveManyProductsCategoryServiceProps {
+  id: string;
+  productsToRemoveId: string[];
+}
 
 export const removeManyProductsCategoryService = async ({
   id,
   productsToRemoveId,
-}: Omit<EditManyProductsCategoryData, 'productsToAddId'>) => {
+}: RemoveManyProductsCategoryServiceProps) => {
   try {
     const existingRegister = await prisma.productCategories.findUnique({
       where: {
