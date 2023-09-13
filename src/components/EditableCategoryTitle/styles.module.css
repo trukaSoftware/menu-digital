@@ -1,5 +1,5 @@
 .editableCategoryTitleContent {
-  @apply flex justify-between mb-3;
+  @apply flex justify-between mb-3 w-full;
 }
 
 .editableCategoryTitleButtonsWrapper {
