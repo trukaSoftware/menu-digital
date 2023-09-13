@@ -43,7 +43,7 @@ export const productMock = {
   productsComplements: productsComplementsMock,
 } as Product;
 
-export const productsMocks = [
+export const productsMock = [
   productMock,
   {
     id: `e51e161b-8628-466d-934b-0d5b698236b4`,
