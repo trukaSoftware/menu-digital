@@ -5,13 +5,13 @@ import Dropdown from '..';
 import { SearchProductsListProps } from '@/components/Forms/CreateCategoryForm/SearchProductsList';
 
 import { categoriesMock } from '@/mocks/categories';
-import { productsMocks } from '@/mocks/products';
+import { productsMock } from '@/mocks/products';
 import { renderWithRedux } from '@/testsUtils/providers';
 import { screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 const mockProps = {
-  filteredProducts: productsMocks,
+  filteredProducts: productsMock,
   register: {},
   gettingProducts: false,
 } as SearchProductsListProps;
