@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { vi } from 'vitest';
 
-import { productsMocks } from '@/mocks/products';
+import { productsMock } from '@/mocks/products';
 import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 
 import CreateCategoryForm from '..';
@@ -46,7 +46,7 @@ describe(`CreateCategoryForm`, () => {
 
   it(`When trying to sending form filling the category name input shouldn't render error`, async () => {
     mockedAxios.get.mockResolvedValueOnce({
-      data: { products: productsMocks },
+      data: { products: productsMock },
     });
 
     render(<CreateCategoryForm {...mockProps} />);

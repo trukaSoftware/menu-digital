@@ -2,7 +2,7 @@ import { vi } from 'vitest';
 
 import { getProducts } from '@/utils/api/getProducts';
 
-import { productsMocks } from '@/mocks/products';
+import { productsMock } from '@/mocks/products';
 import { renderWithRedux } from '@/testsUtils/providers';
 import { screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -11,7 +11,7 @@ import ProductsWithSearchInput from '..';
 
 vi.mock(`@/utils/api/getProducts`);
 vi.mocked(getProducts).mockImplementation(async () => ({
-  products: productsMocks,
+  products: productsMock,
 }));
 
 describe(`When ProductsWithSearchInput is called and`, () => {
