@@ -18,7 +18,7 @@ export default function EditCategoryTrigger({
 
   return (
     <Root open={showDialog} onOpenChange={setShowDialog}>
-      <Trigger>
+      <Trigger aria-label="Editar categoria">
         <FaRegEdit size={18} />
       </Trigger>
       <EditCategoryPortal
