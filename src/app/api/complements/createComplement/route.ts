@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import {
   ComplementData,
   validateComplementData,
-} from '@/utils/validations/complementsDataValidation';
+} from '@yup/back/complementsDataValidation';
 
 import { createComplementService } from '../../services/complement/createComplementService';
 

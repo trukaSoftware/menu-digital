@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import {
   CategoryData,
   validateCategoryData,
-} from '@/utils/validations/categoryDataValidation';
+} from '@yup/back/categoryDataValidation';
 
 import { createCategoryService } from '../../services/category/createCategoryService';
 

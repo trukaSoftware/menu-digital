@@ -1,7 +1,6 @@
-import { CategoryData } from '@/utils/validations/categoryDataValidation';
-
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
+import { CategoryData } from '@yup/back/categoryDataValidation';
 
 export const createCategoryService = async ({
   companyId,

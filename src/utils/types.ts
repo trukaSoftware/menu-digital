@@ -44,6 +44,13 @@ export type EditCategoryData = {
   name: string;
 };
 
+export type EditManyProductsCategoryData = {
+  id: string;
+  newCategoryName: string;
+  productsToAddId: string[];
+  productsToRemoveId: string[];
+};
+
 export type EditProductData = {
   id: string;
   name?: string;

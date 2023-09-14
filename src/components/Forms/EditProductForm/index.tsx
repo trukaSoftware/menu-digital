@@ -13,14 +13,11 @@ import { editProduct } from '@/utils/api/editProduct';
 import { updateProductImage } from '@/utils/api/updateProductImage';
 import { convertFileToBase64 } from '@/utils/convertFileToBase64';
 import { ImageProps } from '@/utils/types';
-import {
-  productSchema,
-  ProductData,
-} from '@/utils/validations/createProductFormValidation';
 
 import { editProductFromCategories } from '@/redux/features/categories-slice';
 import { editProductFromList } from '@/redux/features/products-slice';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { productSchema, ProductData } from '@yup/front/createProductFormSchema';
 
 import ButtonSubmit from '../../ButtonSubmit';
 import DefaultInput from '../../DefaultInput';

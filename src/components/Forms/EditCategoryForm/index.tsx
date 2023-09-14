@@ -1,32 +1,46 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaGripLines, FaSearch } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
 
 import { InferType } from 'yup';
 
-import { createCategory } from '@/utils/api/createCategory';
-import { editProduct } from '@/utils/api/editProduct';
+import { editManyProductsCategory } from '@/utils/api/editManyProductsCategory';
 import { removeAccent } from '@/utils/removeAccent';
+import { EditManyProductsCategoryData } from '@/utils/types';
 
 import { useProducts } from '@/hooks/useProducts';
+import {
+  categoryByIdSelector,
+  setCategories,
+} from '@/redux/features/categories-slice';
+import { useAppSelector } from '@/redux/store';
 import { useUser } from '@clerk/nextjs';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { createCategoryFormSchema } from '@yup/front/createCategoryFormSchema';
 
 import ButtonSubmit from '../../ButtonSubmit';
 import DefaultInput from '../../DefaultInput';
-import SearchProductsList from './SearchProductsList';
+import SearchProductsList from '../CreateCategoryForm/SearchProductsList';
 import styles from './styles.module.css';
 
-type CreateCategoryFormData = InferType<typeof createCategoryFormSchema>;
+type EditCategoryFormData = InferType<typeof createCategoryFormSchema>;
 
-interface CreateCategoryProps {
+export interface EditCategoryFormProps {
   setShowDialog: (value: boolean) => void;
+  categoryId: string;
 }
 
-export default function CreateCategoryForm({
+export default function EditCategoryForm({
   setShowDialog,
-}: CreateCategoryProps) {
+  categoryId,
+}: EditCategoryFormProps) {
+  const category = useAppSelector((state) =>
+    categoryByIdSelector(state, categoryId)
+  );
+  const productsIds = category?.categoryProducts?.map((product) => product.id);
+  const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
@@ -34,6 +48,10 @@ export default function CreateCategoryForm({
   } = useForm({
     resolver: yupResolver(createCategoryFormSchema),
     mode: `onChange`,
+    defaultValues: {
+      categoryName: category?.name,
+      productsIds,
+    },
   });
 
   const [isSubmiting, setIsSubmiting] = useState(false);
@@ -53,34 +71,39 @@ export default function CreateCategoryForm({
         )
       : [];
 
-  const onSubmit = async (data: CreateCategoryFormData) => {
+  const onSubmit = async (data: EditCategoryFormData) => {
     setIsSubmiting(true);
+    const productsToRemoveId =
+      productsIds?.filter(
+        (productId) => !data.productsIds?.includes(productId)
+      ) || [];
+
+    const productsToAddId =
+      data.productsIds?.filter(
+        (productId) => !productsIds?.includes(productId as string)
+      ) || [];
 
     try {
-      const createdCategory = await createCategory({
-        name: data.categoryName,
-        companyId: user?.id,
-      });
+      const shouldEditCategoryName = data.categoryName !== category?.name;
+      const shouldEditProductsCategoryId =
+        productsToRemoveId.length > 0 ||
+        productsToAddId.length > 0 ||
+        shouldEditCategoryName;
 
-      if (!createdCategory?.id) {
-        setIsSubmiting(false);
-        return setRequestError(true);
-      }
+      if (shouldEditProductsCategoryId) {
+        const editManyProductsCategoryPayload = {
+          id: categoryId,
+          newCategoryName: shouldEditCategoryName ? data.categoryName : ``,
+          productsToAddId,
+          productsToRemoveId,
+        } as EditManyProductsCategoryData;
 
-      const newCategoryId = createdCategory.id;
+        const updatedCategories = await editManyProductsCategory(
+          editManyProductsCategoryPayload,
+          user?.id as string
+        );
 
-      if (data.productsIds) {
-        data.productsIds.forEach(async (productId) => {
-          const editedProduct = await editProduct({
-            id: productId as string,
-            categoryId: newCategoryId,
-          });
-
-          if (!editedProduct?.id) {
-            setIsSubmiting(false);
-            return setRequestError(true);
-          }
-        });
+        dispatch(setCategories(updatedCategories));
       }
     } catch {
       setRequestError(true);
@@ -94,14 +117,11 @@ export default function CreateCategoryForm({
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className={styles.createCategoryForm}
-    >
-      <div className={styles.createCategoryFormInputs}>
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.editCategoryForm}>
+      <div className={styles.editCategoryFormInputs}>
         <DefaultInput
           Icon={
-            <FaGripLines size={20} className={styles.createCategoryFormIcon} />
+            <FaGripLines size={20} className={styles.editCategoryFormIcon} />
           }
           labelText="Nome da categoria*"
           register={register(`categoryName`)}
@@ -112,13 +132,13 @@ export default function CreateCategoryForm({
         <p className={styles.addProductToCategoryTitle}>
           Adicionar produtos a categoria
         </p>
-        <div className={styles.searchProductInputWrapper}>
-          <div className={styles.searchProductIconWrapper}>
-            <FaSearch size={20} className={styles.searchProductIcon} />
+        <div className={styles.editProductInputWrapper}>
+          <div className={styles.editProductIconWrapper}>
+            <FaSearch size={20} className={styles.editProductIcon} />
           </div>
           <input
             type="text"
-            className={styles.searchProductInput}
+            className={styles.editProductInput}
             onChange={(e) => setSearchProductName(e.target.value)}
             placeholder="Pesquisar produto por nome..."
           />
@@ -133,11 +153,11 @@ export default function CreateCategoryForm({
         isSubmiting={isSubmiting}
         text={
           registredWithSucess
-            ? `Categoria criada com sucesso ✔️`
-            : `Criar categoria`
+            ? `Categoria editada com sucesso ✔️`
+            : `Editar categoria`
         }
         submitError={requestError}
-        className={styles.submitButton}
+        className={styles.editCategorySubmitButton}
       />
     </form>
   );

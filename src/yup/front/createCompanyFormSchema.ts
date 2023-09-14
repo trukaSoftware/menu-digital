@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-export const createCompanyFormValidation = yup.object().shape({
+export const createCompanyFormSchema = yup.object().shape({
   name: yup.string().required(`O Nome do restaurante é obrigatório.`),
   cnpj: yup
     .string()

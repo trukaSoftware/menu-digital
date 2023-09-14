@@ -1,9 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import {
-  ItemData,
-  validateItemData,
-} from '@/utils/validations/itemDataValidation';
+import { ItemData, validateItemData } from '@yup/back/itemDataValidation';
 
 import { createItemService } from '../../services/item/createItemService';
 

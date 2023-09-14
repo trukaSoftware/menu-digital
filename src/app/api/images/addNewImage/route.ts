@@ -1,9 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import {
-  ImageData,
-  validateImageData,
-} from '@/utils/validations/imageDataValidation';
+import { ImageData, validateImageData } from '@yup/back/imageDataValidation';
 
 import { addNewImageService } from '../../services/image/addNewImageService';
 

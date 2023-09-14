@@ -1,8 +1,8 @@
 import { uploadImages } from '@/utils/uploadImages';
-import { ProductData } from '@/utils/validations/productDataValidation';
 
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
+import { ProductData } from '@yup/back/productDataValidation';
 
 export const createProductService = async ({
   name,

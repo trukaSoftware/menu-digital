@@ -10,15 +10,12 @@ import { useDispatch } from 'react-redux';
 import { createProduct } from '@/utils/api/createProduct';
 import { convertFileToBase64 } from '@/utils/convertFileToBase64';
 import { ImageProps } from '@/utils/types';
-import {
-  productSchema,
-  ProductData,
-} from '@/utils/validations/createProductFormValidation';
 
 import { setProducts } from '@/redux/features/products-slice';
 import { useAppSelector } from '@/redux/store';
 import { useUser } from '@clerk/nextjs';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { productSchema, ProductData } from '@yup/front/createProductFormSchema';
 
 import ButtonSubmit from '../../ButtonSubmit';
 import DefaultInput from '../../DefaultInput';

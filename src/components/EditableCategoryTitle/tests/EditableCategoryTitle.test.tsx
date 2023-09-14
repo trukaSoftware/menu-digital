@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { vi } from 'vitest';
 
 import { renderWithRedux } from '@/testsUtils/providers';
@@ -12,6 +13,11 @@ const mockProps = {
   categoryName: `1`,
   removeCategoryFromList: vi.fn(),
 } as EditableCategoryTitleProps;
+
+vi.mock(`@clerk/nextjs`, () => ({
+  __esModule: true,
+  useUser: () => ({ user: { id: `1` } }),
+}));
 
 describe(`EditableCategoryTitle`, () => {
   afterAll(() => {
@@ -40,5 +46,26 @@ describe(`EditableCategoryTitle`, () => {
         exact: false,
       })
     ).toBeInTheDocument();
+  });
+
+  it(`Should render edit category dialog when clicking in edit category trigger button`, async () => {
+    vi.mock(`axios`);
+    const mockedAxios = axios as jest.Mocked<typeof axios>;
+    mockedAxios.get.mockResolvedValueOnce({
+      data: { products: [], gettingProducts: false },
+    });
+
+    renderWithRedux(<EditableCategoryTitle {...mockProps} />);
+
+    expect(screen.queryByRole(`dialog`)).not.toBeInTheDocument();
+
+    const deleteCategoryTriggerButton = screen.getByRole(`button`, {
+      name: `Editar categoria`,
+    });
+
+    await userEvent.click(deleteCategoryTriggerButton);
+
+    expect(screen.getByRole(`dialog`)).toBeInTheDocument();
+    expect(screen.getByText(`Edição de categoria`)).toBeInTheDocument();
   });
 });

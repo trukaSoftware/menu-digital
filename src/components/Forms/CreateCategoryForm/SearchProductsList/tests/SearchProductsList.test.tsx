@@ -1,12 +1,12 @@
 import { vi } from 'vitest';
 
-import { productsMocks } from '@/mocks/products';
+import { productsMock } from '@/mocks/products';
 import { render, screen, cleanup } from '@testing-library/react';
 
 import SearchProductsList, { SearchProductsListProps } from '..';
 
 const mockProps = {
-  filteredProducts: productsMocks,
+  filteredProducts: productsMock,
   register: {},
   gettingProducts: false,
 } as SearchProductsListProps;

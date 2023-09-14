@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
 
 import { categoriesMock } from '@/mocks/categories';
-import { productsMocks } from '@/mocks/products';
+import { productsMock } from '@/mocks/products';
 import { configureStore } from '@reduxjs/toolkit';
 import type { PreloadedState } from '@reduxjs/toolkit';
 import { render } from '@testing-library/react';
@@ -26,7 +26,7 @@ export function renderWithRedux(
         categories: categoriesMock,
       },
       productsReducer: {
-        products: productsMocks,
+        products: productsMock,
       },
     } as RootState,
     // Automatically create a store instance if no store was passed in

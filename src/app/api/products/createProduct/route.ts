@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import {
   ProductData,
   validateProductData,
-} from '@/utils/validations/productDataValidation';
+} from '@yup/back/productDataValidation';
 
 import { createProductService } from '../../services/product/createProductService';
 

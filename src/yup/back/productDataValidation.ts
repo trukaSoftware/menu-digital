@@ -4,7 +4,7 @@ const productSchema = object({
   name: string().required(),
   description: string().required(),
   price: number().min(1).required(),
-  categoryId: string().required(),
+  categoryId: string(),
   companyId: string().required(),
   complementsId: array(string().required()),
   discount: number(),
