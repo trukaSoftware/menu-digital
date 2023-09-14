@@ -89,7 +89,7 @@ describe(`EditCategoryForm`, () => {
     ).toBeInTheDocument();
   });
 
-  it(`When there is no error and submitButton is clicked should change submitButton text to "Categoria editada com sucesso ✔️"`, async () => {
+  it(`When there is no error and submitButton is clicked should change submitButton text to "Erro ao enviar, tente novamente."`, async () => {
     mockedAxios.put.mockResolvedValueOnce({
       status: 400,
     });
