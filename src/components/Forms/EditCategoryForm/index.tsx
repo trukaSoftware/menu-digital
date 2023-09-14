@@ -26,7 +26,7 @@ import styles from './styles.module.css';
 
 type EditCategoryFormData = InferType<typeof createCategoryFormSchema>;
 
-interface EditCategoryProps {
+export interface EditCategoryFormProps {
   setShowDialog: (value: boolean) => void;
   categoryId: string;
 }
@@ -34,7 +34,7 @@ interface EditCategoryProps {
 export default function EditCategoryForm({
   setShowDialog,
   categoryId,
-}: EditCategoryProps) {
+}: EditCategoryFormProps) {
   const category = useAppSelector((state) =>
     categoryByIdSelector(state, categoryId)
   );
