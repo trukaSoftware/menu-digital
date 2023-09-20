@@ -2,7 +2,7 @@
   @apply flex justify-between items-center w-full py-2 px-4;
 }
 
-.CreateFormTriggerTitle {
+.createFormTriggerTitle {
   @apply text-xl leading-7 font-semibold text-gray-900;
 }
 

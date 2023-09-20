@@ -50,7 +50,7 @@ describe(`When CategoriesWithSearchInput is called and`, () => {
     expect(emptyState).toBeInTheDocument();
   });
 
-  it(`have categories to display, should displayer all categories of categories array as dropdown buttons`, async () => {
+  it(`have categories to display, should render all categories of categories array as dropdown buttons`, async () => {
     renderWithRedux(<CategoriesWithSearchInput />);
 
     const firstCategoryDropdownButton = screen.getByRole(`heading`, {
@@ -65,7 +65,7 @@ describe(`When CategoriesWithSearchInput is called and`, () => {
     expect(secondCategoryDropdownButton).toBeInTheDocument();
   });
 
-  it(`have categories to display, the first category dropdown button must have its 2 products marked in checkboxes`, async () => {
+  it(`have categories to display, the first category dropdown button must have 2 products marked in checkboxes`, async () => {
     renderWithRedux(<CategoriesWithSearchInput />, {
       preloadedState: {
         categoriesReducer: {
@@ -90,7 +90,7 @@ describe(`When CategoriesWithSearchInput is called and`, () => {
     });
   });
 
-  it(`have categories to display, the second category dropdown button must have its 2 products marked in checkboxes`, async () => {
+  it(`have categories to display, the second category dropdown button must have 2 products marked in checkboxes`, async () => {
     renderWithRedux(<CategoriesWithSearchInput />, {
       preloadedState: {
         categoriesReducer: {
