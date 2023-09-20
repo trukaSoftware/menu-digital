@@ -1,20 +1,37 @@
 import { vi } from 'vitest';
 
-import Dropdown from '..';
+import Dropdown, { DropdownProps } from '..';
 
-import { SearchProductsListProps } from '@/components/Forms/CreateCategoryForm/SearchProductsList';
-
-import { categoriesMock } from '@/mocks/categories';
+import { categoryMock } from '@/mocks/categories';
 import { productsMock } from '@/mocks/products';
 import { renderWithRedux } from '@/testsUtils/providers';
 import { screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+vi.mock(`@clerk/nextjs`, () => ({
+  __esModule: true,
+  useUser: () => ({
+    user: {
+      id: `1`,
+      emailAddresses: [
+        {
+          emailAddress: `test@example.com`,
+        },
+      ],
+    },
+  }),
+}));
+
 const mockProps = {
+  category: categoryMock,
   filteredProducts: productsMock,
-  register: {},
+  currentCategoryIndex: 0,
   gettingProducts: false,
-} as SearchProductsListProps;
+  showDropdown: null,
+  search: ``,
+  setSearch: vi.fn(),
+  toggleDropdown: vi.fn(),
+} as DropdownProps;
 
 describe(`Dropdown`, () => {
   afterAll(() => {
@@ -26,45 +43,60 @@ describe(`Dropdown`, () => {
     vi.resetAllMocks();
   });
 
-  it(`Must render 1 dropdown at a time when clicked`, async () => {
-    renderWithRedux(<Dropdown {...mockProps} categories={categoriesMock} />);
+  it(`When the component is rendered, there should be a category dropdown button`, async () => {
+    renderWithRedux(<Dropdown {...mockProps} />);
 
-    const firstCategory = screen.getByRole(`heading`, { name: /reuniao/i });
-    const secondCategory = screen.getByRole(`heading`, { name: /comida/i });
+    const categoryDropdownButton = screen.getByRole(`heading`, {
+      name: /reuniao/i,
+    });
 
-    await userEvent.click(firstCategory);
+    expect(categoryDropdownButton).toBeInTheDocument();
 
-    const firstCategoryProduct = await screen.findAllByText(/pão/i);
-
-    expect(firstCategoryProduct).toHaveLength(1);
-
-    await userEvent.click(secondCategory);
-
-    const secondCategoryProduct = await screen.findAllByText(/pão/i);
-
-    expect(secondCategoryProduct).toHaveLength(1);
-  });
-
-  it(`Only shows the product that was searched for`, async () => {
-    renderWithRedux(<Dropdown {...mockProps} categories={categoriesMock} />);
-
-    const firstCategory = screen.getByRole(`heading`, { name: /reuniao/i });
-
-    await userEvent.click(firstCategory);
-
-    const searchInput = screen.getAllByPlaceholderText(
-      `Pesquisar produto por nome...`
-    )[0];
-
-    expect(searchInput).toBeInTheDocument();
-
-    const firstCategoryProduct = await screen.findByText(/pão/i);
-
-    await userEvent.type(searchInput, `smash burguer`);
-
-    const searchedProduct = await screen.findByText(/smash burguer/i);
+    const firstCategoryProduct = screen.queryByText(/pão/i);
+    const secondCategoryProduct = screen.queryByText(/guaraná antartica/i);
+    const thirdCategoryProduct = screen.queryByText(/guaraná jesus/i);
+    const fourthCategoryProduct = screen.queryByText(/smash burguer/i);
 
     expect(firstCategoryProduct).not.toBeInTheDocument();
-    expect(searchedProduct).toBeInTheDocument();
+    expect(secondCategoryProduct).not.toBeInTheDocument();
+    expect(thirdCategoryProduct).not.toBeInTheDocument();
+    expect(fourthCategoryProduct).not.toBeInTheDocument();
+  });
+
+  it(`When the dropdown is clicked, there must be products inside it`, async () => {
+    renderWithRedux(<Dropdown {...mockProps} />);
+
+    const categoryDropdownButton = screen.getByRole(`heading`, {
+      name: /reuniao/i,
+    });
+
+    let firstCategoryProduct = screen.queryByText(/pão/i);
+    let secondCategoryProduct = screen.queryByText(/guaraná antartica/i);
+    let thirdCategoryProduct = screen.queryByText(/guaraná jesus/i);
+    let fourthCategoryProduct = screen.queryByText(/smash burguer/i);
+
+    expect(firstCategoryProduct).not.toBeInTheDocument();
+    expect(secondCategoryProduct).not.toBeInTheDocument();
+    expect(thirdCategoryProduct).not.toBeInTheDocument();
+    expect(fourthCategoryProduct).not.toBeInTheDocument();
+
+    await userEvent.click(categoryDropdownButton);
+
+    const modifiedMockProps = {
+      ...mockProps,
+      showDropdown: 0,
+    };
+
+    renderWithRedux(<Dropdown {...modifiedMockProps} />);
+
+    firstCategoryProduct = await screen.findByText(/pão/i);
+    secondCategoryProduct = await screen.findByText(/guaraná antartica/i);
+    thirdCategoryProduct = await screen.findByText(/guaraná jesus/i);
+    fourthCategoryProduct = await screen.findByText(/smash burguer/i);
+
+    expect(firstCategoryProduct).toBeInTheDocument();
+    expect(secondCategoryProduct).toBeInTheDocument();
+    expect(thirdCategoryProduct).toBeInTheDocument();
+    expect(fourthCategoryProduct).toBeInTheDocument();
   });
 });
