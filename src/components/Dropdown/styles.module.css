@@ -1,3 +1,7 @@
+.dropdownForm {
+  @apply flex flex-col h-[calc(100%_-_56px)] justify-between pt-4;
+}
+
 .dropdownWrapper {
   @apply border-b border-gray-400 mb-3;
 }
@@ -32,4 +36,8 @@
 
 .dropdownProductName {
   @apply font-medium text-gray-900 text-base;
+}
+
+.dropdownSubmitButton {
+  @apply w-full py-2.5 bg-red-600 border-none text-white rounded flex items-center justify-center h-11 mt-2;
 }
