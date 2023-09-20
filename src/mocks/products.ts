@@ -52,7 +52,7 @@ export const productsMock = [
     price: `12`,
     discount: 20,
     companyId: `user_2TAnaTdaUI6K5SKHTrwKmv5EsGF`,
-    productCategoriesId: `810640e3-a1ec-414b-ad14-deb1dd3f2989`,
+    productCategoriesId: `810640e3-a1ec-414b-ad14-deb1dd3f2990`,
     createdAt: `2023-08-02T18:08:58.591Z`,
     updatedAt: `2023-08-02T18:08:58.591Z`,
     productsImages: [
@@ -87,7 +87,7 @@ export const productsMock = [
     description: `Rasga tudo mas é bão`,
     price: `12`,
     companyId: `user_2TAnaTdaUI6K5SKHTrwKmv5EsGF`,
-    productCategoriesId: `810640e3-a1ec-414b-ad14-deb1dd3f2989`,
+    productCategoriesId: `810640e3-a1ec-414b-ad14-deb1dd3f2990`,
     createdAt: `2023-08-02T18:09:05.888Z`,
     updatedAt: `2023-08-02T18:09:05.888Z`,
     productsImages: [
