@@ -28,6 +28,7 @@ export default async function ManageProducts({ params }: RouterParams) {
         companyLogoUrl={companyLogoUrl}
         companyName={name}
         backPage="/"
+        title="Produtos"
       />
       <ProductsPreLoader products={products} />
 

@@ -35,7 +35,7 @@ const publicRoutes =
         `/api/images/addNewImage`,
         `/api/images/deleteImage`,
       ]
-    : [`/`];
+    : [`/`, `/produtos/`];
 
 export default authMiddleware({
   beforeAuth(req) {

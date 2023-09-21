@@ -23,7 +23,7 @@ export default function CreateFormTrigger({
   return (
     <Root open={showDialog} onOpenChange={setShowDialog}>
       <div className={styles.createFormTriggerWrapper}>
-        <h2>{title}</h2>
+        <h2 className={styles.createFormTriggerTitle}>{title}</h2>
         <Trigger className={styles.createFormTrigger}>
           Criar
           <AiOutlinePlus />

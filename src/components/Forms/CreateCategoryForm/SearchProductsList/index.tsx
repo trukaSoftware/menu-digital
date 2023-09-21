@@ -36,6 +36,7 @@ export default function SearchProductsList({
               key={`${product.id}-label`}
             >
               <input
+                data-testid={`checkbox-${product.productCategoriesId}`}
                 type="checkbox"
                 value={product.id}
                 id={product.id}

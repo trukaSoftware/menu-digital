@@ -1,20 +1,36 @@
 import { vi } from 'vitest';
 
-import Dropdown from '..';
+import Dropdown, { DropdownProps } from '..';
 
-import { SearchProductsListProps } from '@/components/Forms/CreateCategoryForm/SearchProductsList';
-
-import { categoriesMock } from '@/mocks/categories';
+import { categoryMock } from '@/mocks/categories';
 import { productsMock } from '@/mocks/products';
 import { renderWithRedux } from '@/testsUtils/providers';
 import { screen, cleanup } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+
+vi.mock(`@clerk/nextjs`, () => ({
+  __esModule: true,
+  useUser: () => ({
+    user: {
+      id: `1`,
+      emailAddresses: [
+        {
+          emailAddress: `test@example.com`,
+        },
+      ],
+    },
+  }),
+}));
 
 const mockProps = {
+  category: categoryMock,
   filteredProducts: productsMock,
-  register: {},
+  currentCategoryIndex: 0,
   gettingProducts: false,
-} as SearchProductsListProps;
+  showDropdown: null,
+  search: ``,
+  setSearch: vi.fn(),
+  toggleDropdown: vi.fn(),
+} as DropdownProps;
 
 describe(`Dropdown`, () => {
   afterAll(() => {
@@ -26,45 +42,42 @@ describe(`Dropdown`, () => {
     vi.resetAllMocks();
   });
 
-  it(`Must render 1 dropdown at a time when clicked`, async () => {
-    renderWithRedux(<Dropdown {...mockProps} categories={categoriesMock} />);
+  it(`When the component is rendered and showDropdown is null, there should be a closed dropdown`, async () => {
+    renderWithRedux(<Dropdown {...mockProps} />);
 
-    const firstCategory = screen.getByRole(`heading`, { name: /reuniao/i });
-    const secondCategory = screen.getByRole(`heading`, { name: /comida/i });
+    const categoryDropdownButton = screen.getByRole(`heading`, {
+      name: /reuniao/i,
+    });
 
-    await userEvent.click(firstCategory);
+    expect(categoryDropdownButton).toBeInTheDocument();
 
-    const firstCategoryProduct = await screen.findAllByText(/pão/i);
-
-    expect(firstCategoryProduct).toHaveLength(1);
-
-    await userEvent.click(secondCategory);
-
-    const secondCategoryProduct = await screen.findAllByText(/pão/i);
-
-    expect(secondCategoryProduct).toHaveLength(1);
-  });
-
-  it(`Only shows the product that was searched for`, async () => {
-    renderWithRedux(<Dropdown {...mockProps} categories={categoriesMock} />);
-
-    const firstCategory = screen.getByRole(`heading`, { name: /reuniao/i });
-
-    await userEvent.click(firstCategory);
-
-    const searchInput = screen.getAllByPlaceholderText(
-      `Pesquisar produto por nome...`
-    )[0];
-
-    expect(searchInput).toBeInTheDocument();
-
-    const firstCategoryProduct = await screen.findByText(/pão/i);
-
-    await userEvent.type(searchInput, `smash burguer`);
-
-    const searchedProduct = await screen.findByText(/smash burguer/i);
+    const firstCategoryProduct = screen.queryByText(/pão/i);
+    const secondCategoryProduct = screen.queryByText(/guaraná antartica/i);
+    const thirdCategoryProduct = screen.queryByText(/guaraná jesus/i);
+    const fourthCategoryProduct = screen.queryByText(/smash burguer/i);
 
     expect(firstCategoryProduct).not.toBeInTheDocument();
-    expect(searchedProduct).toBeInTheDocument();
+    expect(secondCategoryProduct).not.toBeInTheDocument();
+    expect(thirdCategoryProduct).not.toBeInTheDocument();
+    expect(fourthCategoryProduct).not.toBeInTheDocument();
+  });
+
+  it(`When the component is rendered and showDropdown is not null, there should be a dropdown menu open with products inside it`, async () => {
+    const modifiedMockProps = {
+      ...mockProps,
+      showDropdown: 0,
+    };
+
+    renderWithRedux(<Dropdown {...modifiedMockProps} />);
+
+    const firstCategoryProduct = screen.queryByText(/pão/i);
+    const secondCategoryProduct = screen.queryByText(/guaraná antartica/i);
+    const thirdCategoryProduct = screen.queryByText(/guaraná jesus/i);
+    const fourthCategoryProduct = screen.queryByText(/smash burguer/i);
+
+    expect(firstCategoryProduct).toBeInTheDocument();
+    expect(secondCategoryProduct).toBeInTheDocument();
+    expect(thirdCategoryProduct).toBeInTheDocument();
+    expect(fourthCategoryProduct).toBeInTheDocument();
   });
 });
