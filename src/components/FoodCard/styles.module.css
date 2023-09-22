@@ -19,7 +19,7 @@
 }
 
 .foodCardDescription {
-  @apply text-gray-900 text-xs lg:text-sm;
+  @apply text-gray-900 text-xs lg:text-sm text-start;
 }
 
 .foodCardPricesWrapper {
