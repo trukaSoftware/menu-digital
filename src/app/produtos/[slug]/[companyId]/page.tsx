@@ -1,28 +1,60 @@
-import { RouterParams } from '@/utils/types';
+import { FoodCardProps } from '@/components/FoodCard';
 
-import { foodCardMock, foodCardWithoutDiscountMock } from '@/mocks/foodCard';
+import api from '@/utils/api';
+import { getCategories } from '@/utils/api/getCategories';
+import { CompanyProps, RouterParams } from '@/utils/types';
 
 import FoodCardList from '../../../../components/FoodCardList';
 import Header from '../../../../components/Header';
 import styles from './styles.module.css';
 
-const mockFoodCardList = [
-  foodCardMock,
-  foodCardWithoutDiscountMock,
-  foodCardMock,
-  foodCardMock,
-  foodCardWithoutDiscountMock,
-  foodCardMock,
-];
+export default async function Products({ params }: RouterParams) {
+  const { categories } = await getCategories(params.companyId);
 
-export default function Products({ params }: RouterParams) {
-  // params can be used to handle company tenant informations
+  const companyResults = await api.get<CompanyProps>(
+    `/company/getCompanyById?id=${params.companyId}`
+  );
+
+  const { name, info } = companyResults.data.company;
+
+  const { companyLogoUrl } = info;
+
+  const parsedCategories = categories.map((category) => ({
+    ...category,
+    categoryProducts: category.categoryProducts.map(
+      (product) =>
+        ({
+          title: product.name,
+          description: product.description,
+          foodImage: product.productsImages[0].imageUrl,
+          price: parseFloat(product.price),
+          discountedPrice: product.discount ? product.discount : undefined,
+          discountPercentage: product.discount
+            ? ((parseFloat(product.price) - product.discount) /
+                parseFloat(product.price)) *
+              100
+            : undefined,
+        } as FoodCardProps)
+    ),
+  }));
+
+  const companyCategories = categories.map((category) => category.name);
+
   return (
     <>
-      <Header />
+      <Header
+        companyName={name}
+        companyImage={companyLogoUrl}
+        companyCategories={companyCategories}
+      />
       <main className={styles.mainContainer}>
-        <FoodCardList title="Mais vendidos" foodCards={mockFoodCardList} />
-        <FoodCardList title="Hamburguers" foodCards={mockFoodCardList} />
+        {parsedCategories.map((category) => (
+          <FoodCardList
+            key={category.id}
+            title={category.name}
+            foodCards={category.categoryProducts}
+          />
+        ))}
       </main>
     </>
   );
