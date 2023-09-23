@@ -6,7 +6,7 @@ const withPWA = require('next-pwa')({
 
 const nextConfig = {
   images: {
-    domains: ['localhost', 'res.cloudinary.com'],
+    domains: ['localhost', 'res.cloudinary.com', 'meu-menu-digital.vercel.app'],
   },
   reactStrictMode: true,
   swcMinify: true,
