@@ -21,7 +21,7 @@ describe(`limitNumberOfCharacters`, () => {
   });
 
   it(`String with exactly 108 characters must be returned unchanged`, () => {
-    const input = `Lorem ipsum dolor sit amet consectetur adipisicing elit.`;
+    const input = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea distinctio consequuntur consequatur repudiandae.`;
     const result = limitNumberOfCharacters(input);
     expect(result).toBe(input);
   });
