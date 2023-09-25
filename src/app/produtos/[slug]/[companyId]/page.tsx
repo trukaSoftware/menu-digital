@@ -17,7 +17,7 @@ export default async function Products({ params }: RouterParams) {
 
   const { name, info } = companyResults.data.company;
 
-  const { companyLogoUrl } = info;
+  const { companyLogoUrl, companyThemeUrl } = info;
 
   const parsedCategories = categories.map((category) => ({
     ...category,
@@ -45,6 +45,7 @@ export default async function Products({ params }: RouterParams) {
       <Header
         companyName={name}
         companyImage={companyLogoUrl}
+        companyThemeUrl={companyThemeUrl}
         companyCategories={companyCategories}
       />
       <main className={styles.mainContainer}>
