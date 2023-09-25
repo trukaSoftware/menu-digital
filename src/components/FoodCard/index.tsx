@@ -1,7 +1,5 @@
 import Image from 'next/image';
 
-import { limitNumberOfCharacters } from '@/utils/limitNumberOfCharacters';
-
 import Prices from '../Prices';
 import styles from './styles.module.css';
 
@@ -30,9 +28,7 @@ export default function FoodCard({
       <div className={styles.foodCardTextContent}>
         <div className={styles.foodCardTextWrapper}>
           <h3 className={styles.foodCardTitle}>{title}</h3>
-          <p className={styles.foodCardDescription}>
-            {limitNumberOfCharacters(description)}
-          </p>
+          <p className={styles.foodCardDescription}>{description}</p>
         </div>
         <Prices price={price} discountedPrice={discountedPrice} />
       </div>
