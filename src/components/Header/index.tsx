@@ -6,19 +6,23 @@ import styles from './styles.module.css';
 interface HeaderProps {
   companyName: string;
   companyImage: string;
+  companyThemeUrl: string;
   companyCategories: string[];
 }
 
 export default function Header({
   companyName,
   companyImage,
+  companyThemeUrl,
   companyCategories,
 }: HeaderProps) {
   return (
     <header className={styles.header}>
       <div className={styles.themeContainer}>
         <Image
-          src="/images/theme-image-mock.webp"
+          src={
+            companyThemeUrl ? `/images/theme-image-mock.webp` : companyThemeUrl
+          }
           alt="Image tema do estabelecimento"
           fill
         />
