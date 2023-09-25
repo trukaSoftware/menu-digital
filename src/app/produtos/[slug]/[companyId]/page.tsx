@@ -28,7 +28,7 @@ export default async function Products({ params }: RouterParams) {
           description: product.description,
           foodImage: product.productsImages[0].imageUrl,
           price: parseFloat(product.price),
-          discountedPrice: product.discount ? product.discount : undefined,
+          discountedPrice: product?.discount,
           discountPercentage: product.discount
             ? ((parseFloat(product.price) - product.discount) /
                 parseFloat(product.price)) *
