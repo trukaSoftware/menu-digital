@@ -4,10 +4,8 @@ import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 
 import Badges, { BadgesProps } from '..';
 
-import { mockBadges } from '../../Header';
-
 const mockProps = {
-  badges: mockBadges,
+  badges: [`Mais vendidos`, `Caldos`, `Bebidas`, `Espetinhos`, `aiphone`],
 } as BadgesProps;
 
 describe(`Badge`, () => {

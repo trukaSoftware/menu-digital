@@ -1,6 +1,5 @@
 import Image from 'next/image';
 
-import FoodImageSvg from '../../../public/images/food-image.svg';
 import Prices from '../Prices';
 import styles from './styles.module.css';
 
@@ -24,7 +23,7 @@ export default function FoodCard({
   return (
     <article className={styles.foodCard}>
       <div className={styles.foodImageWrapper}>
-        <Image src={FoodImageSvg} alt={title} fill />
+        <Image src={foodImage} alt={title} fill />
       </div>
       <div className={styles.foodCardTextContent}>
         <div className={styles.foodCardTextWrapper}>

@@ -1,8 +1,19 @@
-import { describe, it } from 'vitest';
+import { describe, it, vi } from 'vitest';
+
+import { cleanup } from '@testing-library/react';
 
 import { createSlug } from '../createSlug';
 
 describe(`createSlug`, () => {
+  afterAll(() => {
+    vi.clearAllMocks();
+  });
+
+  afterEach(() => {
+    cleanup();
+    vi.resetAllMocks();
+  });
+
   it(`should transform a string with spaces into a slug`, () => {
     const text = `Example of Text With Spaces`;
     const result = createSlug(text);

@@ -3,20 +3,26 @@ import Image from 'next/image';
 import Badges from '../Badges';
 import styles from './styles.module.css';
 
-export const mockBadges = [
-  `Mais vendidos`,
-  `Caldos`,
-  `Bebidas`,
-  `Espetinhos`,
-  `aiphone`,
-];
+interface HeaderProps {
+  companyName: string;
+  companyImage: string;
+  companyThemeUrl: string;
+  companyCategories: string[];
+}
 
-export default function Header() {
+export default function Header({
+  companyName,
+  companyImage,
+  companyThemeUrl,
+  companyCategories,
+}: HeaderProps) {
   return (
     <header className={styles.header}>
       <div className={styles.themeContainer}>
         <Image
-          src="/images/theme-image-mock.webp"
+          src={
+            companyThemeUrl ? `/images/theme-image-mock.webp` : companyThemeUrl
+          }
           alt="Image tema do estabelecimento"
           fill
         />
@@ -24,15 +30,11 @@ export default function Header() {
 
       <div className={styles.imageAndTitleContainer}>
         <div className={styles.imageContainer}>
-          <Image
-            src="/images/logo-mock.webp"
-            alt="Imagem do estabelecimento"
-            fill
-          />
+          <Image src={companyImage} alt="Imagem do estabelecimento" fill />
         </div>
-        <h1 className={styles.title}>Nome do Restaurante</h1>
+        <h1 className={styles.title}>{companyName}</h1>
       </div>
-      <Badges badges={mockBadges} />
+      <Badges badges={companyCategories} />
     </header>
   );
 }

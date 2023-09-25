@@ -10,7 +10,9 @@ export interface FoodCardListProps {
 export default function FoodCardList({ title, foodCards }: FoodCardListProps) {
   return (
     <section className={styles.foodCardList}>
-      <h2 className={styles.foodCardListTitle}>{title}</h2>
+      <h2 id={title} className={styles.foodCardListTitle}>
+        {title}
+      </h2>
       <div className={styles.foodCardListFoods}>
         {foodCards?.map((food) => (
           <FoodCardDialog foodCard={food} key={food.title} />

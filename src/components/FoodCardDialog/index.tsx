@@ -6,7 +6,6 @@ import Image from 'next/image';
 
 import * as Dialog from '@radix-ui/react-dialog';
 
-import FoodImageSvg from '../../../public/images/food-image-square.svg';
 import FoodCard, { FoodCardProps } from '../FoodCard';
 import Prices from '../Prices';
 import styles from './styles.module.css';
@@ -40,7 +39,7 @@ export default function FoodCardDialog({ foodCard }: FoodCardDialogProps) {
           ) : null}
           <div className={styles.foodCardDialogImageWrapper}>
             <Image
-              src={FoodImageSvg}
+              src={foodCard.foodImage}
               alt={foodCard.title}
               fill
               className={styles.foodCardDialogImage}

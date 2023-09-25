@@ -18,7 +18,7 @@ export default function Badges({ badges }: BadgesProps) {
         <Badge
           key={`${++index}-${badge}-${Math.random() * 10000}`}
           badgeName={badge}
-          linkTo="#"
+          linkTo={`#${badge}`}
           onClick={() => setSelectedBadge(badge)}
           isSelected={selectedBadge === badge}
         />

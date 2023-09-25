@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 export default function Page() {
   return (
     <div className={styles.containerSignUp}>
-      <SignUp redirectUrl="/createCompany" />
+      <SignUp redirectUrl="/criar-empresa" />
     </div>
   );
 }
