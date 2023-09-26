@@ -1,0 +1,3 @@
+.qrcodeWrapper {
+  @apply flex w-full h-4/5 justify-center items-center md:h-80;
+}
