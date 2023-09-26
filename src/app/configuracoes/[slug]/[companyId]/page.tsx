@@ -31,7 +31,7 @@ export default async function Configs({ params }: RouterParams) {
         </div>
 
         <a
-          href={`sua-loja/${slug}/${companyId}`}
+          href={`/sua-loja/${slug}/${companyId}`}
           className={styles.configsSeeMyStoreButton}
         >
           Como sua loja está hoje
