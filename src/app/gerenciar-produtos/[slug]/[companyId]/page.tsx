@@ -9,7 +9,9 @@ import { CompanyProps, RouterParams } from '@/utils/types';
 
 import styles from './styles.module.css';
 
+export const fetchCache = `force-no-store`;
 export const dynamic = `force-dynamic`;
+export const revalidate = true;
 
 export default async function ManageProducts({ params }: RouterParams) {
   const { companyId } = params;
