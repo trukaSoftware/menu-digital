@@ -19,7 +19,7 @@
 }
 
 .defaultInputFormNameInput {
-  @apply gap-2 w-full rounded-r rounded-b focus:outline-none;
+  @apply gap-2 w-full rounded-r rounded-b focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none;
 }
 
 .defaultInputErrorMessage {
