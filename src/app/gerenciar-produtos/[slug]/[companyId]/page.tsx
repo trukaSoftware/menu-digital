@@ -9,6 +9,8 @@ import { CompanyProps, RouterParams } from '@/utils/types';
 
 import styles from './styles.module.css';
 
+export const dynamic = `force-dynamic`;
+
 export default async function ManageProducts({ params }: RouterParams) {
   const { companyId } = params;
 
