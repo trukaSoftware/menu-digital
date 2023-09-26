@@ -30,6 +30,7 @@ export default function MenuComponent({
                 className={styles.menuComponentItem}
                 href={`${item.managementPageHref}/${companyInfos.slug}/${companyInfos.companyId}`}
                 key={`item-${Math.floor(new Date().valueOf() * Math.random())}`}
+                prefetch={false}
               >
                 <div className={styles.menuComponentIconContainer}>
                   <item.menuIcon size={32} color="E5E7EB" />
