@@ -5,13 +5,13 @@ import { useUser } from '@clerk/nextjs';
 import styles from './styles.module.css';
 
 export default function Qrcode() {
-  const user = useUser();
+  const { user } = useUser();
 
   const fullURL = window.location.href;
   const urlObj = new URL(fullURL);
   const pathname = urlObj.origin;
 
-  const qrcodeProductsUrl = `${pathname}/produtos/${user.user?.publicMetadata.slug}/${user.user?.id}`;
+  const qrcodeProductsUrl = `${pathname}/produtos/${user?.publicMetadata.slug}/${user?.id}`;
 
   const handleSaveQrcode = () => {
     window.print();
