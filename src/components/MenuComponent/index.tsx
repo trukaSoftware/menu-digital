@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import { menuItens } from '@/utils/menuItems';
 
 import CreateCategoryTrigger from '../Dialogs/CreateCategoryDialog/CreateCategoryTrigger';
@@ -25,7 +23,7 @@ export default function MenuComponent({
         <div className={styles.menuComponentContainerItems}>
           {companyInfos ? (
             menuItens.map((item) => (
-              <Link
+              <a
                 title={`${item.itemText}`}
                 className={styles.menuComponentItem}
                 href={`${item.managementPageHref}/${companyInfos.slug}/${companyInfos.companyId}`}
@@ -37,7 +35,7 @@ export default function MenuComponent({
                 <span className={styles.menuComponentItemText}>
                   {item.itemText}
                 </span>
-              </Link>
+              </a>
             ))
           ) : (
             <>
