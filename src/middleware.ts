@@ -42,6 +42,13 @@ export default authMiddleware({
     if (req.nextUrl.pathname === `/` && !req.cookies.get(`__session`)) {
       return NextResponse.redirect(`${req.nextUrl.href}sign-in`);
     }
+
+    if (
+      req.nextUrl.pathname.includes(`configuracoes`) &&
+      !req.cookies.get(`__session`)
+    ) {
+      return NextResponse.redirect(`${req.nextUrl.href}sign-in`);
+    }
   },
 
   async afterAuth(auth, req) {
