@@ -19,24 +19,26 @@ export default async function Products({ params }: RouterParams) {
 
   const { companyLogoUrl, companyThemeUrl } = info;
 
-  const parsedCategories = categories.map((category) => ({
-    ...category,
-    categoryProducts: category.categoryProducts.map(
-      (product) =>
-        ({
-          title: product.name,
-          description: product.description,
-          foodImage: product.productsImages[0].imageUrl,
-          price: parseFloat(product.price),
-          discountedPrice: product?.discount,
-          discountPercentage: product.discount
-            ? ((parseFloat(product.price) - product.discount) /
-                parseFloat(product.price)) *
-              100
-            : undefined,
-        } as FoodCardProps)
-    ),
-  }));
+  const parsedCategories = categories
+    .filter((category) => category.categoryProducts.length > 0)
+    .map((category) => ({
+      ...category,
+      categoryProducts: category.categoryProducts.map(
+        (product) =>
+          ({
+            title: product.name,
+            description: product.description,
+            foodImage: product.productsImages[0].imageUrl,
+            price: parseFloat(product.price),
+            discountedPrice: product?.discount,
+            discountPercentage: product.discount
+              ? ((parseFloat(product.price) - product.discount) /
+                  parseFloat(product.price)) *
+                100
+              : undefined,
+          } as FoodCardProps)
+      ),
+    }));
 
   const companyCategories = categories.map((category) => category.name);
 
