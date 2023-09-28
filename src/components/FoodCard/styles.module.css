@@ -3,7 +3,11 @@
 }
 
 .foodImageWrapper {
-  @apply w-24 h-24 relative lg:w-36 lg:h-36 lg:m-4;
+  @apply w-24 h-24 relative lg:w-36 lg:h-36 lg:m-4 rounded-lg;
+}
+
+.foodImageWrapper img {
+  @apply rounded-lg;
 }
 
 .foodCardTextContent {
