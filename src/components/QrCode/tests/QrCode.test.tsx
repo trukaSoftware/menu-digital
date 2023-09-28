@@ -28,15 +28,17 @@ describe(`QRCode`, () => {
     vi.resetAllMocks();
   });
 
-  it(`When clicked on the save button, it should save a screenshot`, async () => {
+  it(`When clicked on the save button, it should change title`, async () => {
     renderWithRedux(<QrCode />);
-
-    window.print = vi.fn();
 
     const qrCodeButton = screen.getByRole(`button`, { name: /salvar qrcode/i });
 
     await userEvent.click(qrCodeButton);
 
-    expect(window.print).toHaveBeenCalled();
+    const qrCodeButtonAfterClick = screen.getByRole(`button`, {
+      name: /qrcode salvo!/i,
+    });
+
+    expect(qrCodeButtonAfterClick).toBeInTheDocument();
   });
 });
