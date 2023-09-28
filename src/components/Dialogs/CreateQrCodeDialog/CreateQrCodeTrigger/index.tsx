@@ -6,7 +6,7 @@ import { FaQrcode } from 'react-icons/fa';
 import { Root } from '@radix-ui/react-dialog';
 
 import MenuItemButton from '../../../MenuItemButton';
-import CreateQrcodePortal from '../CreateQrcodePortal';
+import CreateQrCodePortal from '../CreateQrCodePortal';
 
 export default function CreateQrcodeTrigger() {
   const [showDialog, setShowDialog] = useState(false);
@@ -15,9 +15,9 @@ export default function CreateQrcodeTrigger() {
     <Root open={showDialog} onOpenChange={setShowDialog}>
       <MenuItemButton
         Icon={<FaQrcode size={32} color="E5E7EB" />}
-        itemText="QRcode"
+        itemText="QRCode"
       />
-      <CreateQrcodePortal />
+      <CreateQrCodePortal />
     </Root>
   );
 }

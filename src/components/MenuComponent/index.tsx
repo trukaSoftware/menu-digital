@@ -4,7 +4,7 @@ import { menuItens } from '@/utils/menuItems';
 
 import CreateCategoryTrigger from '../Dialogs/CreateCategoryDialog/CreateCategoryTrigger';
 import CreateProductTrigger from '../Dialogs/CreateProductDialog/CreateProductTrigger';
-import CreateQrcodeTrigger from '../Dialogs/CreateQrcodeDialog/CreateQrcodeTrigger';
+import CreateQrCodeTrigger from '../Dialogs/CreateQrCodeDialog/CreateQrCodeTrigger';
 import styles from './styles.module.css';
 
 export interface MenuComponentProps {
@@ -44,7 +44,7 @@ export default function MenuComponent({
             <>
               <CreateProductTrigger />
               <CreateCategoryTrigger />
-              <CreateQrcodeTrigger />
+              <CreateQrCodeTrigger />
             </>
           )}
         </div>

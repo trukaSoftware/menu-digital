@@ -1,5 +1,5 @@
 import ModalDefaultHeader from '@/components/ModalDefaultHeader';
-import Qrcode from '@/components/Qrcode';
+import QrCode from '@/components/QrCode';
 
 import * as Dialog from '@radix-ui/react-dialog';
 
@@ -8,10 +8,10 @@ import styles from './styles.module.css';
 export default function CreateQrcodePortal() {
   return (
     <Dialog.Portal>
-      <Dialog.Overlay className={styles.createQrcodeOverlay} />
-      <Dialog.Content className={styles.createQrcodeContent}>
-        <ModalDefaultHeader title="QRcode" />
-        <Qrcode />
+      <Dialog.Overlay className={styles.createQrCodeOverlay} />
+      <Dialog.Content className={styles.createQrCodeContent}>
+        <ModalDefaultHeader title="QRCode" />
+        <QrCode />
       </Dialog.Content>
     </Dialog.Portal>
   );

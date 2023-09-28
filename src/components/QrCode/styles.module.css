@@ -1,7 +1,7 @@
-.qrcodeWrapper {
+.qrCodeWrapper {
   @apply flex flex-col w-full h-4/5 justify-center items-center md:h-80 md:pt-3;
 }
 
-.qrcodeButton {
+.qrCodeButton {
   @apply bg-red-600 py-3 px-16 mt-6 text-white font-bold text-base flex justify-center rounded md:px-0 md:py-3 md:w-full md:rounded-none;
 }

@@ -4,7 +4,7 @@ import { renderWithRedux } from '@/testsUtils/providers';
 import { screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import Qrcode from '..';
+import QrCode from '..';
 
 vi.mock(`@clerk/nextjs`, () => ({
   __esModule: true,
@@ -18,7 +18,7 @@ vi.mock(`@clerk/nextjs`, () => ({
   }),
 }));
 
-describe(`QRcode`, () => {
+describe(`QRCode`, () => {
   afterAll(() => {
     vi.clearAllMocks();
   });
@@ -29,13 +29,13 @@ describe(`QRcode`, () => {
   });
 
   it(`When clicked on the save button, it should save a screenshot`, async () => {
-    renderWithRedux(<Qrcode />);
+    renderWithRedux(<QrCode />);
 
     window.print = vi.fn();
 
-    const qrcodeButton = screen.getByRole(`button`, { name: /salvar qrcode/i });
+    const qrCodeButton = screen.getByRole(`button`, { name: /salvar qrcode/i });
 
-    await userEvent.click(qrcodeButton);
+    await userEvent.click(qrCodeButton);
 
     expect(window.print).toHaveBeenCalled();
   });

@@ -4,29 +4,29 @@ import { useUser } from '@clerk/nextjs';
 
 import styles from './styles.module.css';
 
-export default function Qrcode() {
+export default function QrCode() {
   const { user } = useUser();
 
   const fullURL = window.location.href;
   const urlObj = new URL(fullURL);
   const pathname = urlObj.origin;
 
-  const qrcodeProductsUrl = `${pathname}/produtos/${user?.publicMetadata.slug}/${user?.id}`;
+  const qrCodeProductsUrl = `${pathname}/produtos/${user?.publicMetadata.slug}/${user?.id}`;
 
-  const handleSaveQrcode = () => {
+  const handleSaveQrCode = () => {
     window.print();
   };
 
   return (
     <>
-      <div className={styles.qrcodeWrapper}>
-        <QRCode value={qrcodeProductsUrl} />
+      <div className={styles.qrCodeWrapper}>
+        <QRCode value={qrCodeProductsUrl} />
         <button
           type="button"
-          className={styles.qrcodeButton}
-          onClick={handleSaveQrcode}
+          className={styles.qrCodeButton}
+          onClick={handleSaveQrCode}
         >
-          Salvar QRcode
+          Salvar QRCode
         </button>
       </div>
     </>
