@@ -1,6 +1,7 @@
 import { vi } from 'vitest';
 
 import { categoriesMock, categoryMock } from '@/mocks/categories';
+import { productsMock, productMock } from '@/mocks/products';
 import { renderWithRedux } from '@/testsUtils/providers';
 import { screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -71,9 +72,16 @@ describe(`When CategoriesWithSearchInput is called and`, () => {
         categoriesReducer: {
           categories: [categoryMock],
         },
+        productsReducer: {
+          products: [
+            productsMock[0],
+            productsMock[1],
+            productsMock[2],
+            productsMock[3],
+          ],
+        },
       },
     });
-
     const firstCategoryDropdownButton = screen.getByRole(`heading`, {
       name: /reuniao/i,
     });
@@ -95,6 +103,14 @@ describe(`When CategoriesWithSearchInput is called and`, () => {
       preloadedState: {
         categoriesReducer: {
           categories: [categoriesMock[1]],
+        },
+        productsReducer: {
+          products: [
+            productsMock[0],
+            productsMock[1],
+            productsMock[2],
+            productsMock[3],
+          ],
         },
       },
     });
@@ -120,6 +136,14 @@ describe(`When CategoriesWithSearchInput is called and`, () => {
       preloadedState: {
         categoriesReducer: {
           categories: [categoriesMock[1]],
+        },
+        productsReducer: {
+          products: [
+            productsMock[0],
+            productsMock[1],
+            productsMock[2],
+            productsMock[3],
+          ],
         },
       },
     });
@@ -147,7 +171,16 @@ describe(`When CategoriesWithSearchInput is called and`, () => {
   });
 
   it(`has categories to display, must render 1 dropdown at a time when clicked`, async () => {
-    renderWithRedux(<CategoriesWithSearchInput />);
+    renderWithRedux(<CategoriesWithSearchInput />, {
+      preloadedState: {
+        categoriesReducer: {
+          categories: [categoriesMock[0], categoriesMock[1]],
+        },
+        productsReducer: {
+          products: [productMock],
+        },
+      },
+    });
 
     const firstCategoryDropdownButton = screen.getByRole(`heading`, {
       name: /reuniao/i,
@@ -160,12 +193,12 @@ describe(`When CategoriesWithSearchInput is called and`, () => {
 
     const firstCategoryProduct = await screen.findAllByText(/pão/i);
 
-    expect(firstCategoryProduct).toHaveLength(2);
+    expect(firstCategoryProduct).toHaveLength(1);
 
     await userEvent.click(secondCategoryDropdownButton);
 
     const secondCategoryProduct = await screen.findAllByText(/pão/i);
 
-    expect(secondCategoryProduct).toHaveLength(2);
+    expect(secondCategoryProduct).toHaveLength(1);
   });
 });
