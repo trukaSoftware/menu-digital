@@ -17,8 +17,7 @@ export default function CategoriesWithSearchInput() {
   const categories = useAppSelector(
     (state) => state.categoriesReducer.categories
   );
-
-  const products = categories.flatMap((category) => category.categoryProducts);
+  const products = useAppSelector((state) => state.productsReducer.products);
 
   const filteredCategories =
     categories.length > 0
