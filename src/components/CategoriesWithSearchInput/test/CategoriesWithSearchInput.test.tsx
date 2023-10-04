@@ -73,12 +73,7 @@ describe(`When CategoriesWithSearchInput is called and`, () => {
           categories: [categoryMock],
         },
         productsReducer: {
-          products: [
-            productsMock[0],
-            productsMock[1],
-            productsMock[2],
-            productsMock[3],
-          ],
+          products: [...productsMock],
         },
       },
     });
@@ -105,12 +100,7 @@ describe(`When CategoriesWithSearchInput is called and`, () => {
           categories: [categoriesMock[1]],
         },
         productsReducer: {
-          products: [
-            productsMock[0],
-            productsMock[1],
-            productsMock[2],
-            productsMock[3],
-          ],
+          products: [...productsMock],
         },
       },
     });
@@ -138,12 +128,7 @@ describe(`When CategoriesWithSearchInput is called and`, () => {
           categories: [categoriesMock[1]],
         },
         productsReducer: {
-          products: [
-            productsMock[0],
-            productsMock[1],
-            productsMock[2],
-            productsMock[3],
-          ],
+          products: [...productsMock],
         },
       },
     });
@@ -174,7 +159,7 @@ describe(`When CategoriesWithSearchInput is called and`, () => {
     renderWithRedux(<CategoriesWithSearchInput />, {
       preloadedState: {
         categoriesReducer: {
-          categories: [categoriesMock[0], categoriesMock[1]],
+          categories: [...categoriesMock],
         },
         productsReducer: {
           products: [productMock],
