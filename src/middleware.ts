@@ -57,6 +57,19 @@ export default authMiddleware({
 
         return NextResponse.redirect(`${req.nextUrl.href}criar-empresa`);
       }
+      if (
+        req.nextUrl.pathname === `/criar-empresa` &&
+        req.cookies.get(`__session`)
+      ) {
+        const user = await clerkClient.users.getUser(`${auth.userId}`);
+
+        if (user.publicMetadata.slug) {
+          req.nextUrl.pathname = `/`;
+          return NextResponse.redirect(
+            `${req.nextUrl.href}configuracoes/${user.publicMetadata.slug}/${auth.userId}`
+          );
+        }
+      }
     } catch (error) {
       return NextResponse.redirect(`${req.nextUrl.href}sign-in`);
     }
