@@ -6,6 +6,7 @@ import { removeAccent } from '@/utils/removeAccent';
 
 import { useAppSelector } from '@/redux/store';
 
+import CategoriesEmptyState from '../CategoriesEmptyState';
 import Dropdown from '../Dropdown';
 import SearchInput from '../SearchInput';
 import styles from './styles.module.css';
@@ -60,7 +61,7 @@ export default function CategoriesWithSearchInput() {
             />
           ))
         ) : (
-          <p>Não existem categorias cadastradas</p>
+          <CategoriesEmptyState />
         )}
       </div>
     </div>
