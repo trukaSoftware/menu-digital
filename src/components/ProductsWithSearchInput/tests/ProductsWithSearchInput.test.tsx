@@ -37,9 +37,13 @@ describe(`When ProductsWithSearchInput is called and`, () => {
       },
     });
 
-    expect(
-      await screen.findByText(`Não existem produtos cadastrados`)
-    ).toBeInTheDocument();
+    const emptyStateText = await screen.findByText(`Nenhum produto encontrado`);
+    const emptyStateNewProductBtn = await screen.findByRole(`button`, {
+      name: `Cadastrar produto`,
+    });
+
+    expect(emptyStateText).toBeInTheDocument();
+    expect(emptyStateNewProductBtn).toBeInTheDocument();
 
     expect(screen.queryByText(`Guaraná Antartica`)).not.toBeInTheDocument();
   });

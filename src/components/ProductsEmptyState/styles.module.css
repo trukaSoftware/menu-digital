@@ -1,0 +1,11 @@
+.productsEmptyState {
+  @apply flex flex-col gap-4 mt-6;
+}
+
+.productsEmptyStateContent {
+  @apply flex gap-2 items-center justify-center text-gray-500 text-base p-2.5;
+}
+
+.createProductButton {
+  @apply w-full bg-red-600 p-2.5 text-white font-medium text-base rounded;
+}

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useAppSelector } from '@/redux/store';
 
 import EditableFoodCard from '../EditableFoodCard';
+import ProductsEmptyState from '../ProductsEmptyState';
 import SearchInput from '../SearchInput';
 import styles from './styles.module.css';
 
@@ -34,9 +35,7 @@ export default function ProductsWithSearchInput() {
               />
             ))
         ) : (
-          <p className={styles.productsWithSearchInputEmptyText}>
-            Não existem produtos cadastrados
-          </p>
+          <ProductsEmptyState />
         )}
       </div>
     </div>
