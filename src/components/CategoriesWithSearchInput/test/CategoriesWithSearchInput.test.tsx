@@ -31,7 +31,7 @@ describe(`When CategoriesWithSearchInput is called and`, () => {
     vi.resetAllMocks();
   });
 
-  it(`does not have categories to display, the message "Não existem categorias cadastradas" should be displayed`, async () => {
+  it(`does not have categories to display, should render CategoriesEmptyState component`, async () => {
     renderWithRedux(<CategoriesWithSearchInput />, {
       preloadedState: {
         categoriesReducer: {
@@ -43,11 +43,15 @@ describe(`When CategoriesWithSearchInput is called and`, () => {
       },
     });
 
-    const emptyState = await screen.findByText(
-      `Não existem categorias cadastradas`
+    const emptyStateText = await screen.findByText(
+      `Nenhuma categoria encontrada`
     );
+    const emptyStateNewCategoryBtn = await screen.findByRole(`button`, {
+      name: `Cadastrar categoria`,
+    });
 
-    expect(emptyState).toBeInTheDocument();
+    expect(emptyStateText).toBeInTheDocument();
+    expect(emptyStateNewCategoryBtn).toBeInTheDocument();
   });
 
   it(`have categories to display, should render all categories of categories array as dropdown buttons`, async () => {
