@@ -41,8 +41,6 @@ describe(`ProductsEmptyState`, () => {
       name: `Cadastrar produto`,
     });
 
-    expect(emptyStateNewProductBtn).toBeInTheDocument();
-
     await userEvent.click(emptyStateNewProductBtn);
 
     expect(
