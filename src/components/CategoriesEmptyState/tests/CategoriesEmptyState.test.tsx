@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { vi } from 'vitest';
 
 import { render, screen, cleanup } from '@testing-library/react';
@@ -14,6 +15,9 @@ vi.mock(`@clerk/nextjs`, () => ({
   }),
 }));
 
+vi.mock(`axios`);
+const mockedAxios = axios as jest.Mocked<typeof axios>;
+
 describe(`CategoriesEmptyState`, () => {
   afterAll(() => {
     vi.clearAllMocks();
@@ -25,6 +29,8 @@ describe(`CategoriesEmptyState`, () => {
   });
 
   it(`should open create category modal when clicking on button "Cadastrar categoria"`, async () => {
+    mockedAxios.delete.mockResolvedValueOnce({ data: { deleted: false } });
+
     render(<CategoriesEmptyState />);
 
     const emptyStateNewCategoryBtn = screen.getByRole(`button`, {
