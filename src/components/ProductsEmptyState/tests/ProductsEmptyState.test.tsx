@@ -30,7 +30,7 @@ describe(`ProductsEmptyState`, () => {
     vi.resetAllMocks();
   });
 
-  it(`should open create category modal when clicking on button "Cadastrar categoria"`, async () => {
+  it(`should open create product modal when clicking on button "Cadastrar produto"`, async () => {
     mockedAxios.get.mockResolvedValueOnce({
       data: { categories: categoriesMock },
     });
