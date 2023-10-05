@@ -37,8 +37,6 @@ describe(`CategoriesEmptyState`, () => {
       name: `Cadastrar categoria`,
     });
 
-    expect(emptyStateNewCategoryBtn).toBeInTheDocument();
-
     await userEvent.click(emptyStateNewCategoryBtn);
 
     expect(
