@@ -1,1 +1,1 @@
-export const pathnames = [`/configuracoes`, `/gerenciar`];
+export const pathnames = [`/configuracoes`, `/gerenciar`, `/sua-loja`];
