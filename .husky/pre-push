@@ -1,6 +1,13 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+current_branch=$(git symbolic-ref --short HEAD 2>/dev/null)
+
+if [ "$current_branch" = "main" ]; then
+  echo "You can't make pushes to the main branch, create a new branch only then commit and push"
+  exit 1
+fi
+
 git diff HEAD --quiet || 
 (
   echo "You have uncommitted changes. Please commit them and try again."
