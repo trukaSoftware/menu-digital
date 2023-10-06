@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 
 import { authMiddleware, clerkClient } from '@clerk/nextjs';
 
+import { pathnames } from './utils/pathnames';
+
 const publicRoutes =
   process.env.NODE_ENV === `development`
     ? [
@@ -40,6 +42,13 @@ const publicRoutes =
 export default authMiddleware({
   beforeAuth(req) {
     if (req.nextUrl.pathname === `/` && !req.cookies.get(`__session`)) {
+      return NextResponse.redirect(`${req.nextUrl.href}sign-in`);
+    }
+    if (
+      pathnames.some((pathname) => req.nextUrl.pathname.startsWith(pathname)) &&
+      !req.cookies.get(`__session`)
+    ) {
+      req.nextUrl.pathname = `/`;
       return NextResponse.redirect(`${req.nextUrl.href}sign-in`);
     }
   },
