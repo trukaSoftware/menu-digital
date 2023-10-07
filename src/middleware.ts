@@ -44,6 +44,7 @@ export default authMiddleware({
     if (req.nextUrl.pathname === `/` && !req.cookies.get(`__session`)) {
       return NextResponse.redirect(`${req.nextUrl.href}sign-in`);
     }
+
     if (
       pathnames.some((pathname) => req.nextUrl.pathname.startsWith(pathname)) &&
       !req.cookies.get(`__session`)
@@ -66,10 +67,22 @@ export default authMiddleware({
 
         return NextResponse.redirect(`${req.nextUrl.href}criar-empresa`);
       }
+
       if (
         req.nextUrl.pathname === `/criar-empresa` &&
         req.cookies.get(`__session`)
       ) {
+        const user = await clerkClient.users.getUser(`${auth.userId}`);
+
+        if (user.publicMetadata.slug) {
+          req.nextUrl.pathname = `/`;
+          return NextResponse.redirect(
+            `${req.nextUrl.href}configuracoes/${user.publicMetadata.slug}/${auth.userId}`
+          );
+        }
+      }
+
+      if (auth.userId && !req.nextUrl.pathname.includes(`${auth.userId}`)) {
         const user = await clerkClient.users.getUser(`${auth.userId}`);
 
         if (user.publicMetadata.slug) {
