@@ -6,6 +6,7 @@ import { BsFillImageFill } from 'react-icons/bs';
 import { LiaMoneyBillWaveSolid } from 'react-icons/lia';
 import { MdOutlineFastfood } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import { createProduct } from '@/utils/api/createProduct';
 import { convertFileToBase64 } from '@/utils/convertFileToBase64';
@@ -78,9 +79,11 @@ export default function CreateProductForm({
         return setRequestError(true);
       }
 
+      toast.success(`Produto criado com sucesso!`);
       dispatch(setProducts([...products, createdProduct]));
     } catch (error) {
       setRequestError(true);
+      toast.error(`Criação de produto falhou, tente novamente em instantes!`);
     } finally {
       setShowDialog(false);
       setIsSubmiting(false);

@@ -6,6 +6,7 @@ import { BsFillImageFill } from 'react-icons/bs';
 import { LiaMoneyBillWaveSolid } from 'react-icons/lia';
 import { MdOutlineFastfood } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import { Product } from '@/types/product';
 
@@ -105,9 +106,12 @@ export default function EditProductForm({
           editProductFromCategories({ newProduct, oldCategoryId: categoryId })
         );
       }
+
+      toast.success(`Produto editado com sucesso!`);
     } catch (error) {
       setIsSubmiting(false);
       setRequestError(true);
+      toast.error(`Edição de produto falhou, tente novamente em instantes!`);
     } finally {
       setIsSubmiting(false);
     }

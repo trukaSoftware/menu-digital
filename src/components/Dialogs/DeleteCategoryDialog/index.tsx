@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import axios from 'axios';
 
@@ -49,12 +50,13 @@ export default function DeleteCategoryDialog({
       if (deletedProduct.data?.deleted) {
         dispatch(deleteCategory({ categoryId }));
         setShowDialog(false);
-
+        toast.success(`Categoria deletada com sucesso!`);
         return;
       }
 
       throw new Error(`Fail when try to delete a category`);
     } catch {
+      toast.error(`Deleção de categoria falhou, tente novamente em instantes!`);
       deletedFailed();
     }
   };
