@@ -30,6 +30,10 @@
   @apply bg-gray-200 border border-gray-300 text-gray-600 flex items-center justify-center;
 }
 
+.deleteProductDialogDelBtn svg {
+  @apply text-red-600;
+}
+
 .deleteProductDialogCancelBtn {
   @apply bg-red-600 text-white;
 }
