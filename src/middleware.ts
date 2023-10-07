@@ -82,7 +82,13 @@ export default authMiddleware({
         }
       }
 
-      if (auth.userId && !req.nextUrl.pathname.includes(`${auth.userId}`)) {
+      if (
+        auth.userId &&
+        pathnames.some((pathname) =>
+          req.nextUrl.pathname.startsWith(pathname)
+        ) &&
+        !req.nextUrl.pathname.includes(`${auth.userId}`)
+      ) {
         const user = await clerkClient.users.getUser(`${auth.userId}`);
 
         if (user.publicMetadata.slug) {
