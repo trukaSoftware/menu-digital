@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaGripLines, FaSearch } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 import { InferType } from 'yup';
 
@@ -82,8 +83,11 @@ export default function CreateCategoryForm({
           }
         });
       }
+
+      toast.success(`Categoria criada com sucesso!`);
     } catch {
       setRequestError(true);
+      toast.error(`Criação de categoria falhou, tente novamente em instantes!`);
     } finally {
       setShowDialog(false);
       setIsSubmiting(false);

@@ -1,7 +1,9 @@
 import './globals.css';
+
 import { Inter } from 'next/font/google';
 
 import { ReduxProvider } from '@/redux/ReduxProvider';
+import ToastProvider from '@/ToastProvider';
 import { ptBR } from '@clerk/localizations';
 import { ClerkProvider } from '@clerk/nextjs';
 
@@ -26,7 +28,9 @@ export default function RootLayout({
           <link rel="apple-touch-icon" href="/icon-512x512.png" />
         </head>
         <body className={inter.className}>
-          <ReduxProvider>{children}</ReduxProvider>
+          <ToastProvider>
+            <ReduxProvider>{children}</ReduxProvider>
+          </ToastProvider>
         </body>
       </html>
     </ClerkProvider>

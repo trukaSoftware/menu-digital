@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaGripLines, FaSearch } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import { InferType } from 'yup';
 
@@ -103,10 +104,12 @@ export default function EditCategoryForm({
           user?.id as string
         );
 
+        toast.success(`Categoria editada com sucesso!`);
         dispatch(setCategories(updatedCategories));
       }
     } catch {
       setRequestError(true);
+      toast.error(`Edição de categoria falhou, tente novamente em instantes!`);
     } finally {
       setShowDialog(false);
       setIsSubmiting(false);
