@@ -1,32 +1,32 @@
-.createProductFormContainer {
-  @apply py-4 px-2 h-full;
+.editProductFormContainer {
+  @apply p-4 h-full bg-white md:rounded;
 }
 
-.createProductForm {
-  @apply flex flex-col justify-between h-4/5 min-h-[92%] overflow-auto;
+.editProductForm {
+  @apply flex flex-col justify-between h-4/5 min-h-[92%] overflow-auto md:h-full;
 }
 
-.createProductFormcontainerInputs {
+.editProductFormcontainerInputs {
   @apply flex flex-col gap-y-2;
 }
 
-.createProductFormlabel {
+.editProductFormlabel {
   @apply flex flex-col gap-2;
 }
 
-.createProductFormTitle {
+.editProductFormTitle {
   @apply text-sm text-gray-900;
 }
 
-.createProductFormTextArea {
+.editProductFormTextArea {
   @apply border border-gray-300 p-2;
 }
 
-.createProductFormErrorMessage {
+.editProductFormErrorMessage {
   @apply text-sm text-red-500 font-medium;
 }
 
-.createProductFormSubmitButton {
+.editProductFormSubmitButton {
   @apply w-full h-11 min-h-[2.75rem] flex justify-center items-center bg-red-600 text-white rounded mt-6;
 }
 

@@ -1,5 +1,5 @@
 .createProductFormContainer {
-  @apply py-4 px-2 h-full bg-white;
+  @apply py-4 px-2 h-full bg-white md:rounded;
 }
 
 .createProductForm {

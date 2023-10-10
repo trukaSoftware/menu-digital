@@ -1,5 +1,5 @@
 .createCategoryForm {
-  @apply flex flex-col h-[calc(100%_-_56px)] justify-between p-4 overflow-auto bg-white;
+  @apply flex flex-col h-[calc(100%_-_56px)] justify-between p-4 overflow-auto bg-white md:rounded;
 }
 
 .createCategoryFormInputs {
