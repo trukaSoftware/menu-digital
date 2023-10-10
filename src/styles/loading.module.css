@@ -1,0 +1,7 @@
+.loadingWrapper {
+  @apply w-full h-screen flex items-center justify-center;
+}
+
+.loadingIcon {
+  @apply animate-spin;
+}
