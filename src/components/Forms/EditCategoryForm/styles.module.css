@@ -1,5 +1,5 @@
 .editCategoryForm {
-  @apply flex flex-col h-[calc(100%_-_56px)] justify-between p-4;
+  @apply flex flex-col h-[calc(100%_-_56px)] justify-between p-4 overflow-auto bg-white md:rounded;
 }
 
 .editCategoryFormInputs {
@@ -31,5 +31,5 @@
 }
 
 .editCategorySubmitButton {
-  @apply w-full py-2.5 bg-red-600 border-none text-white rounded flex items-center justify-center h-11;
+  @apply w-full py-2.5 bg-red-600 border-none text-white rounded flex items-center justify-center h-11 mt-6;
 }

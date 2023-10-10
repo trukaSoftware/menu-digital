@@ -144,12 +144,12 @@ export default function EditProductForm({
   };
 
   return (
-    <div className={styles.createProductFormContainer}>
+    <div className={styles.editProductFormContainer}>
       <form
-        className={styles.createProductForm}
+        className={styles.editProductForm}
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className={styles.createProductFormcontainerInputs}>
+        <div className={styles.editProductFormcontainerInputs}>
           <DefaultInput
             Icon={<MdOutlineFastfood />}
             name="name"
@@ -158,20 +158,17 @@ export default function EditProductForm({
             register={register(`name`)}
             error={errors.name?.message}
           />
-          <label
-            htmlFor="description"
-            className={styles.createProductFormlabel}
-          >
-            <span className={styles.createProductFormTitle}>Descrição*</span>
+          <label htmlFor="description" className={styles.editProductFormlabel}>
+            <span className={styles.editProductFormTitle}>Descrição*</span>
             <textarea
-              className={styles.createProductFormTextArea}
+              className={styles.editProductFormTextArea}
               id="description"
               rows={3}
               placeholder="Pão australiano, 120g de carne, 2 ovos, queijo e presunto"
               {...register(`description`)}
             />
             {errors.description ? (
-              <span className={styles.createProductFormErrorMessage}>
+              <span className={styles.editProductFormErrorMessage}>
                 {errors.description?.message}
               </span>
             ) : null}
@@ -214,7 +211,7 @@ export default function EditProductForm({
               : `Editar produto`
           }
           submitError={requestError}
-          className={styles.createProductFormSubmitButton}
+          className={styles.editProductFormSubmitButton}
         />
       </form>
     </div>

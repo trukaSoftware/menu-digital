@@ -1,9 +1,9 @@
 .createProductFormContainer {
-  @apply py-4 px-2 h-full;
+  @apply py-4 px-2 h-full bg-white md:rounded;
 }
 
 .createProductForm {
-  @apply flex flex-col justify-between h-4/5 min-h-[92%] overflow-auto;
+  @apply flex flex-col justify-between h-4/5 min-h-[92%] overflow-auto md:h-full md:min-h-full;
 }
 
 .createProductFormcontainerInputs {
