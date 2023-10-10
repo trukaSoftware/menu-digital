@@ -10,10 +10,10 @@ export interface ModalDefaultHeaderProps {
 
 export default function ModalDefaultHeader({ title }: ModalDefaultHeaderProps) {
   return (
-    <div className={styles.createCategoryHeader}>
-      <Title className={styles.createCategoryTitle}>{title}</Title>
+    <div className={styles.modalDefaultHeader}>
+      <Title className={styles.modalDefaultHeaderTitle}>{title}</Title>
       <Close>
-        <CgClose size={30} className={styles.createCategoryCloseIcon} />
+        <CgClose size={30} className={styles.modalDefaultHeaderCloseIcon} />
       </Close>
     </div>
   );
