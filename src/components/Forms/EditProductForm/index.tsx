@@ -17,6 +17,7 @@ import { ImageProps } from '@/utils/types';
 
 import { editProductFromCategories } from '@/redux/features/categories-slice';
 import { editProductFromList } from '@/redux/features/products-slice';
+import { useAppSelector } from '@/redux/store';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { productSchema, ProductData } from '@yup/front/createProductFormSchema';
 
@@ -53,6 +54,7 @@ export default function EditProductForm({
     register,
     control,
     formState: { errors },
+    setError,
   } = useForm<ProductData>({
     resolver: yupResolver(productSchema),
     mode: `onChange`,
@@ -64,6 +66,8 @@ export default function EditProductForm({
     },
   });
 
+  const products = useAppSelector((state) => state.productsReducer.products);
+
   const productName = useWatch({
     control,
     name: `name`,
@@ -71,6 +75,18 @@ export default function EditProductForm({
 
   const onSubmit = async (values: ProductData) => {
     setIsSubmiting(true);
+
+    const allProductsNames = products
+      .filter((prod) => prod.id !== product.id)
+      .map((prod) => prod.name.toLowerCase());
+
+    if (allProductsNames.includes(values.name.toLowerCase())) {
+      setIsSubmiting(false);
+      setError(`name`, {
+        message: `Já existe um produto com esse nome, coloque um nome diferente!`,
+      });
+      return;
+    }
 
     const editProductPayload = {
       ...values,
@@ -113,13 +129,12 @@ export default function EditProductForm({
       setRequestError(true);
       toast.error(`Edição de produto falhou, tente novamente em instantes!`);
     } finally {
+      setShowDialog(false);
       setIsSubmiting(false);
     }
 
     setRegistredWithSucess(true);
-    setTimeout(() => {
-      setShowDialog(false);
-    }, 2000);
+    setIsSubmiting(false);
   };
 
   const handleImage = async (event: ChangeEvent<HTMLInputElement>) => {
