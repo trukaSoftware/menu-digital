@@ -6,8 +6,8 @@ import Image from 'next/image';
 
 import * as Dialog from '@radix-ui/react-dialog';
 
+import Complement from '../Complement';
 import FoodCard, { FoodCardProps } from '../FoodCard';
-import Prices from '../Prices';
 import styles from './styles.module.css';
 
 export interface FoodCardDialogProps {
@@ -53,13 +53,15 @@ export default function FoodCardDialog({ foodCard }: FoodCardDialogProps) {
             <Dialog.Description className={styles.foodCardDialogDescription}>
               {foodCard.description}
             </Dialog.Description>
-            <Prices
-              price={foodCard.price}
-              discountedPrice={foodCard.discountedPrice}
-              priceClassName={styles.bigPriceClassName}
-              discountedPriceClassName={styles.bigPriceClassName}
-            />
           </div>
+          {foodCard.complements.length > 0
+            ? foodCard.complements?.map((complement) => (
+                <Complement
+                  key={complement.complementId}
+                  complement={complement.complements}
+                />
+              ))
+            : null}
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
