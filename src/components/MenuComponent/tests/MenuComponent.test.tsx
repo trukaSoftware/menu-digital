@@ -96,7 +96,7 @@ describe(`MenuComponent`, () => {
   });
 
   it(`if MenuComponent is called without companyInfos and the button Categorias is clicked should open a dialog with headline text "Criação de categoria"`, async () => {
-    render(<MenuComponent {...modifieldMockProps} />);
+    renderWithRedux(<MenuComponent {...modifieldMockProps} />);
 
     const createCategoryButton = screen.getByRole(`button`, {
       name: /Categorias/i,
