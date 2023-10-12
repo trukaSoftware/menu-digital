@@ -49,6 +49,7 @@ export default function CreateProductForm({
     register,
     control,
     formState: { errors },
+    setError,
   } = useForm<ProductData>({
     resolver: yupResolver(productSchema),
     mode: `onChange`,
@@ -61,6 +62,18 @@ export default function CreateProductForm({
 
   const onSubmit = async (values: ProductData) => {
     setIsSubmiting(true);
+
+    const allProductsNames = products.map((product) =>
+      product.name.toLowerCase()
+    );
+
+    if (allProductsNames.includes(values.name.toLowerCase())) {
+      setIsSubmiting(false);
+      setError(`name`, {
+        message: `Já existe um produto com esse nome, coloque um nome diferente!`,
+      });
+      return;
+    }
 
     const createProductPayload = {
       ...values,

@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { vi } from 'vitest';
 
-import { render, screen, cleanup } from '@testing-library/react';
+import { renderWithRedux } from '@/testsUtils/providers';
+import { screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import CategoriesEmptyState from '..';
@@ -31,7 +32,7 @@ describe(`CategoriesEmptyState`, () => {
   it(`should open create category modal when clicking on button "Cadastrar categoria"`, async () => {
     mockedAxios.delete.mockResolvedValueOnce({ data: { deleted: false } });
 
-    render(<CategoriesEmptyState />);
+    renderWithRedux(<CategoriesEmptyState />);
 
     const emptyStateNewCategoryBtn = screen.getByRole(`button`, {
       name: `Cadastrar categoria`,

@@ -46,6 +46,7 @@ export default function EditCategoryForm({
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm({
     resolver: yupResolver(createCategoryFormSchema),
     mode: `onChange`,
@@ -61,6 +62,10 @@ export default function EditCategoryForm({
   const [registredWithSucess, setRegistredWithSucess] = useState(false);
   const { user } = useUser();
 
+  const categories = useAppSelector(
+    (state) => state.categoriesReducer.categories
+  );
+
   const { products, gettingProducts } = useProducts(user?.id as string);
 
   const filteredProducts =
@@ -74,6 +79,19 @@ export default function EditCategoryForm({
 
   const onSubmit = async (data: EditCategoryFormData) => {
     setIsSubmiting(true);
+
+    const allCategoriesNames = categories
+      .filter((cat) => cat.id !== category?.id)
+      .map((cat) => cat.name.toLowerCase());
+
+    if (allCategoriesNames.includes(data.categoryName.toLowerCase())) {
+      setIsSubmiting(false);
+      setError(`categoryName`, {
+        message: `Já existe uma categoria com esse nome, coloque um nome diferente!`,
+      });
+      return;
+    }
+
     const productsToRemoveId =
       productsIds?.filter(
         (productId) => !data.productsIds?.includes(productId)

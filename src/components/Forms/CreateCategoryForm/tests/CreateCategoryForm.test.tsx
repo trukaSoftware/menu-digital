@@ -2,7 +2,8 @@ import axios from 'axios';
 import { vi } from 'vitest';
 
 import { productsMock } from '@/mocks/products';
-import { render, screen, cleanup, fireEvent } from '@testing-library/react';
+import { renderWithRedux } from '@/testsUtils/providers';
+import { screen, cleanup, fireEvent } from '@testing-library/react';
 
 import CreateCategoryForm from '..';
 
@@ -29,7 +30,7 @@ describe(`CreateCategoryForm`, () => {
   };
 
   it(`When trying to send form without filling the category name input should render error`, async () => {
-    render(<CreateCategoryForm {...mockProps} />);
+    renderWithRedux(<CreateCategoryForm {...mockProps} />);
 
     const submitButton = screen.getByRole(`button`, {
       name: `Criar categoria`,
@@ -49,7 +50,7 @@ describe(`CreateCategoryForm`, () => {
       data: { products: productsMock },
     });
 
-    render(<CreateCategoryForm {...mockProps} />);
+    renderWithRedux(<CreateCategoryForm {...mockProps} />);
 
     const submitButton = screen.getByRole(`button`, {
       name: `Criar categoria`,
