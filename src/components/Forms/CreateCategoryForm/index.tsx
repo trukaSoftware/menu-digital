@@ -1,15 +1,18 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaGripLines, FaSearch } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
 import { InferType } from 'yup';
 
 import { createCategory } from '@/utils/api/createCategory';
 import { editProduct } from '@/utils/api/editProduct';
+import { getCategories } from '@/utils/api/getCategories';
 import { removeAccent } from '@/utils/removeAccent';
 
 import { useProducts } from '@/hooks/useProducts';
+import { setCategories } from '@/redux/features/categories-slice';
 import { useAppSelector } from '@/redux/store';
 import { useUser } from '@clerk/nextjs';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -38,6 +41,8 @@ export default function CreateCategoryForm({
     resolver: yupResolver(createCategoryFormSchema),
     mode: `onChange`,
   });
+
+  const dispatch = useDispatch();
 
   const [isSubmiting, setIsSubmiting] = useState(false);
   const [searchProductName, setSearchProductName] = useState<string>(``);
@@ -100,6 +105,9 @@ export default function CreateCategoryForm({
         });
       }
 
+      const newCategories = await getCategories(user?.id as string);
+
+      dispatch(setCategories(newCategories.categories));
       toast.success(`Categoria criada com sucesso!`);
     } catch {
       setRequestError(true);
