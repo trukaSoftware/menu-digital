@@ -40,7 +40,9 @@ export default async function Products({ params }: RouterParams) {
       ),
     }));
 
-  const companyCategories = categories.map((category) => category.name);
+  const companyCategories = categories
+    .filter((category) => category.categoryProducts.length > 0)
+    .map((category) => category.name);
 
   return (
     <>
