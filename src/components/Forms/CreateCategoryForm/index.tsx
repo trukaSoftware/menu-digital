@@ -10,6 +10,7 @@ import { editProduct } from '@/utils/api/editProduct';
 import { removeAccent } from '@/utils/removeAccent';
 
 import { useProducts } from '@/hooks/useProducts';
+import { useAppSelector } from '@/redux/store';
 import { useUser } from '@clerk/nextjs';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { createCategoryFormSchema } from '@yup/front/createCategoryFormSchema';
@@ -32,6 +33,7 @@ export default function CreateCategoryForm({
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm({
     resolver: yupResolver(createCategoryFormSchema),
     mode: `onChange`,
@@ -54,8 +56,22 @@ export default function CreateCategoryForm({
         )
       : [];
 
+  const categories = useAppSelector(
+    (state) => state.categoriesReducer.categories
+  );
+
   const onSubmit = async (data: CreateCategoryFormData) => {
     setIsSubmiting(true);
+
+    const allCategoriesNames = categories.map((cat) => cat.name.toLowerCase());
+
+    if (allCategoriesNames.includes(data.categoryName.toLowerCase())) {
+      setIsSubmiting(false);
+      setError(`categoryName`, {
+        message: `Já existe uma categoria com esse nome, coloque um nome diferente!`,
+      });
+      return;
+    }
 
     try {
       const createdCategory = await createCategory({
