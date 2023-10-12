@@ -1,0 +1,27 @@
+.complementWrapper {
+  @apply flex flex-col px-3 gap-2 mb-2;
+}
+
+.complementContent {
+  @apply flex justify-between items-center w-full bg-zinc-200 rounded p-2;
+}
+
+.complementTitleWrapper {
+  @apply flex flex-col gap-1;
+}
+
+.complementTitleWrapper > h3 {
+  @apply text-zinc-900 font-semibold text-sm;
+}
+
+.complementTitleWrapper > p {
+  @apply text-zinc-900 font-light text-xs;
+}
+
+.complementAmount {
+  @apply text-zinc-900 font-semibold text-sm;
+}
+
+.complementItemsWrapper {
+  @apply flex flex-col gap-1;
+}
