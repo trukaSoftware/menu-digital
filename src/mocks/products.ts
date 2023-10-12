@@ -40,7 +40,7 @@ export const productMock = {
   createdAt: `2023-08-02T18:08:35.658Z`,
   updatedAt: `2023-08-02T18:08:35.658Z`,
   productsImages: productsImagesMock,
-  productsComplements: productsComplementsMock,
+  productsComplements: [],
 } as Product;
 
 export const productsMock = [
