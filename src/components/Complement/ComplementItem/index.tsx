@@ -1,6 +1,6 @@
 import { FaPlus, FaMinus } from 'react-icons/fa6';
 
-import { ComplementItem } from '@/types/complement';
+import { ComplementItemProp } from '@/types/complement';
 
 import { priceToBrazilCurrency } from '@/utils/priceToBrazilCurrency';
 
@@ -9,11 +9,11 @@ import styles from './styles.module.css';
 import { ComplementSelectedProps } from '..';
 
 export interface ComplementItemProps {
-  complementItem: ComplementItem;
-  handleAddComplement: (id: string) => void;
+  complementItem: ComplementItemProp;
+  handleAddComplement: (complementItem: ComplementItemProp) => void;
   handleRemoveComplement: (
-    id: string,
-    selectedComplementItemAmount: number
+    complementItem: ComplementItemProp,
+    complementPrice: number
   ) => void;
   complementsSelected: ComplementSelectedProps[];
 }
@@ -44,7 +44,10 @@ export default function ComplementItem({
             <button
               type="button"
               onClick={() =>
-                handleRemoveComplement(complementItem.id, selectedAmount.amount)
+                handleRemoveComplement(
+                  complementItem,
+                  Number(complementItem.price)
+                )
               }
             >
               <FaMinus size={18} className={styles.complementItemMinusIcon} />
@@ -54,7 +57,7 @@ export default function ComplementItem({
         ) : null}
         <button
           type="button"
-          onClick={() => handleAddComplement(complementItem.id)}
+          onClick={() => handleAddComplement(complementItem)}
         >
           <FaPlus size={18} />
         </button>

@@ -1,20 +1,28 @@
 import { useState } from 'react';
 
-import { Complement } from '@/types/complement';
+import { Complement, ComplementItemProp } from '@/types/complement';
 
 import ComplementItem from './ComplementItem';
 import styles from './styles.module.css';
 
 export interface ComplementProps {
   complement: Complement;
+  addComplementPriceToCartItem: (price: number) => void;
+  removeComplementPriceToCartItem: (price: number) => void;
 }
 
 export interface ComplementSelectedProps {
   id: string;
   amount: number;
+  price: number;
+  name: string;
 }
 
-export default function Complement({ complement }: ComplementProps) {
+export default function Complement({
+  complement,
+  addComplementPriceToCartItem,
+  removeComplementPriceToCartItem,
+}: ComplementProps) {
   const [complementsSelected, setComplementsSelected] = useState<
     ComplementSelectedProps[]
   >([]);
@@ -24,32 +32,47 @@ export default function Complement({ complement }: ComplementProps) {
     0
   );
 
-  const handleAddComplement = (id: string) => {
+  const handleAddComplement = (complementItem: ComplementItemProp) => {
     if (totalComplements + 1 <= complement.maxAmount) {
       const complementSelected = complementsSelected.find(
-        (comp) => comp.id === id
+        (comp) => comp.id === complementItem.id
       );
 
       if (complementSelected) {
         setComplementsSelected(
           complementsSelected.map((comp) =>
-            comp.id === id ? { ...comp, amount: comp.amount + 1 } : comp
+            comp.id === complementItem.id
+              ? { ...comp, amount: comp.amount + 1 }
+              : comp
           )
         );
       } else {
-        setComplementsSelected([...complementsSelected, { id, amount: 1 }]);
+        setComplementsSelected([
+          ...complementsSelected,
+          {
+            id: complementItem.id,
+            amount: 1,
+            price: Number(complementItem.price),
+            name: complementItem.name,
+          },
+        ]);
       }
+
+      addComplementPriceToCartItem(Number(complementItem.price));
     }
   };
 
   const handleRemoveComplement = (
-    id: string,
+    complementItem: ComplementItemProp,
     selectedComplementItemAmount: number
   ) => {
+    removeComplementPriceToCartItem(Number(complementItem.price));
     if (selectedComplementItemAmount > 1) {
       setComplementsSelected(
         complementsSelected.map((comp) =>
-          comp.id === id ? { ...comp, amount: comp.amount - 1 } : comp
+          comp.id === complementItem.id
+            ? { ...comp, amount: comp.amount - 1 }
+            : comp
         )
       );
 
@@ -57,7 +80,7 @@ export default function Complement({ complement }: ComplementProps) {
     }
 
     const newComplementsSelected = complementsSelected.filter(
-      (comp) => comp.id !== id
+      (comp) => comp.id !== complementItem.id
     );
 
     setComplementsSelected(newComplementsSelected);
