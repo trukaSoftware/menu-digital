@@ -1,3 +1,4 @@
+import ShoppingCartDialog from '@/components/Dialogs/ShoppingCartDialog';
 import { FoodCardProps } from '@/components/FoodCard';
 
 import api from '@/utils/api';
@@ -49,22 +50,27 @@ export default async function Products({ params }: RouterParams) {
     .map((category) => category.name);
 
   return (
-    <>
-      <Header
-        companyName={name}
-        companyImage={companyLogoUrl}
-        companyThemeUrl={companyThemeUrl}
-        companyCategories={companyCategories}
-      />
-      <main className={styles.mainContainer}>
-        {parsedCategories.map((category) => (
-          <FoodCardList
-            key={category.id}
-            title={category.name}
-            foodCards={category.categoryProducts}
-          />
-        ))}
-      </main>
-    </>
+    <div className={styles.container}>
+      <div>
+        <Header
+          companyName={name}
+          companyImage={companyLogoUrl}
+          companyThemeUrl={companyThemeUrl}
+          companyCategories={companyCategories}
+        />
+        <main className={styles.mainContainer}>
+          {parsedCategories.map((category) => (
+            <FoodCardList
+              key={category.id}
+              title={category.name}
+              foodCards={category.categoryProducts}
+            />
+          ))}
+        </main>
+      </div>
+      <div className={styles.containerShoppingCartDialog}>
+        <ShoppingCartDialog />
+      </div>
+    </div>
   );
 }
