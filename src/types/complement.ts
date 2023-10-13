@@ -1,4 +1,4 @@
-export interface ComplementItem {
+export interface ComplementItemProp {
   id: string;
   name: string;
   price: string;
@@ -13,5 +13,5 @@ export interface Complement {
   maxAmount: number;
   createdAt: string;
   updatedAt: string;
-  items: ComplementItem[];
+  items: ComplementItemProp[];
 }
