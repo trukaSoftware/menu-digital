@@ -47,6 +47,11 @@ export default function FoodCardDialog({ foodCard }: FoodCardDialogProps) {
   const [cartItem, setCartItem] = useState<CartItemProps>(
     CART_ITEM_INITIAL_VALUE
   );
+
+  // const { value: cartProducts, updateLocalStorage } = useLocalStorage<
+  //   CartItemProps[]
+  // >(`md-food-cart-items`, []);
+
   const addComplementPriceToCartItem = (
     price: number,
     selectedComplement: SelectedComplement
@@ -146,8 +151,19 @@ export default function FoodCardDialog({ foodCard }: FoodCardDialogProps) {
   };
 
   const handleAddToCart = () => {
-    localStorage.setItem(`mdFoodCartItems`, JSON.stringify(cartItem));
+    const cartProducts = JSON.parse(
+      `${localStorage.getItem(`md-food-cart-items`)}`
+    );
+
     toast.success(`${foodCard.title} adicionado ao carrinho!`);
+    if (cartProducts) {
+      return localStorage.setItem(
+        `md-food-cart-items`,
+        JSON.stringify([...cartProducts, cartItem])
+      );
+    }
+
+    localStorage.setItem(`md-food-cart-items`, JSON.stringify([cartItem]));
   };
 
   return (
