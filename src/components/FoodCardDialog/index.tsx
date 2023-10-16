@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { CgClose } from 'react-icons/cg';
 import { FaMinus, FaPlus } from 'react-icons/fa6';
+import { toast } from 'react-toastify';
 
 import Image from 'next/image';
 
@@ -46,9 +47,6 @@ export default function FoodCardDialog({ foodCard }: FoodCardDialogProps) {
   const [cartItem, setCartItem] = useState<CartItemProps>(
     CART_ITEM_INITIAL_VALUE
   );
-
-  console.log(cartItem);
-
   const addComplementPriceToCartItem = (
     price: number,
     selectedComplement: SelectedComplement
@@ -147,6 +145,11 @@ export default function FoodCardDialog({ foodCard }: FoodCardDialogProps) {
     });
   };
 
+  const handleAddToCart = () => {
+    localStorage.setItem(`mdFoodCartItems`, JSON.stringify(cartItem));
+    toast.success(`${foodCard.title} adicionado ao carrinho!`);
+  };
+
   return (
     <Dialog.Root onOpenChange={() => setCartItem(CART_ITEM_INITIAL_VALUE)}>
       <Dialog.Trigger className={styles.foodCardDialogTrigger}>
@@ -219,10 +222,14 @@ export default function FoodCardDialog({ foodCard }: FoodCardDialogProps) {
                 <FaPlus size={18} className={styles.addMoreToCartMinusIcon} />
               </button>
             </div>
-            <button type="button" className={styles.btnAddToCart}>
+            <Dialog.Close
+              type="button"
+              className={styles.btnAddToCart}
+              onClick={handleAddToCart}
+            >
               <span>Adicionar</span>
               <span>{priceToBrazilCurrency(cartItem.totalValue)}</span>
-            </button>
+            </Dialog.Close>
           </div>
         </Dialog.Content>
       </Dialog.Portal>
