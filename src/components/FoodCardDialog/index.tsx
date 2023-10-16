@@ -19,10 +19,12 @@ export interface FoodCardDialogProps {
 }
 
 export interface SelectedComplement {
-  idComplemento: string;
+  complementId: string;
   items: ComplementSelectedProps[];
 }
 export interface CartItemProps {
+  productImage: string;
+  productName: string;
   totalValue: number;
   originalValue: number;
   amount: number;
@@ -32,36 +34,95 @@ export interface CartItemProps {
 
 export default function FoodCardDialog({ foodCard }: FoodCardDialogProps) {
   const CART_ITEM_INITIAL_VALUE = {
+    productImage: foodCard.foodImage,
+    productName: foodCard.title,
     totalValue: foodCard.price,
     originalValue: foodCard.price,
     amount: 1,
     observation: ``,
     allSelectedComplements: [],
-  };
+  } as CartItemProps;
 
   const [cartItem, setCartItem] = useState<CartItemProps>(
     CART_ITEM_INITIAL_VALUE
   );
 
-  const addComplementPriceToCartItem = (price: number) => {
+  console.log(cartItem);
+
+  const addComplementPriceToCartItem = (
+    price: number,
+    selectedComplement: SelectedComplement
+  ) => {
     const newTotalValuePrice = cartItem.totalValue + price * cartItem.amount;
     const newOriginalValuePrice = cartItem.originalValue + price;
+    const complementIsNotInArray = !cartItem.allSelectedComplements.find(
+      (comp) => comp.complementId === selectedComplement.complementId
+    );
+
+    if (
+      cartItem.allSelectedComplements.length === 0 ||
+      complementIsNotInArray
+    ) {
+      return setCartItem({
+        ...cartItem,
+        totalValue: newTotalValuePrice,
+        originalValue: newOriginalValuePrice,
+        allSelectedComplements: [
+          ...cartItem.allSelectedComplements,
+          selectedComplement,
+        ],
+      });
+    }
+
+    const newAllSelectedComplements = cartItem.allSelectedComplements.map(
+      (comp) =>
+        comp.complementId === selectedComplement.complementId
+          ? selectedComplement
+          : comp
+    );
 
     setCartItem({
       ...cartItem,
       totalValue: newTotalValuePrice,
       originalValue: newOriginalValuePrice,
+      allSelectedComplements: newAllSelectedComplements,
     });
   };
 
-  const removeComplementPriceToCartItem = (price: number) => {
+  const removeComplementPriceToCartItem = (
+    price: number,
+    selectedComplement: SelectedComplement
+  ) => {
     const newTotalValuePrice = cartItem.totalValue - price * cartItem.amount;
     const newOriginalValuePrice = cartItem.originalValue - price;
+
+    const isComplementWithNoItens = selectedComplement.items.length === 0;
+
+    if (isComplementWithNoItens) {
+      const newAllSelectedComplements = cartItem.allSelectedComplements.filter(
+        (comp) => comp.complementId !== selectedComplement.complementId
+      );
+
+      return setCartItem({
+        ...cartItem,
+        totalValue: newTotalValuePrice,
+        originalValue: newOriginalValuePrice,
+        allSelectedComplements: newAllSelectedComplements,
+      });
+    }
+
+    const newAllSelectedComplements = cartItem.allSelectedComplements.map(
+      (comp) =>
+        comp.complementId === selectedComplement.complementId
+          ? selectedComplement
+          : comp
+    );
 
     setCartItem({
       ...cartItem,
       totalValue: newTotalValuePrice,
       originalValue: newOriginalValuePrice,
+      allSelectedComplements: newAllSelectedComplements,
     });
   };
 

@@ -2,13 +2,20 @@ import { useState } from 'react';
 
 import { Complement, ComplementItemProp } from '@/types/complement';
 
+import { SelectedComplement } from '../FoodCardDialog';
 import ComplementItem from './ComplementItem';
 import styles from './styles.module.css';
 
 export interface ComplementProps {
   complement: Complement;
-  addComplementPriceToCartItem: (price: number) => void;
-  removeComplementPriceToCartItem: (price: number) => void;
+  addComplementPriceToCartItem: (
+    price: number,
+    selectedComplement: SelectedComplement
+  ) => void;
+  removeComplementPriceToCartItem: (
+    price: number,
+    selectedComplement: SelectedComplement
+  ) => void;
 }
 
 export interface ComplementSelectedProps {
@@ -23,42 +30,52 @@ export default function Complement({
   addComplementPriceToCartItem,
   removeComplementPriceToCartItem,
 }: ComplementProps) {
-  const [complementsSelected, setComplementsSelected] = useState<
+  const [complementItemsSelected, setComplementItemsSelected] = useState<
     ComplementSelectedProps[]
   >([]);
 
-  const totalComplements = complementsSelected.reduce(
+  const totalComplements = complementItemsSelected.reduce(
     (acc, current) => acc + current.amount,
     0
   );
 
   const handleAddComplement = (complementItem: ComplementItemProp) => {
     if (totalComplements + 1 <= complement.maxAmount) {
-      const complementSelected = complementsSelected.find(
+      const complementSelected = complementItemsSelected.find(
         (comp) => comp.id === complementItem.id
       );
 
       if (complementSelected) {
-        setComplementsSelected(
-          complementsSelected.map((comp) =>
-            comp.id === complementItem.id
-              ? { ...comp, amount: comp.amount + 1 }
-              : comp
-          )
+        const newComplementItemsSelected = complementItemsSelected.map((comp) =>
+          comp.id === complementItem.id
+            ? { ...comp, amount: comp.amount + 1 }
+            : comp
         );
-      } else {
-        setComplementsSelected([
-          ...complementsSelected,
-          {
-            id: complementItem.id,
-            amount: 1,
-            price: Number(complementItem.price),
-            name: complementItem.name,
-          },
-        ]);
+
+        setComplementItemsSelected(newComplementItemsSelected);
+
+        return addComplementPriceToCartItem(Number(complementItem.price), {
+          complementId: complement.id,
+          items: newComplementItemsSelected,
+        });
       }
 
-      addComplementPriceToCartItem(Number(complementItem.price));
+      const newComplementItemsSelected = [
+        ...complementItemsSelected,
+        {
+          id: complementItem.id,
+          amount: 1,
+          price: Number(complementItem.price),
+          name: complementItem.name,
+        },
+      ];
+
+      setComplementItemsSelected(newComplementItemsSelected);
+
+      addComplementPriceToCartItem(Number(complementItem.price), {
+        complementId: complement.id,
+        items: newComplementItemsSelected,
+      });
     }
   };
 
@@ -66,24 +83,31 @@ export default function Complement({
     complementItem: ComplementItemProp,
     selectedComplementItemAmount: number
   ) => {
-    removeComplementPriceToCartItem(Number(complementItem.price));
     if (selectedComplementItemAmount > 1) {
-      setComplementsSelected(
-        complementsSelected.map((comp) =>
-          comp.id === complementItem.id
-            ? { ...comp, amount: comp.amount - 1 }
-            : comp
-        )
+      const newComps = complementItemsSelected.map((comp) =>
+        comp.id === complementItem.id
+          ? { ...comp, amount: comp.amount - 1 }
+          : comp
       );
 
-      return;
+      removeComplementPriceToCartItem(Number(complementItem.price), {
+        complementId: complement.id,
+        items: newComps,
+      });
+
+      return setComplementItemsSelected(newComps);
     }
 
-    const newComplementsSelected = complementsSelected.filter(
+    const newComplementsSelected = complementItemsSelected.filter(
       (comp) => comp.id !== complementItem.id
     );
 
-    setComplementsSelected(newComplementsSelected);
+    removeComplementPriceToCartItem(Number(complementItem.price), {
+      complementId: complement.id,
+      items: newComplementsSelected,
+    });
+
+    setComplementItemsSelected(newComplementsSelected);
   };
 
   return (
@@ -108,7 +132,7 @@ export default function Complement({
             complementItem={complementItem}
             handleAddComplement={handleAddComplement}
             handleRemoveComplement={handleRemoveComplement}
-            complementsSelected={complementsSelected}
+            complementsSelected={complementItemsSelected}
           />
         ))}
       </ul>
