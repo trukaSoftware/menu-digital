@@ -6,7 +6,8 @@
   @apply flex justify-between items-center w-full bg-zinc-200 rounded p-2;
 }
 
-.complementTitleWrapper {
+.complementTitleWrapper,
+.complementItemsWrapper {
   @apply flex flex-col gap-1;
 }
 
@@ -20,8 +21,4 @@
 
 .complementAmount {
   @apply text-zinc-900 font-semibold text-sm;
-}
-
-.complementItemsWrapper {
-  @apply flex flex-col gap-1;
 }

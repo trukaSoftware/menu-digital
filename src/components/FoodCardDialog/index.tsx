@@ -48,10 +48,6 @@ export default function FoodCardDialog({ foodCard }: FoodCardDialogProps) {
     CART_ITEM_INITIAL_VALUE
   );
 
-  // const { value: cartProducts, updateLocalStorage } = useLocalStorage<
-  //   CartItemProps[]
-  // >(`md-food-cart-items`, []);
-
   const addComplementPriceToCartItem = (
     price: number,
     selectedComplement: SelectedComplement
