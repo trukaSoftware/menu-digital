@@ -32,7 +32,7 @@ export default function ComplementItem({
     <li className={styles.complementItemWrapper}>
       <div className={styles.complementItemTitleWrapper}>
         <h4>{complementItem.name}</h4>
-        <p>{priceToBrazilCurrency(+complementItem.price)}</p>
+        <p>{priceToBrazilCurrency(Number(complementItem.price))}</p>
       </div>
       <div
         className={`${styles.complementItemButtonsWrapper} ${
