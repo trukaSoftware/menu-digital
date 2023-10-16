@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { CgClose } from 'react-icons/cg';
 import { FaMinus, FaPlus } from 'react-icons/fa6';
 
@@ -42,11 +42,6 @@ export default function FoodCardDialog({ foodCard }: FoodCardDialogProps) {
   const [cartItem, setCartItem] = useState<CartItemProps>(
     CART_ITEM_INITIAL_VALUE
   );
-
-  useEffect(() => {
-    setCartItem(CART_ITEM_INITIAL_VALUE);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const addComplementPriceToCartItem = (price: number) => {
     const newTotalValuePrice = cartItem.totalValue + price * cartItem.amount;
@@ -92,7 +87,7 @@ export default function FoodCardDialog({ foodCard }: FoodCardDialogProps) {
   };
 
   return (
-    <Dialog.Root>
+    <Dialog.Root onOpenChange={() => setCartItem(CART_ITEM_INITIAL_VALUE)}>
       <Dialog.Trigger className={styles.foodCardDialogTrigger}>
         <FoodCard {...foodCard} />
       </Dialog.Trigger>

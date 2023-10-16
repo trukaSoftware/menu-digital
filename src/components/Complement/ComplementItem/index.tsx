@@ -46,7 +46,7 @@ export default function ComplementItem({
               onClick={() =>
                 handleRemoveComplement(
                   complementItem,
-                  Number(complementItem.price)
+                  Number(selectedAmount.amount)
                 )
               }
             >
