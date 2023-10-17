@@ -125,7 +125,7 @@ export default function ShoppingCartPortal({
                         }
                       >
                         <p className={styles.shoppingCartBoldTexts}>
-                          {`${cartItem.amount} ${cartItem.productName}`}
+                          {cartItem.productName}
                         </p>
                         <FaRegEdit size={16} />
                       </div>
@@ -156,6 +156,7 @@ export default function ShoppingCartPortal({
                             onClick={() => {
                               removeCartProductAmount(cartItem);
                             }}
+                            aria-label="Remover item do carrinho"
                           >
                             <FaMinus size={14} color="#EF4444" />
                           </button>
@@ -163,6 +164,7 @@ export default function ShoppingCartPortal({
                           <button
                             type="button"
                             onClick={() => addCartProductAmount(cartItem)}
+                            aria-label="Adicionar item ao carrinho"
                           >
                             <FaPlus size={14} />
                           </button>
@@ -172,7 +174,7 @@ export default function ShoppingCartPortal({
                   </div>
                 ))
               ) : (
-                <p>Não exite produtos no carrinho</p>
+                <p>Não exitem produtos no carrinho</p>
               )}
             </div>
             <button
