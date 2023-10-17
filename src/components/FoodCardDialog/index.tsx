@@ -3,12 +3,16 @@
 import { useState } from 'react';
 import { CgClose } from 'react-icons/cg';
 import { FaMinus, FaPlus } from 'react-icons/fa6';
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
 import Image from 'next/image';
 
+import { v4 as uuidv4 } from 'uuid';
+
 import { priceToBrazilCurrency } from '@/utils/priceToBrazilCurrency';
 
+import { setCartItens } from '@/redux/features/cartItem-slice';
 import * as Dialog from '@radix-ui/react-dialog';
 
 import Complement, { ComplementSelectedProps } from '../Complement';
@@ -24,6 +28,7 @@ export interface SelectedComplement {
   items: ComplementSelectedProps[];
 }
 export interface CartItemProps {
+  id: string;
   productImage: string;
   productName: string;
   totalValue: number;
@@ -35,6 +40,7 @@ export interface CartItemProps {
 
 export default function FoodCardDialog({ foodCard }: FoodCardDialogProps) {
   const CART_ITEM_INITIAL_VALUE = {
+    id: uuidv4(),
     productImage: foodCard.foodImage,
     productName: foodCard.title,
     totalValue: foodCard.price,
@@ -47,6 +53,7 @@ export default function FoodCardDialog({ foodCard }: FoodCardDialogProps) {
   const [cartItem, setCartItem] = useState<CartItemProps>(
     CART_ITEM_INITIAL_VALUE
   );
+  const dispatch = useDispatch();
 
   const addComplementPriceToCartItem = (
     price: number,
@@ -147,19 +154,17 @@ export default function FoodCardDialog({ foodCard }: FoodCardDialogProps) {
   };
 
   const handleAddToCart = () => {
-    const cartProducts = JSON.parse(
-      `${localStorage.getItem(`md-food-cart-items`)}`
-    );
+    const cartProducts =
+      (JSON.parse(
+        `${localStorage.getItem(`md-food-cart-items`)}`
+      ) as CartItemProps[]) || [];
 
     toast.success(`${foodCard.title} adicionado ao carrinho!`);
-    if (cartProducts) {
-      return localStorage.setItem(
-        `md-food-cart-items`,
-        JSON.stringify([...cartProducts, cartItem])
-      );
-    }
-
-    localStorage.setItem(`md-food-cart-items`, JSON.stringify([cartItem]));
+    localStorage.setItem(
+      `md-food-cart-items`,
+      JSON.stringify([...cartProducts, cartItem])
+    );
+    dispatch(setCartItens([...cartProducts, cartItem]));
   };
 
   return (
