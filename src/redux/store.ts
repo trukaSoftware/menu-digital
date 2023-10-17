@@ -6,12 +6,14 @@ import {
   configureStore,
 } from '@reduxjs/toolkit';
 
+import cartItemReducer from './features/cartItem-slice';
 import categoriesReducer from './features/categories-slice';
 import productsReducer from './features/products-slice';
 
 export const rootReducer = combineReducers({
   categoriesReducer,
   productsReducer,
+  cartItemReducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) =>
