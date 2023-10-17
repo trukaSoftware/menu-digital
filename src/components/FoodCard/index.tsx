@@ -1,5 +1,7 @@
 import Image from 'next/image';
 
+import { ProductsComplement } from '@/types/product';
+
 import Prices from '../Prices';
 import styles from './styles.module.css';
 
@@ -10,6 +12,7 @@ export interface FoodCardProps {
   price: number;
   discountedPrice?: number;
   discountPercentage?: number;
+  complements: ProductsComplement[];
 }
 
 export default function FoodCard({

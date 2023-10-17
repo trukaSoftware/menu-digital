@@ -1,5 +1,7 @@
 import { ImageProps } from '@/utils/types';
 
+import { Complement } from './complement';
+
 export interface ProductResponse {
   products: Product[];
 }
@@ -34,16 +36,7 @@ export interface ProductPayload {
 export interface ProductsComplement {
   productsId: string;
   complementId: string;
-  complements: Complements;
-}
-
-export interface Complements {
-  id: string;
-  name: string;
-  maxAmount: number;
-  createdAt: string;
-  updatedAt: string;
-  items: any[];
+  complements: Complement;
 }
 
 export interface ProductsImage {

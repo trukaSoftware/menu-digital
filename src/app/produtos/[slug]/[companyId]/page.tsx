@@ -36,11 +36,17 @@ export default async function Products({ params }: RouterParams) {
                   parseFloat(product.price)) *
                 100
               : undefined,
+            complements:
+              product.productsComplements.length > 0
+                ? product.productsComplements
+                : [],
           } as FoodCardProps)
       ),
     }));
 
-  const companyCategories = categories.map((category) => category.name);
+  const companyCategories = categories
+    .filter((category) => category.categoryProducts.length > 0)
+    .map((category) => category.name);
 
   return (
     <>

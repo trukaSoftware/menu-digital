@@ -1,0 +1,27 @@
+.complementItemWrapper {
+  @apply flex items-center justify-between p-2 bg-zinc-100 rounded;
+}
+
+.complementItemTitleWrapper {
+  @apply flex flex-col gap-0.5;
+}
+
+.complementItemTitleWrapper > h4 {
+  @apply text-xs font-semibold text-zinc-900;
+}
+
+.complementItemTitleWrapper > p {
+  @apply text-xs text-zinc-900 font-light;
+}
+
+.complementItemButtonsWrapper {
+  @apply flex justify-between items-center py-0.5 px-1;
+}
+
+.complementItemButtonsWrapperSelected {
+  @apply bg-zinc-200 rounded w-24;
+}
+
+.complementItemMinusIcon {
+  @apply text-red-500;
+}

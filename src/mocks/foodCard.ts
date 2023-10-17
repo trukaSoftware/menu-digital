@@ -7,6 +7,7 @@ export const foodCardMock = {
   price: 10,
   discountedPrice: 8,
   discountPercentage: 20,
+  complements: [],
 } as FoodCardProps;
 
 export const foodCardWithoutDiscountMock = {
@@ -14,4 +15,5 @@ export const foodCardWithoutDiscountMock = {
   description: `Descrição do produto`,
   foodImage: `/images/food-image.svg`,
   price: 10,
+  complements: [],
 } as FoodCardProps;
