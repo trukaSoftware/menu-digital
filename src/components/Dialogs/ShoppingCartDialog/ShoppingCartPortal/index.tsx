@@ -174,7 +174,7 @@ export default function ShoppingCartPortal({
                   </div>
                 ))
               ) : (
-                <p>Não exitem produtos no carrinho</p>
+                <p>Não existem produtos no carrinho</p>
               )}
             </div>
             <button
