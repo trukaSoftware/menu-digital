@@ -1,7 +1,8 @@
 import { vi } from 'vitest';
 
 import { foodCardMock, foodCardWithoutDiscountMock } from '@/mocks/foodCard';
-import { render, screen, cleanup, fireEvent } from '@testing-library/react';
+import { screen, cleanup, fireEvent } from '@testing-library/react';
+import { renderWithRedux } from '@/testsUtils/providers';
 
 import FoodCardDialog, { FoodCardDialogProps } from '..';
 
@@ -20,7 +21,7 @@ describe(`FoodCardDialog`, () => {
   } as FoodCardDialogProps;
 
   it(`when prop discountPercentage is passed should load discount percentage div with the passed percentage`, () => {
-    render(<FoodCardDialog {...mockProps} />);
+    renderWithRedux(<FoodCardDialog {...mockProps} />);
 
     const foodCard = screen.getByRole(`article`);
 
@@ -47,7 +48,7 @@ describe(`FoodCardDialog`, () => {
       foodCard: foodCardWithoutDiscountMock,
     } as FoodCardDialogProps;
 
-    render(<FoodCardDialog {...modifiedMockProps} />);
+    renderWithRedux(<FoodCardDialog {...modifiedMockProps} />);
 
     const foodCard = screen.getByRole(`article`);
 

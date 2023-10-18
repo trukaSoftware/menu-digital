@@ -1,0 +1,89 @@
+.shoppingCartContent {
+  @apply fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full bg-white max-h-screen md:h-2/3 md:w-128 md:rounded;
+}
+
+.shoppingCartOverlay {
+  @apply fixed inset-0 bg-black/50;
+}
+
+.shoppingCartContainerContentAndFooter {
+  @apply flex flex-col h-[calc(100%_-_56px)] justify-between;
+}
+
+.shoppingCartContainerCartInformation {
+  @apply p-4 h-full bg-white md:rounded;
+}
+
+.shoppingCartContainerHeadLineInformation {
+  @apply flex justify-between items-center;
+}
+
+.shoppingCartText {
+  @apply font-medium text-gray-900;
+}
+
+.shoppingCartClearCartButton,
+.shoppingCartAddMoreItensButton {
+  @apply text-red-600 font-medium underline;
+}
+
+.shoppingCartContainerProducts {
+  @apply flex flex-col gap-2 w-full max-h-[21rem] overflow-auto my-2;
+}
+
+.shoppingCartContainerProduct {
+  @apply flex gap-2.5 w-full min-h-[6.875rem] border border-solid border-gray-300 rounded px-2.5 py-2;
+}
+
+.shoppingCartContainerProductImage {
+  @apply w-1/4 h-[3.75rem] relative md:h-auto;
+}
+
+.shoppingCartContainerProductImage img {
+  @apply rounded-lg inset-0;
+}
+
+.shoppingCartContainerProductInformation {
+  @apply flex flex-col justify-between w-full min-h-full;
+}
+
+.shoppingCartContainerProductTitleAndEditIcon {
+  @apply flex justify-between items-center w-full;
+}
+
+.shoppingCartBoldTexts,
+.shoppingCartTotalValue {
+  @apply font-semibold text-xs text-gray-900;
+}
+
+.addMoreToCart {
+  @apply flex justify-between items-center bg-zinc-200 w-[4.5rem] h-[1.375rem] rounded text-gray-900 py-[0.125rem] px-[0.25rem];
+}
+
+.addMoreToCart > p {
+  @apply w-full flex items-center justify-center font-semibold;
+}
+
+.shoppingCartComplementsTexts {
+  @apply text-[0.625rem] text-gray-600;
+}
+
+.shoppingContainerPriceAndQuantity {
+  @apply flex justify-between items-center w-full;
+}
+
+.shoppingCartFooter {
+  @apply border-t border-gray-300 border-solid px-4 py-3;
+}
+
+.shoppingCartContainerTotalValue {
+  @apply flex justify-between w-full;
+}
+
+.shoppingCartTotalValue {
+  @apply font-medium text-sm;
+}
+
+.shoppingCartConfirmButton {
+  @apply w-full h-12 text-center bg-red-500 text-white rounded-lg mt-4;
+}

@@ -1,3 +1,11 @@
+.container {
+  @apply flex flex-col justify-between relative h-screen;
+}
+
 .mainContainer {
-  @apply flex bg-white min-h-screen flex-col items-center;
+  @apply flex bg-white flex-col items-center;
+}
+
+.containerShoppingCartDialog {
+  @apply fixed bottom-8 right-8;
 }

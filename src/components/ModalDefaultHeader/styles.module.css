@@ -2,6 +2,10 @@
   @apply flex items-center h-14 w-full justify-between px-4 py-2 bg-gray-200 md:rounded-t;
 }
 
+.modalDefaultHeaderContainerIconAndTitle {
+  @apply flex items-center justify-center gap-2.5;
+}
+
 .modalDefaultHeaderTitle {
   @apply text-base font-semibold text-gray-900;
 }
