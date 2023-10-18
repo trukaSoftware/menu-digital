@@ -18,7 +18,7 @@ export default async function Products({ params }: RouterParams) {
 
   const { name, info } = companyResults.data.company;
 
-  const { companyLogoUrl, companyThemeUrl } = info;
+  const { companyLogoUrl, companyThemeUrl, deliveryPhoneNumber } = info;
 
   const parsedCategories = categories
     .filter((category) => category.categoryProducts.length > 0)
@@ -49,6 +49,11 @@ export default async function Products({ params }: RouterParams) {
     .filter((category) => category.categoryProducts.length > 0)
     .map((category) => category.name);
 
+  const companyData = {
+    deliveryPhoneNumber,
+    name,
+  };
+
   return (
     <div className={styles.container}>
       <div>
@@ -69,7 +74,7 @@ export default async function Products({ params }: RouterParams) {
         </main>
       </div>
       <div className={styles.containerShoppingCartDialog}>
-        <ShoppingCartDialog />
+        <ShoppingCartDialog companyData={companyData} />
       </div>
     </div>
   );
