@@ -15,7 +15,20 @@ export const createRequestService = async ({
       where: { table },
     });
 
-    if (requestExists)
+    if (requestExists && status === `OPEN`) {
+      return await prisma.requests.update({
+        where: { id: requestExists.id },
+        data: {
+          products: JSON.stringify([
+            ...JSON.parse(requestExists.products),
+            ...JSON.parse(products),
+          ]),
+          totalValue: Number(requestExists.totalValue) + totalValue,
+        },
+      });
+    }
+
+    if (requestExists && table !== null)
       throw new Error(`Uma Request para mesa ${table} já existe`);
 
     const request = await prisma.requests.create({
