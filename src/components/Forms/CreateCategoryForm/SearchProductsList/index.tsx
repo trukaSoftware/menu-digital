@@ -1,6 +1,7 @@
 import { UseFormRegisterReturn } from 'react-hook-form';
 import { MdOutlineSearchOff } from 'react-icons/md';
 
+import CheckboxInput from '@/components/CheckboxInput';
 import Spinner from '@/components/Spinner';
 
 import { Product } from '@/types/product';
@@ -30,23 +31,13 @@ export default function SearchProductsList({
       {!gettingProducts &&
         (filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
-            <label
-              htmlFor={product.id}
-              className={styles.searchProductItem}
+            <CheckboxInput
+              text={product.name}
+              id={product.id}
+              dataTestId={product.productCategoriesId}
+              register={register}
               key={`${product.id}-label`}
-            >
-              <input
-                data-testid={`checkbox-${product.productCategoriesId}`}
-                type="checkbox"
-                value={product.id}
-                id={product.id}
-                className={styles.searchProductItemCheckbox}
-                key={`${product.id}-input`}
-                {...register}
-              />
-              <span className={styles.newCheckBox} />
-              <span>{product.name}</span>
-            </label>
+            />
           ))
         ) : (
           <div className={styles.noProductsFound}>
