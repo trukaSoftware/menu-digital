@@ -23,3 +23,7 @@
 .menuComponentItemText {
   @apply text-sm font-semibold text-gray-900;
 }
+
+.menuComponentTrigger {
+  @apply flex flex-wrap gap-3;
+}
