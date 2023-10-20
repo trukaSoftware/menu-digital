@@ -6,7 +6,7 @@ export interface CheckboxInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   text: string;
   id: string;
-  dataTestId: string;
+  dataTestId?: string;
   register?: UseFormRegisterReturn;
 }
 
