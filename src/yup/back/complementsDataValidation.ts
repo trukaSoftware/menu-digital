@@ -1,8 +1,9 @@
-import { object, string, number, InferType } from 'yup';
+import { object, string, number, InferType, boolean } from 'yup';
 
 const complementSchema = object({
   name: string().required(),
   maxAmount: number().min(1).required(),
+  required: boolean().required(),
 });
 
 export type ComplementData = InferType<typeof complementSchema>;

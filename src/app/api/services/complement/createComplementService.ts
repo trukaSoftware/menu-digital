@@ -5,6 +5,7 @@ import { ComplementData } from '@yup/back/complementsDataValidation';
 export const createComplementService = async ({
   name,
   maxAmount,
+  required,
 }: ComplementData) => {
   try {
     const complementExists = await prisma.complements.findFirst({
@@ -17,6 +18,7 @@ export const createComplementService = async ({
       data: {
         name,
         maxAmount,
+        required,
       },
     });
 
