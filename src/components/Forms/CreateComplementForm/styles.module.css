@@ -1,0 +1,39 @@
+.createComplementFormContainer {
+  @apply py-4 px-2 h-[calc(100%_-_72px)] overflow-auto bg-white md:rounded;
+}
+
+.createComplementFormWrapper {
+  @apply flex flex-col justify-between h-4/5 min-h-[92%] max-h-full md:h-full md:min-h-full;
+}
+
+.createComplementForm {
+  @apply flex flex-col;
+}
+
+.createComplementAmountInputWrapper {
+  @apply flex w-full justify-center gap-28 mt-2;
+}
+
+.createComplementAmountInput {
+  @apply text-center mr-2 w-7 border border-gray-300 rounded-md focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none;
+}
+
+.createComplementAmountInput::placeholder {
+  @apply text-center;
+}
+
+.inputErrorMessage {
+  @apply text-xs text-red-500 font-medium;
+}
+
+.createComplementAddComplementButton {
+  @apply text-red-500 mb-2;
+}
+
+.createComplementAddComplementButton:hover {
+  @apply md:underline;
+}
+
+.submitButton {
+  @apply w-full h-11 min-h-[2.75rem] flex justify-center items-center bg-red-600 text-white rounded mt-6;;
+}
