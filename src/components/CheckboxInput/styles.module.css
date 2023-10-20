@@ -1,0 +1,22 @@
+.checkboxInputLabel {
+  @apply flex relative items-center;
+}
+
+.checkboxInput {
+  @apply appearance-none opacity-0 w-0 h-0;
+}
+
+.newCheckBox {
+  @apply top-0 left-0 w-5 h-5 border border-gray-300 rounded mr-2 after:content-[''] after:absolute after:hidden after:border-solid after:border-green-600 after:h-3 after:rotate-45;
+}
+
+.checkboxInputLabel input:checked ~ .newCheckBox {
+  @apply after:block;
+}
+
+.checkboxInputLabel .newCheckBox:after {
+  left: 7px;
+  top: 5px;
+  width: 7px;
+  border-width: 0 3px 3px 0;
+}
