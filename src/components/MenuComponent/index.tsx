@@ -40,7 +40,7 @@ export default function MenuComponent({
               </a>
             ))
           ) : (
-            <div className={styles.teste}>
+            <div className={styles.menuComponentTrigger}>
               <CreateProductTrigger />
               <CreateCategoryTrigger />
               <CreateComplementTrigger />
