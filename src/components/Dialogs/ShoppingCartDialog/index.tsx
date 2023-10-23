@@ -13,7 +13,16 @@ import { Root, Trigger } from '@radix-ui/react-dialog';
 import ShoppingCartPortal from './ShoppingCartPortal';
 import styles from './styles.module.css';
 
-export default function ShoppingCartDialog() {
+interface ShoppingCardDialogProps {
+  companyData: {
+    deliveryPhoneNumber: string;
+    name: string;
+  };
+}
+
+export default function ShoppingCartDialog({
+  companyData,
+}: ShoppingCardDialogProps) {
   const [showDialog, setShowDialog] = useState(false);
   const cartItens = useAppSelector((state) => getCartItens(state));
   const dispatch = useDispatch();
@@ -37,7 +46,11 @@ export default function ShoppingCartDialog() {
           </div>
         ) : null}
       </Trigger>
-      <ShoppingCartPortal cartItens={cartItens} setShowDialog={setShowDialog} />
+      <ShoppingCartPortal
+        cartItens={cartItens}
+        setShowDialog={setShowDialog}
+        companyData={companyData}
+      />
     </Root>
   );
 }

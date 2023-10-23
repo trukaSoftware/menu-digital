@@ -13,7 +13,7 @@ model Company {
   slug                    String              @db.VarChar(255)
   status                  CompanyStatus       @default(ACTIVE)
   info                    Info?
-  requests                Requests?
+  requests                Requests[]
   branchs                 Branch[]
   products                Products[]
   productCategory         ProductCategories[]
@@ -28,7 +28,7 @@ model Branch {
   status    CompanyStatus @default(ACTIVE)
   companyId String
   info      Info?
-  requests  Requests?
+  requests  Requests[]
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
   company   Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
@@ -63,14 +63,17 @@ model Address {
 }
 
 model Requests {
-  id              String     @id @default(uuid())
+  id              String        @id @default(uuid())
   products        String
-  companyId       String     @unique
-  branchId        String?    @unique
-  company         Company    @relation(fields: [companyId], references: [id], onDelete: Cascade)
-  branch          Branch?    @relation(fields: [branchId], references: [id], onDelete: Cascade)
-  createdAt       DateTime   @default(now())
-  updatedAt       DateTime   @updatedAt
+  companyId       String?        
+  branchId        String?
+  company         Company?      @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  branch          Branch?       @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  status          RequestStatus @default(OPEN)
+  table           String?
+  totalValue      Decimal       @db.Money
 }
 
 model ProductsComplements {
@@ -142,4 +145,9 @@ model ProductImages {
 enum CompanyStatus {
   ACTIVE
   INACTIVE
+}
+
+enum RequestStatus {
+  OPEN
+  CLOSE
 }
