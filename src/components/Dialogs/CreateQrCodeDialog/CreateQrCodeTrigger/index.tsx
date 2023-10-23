@@ -17,7 +17,7 @@ export default function CreateQrcodeTrigger() {
         Icon={<FaQrcode size={32} color="E5E7EB" />}
         itemText="QRCode"
       />
-      <CreateQrCodePortal />
+      <CreateQrCodePortal setShowDialog={setShowDialog} />
     </Root>
   );
 }
