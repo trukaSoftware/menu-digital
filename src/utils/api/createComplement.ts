@@ -16,7 +16,7 @@ export const createComplement = async ({
     }
   );
 
-  const createdComplement = complement.data.complement;
+  const createdComplement = complement.data;
 
   return createdComplement;
 };
