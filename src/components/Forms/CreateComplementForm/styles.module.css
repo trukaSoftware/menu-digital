@@ -26,12 +26,20 @@
   @apply text-xs text-red-500 font-medium;
 }
 
-.createComplementAddComplementButton {
+.createComplementButtonsWrapper {
+  @apply flex justify-between mx-1;
+}
+
+.createComplementAddAndRemoveComplementButton {
   @apply text-red-500 mb-2;
 }
 
-.createComplementAddComplementButton:hover {
+.createComplementAddAndRemoveComplementButton:hover {
   @apply md:underline;
+}
+
+.createComplementRemoveComplementButtonHidden {
+  @apply hidden;
 }
 
 .submitButton {
