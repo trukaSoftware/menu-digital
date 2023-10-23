@@ -29,7 +29,8 @@ describe(`QRCode`, () => {
   });
 
   it(`When clicked on the save button, it should change title`, async () => {
-    renderWithRedux(<QrCode />);
+    global.URL.createObjectURL = vi.fn();
+    renderWithRedux(<QrCode qrCodeProductsUrl={[]} setShowDialog={vi.fn()} />);
 
     const qrCodeButton = screen.getByRole(`button`, { name: /salvar qrcode/i });
 
