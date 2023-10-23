@@ -1,7 +1,11 @@
 .qrCodeWrapper {
-  @apply flex flex-col w-full h-4/5 justify-center items-center md:h-80 md:p-4;
+  @apply flex flex-col w-full h-4/5 justify-center items-center md:h-80 p-4;
+}
+
+.qrCodeContainer {
+  @apply flex flex-wrap justify-center items-center w-full h-full max-h-56 overflow-auto;
 }
 
 .qrCodeButton {
-  @apply bg-red-600 w-64 py-3 mt-6 text-white font-bold text-base flex justify-center rounded md:px-0 md:py-3 md:w-full md:rounded;
+  @apply bg-red-600 w-full py-3 mt-6 text-white font-bold text-base flex justify-center rounded md:px-0 md:py-3 md:w-full md:rounded;
 }
