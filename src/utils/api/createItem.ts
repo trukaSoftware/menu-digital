@@ -1,16 +1,11 @@
-import { itemPayload, itemResponse } from '@/types/item';
+import { ItemPayload, ItemResponse } from '@/types/item';
 
 import { post } from './post';
 
-export const createItem = async ({
-  complementId,
-  name,
-  price,
-}: itemPayload) => {
-  const item = await post<itemResponse, itemPayload>(`/api/items/createItem`, {
+export const createItem = async ({ complementId, items }: ItemPayload) => {
+  const item = await post<ItemResponse, ItemPayload>(`/api/items/createItem`, {
     complementId,
-    name,
-    price,
+    items,
   });
 
   const createdItem = item.data.item;

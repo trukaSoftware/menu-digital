@@ -2,7 +2,7 @@ import { object, string, number, InferType, array } from 'yup';
 
 const itemSchema = object({
   complementId: string().required(),
-  itens: array()
+  items: array()
     .of(
       object()
         .shape({
