@@ -12,6 +12,7 @@ import DefaultInput from '@/components/DefaultInput';
 
 import { createComplement } from '@/utils/api/createComplement';
 import { createItem } from '@/utils/api/createItem';
+import { editProduct } from '@/utils/api/editProduct';
 
 import { useProducts } from '@/hooks/useProducts';
 import { createComplementFormSchema } from '@/yup/front/createComplementFormSchema';
@@ -35,32 +36,53 @@ function CreateComplementForm({ setShowDialog }: CreateComplementProps) {
   } = useForm({
     resolver: yupResolver(createComplementFormSchema),
     mode: `onChange`,
+    defaultValues: {
+      productsIds: [],
+    },
   });
 
   const [requestError, setRequestError] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [complements, setComplements] = useState<number[]>([]);
   const { user } = useUser();
   const { products, gettingProducts } = useProducts(user?.id as string);
   const filteredProducts = products;
 
   const onSubmit = async (data: CreateComplementFormData) => {
-    console.log(data);
+    try {
+      setIsSubmitting(true);
 
-    // try {
-    // const createdComplement = await createComplement({
-    //   name: data.name,
-    //   required: data.required === `required`,
-    //   maxAmount: data.maxAmount,
-    // });
-    // if (data.productsIds?.length > 0) {
-    //   e
-    // }
-    // } catch (error) {
-    //   setRequestError(true);
-    //   toast.error(`Erro ao criar o complemento, tente novamente em instantes!`);
-    // }
-    // console.log(data);
-    // setShowDialog(false);
+      const createdComplement = await createComplement({
+        name: data.name,
+        required: data.required === `required`,
+        maxAmount: data.maxAmount,
+      });
+
+      if (!!data?.productsIds && data?.productsIds?.length > 0) {
+        data.productsIds?.forEach(async (productId) => {
+          await editProduct({
+            id: productId as string,
+            complementsId: [createdComplement.complementId],
+          });
+        });
+      }
+
+      if (!!data?.items && data.items?.length > 0) {
+        const itemsPayLoad = {
+          complementId: createdComplement.complementId,
+          items: data.items,
+        };
+
+        await createItem(itemsPayLoad);
+      }
+      toast.success(`Complementos criados com sucesso!`);
+    } catch (error) {
+      setRequestError(true);
+      toast.error(`Erro ao criar o complemento, tente novamente em instantes!`);
+    } finally {
+      setIsSubmitting(false);
+    }
+    setShowDialog(false);
   };
 
   const addComplement = () => {
@@ -154,7 +176,7 @@ function CreateComplementForm({ setShowDialog }: CreateComplementProps) {
         </div>
         <ButtonSubmit
           text="Concluir"
-          isSubmiting={false}
+          isSubmiting={isSubmitting}
           className={styles.submitButton}
           submitError={requestError}
         />

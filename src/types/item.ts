@@ -1,10 +1,14 @@
-export interface itemPayload {
+export interface ItemPayload {
   complementId: string;
+  items: Item[];
+}
+
+export interface Item {
   name: string;
   price: number;
 }
 
-export interface itemReturn {
+export interface ItemReturn {
   id: string;
   name: string;
   price: number;
@@ -13,6 +17,6 @@ export interface itemReturn {
   updatedAt: string;
 }
 
-export interface itemResponse {
-  item: itemReturn;
+export interface ItemResponse {
+  item: ItemReturn;
 }

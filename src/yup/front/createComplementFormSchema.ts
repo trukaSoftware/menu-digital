@@ -18,7 +18,7 @@ export const createComplementFormSchema = Yup.object().shape({
   items: Yup.array().of(
     Yup.object().shape({
       name: Yup.string().required(`Digite o nome do item.`),
-      price: Yup.number().required(`Digite o preço`),
+      price: Yup.number().optional().default(0),
     })
   ),
 });

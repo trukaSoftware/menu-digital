@@ -48,6 +48,7 @@ export default function ComplementInput({
             className={styles.complementFormInput}
             {...priceRegister}
             placeholder="R$ 0,00"
+            defaultValue={0}
           />
         </div>
         {priceError ? (
