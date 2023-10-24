@@ -2,32 +2,14 @@ import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 import { ItemData } from '@yup/back/itemDataValidation';
 
-export const createItemService = async ({
-  complementId,
-  name,
-  price,
-}: ItemData) => {
+export const createItemService = async ({ complementId, itens }: ItemData) => {
   try {
-    const itemExists = await prisma.items.findFirst({
-      where: {
-        AND: {
-          name,
-          complementId,
-        },
-      },
+    const createdItens = await prisma.items.createMany({
+      data: itens.map((item) => ({ ...item, complementId })),
+      skipDuplicates: true,
     });
 
-    if (itemExists) throw new Error(`Item já existe`);
-
-    const item = await prisma.items.create({
-      data: {
-        complementId,
-        name,
-        price,
-      },
-    });
-
-    return item;
+    return createdItens;
   } catch (error) {
     if (
       error instanceof Prisma.PrismaClientKnownRequestError ||

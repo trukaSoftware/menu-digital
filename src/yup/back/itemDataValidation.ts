@@ -1,9 +1,17 @@
-import { object, string, number, InferType } from 'yup';
+import { object, string, number, InferType, array } from 'yup';
 
 const itemSchema = object({
   complementId: string().required(),
-  name: string().required(),
-  price: number().min(1).required(),
+  itens: array()
+    .of(
+      object()
+        .shape({
+          name: string().required(),
+          price: number().required(),
+        })
+        .required()
+    )
+    .required(),
 });
 
 export type ItemData = InferType<typeof itemSchema>;
