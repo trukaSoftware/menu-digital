@@ -44,12 +44,17 @@ function CreateComplementForm({ setShowDialog }: CreateComplementProps) {
   const filteredProducts = products;
 
   const onSubmit = async (data: CreateComplementFormData) => {
+    console.log(data);
+
     // try {
-    const createdComplement = await createComplement({
-      name: data.name,
-      required: data.required === `required`,
-      maxAmount: data.maxAmount,
-    });
+    // const createdComplement = await createComplement({
+    //   name: data.name,
+    //   required: data.required === `required`,
+    //   maxAmount: data.maxAmount,
+    // });
+    // if (data.productsIds?.length > 0) {
+    //   e
+    // }
     // } catch (error) {
     //   setRequestError(true);
     //   toast.error(`Erro ao criar o complemento, tente novamente em instantes!`);
@@ -65,8 +70,6 @@ function CreateComplementForm({ setShowDialog }: CreateComplementProps) {
   const removeComplement = () => {
     setComplements(complements.slice(0, complements.length - 1));
   };
-
-  console.log(complements);
 
   return (
     <div className={styles.createComplementFormContainer}>
