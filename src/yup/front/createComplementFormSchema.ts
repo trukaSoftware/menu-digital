@@ -4,7 +4,20 @@ const nameComplementValidation = Yup.string().required(
   `Digite o nome do complemento.`
 );
 
-const maxAmountComplementValidation = Yup.number().required();
+const maxAmountComplementValidation = Yup.number()
+  .required(`Digite uma quantidade máxima`)
+  .transform((value, originalValue) => {
+    if (originalValue === ``) {
+      return undefined; // Transforma um valor vazio em undefined
+    }
+    return value;
+  })
+  .test(`is-valid-number`, `O preço deve ser um número válido.`, (value) => {
+    if (value === undefined || !Number.isNaN(value)) {
+      return true; // A validação passará se o valor for undefined ou um número válido
+    }
+    return false; // A validação falhará se o valor não for um número válido
+  });
 
 const requiredComplementValidation = Yup.string().required();
 
@@ -18,7 +31,25 @@ export const createComplementFormSchema = Yup.object().shape({
   items: Yup.array().of(
     Yup.object().shape({
       name: Yup.string().required(`Digite o nome do item.`),
-      price: Yup.number().optional().default(0),
+      price: Yup.number()
+        .required(`Acima de 0`)
+        .default(0)
+        .transform((value, originalValue) => {
+          if (originalValue === ``) {
+            return undefined; // Transforma um valor vazio em undefined
+          }
+          return value;
+        })
+        .test(
+          `is-valid-number`,
+          `O preço deve ser um número válido.`,
+          (value) => {
+            if (value === undefined || !Number.isNaN(value)) {
+              return true; // A validação passará se o valor for undefined ou um número válido
+            }
+            return false; // A validação falhará se o valor não for um número válido
+          }
+        ),
     })
   ),
 });

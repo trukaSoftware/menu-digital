@@ -101,7 +101,7 @@ function CreateComplementForm({ setShowDialog }: CreateComplementProps) {
       >
         <div className={styles.createComplementForm}>
           <DefaultInput
-            error=""
+            error={errors.name?.message}
             labelText="Nome do adicional:"
             register={register(`name`)}
             name="Nome do adicional*"
@@ -123,6 +123,11 @@ function CreateComplementForm({ setShowDialog }: CreateComplementProps) {
                 {...register(`maxAmount`)}
               />
               <span>Máximo</span>
+              {errors.maxAmount ? (
+                <p className={styles.defaultInputErrorMessage}>
+                  {errors.maxAmount.message}
+                </p>
+              ) : null}
             </label>
           </div>
           <div>
