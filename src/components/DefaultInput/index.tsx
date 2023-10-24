@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 export interface DefaultInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
-  Icon: JSX.Element;
+  Icon?: JSX.Element;
   labelText?: string;
   name: string;
   register: UseFormRegisterReturn;
@@ -30,7 +30,9 @@ export default function DefaultInput({
         <span className={styles.defaultInputFormNameTitle}>{labelText}</span>
       ) : null}
       <div className={styles.defaultInputFormInputWrapper}>
-        <div className={styles.defaultInputFormIconWrapper}>{Icon}</div>
+        {Icon ? (
+          <div className={styles.defaultInputFormIconWrapper}>{Icon}</div>
+        ) : null}
         <input
           id={name}
           className={styles.defaultInputFormNameInput}

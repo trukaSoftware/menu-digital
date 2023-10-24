@@ -5,3 +5,15 @@
 .createQrCodeOverlay {
   @apply fixed inset-0 bg-black/50;
 }
+
+.createQrCodeForm {
+  @apply flex flex-col justify-center p-4;
+}
+
+.createQrcodelabelClassName input {
+  @apply pl-2;
+}
+
+.createQrcodeButton {
+  @apply bg-red-600 py-3 mt-6 text-white font-bold text-base flex justify-center rounded md:px-0 md:py-3 md:w-full md:rounded;
+}
