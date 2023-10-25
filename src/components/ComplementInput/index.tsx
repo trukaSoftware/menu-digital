@@ -1,5 +1,6 @@
 import { UseFormRegisterReturn } from 'react-hook-form';
 
+import DefaultInput from '../DefaultInput';
 import styles from './styles.module.css';
 
 export interface ComplementInputProps
@@ -26,35 +27,24 @@ export default function ComplementInput({
 }: ComplementInputProps) {
   return (
     <div className={styles.complementFormInputWrapper}>
-      <label htmlFor={`${itemName}-${index}`} className={styles.teste1}>
-        <div className={styles.complementInputWrapper}>
-          <input
-            id={`${itemName}-${index}`}
-            className={styles.complementFormInput}
-            {...itemRegister}
-            {...rest}
-            placeholder="Nome do item"
-          />
-        </div>
-        {itemError ? (
-          <span className={styles.inputErrorMessage}>{itemError}</span>
-        ) : null}
-      </label>
-      <label htmlFor={`${priceName}-${index}`} className={styles.teste2}>
-        <div className={styles.complementInputWrapper}>
-          <input
-            type="number"
-            id={`${priceName}-${index}`}
-            className={styles.complementFormInput}
-            {...priceRegister}
-            placeholder="R$ 0,00"
-            defaultValue={0}
-          />
-        </div>
-        {priceError ? (
-          <span className={styles.inputErrorMessage}>{priceError}</span>
-        ) : null}
-      </label>
+      <DefaultInput
+        name={`${itemName}-${index}`}
+        placeholder="Nome Do Item"
+        error={itemError}
+        register={itemRegister}
+        {...rest}
+        className={styles.complementFormInput}
+        labelClassName={styles.complementFormInputLabel}
+      />
+      <DefaultInput
+        name={`${priceName}-${index}`}
+        placeholder="R$ 0,00"
+        defaultValue={0}
+        register={priceRegister}
+        className={styles.complementFormInput}
+        labelClassName={styles.complementPriceFormLabel}
+        error={priceError}
+      />
     </div>
   );
 }

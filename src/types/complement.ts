@@ -4,10 +4,6 @@ export interface ComplementPayload {
   required: boolean;
 }
 
-// export interface ComplementReturn {
-//   complementId: string;
-// }
-
 export interface ComplementResponse {
   complementId: string;
 }

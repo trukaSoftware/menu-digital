@@ -2,22 +2,14 @@
   @apply flex justify-center gap-2 mt-2;
 }
 
-.complementInputWrapper {
-  @apply flex w-full border border-gray-300 rounded gap-2;
-}
-
-.teste2 {
-  @apply w-1/4;
-}
-
-.teste1 {
+.complementFormInputLabel {
   @apply w-3/4;
+}
+
+.complementPriceFormLabel {
+  @apply w-1/4;
 }
 
 .complementFormInput {
   @apply gap-2 px-1 py-0.5 w-full rounded-md focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none;
-}
-
-.inputErrorMessage {
-  @apply text-xs text-red-500 font-medium;
 }
