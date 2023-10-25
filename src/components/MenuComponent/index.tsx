@@ -1,6 +1,7 @@
 import { menuItens } from '@/utils/menuItems';
 
 import CreateCategoryTrigger from '../Dialogs/CreateCategoryDialog/CreateCategoryTrigger';
+import CreateComplementTrigger from '../Dialogs/CreateComplementsDialog/CreateComplementsTrigger';
 import CreateProductTrigger from '../Dialogs/CreateProductDialog/CreateProductTrigger';
 import CreateQrCodeTrigger from '../Dialogs/CreateQrCodeDialog/CreateQrCodeTrigger';
 import styles from './styles.module.css';
@@ -39,11 +40,12 @@ export default function MenuComponent({
               </a>
             ))
           ) : (
-            <>
+            <div className={styles.menuComponentTrigger}>
               <CreateProductTrigger />
               <CreateCategoryTrigger />
+              <CreateComplementTrigger />
               <CreateQrCodeTrigger />
-            </>
+            </div>
           )}
         </div>
       </div>

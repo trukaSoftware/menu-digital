@@ -5,20 +5,20 @@ import { ItemData, validateItemData } from '@yup/back/itemDataValidation';
 import { createItemService } from '../../services/item/createItemService';
 
 export async function POST(req: Request) {
-  const { complementId, itens } = (await req.json()) as ItemData;
+  const { complementId, items } = (await req.json()) as ItemData;
 
   try {
     await validateItemData({
       complementId,
-      itens,
+      items,
     });
 
-    const createdItens = await createItemService({
+    const createdItems = await createItemService({
       complementId,
-      itens,
+      items,
     });
 
-    return NextResponse.json({ itens: createdItens });
+    return NextResponse.json({ items: createdItems });
   } catch (error) {
     if (error instanceof Error) {
       return NextResponse.json({ message: error.message });

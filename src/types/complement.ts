@@ -1,3 +1,13 @@
+export interface ComplementPayload {
+  name: string;
+  maxAmount: number;
+  required: boolean;
+}
+
+export interface ComplementResponse {
+  complementId: string;
+}
+
 export interface ComplementItemProp {
   id: string;
   name: string;

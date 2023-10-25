@@ -2,10 +2,10 @@ import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 import { ItemData } from '@yup/back/itemDataValidation';
 
-export const createItemService = async ({ complementId, itens }: ItemData) => {
+export const createItemService = async ({ complementId, items }: ItemData) => {
   try {
     const createdItens = await prisma.items.createMany({
-      data: itens.map((item) => ({ ...item, complementId })),
+      data: items.map((item) => ({ ...item, complementId })),
       skipDuplicates: true,
     });
 
