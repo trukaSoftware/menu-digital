@@ -46,3 +46,11 @@
 .shoppingCartConfirmButton:disabled {
   @apply bg-red-300;
 }
+
+.deliveryDefaultLabel {
+  @apply text-gray-900;
+}
+
+.deliveryDefaultLabel input {
+  @apply px-2.5 py-2;
+}

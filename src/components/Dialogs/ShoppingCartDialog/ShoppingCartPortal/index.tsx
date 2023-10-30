@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { FaShoppingBag } from 'react-icons/fa';
+import { useForm } from 'react-hook-form';
+import { IoIosArrowBack } from 'react-icons/io';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
@@ -15,9 +16,14 @@ import { createOrderToSendToWpp } from '@/utils/createOrderToSendToWpp';
 import { priceToBrazilCurrency } from '@/utils/priceToBrazilCurrency';
 
 import { setCartItens } from '@/redux/features/cartItem-slice';
+import { deliverySchema, DeliveryData } from '@/yup/front/develiveryForm';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Portal, Overlay, Content } from '@radix-ui/react-dialog';
 
+import DeliveryInfo from '../DeliveryInfo';
+import TypeOfDelivery from '../TypeOfDelivery';
 import styles from './styles.module.css';
+import { getHeaderTitleAndIcon } from './utils';
 
 export interface ShoppingCartPortalProps {
   setShowDialog: (value: boolean) => void;
@@ -33,8 +39,20 @@ export default function ShoppingCartPortal({
   cartItens,
   companyData,
 }: ShoppingCartPortalProps) {
+  const {
+    handleSubmit,
+    register,
+    control,
+    formState: { errors },
+    setError,
+  } = useForm<DeliveryData>({
+    resolver: yupResolver(deliverySchema),
+    mode: `onChange`,
+  });
+
   const [generatingOrder, setGeneratingOrder] = useState(false);
-  const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [step, setStep] = useState<number>(0);
   const dispatch = useDispatch();
   const pathnames = usePathname();
 
@@ -134,41 +152,64 @@ export default function ShoppingCartPortal({
     }
   };
 
+  // const isDelivery = true;
+  // const submitButtonText = isDelivery ? `Continuar` : `Confirmar pedido`;
+
+  const modalHeaderInfo = getHeaderTitleAndIcon(step);
+
   return (
     <Portal>
       <Overlay className={styles.shoppingCartOverlay} />
       <Content className={styles.shoppingCartContent}>
         <ModalDefaultHeader
-          icon={<FaShoppingBag size={24} fill="#EF4444" />}
-          title="Sacola"
+          icon={<modalHeaderInfo.Icon size={24} fill="#EF4444" />}
+          title={modalHeaderInfo?.title}
+          GoBackBtn={
+            step ? (
+              <button type="button" onClick={() => setStep(step - 1)}>
+                <IoIosArrowBack size={32} color="#EF4444" />
+              </button>
+            ) : undefined
+          }
         />
         <div className={styles.shoppingCartContainerContentAndFooter}>
-          <div className={styles.shoppingCartContainerCartInformation}>
-            <div className={styles.shoppingCartContainerHeadLineInformation}>
-              <p className={styles.shoppingCartText}>Pedido</p>
+          {step === 0 && (
+            <div className={styles.shoppingCartContainerCartInformation}>
+              <div className={styles.shoppingCartContainerHeadLineInformation}>
+                <p className={styles.shoppingCartText}>Pedido</p>
+                <button
+                  type="button"
+                  className={styles.shoppingCartClearCartButton}
+                  onClick={handleClearCartItems}
+                >
+                  Limpar
+                </button>
+              </div>
+
+              <ShoppingCartProducts
+                cartItens={cartItens}
+                removeCartProductAmount={removeCartProductAmount}
+                addCartProductAmount={addCartProductAmount}
+              />
+
               <button
                 type="button"
-                className={styles.shoppingCartClearCartButton}
-                onClick={handleClearCartItems}
+                className={styles.shoppingCartAddMoreItensButton}
+                onClick={() => setShowDialog(false)}
               >
-                Limpar
+                Adicionar mais itens
               </button>
             </div>
-
-            <ShoppingCartProducts
-              cartItens={cartItens}
-              removeCartProductAmount={removeCartProductAmount}
-              addCartProductAmount={addCartProductAmount}
+          )}
+          {step === 1 && (
+            <DeliveryInfo
+              nameRegister={register(`clientName`)}
+              phoneRegister={register(`clientPhoneNumber`)}
+              error={errors.clientName?.message}
+              labelClassName={styles.deliveryDefaultLabel}
             />
-
-            <button
-              type="button"
-              className={styles.shoppingCartAddMoreItensButton}
-              onClick={() => setShowDialog(false)}
-            >
-              Adicionar mais itens
-            </button>
-          </div>
+          )}
+          {step === 2 && <TypeOfDelivery />}
           <footer className={styles.shoppingCartFooter}>
             <div className={styles.shoppingCartContainerTotalValue}>
               <p className={styles.shoppingCartTotalValue}>Total</p>
@@ -179,12 +220,10 @@ export default function ShoppingCartPortal({
             <button
               type="button"
               className={styles.shoppingCartConfirmButton}
-              onClick={handleClientRequest}
+              onClick={step < 5 ? () => setStep(step + 1) : () => {}}
               disabled={cartItens.length === 0}
             >
-              {generatingOrder
-                ? `Processando seu Pedido...`
-                : `Confirmar Pedido`}
+              Continuar
             </button>
           </footer>
         </div>
