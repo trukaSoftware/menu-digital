@@ -19,6 +19,10 @@ export async function POST(req: Request) {
     companyTheme,
     phoneNumber,
     deliveryPhoneNumber,
+    deliveryTax,
+    deliveryTime,
+    openingHours,
+    instagramUrl,
   } = (await req.json()) as CompanyData;
 
   try {
@@ -33,6 +37,10 @@ export async function POST(req: Request) {
       companyTheme,
       phoneNumber,
       deliveryPhoneNumber,
+      deliveryTax,
+      deliveryTime,
+      openingHours,
+      instagramUrl,
     });
 
     const companyId = await createCompanyService({
@@ -46,6 +54,10 @@ export async function POST(req: Request) {
       companyTheme,
       phoneNumber,
       deliveryPhoneNumber,
+      deliveryTax,
+      deliveryTime,
+      openingHours,
+      instagramUrl,
     });
 
     return NextResponse.json({ companyId });
