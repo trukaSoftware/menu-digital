@@ -13,6 +13,10 @@ export interface CompanyPayload {
   companyTheme: {
     file: string | undefined;
   };
+  deliveryTax: number;
+  deliveryTime: string;
+  openingHours: string;
+  instagramUrl: string;
 }
 
 export interface CreateCompanyResponse {
