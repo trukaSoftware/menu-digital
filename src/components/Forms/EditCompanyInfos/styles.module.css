@@ -1,0 +1,39 @@
+.editCompanyWrapper {
+  @apply w-full bg-gray-300 md:flex md:flex-col md:items-center;
+}
+
+.editCompanyForm {
+  @apply flex flex-col justify-between items-center w-full h-[90vh] bg-white md:h-auto p-2;
+}
+
+.editCompanyContainerInputs {
+  @apply flex flex-col w-full max-w-2xl h-full overflow-x-scroll py-4 px-2 bg-white rounded md:shadow-xl;
+}
+
+.companyImageInputWrapper {
+  @apply flex gap-2 content-between flex-1 mt-2;
+}
+
+.labelInputChecked {
+  @apply flex items-center border-t border-b border-r border-green-500  bg-green-500 text-white text-base rounded-r-md pl-2 h-9 w-full;
+}
+
+.labelInput {
+  @apply flex items-center border-t border-b border-r border-gray-300 text-gray-400 text-base rounded-r-md pl-2 h-9 w-full;
+}
+
+.companySubmitButton {
+  @apply bg-red-600 py-3 w-full text-white font-bold text-base flex justify-center rounded;
+}
+
+label.editCompanyLabel span {
+  @apply last:text-xs mb-2;
+}
+
+label.editCompanyLabel {
+  @apply gap-0;
+}
+
+label.deliveryPhoneLabel span {
+  @apply last:mb-0;
+}
