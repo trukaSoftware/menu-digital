@@ -7,6 +7,10 @@
   @apply flex-row-reverse;
 }
 
+.managementScreenHeaderContainerImageAndEditCompanyTrigger {
+  @apply relative;
+}
+
 .managementScreenHeaderLogo {
   @apply rounded-full;
 }
