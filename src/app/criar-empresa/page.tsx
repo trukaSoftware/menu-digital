@@ -2,6 +2,7 @@
 
 import { Dispatch, SetStateAction, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { BiSolidTimer, BiLogoInstagramAlt } from 'react-icons/bi';
 import {
   FaAddressCard,
   FaRegBuilding,
@@ -12,6 +13,8 @@ import {
   FaMapPin,
   FaImage,
 } from 'react-icons/fa';
+import { IoMdTimer } from 'react-icons/io';
+import { MdDeliveryDining } from 'react-icons/md';
 
 import { useRouter } from 'next/navigation';
 
@@ -207,6 +210,44 @@ export default function CreateCompany() {
               error={errors.address?.message}
               register={register(`address`)}
               placeholder="Ex: Rua 1, nº 1, casa 1 - Bairro luz"
+            />
+            <DefaultInput
+              labelClassName={styles.createCompanyLabel}
+              Icon={<MdDeliveryDining size={20} color="#9ca3af" />}
+              name="deliveryTax"
+              labelText="taxa de entrega*"
+              error={errors.deliveryTax?.message}
+              register={register(`deliveryTax`)}
+              placeholder="Ex: 3,50"
+              type="number"
+              step="0.01"
+            />
+            <DefaultInput
+              labelClassName={styles.createCompanyLabel}
+              Icon={<BiSolidTimer size={20} color="#9ca3af" />}
+              name="deliveryTime"
+              labelText="tempo de entrega*"
+              error={errors.deliveryTime?.message}
+              register={register(`deliveryTime`)}
+              placeholder="Ex: Entre 30 e 40 minutos"
+            />
+            <DefaultInput
+              labelClassName={styles.createCompanyLabel}
+              Icon={<IoMdTimer size={20} color="#9ca3af" />}
+              name="openingHours"
+              labelText="Horário de funcionamento*"
+              error={errors.openingHours?.message}
+              register={register(`openingHours`)}
+              placeholder="Ex: Das 18h as 23h"
+            />
+            <DefaultInput
+              labelClassName={styles.createCompanyLabel}
+              Icon={<BiLogoInstagramAlt size={20} color="#9ca3af" />}
+              name="instagramUrl"
+              labelText="Link do Instagram*"
+              error={errors.instagramUrl?.message}
+              register={register(`instagramUrl`)}
+              placeholder="Ex: https://www.instagram.com/açai-do-bom/"
             />
           </div>
           <ButtonSubmit
