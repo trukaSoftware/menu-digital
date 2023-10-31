@@ -13,6 +13,10 @@ export const createCompany = async ({
   email,
   phoneNumber,
   zipCode,
+  deliveryTax,
+  deliveryTime,
+  openingHours,
+  instagramUrl,
 }: CompanyPayload) => {
   const company = await post<CreateCompanyResponse, CompanyPayload>(
     `/api/company/createCompany`,
@@ -27,6 +31,10 @@ export const createCompany = async ({
       email,
       phoneNumber,
       zipCode,
+      deliveryTax,
+      deliveryTime,
+      openingHours,
+      instagramUrl,
     }
   );
 
