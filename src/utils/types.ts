@@ -6,6 +6,10 @@ export type EditCompanyData = {
     status?: `ACTIVE` | `INACTIVE`;
   };
   companyInfo?: {
+    deliveryTax?: number;
+    deliveryTime?: string;
+    openingHours?: string;
+    instagramUrl?: string;
     cnpj?: string;
     email?: string;
     phoneNumber?: string;
@@ -24,6 +28,39 @@ export type EditCompanyData = {
   companyAddress?: {
     zipCode?: string;
     address?: string;
+  };
+};
+
+export type EditCompanyReturn = {
+  id: string;
+  company: {
+    name: string;
+    slug: string;
+    status: `ACTIVE` | `INACTIVE`;
+  };
+  info: {
+    deliveryTax: number;
+    deliveryTime: string;
+    openingHours: string;
+    instagramUrl: string;
+    cnpj: string;
+    email: string;
+    phoneNumber: string;
+    deliveryPhoneNumber: string;
+    companyLogo: {
+      file: string;
+      width: number;
+      height: number;
+    };
+    companyTheme: {
+      file: string;
+      width: number;
+      height: number;
+    };
+  };
+  address: {
+    zipCode: string;
+    address: string;
   };
 };
 
@@ -125,4 +162,22 @@ export interface CreateCompanyData {
   zipCode: string;
   fileLogo?: string;
   fileCoverCape?: string;
+  deliveryTax: number;
+  deliveryTime: string;
+  openingHours: string;
+  instagramUrl: string;
+}
+
+export interface EditCompanyInterface {
+  address?: string;
+  deliveryPhoneNumber?: string;
+  id?: string;
+  phoneNumber?: string;
+  zipCode?: string;
+  fileLogo?: string;
+  fileCoverCape?: string;
+  deliveryTax?: number;
+  deliveryTime?: string;
+  openingHours?: string;
+  instagramUrl?: string;
 }
