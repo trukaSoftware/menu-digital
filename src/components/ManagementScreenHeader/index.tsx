@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 import { UserButton } from '@clerk/nextjs';
 
+import EditCompanyTrigger from '../Dialogs/EditCompanyDialog/EditCompanyTrigger';
 import styles from './styles.module.css';
 
 export type ManagementScreenHeaderProps = {
@@ -25,13 +26,20 @@ export default function ManagementScreenHeader({
       data-testid="management-screen-header"
       className={styles.managementScreenHeaderWithRowReverse}
     >
-      <Image
-        className={styles.managementScreenHeaderLogo}
-        src={companyLogoUrl}
-        alt={`Imagem do estabelecimento ${companyName}`}
-        width={44}
-        height={44}
-      />
+      <div
+        className={
+          styles.managementScreenHeaderContainerImageAndEditCompanyTrigger
+        }
+      >
+        <Image
+          className={styles.managementScreenHeaderLogo}
+          src={companyLogoUrl}
+          alt={`Imagem do estabelecimento ${companyName}`}
+          width={44}
+          height={44}
+        />
+        <EditCompanyTrigger />
+      </div>
 
       {title ? (
         <h1 className={styles.managementScreenHeaderTitle}>{title}</h1>
