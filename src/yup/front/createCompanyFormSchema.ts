@@ -40,4 +40,8 @@ export const createCompanyFormSchema = yup.object().shape({
   address: yup.string().required(`O Endereço é obrigatório.`),
   fileLogo: yup.string(),
   fileCoverCape: yup.string(),
+  deliveryTax: yup.number().required(),
+  deliveryTime: yup.string().required(),
+  openingHours: yup.string().required(),
+  instagramUrl: yup.string().required(),
 });
