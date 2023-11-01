@@ -3,7 +3,7 @@
 }
 
 .typeOfDeliveryCheckboxesWrapper {
-  @apply flex flex-col w-full items-start;
+  @apply flex flex-col w-full items-start gap-2 mt-2;
 }
 
 .typeOfDeliveryCheckboxesWrapper label {
