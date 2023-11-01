@@ -1,0 +1,19 @@
+.searchItemsList {
+  @apply p-2 border border-gray-300 rounded h-72 w-full overflow-y-auto;
+}
+
+.searchingItems {
+  @apply flex flex-col gap-2 items-center justify-center h-full;
+}
+
+.searchingItems > p {
+  @apply text-gray-600;
+}
+
+.noProductsFound {
+  @apply flex items-center justify-center h-full text-gray-900;
+}
+
+.noProductsFound > p {
+  @apply text-base;
+}
