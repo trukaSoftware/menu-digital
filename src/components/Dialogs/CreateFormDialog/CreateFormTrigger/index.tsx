@@ -6,6 +6,7 @@ import { AiOutlinePlus } from 'react-icons/ai';
 import { Root, Trigger } from '@radix-ui/react-dialog';
 
 import CreateCategoryPortal from '../../CreateCategoryDialog/CreateCategoryPortal';
+import CreateComplementPortal from '../../CreateComplementsDialog/CreateComplementsPortal';
 import CreateProductPortal from '../../CreateProductDialog/CreateProductPortal';
 import styles from './styles.module.css';
 
@@ -33,6 +34,9 @@ export default function CreateFormTrigger({
           <CreateProductPortal setShowDialog={setShowDialog} />
         ) : (
           <CreateCategoryPortal setShowDialog={setShowDialog} />
+        )}
+        {formType === `complement-form` && (
+          <CreateComplementPortal setShowDialog={setShowDialog} />
         )}
       </div>
     </Root>
