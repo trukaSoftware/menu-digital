@@ -8,6 +8,10 @@ export interface ComplementResponse {
   complementId: string;
 }
 
+export interface GetComplementReturn {
+  complements: Complement[];
+}
+
 export interface ComplementItemProp {
   id: string;
   name: string;
