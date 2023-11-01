@@ -1,0 +1,3 @@
+.defaultRadioInpuLabel > input {
+  @apply accent-red-500;
+}
