@@ -20,3 +20,7 @@ export interface ItemReturn {
 export interface ItemResponse {
   item: ItemReturn;
 }
+
+export interface GetItemReturn {
+  items: ItemReturn[];
+}
