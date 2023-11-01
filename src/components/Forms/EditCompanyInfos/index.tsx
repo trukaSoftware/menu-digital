@@ -92,7 +92,7 @@ export default function EditCompanyInfos({
     setIsSubmiting(true);
 
     try {
-      const createdCompany = await editCompany({
+      const editedCompany = await editCompany({
         ...data,
         id: `${user?.id}`,
         company: undefined,
@@ -119,7 +119,7 @@ export default function EditCompanyInfos({
           address: data.address || undefined,
         },
       });
-      if (!createdCompany?.company?.id) {
+      if (!editedCompany?.company?.id) {
         setIsSubmiting(false);
         setShowDialog(false);
         return setRequestError(true);
