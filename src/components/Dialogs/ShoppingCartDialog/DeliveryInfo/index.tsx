@@ -9,13 +9,15 @@ import styles from './styles.module.css';
 export interface DeliveryInfoProps {
   nameRegister: UseFormRegisterReturn;
   phoneRegister: UseFormRegisterReturn;
-  error: string | undefined;
+  nameError: string | undefined;
+  phoneError: string | undefined;
   labelClassName?: string;
 }
 
 export default function DeliveryInfo({
   nameRegister,
-  error,
+  nameError,
+  phoneError,
   phoneRegister,
   labelClassName,
 }: DeliveryInfoProps) {
@@ -24,14 +26,14 @@ export default function DeliveryInfo({
       <DefaultInput
         register={nameRegister}
         name="clientName"
-        error={error}
+        error={nameError}
         labelText="Nome*"
         labelClassName={labelClassName}
       />
       <DefaultInput
         register={phoneRegister}
         name="clientPhoneNumber"
-        error={error}
+        error={phoneError}
         labelText="Telefone*"
         labelClassName={labelClassName}
       />
