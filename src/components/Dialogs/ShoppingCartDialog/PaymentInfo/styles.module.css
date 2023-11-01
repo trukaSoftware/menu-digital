@@ -1,0 +1,11 @@
+.paymentInfoWrapper {
+  @apply flex flex-col p-4;
+}
+
+.paymentInfoRadios {
+  @apply flex flex-col gap-2 p-1;
+}
+
+.paymentInfoRadio {
+  @apply flex  items-center gap-2;
+}
