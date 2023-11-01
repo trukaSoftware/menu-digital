@@ -20,7 +20,10 @@ import { deliverySchema, DeliveryData } from '@/yup/front/develiveryFormSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Portal, Overlay, Content } from '@radix-ui/react-dialog';
 
+import DeliveryAdress from '../DeliveryAdress';
 import DeliveryInfo from '../DeliveryInfo';
+import OrderInfo from '../OrderInfo';
+import PaymentInfo from '../PaymentInfo';
 import TypeOfDelivery from '../TypeOfDelivery';
 import styles from './styles.module.css';
 import { getHeaderTitleAndIcon } from './utils';
@@ -40,7 +43,7 @@ export default function ShoppingCartPortal({
   companyData,
 }: ShoppingCartPortalProps) {
   const {
-    getFieldState,
+    getValues,
     handleSubmit,
     register,
     control,
@@ -49,6 +52,10 @@ export default function ShoppingCartPortal({
   } = useForm<DeliveryData>({
     resolver: yupResolver(deliverySchema),
     mode: `onChange`,
+    defaultValues: {
+      deliveryType: `Entrega`,
+      paymentMethod: `pix`,
+    },
   });
 
   const [generatingOrder, setGeneratingOrder] = useState(false);
@@ -162,6 +169,36 @@ export default function ShoppingCartPortal({
 
   const modalHeaderInfo = getHeaderTitleAndIcon(step);
 
+  const handleStepFoward = () => {
+    const { deliveryType } = getValues();
+
+    if (step === 5) {
+      return;
+    }
+
+    if (step === 2) {
+      if (deliveryType === `Retirada`) {
+        setStep(4);
+        return;
+      }
+    }
+
+    setStep(step + 1);
+  };
+
+  const handleStepBack = () => {
+    const { deliveryType } = getValues();
+
+    if (step === 4) {
+      if (deliveryType === `Retirada`) {
+        setStep(2);
+        return;
+      }
+    }
+
+    setStep(step - 1);
+  };
+
   return (
     <Portal>
       <Overlay className={styles.shoppingCartOverlay} />
@@ -171,7 +208,7 @@ export default function ShoppingCartPortal({
           title={modalHeaderInfo?.title}
           GoBackBtn={
             step ? (
-              <button type="button" onClick={() => setStep(step - 1)}>
+              <button type="button" onClick={handleStepBack}>
                 <IoIosArrowBack size={32} color="#EF4444" />
               </button>
             ) : undefined
@@ -219,6 +256,15 @@ export default function ShoppingCartPortal({
             />
           )}
           {step === 2 && <TypeOfDelivery register={register(`deliveryType`)} />}
+          {step === 3 && (
+            <DeliveryAdress
+              error={errors.deliveryAddress?.message}
+              register={register(`deliveryAddress`)}
+              labelClassName={styles.deliveryDefaultLabel}
+            />
+          )}
+          {step === 4 && <PaymentInfo register={register(`paymentMethod`)} />}
+          {step === 5 && <OrderInfo />}
           <footer className={styles.shoppingCartFooter}>
             <div className={styles.shoppingCartContainerTotalValue}>
               <p className={styles.shoppingCartTotalValue}>Total</p>
@@ -229,10 +275,10 @@ export default function ShoppingCartPortal({
             <button
               type="button"
               className={styles.shoppingCartConfirmButton}
-              onClick={step < 5 ? () => setStep(step + 1) : () => {}}
+              onClick={handleStepFoward}
               disabled={cartItens.length === 0}
             >
-              Continuar
+              {step === 5 ? `Finalizar pedido` : `Continuar`}
             </button>
             <button type="submit">teste</button>
           </footer>
