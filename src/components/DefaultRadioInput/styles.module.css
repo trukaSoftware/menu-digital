@@ -1,3 +1,7 @@
 .defaultRadioInpuLabel > input {
   @apply accent-red-500;
 }
+
+.defaultRadioInpuLabel {
+  @apply text-gray-900;
+}

@@ -8,6 +8,7 @@ export interface DefaultRadioInputProps
   register: UseFormRegisterReturn;
   inputText: string;
   value: string;
+  Icon?: JSX.Element;
   labelClassName?: string;
 }
 export default function DefaultRadioInput({
@@ -15,6 +16,7 @@ export default function DefaultRadioInput({
   register,
   inputText,
   value,
+  Icon,
   labelClassName,
   ...rest
 }: DefaultRadioInputProps) {
@@ -23,14 +25,8 @@ export default function DefaultRadioInput({
       htmlFor={id}
       className={`${styles.defaultRadioInpuLabel} ${labelClassName || ``}`}
     >
-      <input
-        id={id}
-        type="radio"
-        value={value}
-        checked
-        {...register}
-        {...rest}
-      />
+      <input id={id} type="radio" value={value} {...register} {...rest} />
+      {Icon || null}
       {inputText}
     </label>
   );
