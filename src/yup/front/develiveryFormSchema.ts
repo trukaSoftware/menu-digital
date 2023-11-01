@@ -2,15 +2,15 @@ import { object, string, InferType } from 'yup';
 
 export const deliverySchema = object({
   clientName: string().required(
-    `É preciso preencher este campo com o nome do produto.`
+    `É preciso preencher este campo com o seu nome.`
   ),
   clientPhoneNumber: string()
     .min(10, `O Telefone é obrigatório.`)
     .max(11, `O número de telefone deve ser válido.`)
     .required(),
-  deliveryType: string().required(
-    `É preciso selecionar ao menos uma categoria para o produto.`
-  ),
+  deliveryType: string()
+    .oneOf([`pickup`, `delivery`])
+    .required(`É preciso selecionar ao menos uma categoria para o produto.`),
   paymentMethod: string().required(
     `É preciso preencher este campo com o preço do produto.`
   ),
