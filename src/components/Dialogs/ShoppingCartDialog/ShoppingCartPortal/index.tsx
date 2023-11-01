@@ -16,7 +16,7 @@ import { createOrderToSendToWpp } from '@/utils/createOrderToSendToWpp';
 import { priceToBrazilCurrency } from '@/utils/priceToBrazilCurrency';
 
 import { setCartItens } from '@/redux/features/cartItem-slice';
-import { deliverySchema, DeliveryData } from '@/yup/front/develiveryForm';
+import { deliverySchema, DeliveryData } from '@/yup/front/develiveryFormSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Portal, Overlay, Content } from '@radix-ui/react-dialog';
 
@@ -40,6 +40,7 @@ export default function ShoppingCartPortal({
   companyData,
 }: ShoppingCartPortalProps) {
   const {
+    getFieldState,
     handleSubmit,
     register,
     control,
@@ -110,6 +111,10 @@ export default function ShoppingCartPortal({
     dispatch(setCartItens(updatedCartItens));
   };
 
+  const onSubmit = async (values: DeliveryData) => {
+    console.log(`>>>> `, values);
+  };
+
   const handleClientRequest = async () => {
     setGeneratingOrder(true);
 
@@ -172,7 +177,10 @@ export default function ShoppingCartPortal({
             ) : undefined
           }
         />
-        <div className={styles.shoppingCartContainerContentAndFooter}>
+        <form
+          className={styles.shoppingCartContainerContentAndFooter}
+          onSubmit={handleSubmit(onSubmit)}
+        >
           {step === 0 && (
             <div className={styles.shoppingCartContainerCartInformation}>
               <div className={styles.shoppingCartContainerHeadLineInformation}>
@@ -205,11 +213,12 @@ export default function ShoppingCartPortal({
             <DeliveryInfo
               nameRegister={register(`clientName`)}
               phoneRegister={register(`clientPhoneNumber`)}
-              error={errors.clientName?.message}
+              nameError={errors.clientName?.message}
+              phoneError={errors.clientPhoneNumber?.message}
               labelClassName={styles.deliveryDefaultLabel}
             />
           )}
-          {step === 2 && <TypeOfDelivery />}
+          {step === 2 && <TypeOfDelivery register={register(`deliveryType`)} />}
           <footer className={styles.shoppingCartFooter}>
             <div className={styles.shoppingCartContainerTotalValue}>
               <p className={styles.shoppingCartTotalValue}>Total</p>
@@ -225,8 +234,9 @@ export default function ShoppingCartPortal({
             >
               Continuar
             </button>
+            <button type="submit">teste</button>
           </footer>
-        </div>
+        </form>
       </Content>
     </Portal>
   );
