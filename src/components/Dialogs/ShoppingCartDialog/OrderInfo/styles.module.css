@@ -1,0 +1,77 @@
+.orderInfoWrapper {
+  @apply flex flex-col p-4 gap-4 overflow-auto text-gray-900;
+}
+
+.orderInfoContent {
+  @apply flex flex-col gap-2;
+}
+
+.orderInfoContent > p,
+.orderInfoContactWrapper > p,
+.orderInfoDeliveryWrapper > p {
+  @apply font-medium;
+}
+
+.orderInfoItems {
+  @apply border border-gray-300 h-20;
+}
+
+.orderInfoContactWrapper {
+  @apply flex flex-col gap-2;
+}
+
+.orderInfoContacts {
+  @apply flex flex-col gap-2 py-2 px-1;
+}
+
+.orderInfoContact {
+  @apply flex justify-between items-center;
+}
+
+.orderInfoContact > p {
+  @apply last:text-gray-500;
+}
+
+.orderInfoDeliveryWrapper {
+  @apply flex flex-col gap-2;
+}
+
+.orderInfoDeliveryWrapper > div {
+  @apply flex flex-col gap-2 py-1 px-2 border border-gray-400 rounded;
+}
+
+.orderInfoDeliveryWrapper > div > p {
+  @apply even:text-gray-500;
+}
+
+.orderInfoCompanyDelivery {
+  @apply flex justify-between items-center;
+}
+
+.orderInfoCompanyDelivery > div {
+  @apply flex flex-col gap-2 py-1;
+}
+
+.orderInfoCompanyDelivery > div > p {
+  @apply font-medium;
+}
+
+.orderInfoCompanyDelivery > div > div {
+  @apply flex gap-1 items-center;
+}
+
+.orderInfoCompanyDelivery > div > div > p {
+  @apply font-medium;
+}
+
+.orderInfoPaymentMethod {
+  @apply flex flex-col gap-1;
+}
+
+.orderInfoPaymentMethod > p {
+  @apply font-medium;
+}
+
+.orderInfoPaymentMethod > div {
+  @apply flex gap-2 px-1 py-1;
+}
