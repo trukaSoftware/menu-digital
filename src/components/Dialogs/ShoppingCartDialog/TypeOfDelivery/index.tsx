@@ -15,13 +15,13 @@ export default function TypeOfDelivery({ register }: TypeOfDeliveryProps) {
       <div className={styles.typeOfDeliveryCheckboxesWrapper}>
         <DefaultRadioInput
           id="delivery"
-          value="delivery"
+          value="Entrega"
           inputText="Entrega"
           register={register}
         />
         <DefaultRadioInput
           id="pickup"
-          value="pickup"
+          value="Retirada"
           inputText="Retirada"
           register={register}
         />
