@@ -82,9 +82,14 @@ export const editCompanyService = async ({
           phoneNumber: companyInfo.phoneNumber || existingInfo.phoneNumber,
           deliveryPhoneNumber:
             companyInfo.deliveryPhoneNumber || existingInfo.deliveryPhoneNumber,
-          companyLogoUrl: imagesUrls[0].imageUrl || existingInfo.companyLogoUrl,
+          companyLogoUrl:
+            imagesUrls[0]?.imageUrl || existingInfo.companyLogoUrl,
           companyThemeUrl:
-            imagesUrls[1].imageUrl || existingInfo.companyThemeUrl,
+            imagesUrls[1]?.imageUrl || existingInfo.companyThemeUrl,
+          deliveryTax: companyInfo.deliveryTax || existingInfo.deliveryTax,
+          deliveryTime: companyInfo.deliveryTime || existingInfo.deliveryTime,
+          openingHours: companyInfo.openingHours || existingInfo.openingHours,
+          instagramUrl: companyInfo.instagramUrl || existingInfo.instagramUrl,
         },
       });
     }

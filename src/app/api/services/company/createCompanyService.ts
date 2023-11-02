@@ -17,6 +17,10 @@ export const createCompanyService = async ({
   companyTheme,
   phoneNumber,
   deliveryPhoneNumber,
+  deliveryTax,
+  deliveryTime,
+  openingHours,
+  instagramUrl,
 }: CompanyData) => {
   const companyImages = [companyLogo, companyTheme];
 
@@ -37,6 +41,10 @@ export const createCompanyService = async ({
             companyLogoUrl: imagesUrls[0].imageUrl,
             companyThemeUrl: imagesUrls[1].imageUrl,
             deliveryPhoneNumber: deliveryPhoneNumber || phoneNumber,
+            deliveryTax,
+            deliveryTime,
+            openingHours,
+            instagramUrl,
             address: {
               create: {
                 address,

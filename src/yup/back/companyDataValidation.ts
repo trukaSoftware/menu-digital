@@ -19,6 +19,10 @@ const companySchema = object({
   zipCode: string().required(),
   phoneNumber: string().required(),
   deliveryPhoneNumber: string(),
+  deliveryTax: number().required(),
+  deliveryTime: string().required(),
+  openingHours: string().required(),
+  instagramUrl: string().required(),
 });
 
 export type CompanyData = InferType<typeof companySchema>;

@@ -299,6 +299,27 @@ describe(`CreateCompany`, () => {
 
     await userEvent.type(addressInput, `endereço`);
 
+    const deliveryTaxInput = screen.getByLabelText(`taxa de entrega*`);
+
+    await userEvent.type(deliveryTaxInput, `4.5`);
+
+    const deliveryTimeInput = screen.getByLabelText(`tempo de entrega*`);
+
+    await userEvent.type(deliveryTimeInput, `Entre 30 e 40 minutos`);
+
+    const openingHoursInput = screen.getByLabelText(
+      `Horário de funcionamento*`
+    );
+
+    await userEvent.type(openingHoursInput, `Entre 30 e 40 minutos`);
+
+    const instagramURLInput = screen.getByLabelText(`Link do Instagram*`);
+
+    await userEvent.type(
+      instagramURLInput,
+      `https://www.instagram.com/mock-instagram/`
+    );
+
     await userEvent.click(submitButton);
 
     expect(createCompany).toHaveBeenCalledTimes(1);

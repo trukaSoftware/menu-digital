@@ -1,0 +1,3 @@
+.trigger {
+  @apply absolute top-[-2px] right-[-2px] text-red-800 bg-white;
+}

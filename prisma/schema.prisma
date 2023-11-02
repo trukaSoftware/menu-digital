@@ -45,6 +45,10 @@ model Info {
   address             Address?
   companyId           String   @unique
   branchId            String?  @unique
+  deliveryTax         Decimal? @db.Money
+  deliveryTime        String?  
+  openingHours        String?
+  instagramUrl        String?
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
   company             Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
