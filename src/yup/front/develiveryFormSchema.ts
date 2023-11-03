@@ -12,7 +12,7 @@ export const deliverySchema = object({
     .oneOf([`Retirada`, `Entrega`])
     .required(`É preciso selecionar ao menos uma categoria para o produto.`),
   paymentMethod: string()
-    .oneOf([`pix`, `Cartão de crédito`, `Dinheiro`, `Cartão de débito`])
+    .oneOf([`Pix`, `Cartão de crédito`, `Dinheiro`, `Cartão de débito`])
     .required(`É preciso preencher este campo com o preço do produto.`),
   deliveryAddress: string().required(
     `É preciso preencher o campo de endereço corretamente.`
