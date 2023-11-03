@@ -18,7 +18,14 @@ export default async function Products({ params }: RouterParams) {
 
   const { name, info } = companyResults.data.company;
 
-  const { companyLogoUrl, companyThemeUrl, deliveryPhoneNumber } = info;
+  const {
+    companyLogoUrl,
+    companyThemeUrl,
+    deliveryPhoneNumber,
+    deliveryTax,
+    deliveryTime,
+    address: { address },
+  } = info;
 
   const parsedCategories = categories
     .filter((category) => category.categoryProducts.length > 0)
@@ -52,6 +59,9 @@ export default async function Products({ params }: RouterParams) {
   const companyData = {
     deliveryPhoneNumber,
     name,
+    deliveryTax,
+    deliveryTime,
+    address,
   };
 
   return (
