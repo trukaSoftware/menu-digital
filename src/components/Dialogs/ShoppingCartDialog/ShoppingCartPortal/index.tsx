@@ -46,9 +46,8 @@ export default function ShoppingCartPortal({
     getValues,
     handleSubmit,
     register,
-    control,
-    formState: { errors },
     setError,
+    formState: { errors },
   } = useForm<DeliveryData>({
     resolver: yupResolver(deliverySchema),
     mode: `onChange`,
@@ -170,7 +169,40 @@ export default function ShoppingCartPortal({
   const modalHeaderInfo = getHeaderTitleAndIcon(step);
 
   const handleStepFoward = () => {
-    const { deliveryType } = getValues();
+    const { deliveryType, clientName, clientPhoneNumber, deliveryAddress } =
+      getValues();
+
+    if (step === 1) {
+      if (!clientName) {
+        setError(`clientName`, {
+          type: `manual`,
+          message: `Insira seu telefone de contato`,
+        });
+      }
+
+      if (!clientPhoneNumber) {
+        setError(`clientPhoneNumber`, {
+          type: `manual`,
+          message: `Insira seu telefone de contato`,
+        });
+      }
+      if (
+        errors.clientName?.message ||
+        errors.clientPhoneNumber?.message ||
+        !clientPhoneNumber ||
+        !clientName
+      ) {
+        return;
+      }
+    }
+
+    if (step === 3 && !deliveryAddress) {
+      setError(`deliveryAddress`, {
+        type: `manual`,
+        message: `Insira seu endereço de entrega`,
+      });
+      return;
+    }
 
     if (step === 5) {
       return;
@@ -264,7 +296,16 @@ export default function ShoppingCartPortal({
             />
           )}
           {step === 4 && <PaymentInfo register={register(`paymentMethod`)} />}
-          {step === 5 && <OrderInfo />}
+          {step === 5 && (
+            <OrderInfo
+              clientName={getValues().clientName}
+              clientPhone={getValues().clientPhoneNumber}
+              clientAdress={getValues().deliveryAddress}
+              paymentMethod={getValues().paymentMethod}
+              deliveryTax="R$ 5,00"
+              deliveryTime="30 min"
+            />
+          )}
           <footer className={styles.shoppingCartFooter}>
             <div className={styles.shoppingCartContainerTotalValue}>
               <p className={styles.shoppingCartTotalValue}>Total</p>
