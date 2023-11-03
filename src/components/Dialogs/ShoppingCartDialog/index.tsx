@@ -17,6 +17,9 @@ interface ShoppingCardDialogProps {
   companyData: {
     deliveryPhoneNumber: string;
     name: string;
+    deliveryTax: string;
+    deliveryTime: string;
+    address: string;
   };
 }
 
