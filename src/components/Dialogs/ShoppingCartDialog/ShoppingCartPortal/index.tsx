@@ -4,10 +4,11 @@ import { IoIosArrowBack } from 'react-icons/io';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 import axios from 'axios';
 
+import ButtonSubmit from '@/components/ButtonSubmit';
 import { CartItemProps } from '@/components/FoodCardDialog';
 import ModalDefaultHeader from '@/components/ModalDefaultHeader';
 import ShoppingCartProducts from '@/components/ShoppingCartProducts';
@@ -34,6 +35,9 @@ export interface ShoppingCartPortalProps {
   companyData: {
     deliveryPhoneNumber: string;
     name: string;
+    deliveryTax: string;
+    deliveryTime: string;
+    address: string;
   };
 }
 
@@ -48,20 +52,23 @@ export default function ShoppingCartPortal({
     register,
     setError,
     formState: { errors },
+    setValue,
   } = useForm<DeliveryData>({
     resolver: yupResolver(deliverySchema),
     mode: `onChange`,
     defaultValues: {
       deliveryType: `Entrega`,
-      paymentMethod: `pix`,
+      paymentMethod: `Pix`,
     },
   });
-
   const [generatingOrder, setGeneratingOrder] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
   const [step, setStep] = useState<number>(0);
   const dispatch = useDispatch();
   const pathnames = usePathname();
+
+  const searchParams = useSearchParams();
+  const tableNumber = searchParams.get(`table`);
 
   useEffect(() => {
     const total = cartItens.reduce(
@@ -117,15 +124,13 @@ export default function ShoppingCartPortal({
     dispatch(setCartItens(updatedCartItens));
   };
 
-  const onSubmit = async (values: DeliveryData) => {
-    console.log(`>>>> `, values);
-  };
-
-  const handleClientRequest = async () => {
+  const handleClientRequest = async (values?: DeliveryData) => {
     setGeneratingOrder(true);
 
     const products = cartItens.map((item) => ({
-      name: `${item.amount}x ${item.productName}`,
+      name: `${item.amount}x ${item.productName} - ${priceToBrazilCurrency(
+        item.totalValue
+      )}`,
       complements: item.allSelectedComplements.flatMap((complement) =>
         complement.items.map(
           (complementItem) =>
@@ -140,8 +145,8 @@ export default function ShoppingCartPortal({
       const response = await axios.post(`/api/requests/createRequest`, {
         products: JSON.stringify(products),
         companyId: pathnames.split(`/`)?.[3],
-        status: `CLOSE`, // for delivery requests status should be close, for presential requests status should be OPEN
-        table: null, // when the qrcode logic was implemented, we get the table number from url
+        status: tableNumber ? `OPEN` : `CLOSE`,
+        table: tableNumber || null,
         totalValue: totalPrice,
       });
 
@@ -152,6 +157,8 @@ export default function ShoppingCartPortal({
         companyData,
         products,
         totalPrice,
+        values,
+        table: tableNumber || undefined,
       });
 
       window.location.href = whatsappURL;
@@ -160,11 +167,13 @@ export default function ShoppingCartPortal({
     } finally {
       handleClearCartItems();
       setGeneratingOrder(false);
+      setShowDialog(false);
     }
   };
 
-  // const isDelivery = true;
-  // const submitButtonText = isDelivery ? `Continuar` : `Confirmar pedido`;
+  const onSubmit = async (values: DeliveryData) => {
+    handleClientRequest(values);
+  };
 
   const modalHeaderInfo = getHeaderTitleAndIcon(step);
 
@@ -196,6 +205,14 @@ export default function ShoppingCartPortal({
       }
     }
 
+    if (step === 2) {
+      if (deliveryType === `Retirada`) {
+        setValue(`deliveryAddress`, companyData.address);
+        setStep(4);
+        return;
+      }
+    }
+
     if (step === 3 && !deliveryAddress) {
       setError(`deliveryAddress`, {
         type: `manual`,
@@ -208,13 +225,6 @@ export default function ShoppingCartPortal({
       return;
     }
 
-    if (step === 2) {
-      if (deliveryType === `Retirada`) {
-        setStep(4);
-        return;
-      }
-    }
-
     setStep(step + 1);
   };
 
@@ -223,6 +233,7 @@ export default function ShoppingCartPortal({
 
     if (step === 4) {
       if (deliveryType === `Retirada`) {
+        setValue(`deliveryAddress`, ``);
         setStep(2);
         return;
       }
@@ -246,10 +257,7 @@ export default function ShoppingCartPortal({
             ) : undefined
           }
         />
-        <form
-          className={styles.shoppingCartContainerContentAndFooter}
-          onSubmit={handleSubmit(onSubmit)}
-        >
+        <form className={styles.shoppingCartContainerContentAndFooter}>
           {step === 0 && (
             <div className={styles.shoppingCartContainerCartInformation}>
               <div className={styles.shoppingCartContainerHeadLineInformation}>
@@ -300,10 +308,13 @@ export default function ShoppingCartPortal({
             <OrderInfo
               clientName={getValues().clientName}
               clientPhone={getValues().clientPhoneNumber}
-              clientAdress={getValues().deliveryAddress}
+              address={getValues().deliveryAddress}
               paymentMethod={getValues().paymentMethod}
-              deliveryTax="R$ 5,00"
-              deliveryTime="30 min"
+              deliveryTax={priceToBrazilCurrency(
+                Number(companyData.deliveryTax)
+              )}
+              deliveryTime={companyData.deliveryTime}
+              cartItens={cartItens}
             />
           )}
           <footer className={styles.shoppingCartFooter}>
@@ -313,15 +324,28 @@ export default function ShoppingCartPortal({
                 {priceToBrazilCurrency(totalPrice)}
               </p>
             </div>
-            <button
-              type="button"
-              className={styles.shoppingCartConfirmButton}
-              onClick={handleStepFoward}
-              disabled={cartItens.length === 0}
-            >
-              {step === 5 ? `Finalizar pedido` : `Continuar`}
-            </button>
-            <button type="submit">teste</button>
+            {step === 5 || tableNumber ? (
+              <ButtonSubmit
+                type="button"
+                onClick={
+                  tableNumber
+                    ? () => handleClientRequest()
+                    : handleSubmit(onSubmit)
+                }
+                className={styles.shoppingCartConfirmButton}
+                isSubmiting={generatingOrder}
+                text="Finalizar pedido"
+              />
+            ) : (
+              <button
+                type="button"
+                className={styles.shoppingCartConfirmButton}
+                onClick={handleStepFoward}
+                disabled={cartItens.length === 0}
+              >
+                Continuar
+              </button>
+            )}
           </footer>
         </form>
       </Content>
