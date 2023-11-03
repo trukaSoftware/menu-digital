@@ -21,7 +21,7 @@ export default function PaymentInfo({ register }: PaymentInfoProps) {
       <div className={styles.paymentInfoRadios}>
         <DefaultRadioInput
           id="pix"
-          value="pix"
+          value="Pix"
           inputText="Pix"
           register={register}
           labelClassName={styles.paymentInfoRadio}
@@ -29,7 +29,7 @@ export default function PaymentInfo({ register }: PaymentInfoProps) {
         />
         <DefaultRadioInput
           id="credit"
-          inputText="Cartão de credito"
+          inputText="Cartão de crédito"
           value="Cartão de crédito"
           labelClassName={styles.paymentInfoRadio}
           register={register}
