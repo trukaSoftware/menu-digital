@@ -1,9 +1,28 @@
 import { BsFillClockFill } from 'react-icons/bs';
-import { FaMoneyBill, FaMotorcycle } from 'react-icons/fa';
+import { FaMotorcycle } from 'react-icons/fa';
 
 import styles from './styles.module.css';
+import { getPaymentMethodIcon } from './utils';
 
-export default function OrderInfo() {
+export interface OrderInfoProps {
+  clientName: string;
+  clientPhone: string;
+  clientAdress?: string;
+  deliveryTax: string;
+  deliveryTime: string;
+  paymentMethod: string;
+}
+
+export default function OrderInfo({
+  clientName,
+  clientPhone,
+  clientAdress,
+  deliveryTax,
+  deliveryTime,
+  paymentMethod,
+}: OrderInfoProps) {
+  const PaymentMethodIcon = getPaymentMethodIcon(paymentMethod);
+
   return (
     <div className={styles.orderInfoWrapper}>
       <div className={styles.orderInfoContent}>
@@ -15,44 +34,51 @@ export default function OrderInfo() {
         <div className={styles.orderInfoContacts}>
           <div className={styles.orderInfoContact}>
             <p>Nome</p>
-            <p>Nome da pessoa</p>
+            <p>{clientName}</p>
           </div>
           <div className={styles.orderInfoContact}>
             <p>Telefone</p>
-            <p>21 98928-0209</p>
+            <p>{clientPhone}</p>
           </div>
         </div>
       </div>
       <div className={styles.orderInfoDeliveryWrapper}>
-        <p>Informações da entrega</p>
-        <div>
-          <p>Endereço</p>
-          <p>Rua carlinhos, Miguel couto, 128</p>
-          <p>Complemento</p>
-          <p>Perto do mecânico manuel</p>
-        </div>
+        {clientAdress ? (
+          <>
+            <p>Informações da entrega</p>
+            <div>
+              <p>Endereço</p>
+              <p>{clientAdress}</p>
+            </div>
+          </>
+        ) : (
+          <>
+            <p>Endereço para retirada</p>
+            <h2>Endereço do estabelecimento</h2>
+          </>
+        )}
       </div>
       <div className={styles.orderInfoCompanyDelivery}>
         <div>
           <p>Taxa de entrega</p>
           <div>
             <FaMotorcycle size={24} />
-            <p>R$ 3,50</p>
+            <p>{deliveryTax}</p>
           </div>
         </div>
         <div>
           <p>Tempo de espera</p>
           <div>
             <BsFillClockFill size={20} />
-            <p>40-50min</p>
+            <p>{deliveryTime}</p>
           </div>
         </div>
       </div>
       <div className={styles.orderInfoPaymentMethod}>
         <p>Forma de pagamento</p>
         <div>
-          <FaMoneyBill size={24} />
-          <p>Dinheiro</p>
+          <PaymentMethodIcon size={24} />
+          <p>{paymentMethod}</p>
         </div>
       </div>
     </div>

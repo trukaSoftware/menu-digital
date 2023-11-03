@@ -69,9 +69,13 @@
 }
 
 .orderInfoPaymentMethod > p {
-  @apply font-medium;
+  @apply font-medium capitalize;
 }
 
 .orderInfoPaymentMethod > div {
   @apply flex gap-2 px-1 py-1;
+}
+
+.orderInfoPaymentMethod > div > p {
+  @apply capitalize;
 }
