@@ -1,22 +1,28 @@
 import { BsFillClockFill } from 'react-icons/bs';
 import { FaMotorcycle } from 'react-icons/fa';
 
+import { CartItemProps } from '@/components/FoodCardDialog';
+
+import { priceToBrazilCurrency } from '@/utils/priceToBrazilCurrency';
+
 import styles from './styles.module.css';
 import { getPaymentMethodIcon } from './utils';
 
 export interface OrderInfoProps {
+  cartItens: CartItemProps[];
   clientName: string;
   clientPhone: string;
-  clientAdress?: string;
+  address: string;
   deliveryTax: string;
   deliveryTime: string;
   paymentMethod: string;
 }
 
 export default function OrderInfo({
+  cartItens,
   clientName,
   clientPhone,
-  clientAdress,
+  address,
   deliveryTax,
   deliveryTime,
   paymentMethod,
@@ -27,7 +33,17 @@ export default function OrderInfo({
     <div className={styles.orderInfoWrapper}>
       <div className={styles.orderInfoContent}>
         <p>Pedido</p>
-        <div className={styles.orderInfoItems} />
+        <div className={styles.orderInfoItems}>
+          {cartItens.map((cartItem) => (
+            <div key={cartItem.id} className={styles.orderInfoCartItemWrapper}>
+              <div>
+                <p>{cartItem.amount}x</p>
+                <p>{cartItem.productName}</p>
+              </div>
+              <p>{priceToBrazilCurrency(cartItem.totalValue)}</p>
+            </div>
+          ))}
+        </div>
       </div>
       <div className={styles.orderInfoContactWrapper}>
         <p>Informações de contato</p>
@@ -43,20 +59,11 @@ export default function OrderInfo({
         </div>
       </div>
       <div className={styles.orderInfoDeliveryWrapper}>
-        {clientAdress ? (
-          <>
-            <p>Informações da entrega</p>
-            <div>
-              <p>Endereço</p>
-              <p>{clientAdress}</p>
-            </div>
-          </>
-        ) : (
-          <>
-            <p>Endereço para retirada</p>
-            <h2>Endereço do estabelecimento</h2>
-          </>
-        )}
+        <p>{address ? `Informações da entrega` : `Endereço para retirada`}</p>
+        <div>
+          <p>Endereço</p>
+          <p>{address}</p>
+        </div>
       </div>
       <div className={styles.orderInfoCompanyDelivery}>
         <div>
