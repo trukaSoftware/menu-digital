@@ -3,8 +3,10 @@
 import { useEffect, useState } from 'react';
 
 import { Complement } from '@/types/complement';
+import { ItemReturn } from '@/types/item';
 
 import { getComplements } from '@/utils/api/getComplements';
+import { getItems } from '@/utils/api/getItems';
 import { removeAccent } from '@/utils/removeAccent';
 
 import ComplementEmptyState from '../ComplementEmptyState';
@@ -16,6 +18,7 @@ export default function ComplementWithSearchInput() {
   const [searchInputValue, setSearchInputValue] = useState(``);
   const [showDropdown, setShowDropdown] = useState<number | null>(null);
   const [allComplements, setAllComplements] = useState<Complement[]>([]);
+  const [allItems, setAllItems] = useState<ItemReturn[]>([]);
   const [search, setSearch] = useState(``);
 
   useEffect(() => {
@@ -23,7 +26,12 @@ export default function ComplementWithSearchInput() {
       const allComplement = await getComplements();
       setAllComplements(allComplement.complements);
     };
+    const getAllItems = async () => {
+      const allItem = await getItems();
+      setAllItems(allItem.items);
+    };
     getAllComplements();
+    getAllItems();
   }, []);
 
   const filteredComplements =
@@ -57,7 +65,7 @@ export default function ComplementWithSearchInput() {
             <DropdownComplement
               key={complements.id}
               complements={complements}
-              filteredItems={complements.items}
+              filteredItems={allItems}
               currentComplementIndex={index}
               gettingProducts={false}
               showDropdown={showDropdown}
