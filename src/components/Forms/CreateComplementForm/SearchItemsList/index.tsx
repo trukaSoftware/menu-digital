@@ -4,12 +4,14 @@ import { MdOutlineSearchOff } from 'react-icons/md';
 import CheckboxInput from '@/components/CheckboxInput';
 import Spinner from '@/components/Spinner';
 
-import { ComplementItemProp } from '@/types/complement';
+import { ItemReturn } from '@/types/item';
+
+import { priceToBrazilCurrency } from '@/utils/priceToBrazilCurrency';
 
 import styles from './styles.module.css';
 
 export interface SearchProductsListProps {
-  filteredItems: ComplementItemProp[];
+  filteredItems: ItemReturn[];
   register: UseFormRegisterReturn;
   gettingProducts: boolean;
 }
@@ -32,7 +34,9 @@ export default function SearchComplementsList({
         (filteredItems.length > 0 ? (
           filteredItems.map((item) => (
             <CheckboxInput
-              text={item.name}
+              text={`${item.name} - ${priceToBrazilCurrency(
+                Number(item.price)
+              )}`}
               id={item.id}
               dataTestId={item.complementId}
               register={register}

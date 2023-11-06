@@ -5,6 +5,9 @@ import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { InferType } from 'yup';
 
 import { Complement, ComplementItemProp } from '@/types/complement';
+import { ItemReturn } from '@/types/item';
+
+import { createItem } from '@/utils/api/createItem';
 
 import { editComplementFormSchema } from '@/yup/front/editComplementFormSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -19,7 +22,7 @@ type EditComplementFormData = InferType<typeof editComplementFormSchema>;
 
 export interface DropdownComplementProps {
   complements: Complement;
-  filteredItems: ComplementItemProp[];
+  filteredItems: ItemReturn[];
   currentComplementIndex: number;
   gettingProducts: boolean;
   showDropdown: null | number;
@@ -43,6 +46,12 @@ export default function DropdownComplement({
   const [requestError, setRequestError] = useState(false);
 
   const itemsIds = complements?.items?.map((item) => item.id);
+  // const fullItems = complements?.items?.map((item) => ({
+  //   name: item.name,
+  //   complementId: complements.id,
+  //   price: item.price,
+  //   id: item.id,
+  // }));
 
   const { register, handleSubmit, reset } = useForm({
     resolver: yupResolver(editComplementFormSchema),
@@ -67,8 +76,39 @@ export default function DropdownComplement({
   };
 
   const onSubmit = async (data: EditComplementFormData) => {
+    setIsSubmiting(true);
+    // const itemsToRemoveId =
+    //   itemsIds?.filter((id) => !data.itemsIds?.includes(id)) || [];
+    const itemsToAddId =
+      data.itemsIds?.filter((id) => !itemsIds?.includes(id as string)) || [];
+
+    const completeItemsToAdd = filteredItems.filter((item) =>
+      itemsToAddId.includes(item.id)
+    );
+    // const fullObjectsToAdd = fullItems?.filter((item) =>
+    //   itemsToAddId?.includes(item.id)
+    // );
+
+    console.log(
+      `esse é o data:`,
+      data,
+      `esse é o filteredItems:`,
+      filteredItems, // itemsToAddId, // `esse é o itemsToAddId:`,
+      `esse é o completeItemsToAdd:`,
+      completeItemsToAdd
+      // `esse é o fullItems:`,
+      // fullItems,
+      // `esse é o itemsIds:`,
+      // itemsIds
+    );
     try {
-      setIsSubmiting(true);
+      // if (!!itemsToAddId && itemsToAddId.length > 0) {
+      //   const itemsPayload = {
+      //     complementId: complements.id,
+      //     items: itemsToAddId,
+      //   };
+      //   await createItem(itemsPayload);
+      // }
     } catch {
       setRequestError(true);
     } finally {
