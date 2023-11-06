@@ -4,19 +4,19 @@ import DefaultInput from '@/components/DefaultInput';
 
 import styles from './styles.module.css';
 
-export interface DeliveryAdressProps {
+export interface DeliveryAddressProps {
   register: UseFormRegisterReturn;
   error?: string;
   labelClassName?: string;
 }
 
-export default function DeliveryAdress({
+export default function DeliveryAddress({
   register,
   error,
   labelClassName,
-}: DeliveryAdressProps) {
+}: DeliveryAddressProps) {
   return (
-    <div className={styles.deliveryAdressWrapper}>
+    <div className={styles.deliveryAddressWrapper}>
       <DefaultInput
         labelClassName={labelClassName}
         name="address"

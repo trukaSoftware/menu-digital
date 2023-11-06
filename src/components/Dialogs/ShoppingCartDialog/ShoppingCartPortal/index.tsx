@@ -21,7 +21,7 @@ import { deliverySchema, DeliveryData } from '@/yup/front/develiveryFormSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Portal, Overlay, Content } from '@radix-ui/react-dialog';
 
-import DeliveryAdress from '../DeliveryAdress';
+import DeliveryAddress from '../DeliveryAddress';
 import DeliveryInfo from '../DeliveryInfo';
 import OrderInfo from '../OrderInfo';
 import PaymentInfo from '../PaymentInfo';
@@ -297,7 +297,7 @@ export default function ShoppingCartPortal({
           )}
           {step === 2 && <TypeOfDelivery register={register(`deliveryType`)} />}
           {step === 3 && (
-            <DeliveryAdress
+            <DeliveryAddress
               error={errors.deliveryAddress?.message}
               register={register(`deliveryAddress`)}
               labelClassName={styles.deliveryDefaultLabel}
