@@ -8,17 +8,17 @@ datasource db {
 }
 
 model Company {
-  id                      String              @id @default(uuid())
-  name                    String              @db.VarChar(255)
-  slug                    String              @db.VarChar(255)
-  status                  CompanyStatus       @default(ACTIVE)
-  info                    Info?
-  requests                Requests[]
-  branchs                 Branch[]
-  products                Products[]
-  productCategory         ProductCategories[]
-  createdAt               DateTime            @default(now())
-  updatedAt               DateTime            @updatedAt
+  id              String              @id @default(uuid())
+  name            String              @db.VarChar(255)
+  slug            String              @db.VarChar(255)
+  status          CompanyStatus       @default(ACTIVE)
+  info            Info?
+  requests        Requests[]
+  branchs         Branch[]
+  products        Products[]
+  productCategory ProductCategories[]
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
 }
 
 model Branch {
@@ -67,17 +67,17 @@ model Address {
 }
 
 model Requests {
-  id              String        @id @default(uuid())
-  products        String
-  companyId       String?        
-  branchId        String?
-  company         Company?      @relation(fields: [companyId], references: [id], onDelete: Cascade)
-  branch          Branch?       @relation(fields: [branchId], references: [id], onDelete: Cascade)
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
-  status          RequestStatus @default(OPEN)
-  table           String?
-  totalValue      Decimal       @db.Money
+  id         String        @id @default(uuid())
+  products   String
+  companyId  String?
+  branchId   String?
+  company    Company?      @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  branch     Branch?       @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+  status     RequestStatus @default(OPEN)
+  table      String?
+  totalValue Decimal       @db.Money
 }
 
 model ProductsComplements {
@@ -101,13 +101,13 @@ model Complements {
 }
 
 model Items {
-  id            String       @id @default(uuid())
-  name          String
-  price         Decimal?     @db.Money
-  complements   Complements  @relation(fields: [complementId], references: [id], onDelete: Cascade)
-  complementId  String
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
+  id           String       @id @default(uuid())
+  name         String
+  price        Decimal?     @db.Money
+  complements  Complements? @relation(fields: [complementId], references: [id], onDelete: Cascade)
+  complementId String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
 
   @@unique([name, complementId])
 }
