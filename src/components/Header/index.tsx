@@ -20,9 +20,7 @@ export default function Header({
     <header className={styles.header}>
       <div className={styles.themeContainer}>
         <Image
-          src={
-            companyThemeUrl ? `/images/theme-image-mock.webp` : companyThemeUrl
-          }
+          src={companyThemeUrl || `/images/theme-image-mock.webp`}
           alt="Image tema do estabelecimento"
           fill
         />
