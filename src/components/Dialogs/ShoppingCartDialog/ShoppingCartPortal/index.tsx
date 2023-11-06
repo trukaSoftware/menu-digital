@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
-import { FaShoppingBag } from 'react-icons/fa';
+import { useForm } from 'react-hook-form';
+import { IoIosArrowBack } from 'react-icons/io';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 import axios from 'axios';
 
+import ButtonSubmit from '@/components/ButtonSubmit';
 import { CartItemProps } from '@/components/FoodCardDialog';
 import ModalDefaultHeader from '@/components/ModalDefaultHeader';
 import ShoppingCartProducts from '@/components/ShoppingCartProducts';
@@ -15,9 +17,17 @@ import { createOrderToSendToWpp } from '@/utils/createOrderToSendToWpp';
 import { priceToBrazilCurrency } from '@/utils/priceToBrazilCurrency';
 
 import { setCartItens } from '@/redux/features/cartItem-slice';
+import { deliverySchema, DeliveryData } from '@/yup/front/develiveryFormSchema';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Portal, Overlay, Content } from '@radix-ui/react-dialog';
 
+import DeliveryAddress from '../DeliveryAddress';
+import DeliveryInfo from '../DeliveryInfo';
+import OrderInfo from '../OrderInfo';
+import PaymentInfo from '../PaymentInfo';
+import TypeOfDelivery from '../TypeOfDelivery';
 import styles from './styles.module.css';
+import { getHeaderTitleAndIcon } from './utils';
 
 export interface ShoppingCartPortalProps {
   setShowDialog: (value: boolean) => void;
@@ -25,6 +35,9 @@ export interface ShoppingCartPortalProps {
   companyData: {
     deliveryPhoneNumber: string;
     name: string;
+    deliveryTax: string;
+    deliveryTime: string;
+    address: string;
   };
 }
 
@@ -33,10 +46,29 @@ export default function ShoppingCartPortal({
   cartItens,
   companyData,
 }: ShoppingCartPortalProps) {
+  const {
+    getValues,
+    handleSubmit,
+    register,
+    setError,
+    formState: { errors },
+    setValue,
+  } = useForm<DeliveryData>({
+    resolver: yupResolver(deliverySchema),
+    mode: `onChange`,
+    defaultValues: {
+      deliveryType: `Entrega`,
+      paymentMethod: `Pix`,
+    },
+  });
   const [generatingOrder, setGeneratingOrder] = useState(false);
-  const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [step, setStep] = useState<number>(0);
   const dispatch = useDispatch();
   const pathnames = usePathname();
+
+  const searchParams = useSearchParams();
+  const tableNumber = searchParams.get(`table`);
 
   useEffect(() => {
     const total = cartItens.reduce(
@@ -92,11 +124,13 @@ export default function ShoppingCartPortal({
     dispatch(setCartItens(updatedCartItens));
   };
 
-  const handleClientRequest = async () => {
+  const handleClientRequest = async (values?: DeliveryData) => {
     setGeneratingOrder(true);
 
     const products = cartItens.map((item) => ({
-      name: `${item.amount}x ${item.productName}`,
+      name: `${item.amount}x ${item.productName} - ${priceToBrazilCurrency(
+        item.totalValue
+      )}`,
       complements: item.allSelectedComplements.flatMap((complement) =>
         complement.items.map(
           (complementItem) =>
@@ -111,8 +145,8 @@ export default function ShoppingCartPortal({
       const response = await axios.post(`/api/requests/createRequest`, {
         products: JSON.stringify(products),
         companyId: pathnames.split(`/`)?.[3],
-        status: `CLOSE`, // for delivery requests status should be close, for presential requests status should be OPEN
-        table: null, // when the qrcode logic was implemented, we get the table number from url
+        status: tableNumber ? `OPEN` : `CLOSE`,
+        table: tableNumber || null,
         totalValue: totalPrice,
       });
 
@@ -123,6 +157,8 @@ export default function ShoppingCartPortal({
         companyData,
         products,
         totalPrice,
+        values,
+        table: tableNumber || undefined,
       });
 
       window.location.href = whatsappURL;
@@ -131,7 +167,79 @@ export default function ShoppingCartPortal({
     } finally {
       handleClearCartItems();
       setGeneratingOrder(false);
+      setShowDialog(false);
     }
+  };
+
+  const onSubmit = async (values: DeliveryData) => {
+    handleClientRequest(values);
+  };
+
+  const modalHeaderInfo = getHeaderTitleAndIcon(step);
+
+  const handleStepFoward = () => {
+    const { deliveryType, clientName, clientPhoneNumber, deliveryAddress } =
+      getValues();
+
+    if (step === 1) {
+      if (!clientName) {
+        setError(`clientName`, {
+          type: `manual`,
+          message: `Insira seu telefone de contato`,
+        });
+      }
+
+      if (!clientPhoneNumber) {
+        setError(`clientPhoneNumber`, {
+          type: `manual`,
+          message: `Insira seu telefone de contato`,
+        });
+      }
+      if (
+        errors.clientName?.message ||
+        errors.clientPhoneNumber?.message ||
+        !clientPhoneNumber ||
+        !clientName
+      ) {
+        return;
+      }
+    }
+
+    if (step === 2) {
+      if (deliveryType === `Retirada`) {
+        setValue(`deliveryAddress`, companyData.address);
+        setStep(4);
+        return;
+      }
+    }
+
+    if (step === 3 && !deliveryAddress) {
+      setError(`deliveryAddress`, {
+        type: `manual`,
+        message: `Insira seu endereço de entrega`,
+      });
+      return;
+    }
+
+    if (step === 5) {
+      return;
+    }
+
+    setStep(step + 1);
+  };
+
+  const handleStepBack = () => {
+    const { deliveryType } = getValues();
+
+    if (step === 4) {
+      if (deliveryType === `Retirada`) {
+        setValue(`deliveryAddress`, ``);
+        setStep(2);
+        return;
+      }
+    }
+
+    setStep(step - 1);
   };
 
   return (
@@ -139,36 +247,76 @@ export default function ShoppingCartPortal({
       <Overlay className={styles.shoppingCartOverlay} />
       <Content className={styles.shoppingCartContent}>
         <ModalDefaultHeader
-          icon={<FaShoppingBag size={24} fill="#EF4444" />}
-          title="Sacola"
+          icon={<modalHeaderInfo.Icon size={24} fill="#EF4444" />}
+          title={modalHeaderInfo?.title}
+          GoBackBtn={
+            step ? (
+              <button type="button" onClick={handleStepBack}>
+                <IoIosArrowBack size={32} color="#EF4444" />
+              </button>
+            ) : undefined
+          }
         />
-        <div className={styles.shoppingCartContainerContentAndFooter}>
-          <div className={styles.shoppingCartContainerCartInformation}>
-            <div className={styles.shoppingCartContainerHeadLineInformation}>
-              <p className={styles.shoppingCartText}>Pedido</p>
+        <form className={styles.shoppingCartContainerContentAndFooter}>
+          {step === 0 && (
+            <div className={styles.shoppingCartContainerCartInformation}>
+              <div className={styles.shoppingCartContainerHeadLineInformation}>
+                <p className={styles.shoppingCartText}>Pedido</p>
+                <button
+                  type="button"
+                  className={styles.shoppingCartClearCartButton}
+                  onClick={handleClearCartItems}
+                >
+                  Limpar
+                </button>
+              </div>
+
+              <ShoppingCartProducts
+                cartItens={cartItens}
+                removeCartProductAmount={removeCartProductAmount}
+                addCartProductAmount={addCartProductAmount}
+              />
+
               <button
                 type="button"
-                className={styles.shoppingCartClearCartButton}
-                onClick={handleClearCartItems}
+                className={styles.shoppingCartAddMoreItensButton}
+                onClick={() => setShowDialog(false)}
               >
-                Limpar
+                Adicionar mais itens
               </button>
             </div>
-
-            <ShoppingCartProducts
-              cartItens={cartItens}
-              removeCartProductAmount={removeCartProductAmount}
-              addCartProductAmount={addCartProductAmount}
+          )}
+          {step === 1 && (
+            <DeliveryInfo
+              nameRegister={register(`clientName`)}
+              phoneRegister={register(`clientPhoneNumber`)}
+              nameError={errors.clientName?.message}
+              phoneError={errors.clientPhoneNumber?.message}
+              labelClassName={styles.deliveryDefaultLabel}
             />
-
-            <button
-              type="button"
-              className={styles.shoppingCartAddMoreItensButton}
-              onClick={() => setShowDialog(false)}
-            >
-              Adicionar mais itens
-            </button>
-          </div>
+          )}
+          {step === 2 && <TypeOfDelivery register={register(`deliveryType`)} />}
+          {step === 3 && (
+            <DeliveryAddress
+              error={errors.deliveryAddress?.message}
+              register={register(`deliveryAddress`)}
+              labelClassName={styles.deliveryDefaultLabel}
+            />
+          )}
+          {step === 4 && <PaymentInfo register={register(`paymentMethod`)} />}
+          {step === 5 && (
+            <OrderInfo
+              clientName={getValues().clientName}
+              clientPhone={getValues().clientPhoneNumber}
+              address={getValues().deliveryAddress}
+              paymentMethod={getValues().paymentMethod}
+              deliveryTax={priceToBrazilCurrency(
+                Number(companyData.deliveryTax)
+              )}
+              deliveryTime={companyData.deliveryTime}
+              cartItens={cartItens}
+            />
+          )}
           <footer className={styles.shoppingCartFooter}>
             <div className={styles.shoppingCartContainerTotalValue}>
               <p className={styles.shoppingCartTotalValue}>Total</p>
@@ -176,18 +324,30 @@ export default function ShoppingCartPortal({
                 {priceToBrazilCurrency(totalPrice)}
               </p>
             </div>
-            <button
-              type="button"
-              className={styles.shoppingCartConfirmButton}
-              onClick={handleClientRequest}
-              disabled={cartItens.length === 0}
-            >
-              {generatingOrder
-                ? `Processando seu Pedido...`
-                : `Confirmar Pedido`}
-            </button>
+            {step === 5 || tableNumber ? (
+              <ButtonSubmit
+                type="button"
+                onClick={
+                  tableNumber
+                    ? () => handleClientRequest()
+                    : handleSubmit(onSubmit)
+                }
+                className={styles.shoppingCartConfirmButton}
+                isSubmiting={generatingOrder}
+                text="Finalizar pedido"
+              />
+            ) : (
+              <button
+                type="button"
+                className={styles.shoppingCartConfirmButton}
+                onClick={handleStepFoward}
+                disabled={cartItens.length === 0}
+              >
+                Continuar
+              </button>
+            )}
           </footer>
-        </div>
+        </form>
       </Content>
     </Portal>
   );

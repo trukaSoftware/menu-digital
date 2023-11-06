@@ -40,9 +40,17 @@
 }
 
 .shoppingCartConfirmButton {
-  @apply w-full h-12 text-center bg-red-500 text-white rounded-lg mt-4;
+  @apply flex items-center justify-center w-full h-12 bg-red-500 text-white rounded-lg mt-4;
 }
 
 .shoppingCartConfirmButton:disabled {
   @apply bg-red-300;
+}
+
+.deliveryDefaultLabel {
+  @apply text-gray-900;
+}
+
+.deliveryDefaultLabel input {
+  @apply px-2.5 py-2;
 }

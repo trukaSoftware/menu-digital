@@ -1,0 +1,3 @@
+.deliveryAddressWrapper {
+  @apply flex flex-col p-4;
+}

@@ -132,6 +132,10 @@ export interface Info {
   createdAt: string;
   updatedAt: string;
   address: Address;
+  deliveryTax: string;
+  deliveryTime: string;
+  openingHours: string;
+  instagramUrl?: string;
 }
 
 export interface Address {

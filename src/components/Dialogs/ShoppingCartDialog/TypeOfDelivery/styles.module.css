@@ -1,0 +1,11 @@
+.typeOfDeliveryWrapper {
+  @apply flex flex-col bg-white p-4;
+}
+
+.typeOfDeliveryCheckboxesWrapper {
+  @apply flex flex-col w-full items-start gap-2 mt-2;
+}
+
+.typeOfDeliveryCheckboxesWrapper label {
+  @apply flex gap-2;
+}
