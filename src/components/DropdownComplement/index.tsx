@@ -4,7 +4,7 @@ import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 import { InferType } from 'yup';
 
-import { Complement, ComplementItemProp } from '@/types/complement';
+import { Complement } from '@/types/complement';
 import { ItemReturn } from '@/types/item';
 
 import { createItem } from '@/utils/api/createItem';
@@ -13,7 +13,7 @@ import { editComplementFormSchema } from '@/yup/front/editComplementFormSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import ButtonSubmit from '../ButtonSubmit';
-import EditableCategoryTitle from '../EditableCategoryTitle';
+import EditableComplementTitle from '../EditableComplement';
 import SearchComplementsList from '../Forms/CreateComplementForm/SearchItemsList';
 import SearchInput from '../SearchInput';
 import styles from './styles.module.css';
@@ -46,12 +46,6 @@ export default function DropdownComplement({
   const [requestError, setRequestError] = useState(false);
 
   const itemsIds = complements?.items?.map((item) => item.id);
-  // const fullItems = complements?.items?.map((item) => ({
-  //   name: item.name,
-  //   complementId: complements.id,
-  //   price: item.price,
-  //   id: item.id,
-  // }));
 
   const { register, handleSubmit, reset } = useForm({
     resolver: yupResolver(editComplementFormSchema),
@@ -77,30 +71,33 @@ export default function DropdownComplement({
 
   const onSubmit = async (data: EditComplementFormData) => {
     setIsSubmiting(true);
-    // const itemsToRemoveId =
-    //   itemsIds?.filter((id) => !data.itemsIds?.includes(id)) || [];
+    const itemsToRemoveId =
+      itemsIds?.filter((id) => !data.itemsIds?.includes(id)) || [];
     const itemsToAddId =
       data.itemsIds?.filter((id) => !itemsIds?.includes(id as string)) || [];
 
-    const completeItemsToAdd = filteredItems.filter((item) =>
-      itemsToAddId.includes(item.id)
-    );
+    if (itemsToAddId.length > 0) {
+      const completeItemsToAdd = filteredItems
+        .filter((item) => itemsToAddId.includes(item.id))
+        .map((item) => ({
+          name: item.name,
+          price: item.price,
+        }));
+
+      const newItems = {
+        complementId: complements.id,
+        items: completeItemsToAdd,
+      };
+
+      await createItem(newItems);
+    }
+
+    console.log(itemsToRemoveId);
+
     // const fullObjectsToAdd = fullItems?.filter((item) =>
     //   itemsToAddId?.includes(item.id)
     // );
 
-    console.log(
-      `esse é o data:`,
-      data,
-      `esse é o filteredItems:`,
-      filteredItems, // itemsToAddId, // `esse é o itemsToAddId:`,
-      `esse é o completeItemsToAdd:`,
-      completeItemsToAdd
-      // `esse é o fullItems:`,
-      // fullItems,
-      // `esse é o itemsIds:`,
-      // itemsIds
-    );
     try {
       // if (!!itemsToAddId && itemsToAddId.length > 0) {
       //   const itemsPayload = {
@@ -137,9 +134,9 @@ export default function DropdownComplement({
                 <FaChevronDown />
               )}
             </div>
-            <EditableCategoryTitle
-              categoryName={complements.name}
-              categoryId={complements.id}
+            <EditableComplementTitle
+              complementName={complements.name}
+              complementId={complements.id}
             />
           </div>
         </label>
