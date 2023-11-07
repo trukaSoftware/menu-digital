@@ -91,7 +91,7 @@ export default function CreateCategoryForm({
 
       const newCategoryId = createdCategory.id;
 
-      if (data.productsIds) {
+      if (data?.productsIds) {
         data.productsIds.forEach(async (productId) => {
           const editedProduct = await editProduct({
             id: productId as string,
