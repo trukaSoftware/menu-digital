@@ -1,0 +1,39 @@
+.deleteComplementDialogTrigger {
+  @apply text-sm text-red-600 font-medium lg:text-sm flex gap-x-1 items-center;
+}
+
+.deleteComplementDialogOverlay {
+  @apply fixed inset-0 bg-black/50;
+}
+
+.deleteComplementDialogContent {
+  @apply w-72 h-48 bg-white fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 rounded flex flex-col justify-between items-center;
+}
+
+.deleteComplementDialogText {
+  @apply text-center text-base text-gray-900 font-semibold;
+}
+
+.deleteComplementDialogText span {
+  @apply text-red-600;
+}
+
+.deleteComplementDialogButtons {
+  @apply h-10 w-full flex gap-x-2;
+}
+
+.deleteComplementDialogButtons button {
+  @apply h-full w-1/2 rounded font-semibold;
+}
+
+.deleteComplementDialogDelBtn {
+  @apply bg-gray-200 border border-gray-300 text-gray-600 flex items-center justify-center;
+}
+
+.deleteComplementDialogDelBtn svg {
+  @apply text-red-600;
+}
+
+.deleteComplementDialogCancelBtn {
+  @apply bg-red-600 text-white;
+}
