@@ -1,5 +1,5 @@
 .badges {
-  @apply flex items-center overflow-x-auto overflow-y-hidden h-full gap-x-2 px-2 py-3 mt-8 border-b border-gray-300 border-solid md:px-4 md:py-6 lg:max-w-screen-xxl lg:w-full lg:mx-auto;
+  @apply flex items-center overflow-x-auto overflow-y-hidden h-full gap-x-2 px-2 py-2 border-b border-gray-300 border-solid md:px-4 md:py-6 lg:max-w-screen-xxl lg:w-full lg:mx-auto;
 }
 
 .badges::-webkit-scrollbar {
