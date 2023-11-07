@@ -1,4 +1,7 @@
+import { FaInstagram } from 'react-icons/fa6';
+
 import Image from 'next/image';
+import Link from 'next/link';
 
 import Badges from '../Badges';
 import styles from './styles.module.css';
@@ -8,6 +11,8 @@ interface HeaderProps {
   companyImage: string;
   companyThemeUrl: string;
   companyCategories: string[];
+  openingHours: string;
+  instagramUrl: string | undefined;
 }
 
 export default function Header({
@@ -15,6 +20,8 @@ export default function Header({
   companyImage,
   companyThemeUrl,
   companyCategories,
+  openingHours,
+  instagramUrl,
 }: HeaderProps) {
   return (
     <header className={styles.header}>
@@ -31,6 +38,16 @@ export default function Header({
           <Image src={companyImage} alt="Imagem do estabelecimento" fill />
         </div>
         <h1 className={styles.title}>{companyName}</h1>
+      </div>
+      <div className={styles.functioningHoursAndSocias}>
+        <h2>{openingHours}</h2>
+        {instagramUrl && (
+          <div>
+            <Link href={instagramUrl} target="_blank" rel="noopener noreferrer">
+              <FaInstagram size={24} />
+            </Link>
+          </div>
+        )}
       </div>
       <Badges badges={companyCategories} />
     </header>
