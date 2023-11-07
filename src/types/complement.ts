@@ -12,6 +12,10 @@ export interface GetComplementReturn {
   complements: Complement[];
 }
 
+export interface GetComplementByIdReturn {
+  complements: Complement;
+}
+
 export interface ComplementItemProp {
   id: string;
   name: string;
@@ -24,6 +28,7 @@ export interface ComplementItemProp {
 export interface Complement {
   id: string;
   name: string;
+  required: boolean;
   maxAmount: number;
   createdAt: string;
   updatedAt: string;
