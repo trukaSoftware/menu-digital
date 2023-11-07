@@ -41,13 +41,13 @@ export default function Header({
       </div>
       <div className={styles.functioningHoursAndSocias}>
         <h2>{openingHours}</h2>
-        {instagramUrl && (
+        {instagramUrl ? (
           <div>
             <Link href={instagramUrl} target="_blank" rel="noopener noreferrer">
               <FaInstagram size={24} />
             </Link>
           </div>
-        )}
+        ) : null}
       </div>
       <Badges badges={companyCategories} />
     </header>
