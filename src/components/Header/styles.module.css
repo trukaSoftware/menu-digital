@@ -14,6 +14,10 @@
   @apply relative w-16 h-16 lg:w-32 lg:h-32;
 }
 
+.functioningHoursAndSocias {
+  @apply flex justify-between mt-8 p-2 text-sm font-medium;
+}
+
 .title {
   @apply ml-2 text-lg font-bold text-gray-900 lg:text-2xl;
 }

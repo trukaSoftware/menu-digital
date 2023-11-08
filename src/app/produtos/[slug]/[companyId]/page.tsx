@@ -25,6 +25,8 @@ export default async function Products({ params }: RouterParams) {
     deliveryTax,
     deliveryTime,
     address: { address },
+    openingHours,
+    instagramUrl,
   } = info;
 
   const parsedCategories = categories
@@ -72,6 +74,8 @@ export default async function Products({ params }: RouterParams) {
           companyImage={companyLogoUrl}
           companyThemeUrl={companyThemeUrl}
           companyCategories={companyCategories}
+          openingHours={openingHours}
+          instagramUrl={instagramUrl}
         />
         <main className={styles.mainContainer}>
           {parsedCategories.map((category) => (
