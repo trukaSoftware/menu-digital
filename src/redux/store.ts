@@ -8,12 +8,16 @@ import {
 
 import cartItemReducer from './features/cartItem-slice';
 import categoriesReducer from './features/categories-slice';
+import complementsReducer from './features/complements-slice';
+import itemsReducer from './features/items-slice';
 import productsReducer from './features/products-slice';
 
 export const rootReducer = combineReducers({
   categoriesReducer,
   productsReducer,
   cartItemReducer,
+  complementsReducer,
+  itemsReducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) =>
