@@ -1,8 +1,12 @@
 import ComplementsWithSearchInput from '@/components/ComplementWithSearchInput';
 import CreateFormTrigger from '@/components/Dialogs/CreateFormDialog/CreateFormTrigger';
 import ManagementScreenHeader from '@/components/ManagementScreenHeader';
+import ComplementsPreLoader from '@/components/PreLoaders/ComplementsPreLoader';
+import ItemsPreLoader from '@/components/PreLoaders/ItemsPreLoader';
 
 import api from '@/utils/api';
+import { getComplements } from '@/utils/api/getComplements';
+import { getItems } from '@/utils/api/getItems';
 import { RouterParams, CompanyProps } from '@/utils/types';
 
 import styles from './styles.module.css';
@@ -18,8 +22,14 @@ export default async function ManageCategories({ params }: RouterParams) {
 
   const { companyLogoUrl } = info;
 
+  const { complements } = await getComplements(companyId);
+
+  const { items } = await getItems();
+
   return (
     <div className={styles.manageComplementsWrapper}>
+      <ItemsPreLoader items={items} />
+      <ComplementsPreLoader complements={complements} />
       <ManagementScreenHeader
         companyLogoUrl={companyLogoUrl}
         companyName={name}
