@@ -7,6 +7,7 @@ export const getComplementsByIdService = async (id: string) => {
       where: { id },
       include: {
         items: true,
+        productsComplements: true,
       },
     });
 
