@@ -8,6 +8,7 @@ import { Complement } from '@/types/complement';
 import { ItemReturn } from '@/types/item';
 
 import { createItem } from '@/utils/api/createItem';
+import { editItem } from '@/utils/api/editItem';
 
 import { editComplementFormSchema } from '@/yup/front/editComplementFormSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -45,7 +46,9 @@ export default function DropdownComplement({
   const [isSubmiting, setIsSubmiting] = useState(false);
   const [requestError, setRequestError] = useState(false);
 
-  const itemsIds = complements?.items?.map((item) => item.id);
+  const itemsIds = filteredItems
+    ?.filter((item) => item.complementId === complements.id)
+    .map((item) => item.id);
 
   const { register, handleSubmit, reset } = useForm({
     resolver: yupResolver(editComplementFormSchema),
@@ -76,36 +79,57 @@ export default function DropdownComplement({
     const itemsToAddId =
       data.itemsIds?.filter((id) => !itemsIds?.includes(id as string)) || [];
 
-    if (itemsToAddId.length > 0) {
-      const completeItemsToAdd = filteredItems
-        .filter((item) => itemsToAddId.includes(item.id))
-        .map((item) => ({
-          name: item.name,
-          price: item.price,
-        }));
-
-      const newItems = {
-        complementId: complements.id,
-        items: completeItemsToAdd,
-      };
-
-      await createItem(newItems);
-    }
-
-    console.log(itemsToRemoveId);
-
-    // const fullObjectsToAdd = fullItems?.filter((item) =>
-    //   itemsToAddId?.includes(item.id)
-    // );
-
     try {
-      // if (!!itemsToAddId && itemsToAddId.length > 0) {
-      //   const itemsPayload = {
-      //     complementId: complements.id,
-      //     items: itemsToAddId,
-      //   };
-      //   await createItem(itemsPayload);
-      // }
+      if (itemsToAddId.length > 0) {
+        const allItemsToAdd = filteredItems.filter((item) =>
+          itemsToAddId.includes(item.id)
+        );
+        const itemWithoutComplement = allItemsToAdd.filter(
+          (item) => item.complementId === null
+        );
+        const itemWithComplement = allItemsToAdd.filter(
+          (item) => item.complementId !== null
+        );
+        if (itemWithoutComplement.length > 0) {
+          itemWithoutComplement.forEach(async (item) => {
+            await editItem({
+              id: item.id,
+              name: item.name,
+              price: item.price,
+              complementId: complements.id,
+            });
+          });
+        }
+
+        if (itemWithComplement.length > 0) {
+          const newItems = itemWithComplement.map((item) => ({
+            name: item.name,
+            price: item.price,
+          }));
+
+          const itemsToCreate = {
+            complementId: complements.id,
+            items: newItems,
+          };
+
+          await createItem(itemsToCreate);
+        }
+      }
+
+      if (itemsToRemoveId.length > 0) {
+        const completeItemsToRemove = filteredItems
+          .filter((item) => itemsToRemoveId.includes(item.id))
+          .map((item) => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            complementId: null,
+          }));
+
+        completeItemsToRemove.forEach(async (item) => {
+          await editItem(item);
+        });
+      }
     } catch {
       setRequestError(true);
     } finally {
