@@ -38,7 +38,6 @@ export default function SearchComplementsList({
                 Number(item.price)
               )}`}
               id={item.id}
-              dataTestId={item.complementId}
               register={register}
               key={`${item.id}-label`}
             />
