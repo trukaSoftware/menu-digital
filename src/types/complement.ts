@@ -4,6 +4,26 @@ export interface ComplementPayload {
   required: boolean;
 }
 
+export interface editComplementPayload {
+  name: string;
+  maxAmount: number;
+  required: boolean;
+  id: string;
+}
+
+export interface editComplement {
+  id: string;
+  name: string;
+  required: boolean;
+  maxAmount: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface editComplementResponse {
+  complementData: editComplement;
+}
+
 export interface ComplementResponse {
   complementId: string;
 }
@@ -33,4 +53,10 @@ export interface Complement {
   createdAt: string;
   updatedAt: string;
   items: ComplementItemProp[];
+  productsComplements?: productsComplementsProps[];
+}
+
+export interface productsComplementsProps {
+  productsId: string;
+  complementId: string;
 }
