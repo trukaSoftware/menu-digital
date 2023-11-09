@@ -11,9 +11,11 @@ import ComplementInput from '@/components/ComplementInput';
 import DefaultInput from '@/components/DefaultInput';
 
 import { GetComplementByIdReturn } from '@/types/complement';
+import { editItemPayload } from '@/types/item';
 
-import { createComplement } from '@/utils/api/createComplement';
 import { createItem } from '@/utils/api/createItem';
+import { editComplement } from '@/utils/api/editComplement';
+import { editItem } from '@/utils/api/editItem';
 import { editProduct } from '@/utils/api/editProduct';
 import { getComplementsById } from '@/utils/api/getComplementsById';
 
@@ -40,6 +42,7 @@ function CreateComplementForm({
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm({
     resolver: yupResolver(createComplementFormSchema),
     mode: `onChange`,
@@ -65,11 +68,33 @@ function CreateComplementForm({
     fetchComplementById();
   }, [complementId]);
 
+  useEffect(() => {
+    setValue(`name`, complementById ? complementById?.complements.name : ``);
+    setValue(
+      `maxAmount`,
+      complementById ? complementById?.complements.maxAmount : 0
+    );
+    setValue(
+      `required`,
+      complementById?.complements.required === false ? `false` : `required`
+    );
+    complementById?.complements.items?.forEach((item, index) => {
+      setValue(`items.${index}.name`, item.name);
+      setValue(`items.${index}.price`, Number(item.price));
+    });
+    setValue(
+      `productsIds`,
+      complementById?.complements.productsComplements?.map(
+        (product) => product.productsId
+      )
+    );
+  }, [complementById, setValue]);
+
   const onSubmit = async (data: editComplementFormData) => {
     try {
       setIsSubmitting(true);
-
-      const createdComplement = await createComplement({
+      const editedComplement = await editComplement({
+        id: complementId,
         name: data.name,
         required: data.required === `required`,
         maxAmount: data.maxAmount,
@@ -79,18 +104,44 @@ function CreateComplementForm({
         data.productsIds?.forEach(async (productId) => {
           await editProduct({
             id: productId as string,
-            complementsId: [createdComplement.complementId],
+            complementsId: [editedComplement.id],
           });
         });
       }
 
       if (!!data?.items && data.items?.length > 0) {
-        const itemsPayLoad = {
-          complementId: createdComplement.complementId,
-          items: data.items,
-        };
+        const itemsIds = complementById?.complements.items?.map(
+          (item) => item.id
+        );
+        if (itemsIds) {
+          const insertIdOnItem = data.items.map((item, index) => {
+            if (index <= itemsIds.length && itemsIds[index]) {
+              return {
+                ...item,
+                id: itemsIds[index],
+                complementId: editedComplement.id,
+              };
+            }
+            return item;
+          });
+          const itemsToEdit = insertIdOnItem.filter(
+            (_item, index) => index < itemsIds.length
+          );
+          const itemsToCreate = insertIdOnItem.filter(
+            (_item, index) => index >= itemsIds.length
+          );
+          if (itemsToCreate.length > 0) {
+            const itemsPayLoad = {
+              complementId: editedComplement.id,
+              items: itemsToCreate,
+            };
+            await createItem(itemsPayLoad);
+          }
 
-        await createItem(itemsPayLoad);
+          itemsToEdit.forEach(async (item) => {
+            await editItem(item as editItemPayload);
+          });
+        }
       }
       toast.success(`Adicional editado com sucesso!`);
     } catch (error) {
@@ -105,6 +156,7 @@ function CreateComplementForm({
   const editableItems = complementById?.complements.items?.map((item) => ({
     name: item.name,
     price: item.price,
+    id: item.id,
   }));
 
   const addComplement = () => {
