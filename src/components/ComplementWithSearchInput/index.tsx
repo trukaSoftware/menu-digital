@@ -1,13 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import { Complement } from '@/types/complement';
-import { ItemReturn } from '@/types/item';
-
-import { getComplements } from '@/utils/api/getComplements';
-import { getItems } from '@/utils/api/getItems';
 import { removeAccent } from '@/utils/removeAccent';
+
+import { useAppSelector } from '@/redux/store';
 
 import ComplementEmptyState from '../ComplementEmptyState';
 import DropdownComplement from '../DropdownComplement';
@@ -17,26 +14,15 @@ import styles from './styles.module.css';
 export default function ComplementWithSearchInput() {
   const [searchInputValue, setSearchInputValue] = useState(``);
   const [showDropdown, setShowDropdown] = useState<number | null>(null);
-  const [allComplements, setAllComplements] = useState<Complement[]>([]);
-  const [allItems, setAllItems] = useState<ItemReturn[]>([]);
   const [search, setSearch] = useState(``);
-
-  useEffect(() => {
-    const getAllComplements = async () => {
-      const allComplement = await getComplements();
-      setAllComplements(allComplement.complements);
-    };
-    const getAllItems = async () => {
-      const allItem = await getItems();
-      setAllItems(allItem.items);
-    };
-    getAllComplements();
-    getAllItems();
-  }, []);
+  const complements = useAppSelector(
+    (state) => state.complementsReducer.complements
+  );
+  const items = useAppSelector((state) => state.itemsReducer.items);
 
   const filteredComplements =
-    allComplements.length > 0
-      ? allComplements.filter((complement) =>
+    complements.length > 0
+      ? complements.filter((complement) =>
           removeAccent(complement.name.toLowerCase())?.includes(
             removeAccent(searchInputValue?.toLowerCase())
           )
@@ -61,11 +47,11 @@ export default function ComplementWithSearchInput() {
       />
       <div className={styles.complementsWithSearchInputContainerProducts}>
         {filteredComplements.length > 0 ? (
-          filteredComplements.map((complements, index) => (
+          filteredComplements.map((complementes, index) => (
             <DropdownComplement
-              key={complements.id}
-              complements={complements}
-              filteredItems={allItems}
+              key={complementes.id}
+              complements={complementes}
+              filteredItems={items}
               currentComplementIndex={index}
               gettingProducts={false}
               showDropdown={showDropdown}
