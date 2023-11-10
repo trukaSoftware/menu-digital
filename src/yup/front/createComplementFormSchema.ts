@@ -19,7 +19,11 @@ const maxAmountComplementValidation = Yup.number()
     return false;
   });
 
-const requiredComplementValidation = Yup.string().required();
+const requiredComplementValidation = Yup.mixed().oneOf([
+  true,
+  false,
+  `required`,
+]);
 
 const productsIdsValidation = Yup.array().of(Yup.string());
 
