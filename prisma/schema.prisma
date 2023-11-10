@@ -17,6 +17,8 @@ model Company {
   branchs         Branch[]
   products        Products[]
   productCategory ProductCategories[]
+  complements     Complements[]
+  items           Items[]
   createdAt       DateTime            @default(now())
   updatedAt       DateTime            @updatedAt
 }
@@ -96,6 +98,8 @@ model Complements {
   maxAmount           Int?
   productsComplements ProductsComplements[]
   items               Items[]
+  companyId           String
+  company             Company               @relation(fields: [companyId], references: [id], onDelete: Cascade)
   createdAt           DateTime              @default(now())
   updatedAt           DateTime              @updatedAt
 }
@@ -106,6 +110,8 @@ model Items {
   price        Decimal?     @db.Money
   complements  Complements? @relation(fields: [complementId], references: [id], onDelete: Cascade)
   complementId String?
+  companyId    String
+  company      Company      @relation(fields: [companyId], references: [id], onDelete: Cascade)
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
 
