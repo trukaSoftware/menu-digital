@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "vercel-build": "prisma generate && prisma migrate deploy && npm run build",
+    "vercel-build": "prisma migrate resolve --applied '20231110223738_add_company_id_to_complements_and_items_model' prisma generate && prisma migrate deploy && npm run build",
     "start": "next start",
     "prepare": "husky install",
     "type-check": "tsc",
