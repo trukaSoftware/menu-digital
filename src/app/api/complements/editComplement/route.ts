@@ -5,7 +5,8 @@ import { EditComplementsData } from '@/utils/types';
 import { editComplementService } from '../../services/complement/editComplementService';
 
 export async function PUT(req: Request) {
-  const { id, name, maxAmount } = (await req.json()) as EditComplementsData;
+  const { id, name, maxAmount, required } =
+    (await req.json()) as EditComplementsData;
 
   try {
     if (!id)
@@ -22,6 +23,7 @@ export async function PUT(req: Request) {
       id,
       name,
       maxAmount,
+      required,
     });
 
     return NextResponse.json({ complementData });
