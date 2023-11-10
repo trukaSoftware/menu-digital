@@ -81,6 +81,7 @@ function CreateComplementForm({ setShowDialog }: CreateComplementProps) {
         const itemsPayLoad = {
           complementId: createdComplement.complementId,
           items: data.items,
+          companyId: `${user?.id}`,
         };
 
         await createItem(itemsPayLoad);

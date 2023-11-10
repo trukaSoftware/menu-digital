@@ -16,6 +16,7 @@ import { getItems } from '@/utils/api/getItems';
 
 import { setItems } from '@/redux/features/items-slice';
 import { editComplementFormSchema } from '@/yup/front/editComplementFormSchema';
+import { useUser } from '@clerk/nextjs';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import ButtonSubmit from '../ButtonSubmit';
@@ -52,6 +53,7 @@ export default function DropdownComplement({
   const [requestError, setRequestError] = useState(false);
   const dispatch = useDispatch();
   const params = useParams();
+  const { user } = useUser();
 
   const itemsIds = filteredItems
     ?.filter((item) => item.complementId === complements.id)
@@ -127,6 +129,7 @@ export default function DropdownComplement({
               name: item.name,
               price: item.price,
             })),
+            companyId: `${user?.id}`,
           };
           await createItem(itemsToCreate);
           const allItems = await getItems(params.companyId);

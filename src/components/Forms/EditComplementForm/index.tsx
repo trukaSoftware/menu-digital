@@ -138,6 +138,7 @@ function CreateComplementForm({
             const itemsPayLoad = {
               complementId: editedComplement.id,
               items: itemsToCreate,
+              companyId: `${user?.id}`,
             };
             await createItem(itemsPayLoad);
           }
