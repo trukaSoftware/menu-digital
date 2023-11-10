@@ -10,18 +10,12 @@ export const getComplementsService = async (companyId: string) => {
     if (!existCompany) throw new Error(`Empresa não encontrada`);
 
     const complements = await prisma.complements.findMany({
+      where: {
+        companyId,
+      },
       include: {
         items: true,
         productsComplements: true,
-      },
-      where: {
-        productsComplements: {
-          every: {
-            products: {
-              companyId,
-            },
-          },
-        },
       },
     });
 
