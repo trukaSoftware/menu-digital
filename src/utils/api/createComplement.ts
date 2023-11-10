@@ -6,6 +6,7 @@ export const createComplement = async ({
   name,
   maxAmount,
   required,
+  companyId,
 }: ComplementPayload) => {
   const complement = await post<ComplementResponse, ComplementPayload>(
     `/api/complements/createComplement`,
@@ -13,6 +14,7 @@ export const createComplement = async ({
       name,
       maxAmount,
       required,
+      companyId,
     }
   );
 
