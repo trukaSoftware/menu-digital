@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaListUl } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+
+import { useParams } from 'next/navigation';
 
 import { InferType } from 'yup';
 
@@ -10,16 +13,19 @@ import CheckboxInput from '@/components/CheckboxInput';
 import ComplementInput from '@/components/ComplementInput';
 import DefaultInput from '@/components/DefaultInput';
 
-import { GetComplementByIdReturn } from '@/types/complement';
 import { editItemPayload } from '@/types/item';
 
 import { createItem } from '@/utils/api/createItem';
 import { editComplement } from '@/utils/api/editComplement';
 import { editItem } from '@/utils/api/editItem';
 import { editProduct } from '@/utils/api/editProduct';
-import { getComplementsById } from '@/utils/api/getComplementsById';
+import { getComplements } from '@/utils/api/getComplements';
+import { getItems } from '@/utils/api/getItems';
 
 import { useProducts } from '@/hooks/useProducts';
+import { setComplements } from '@/redux/features/complements-slice';
+import { setItems } from '@/redux/features/items-slice';
+import { useAppSelector } from '@/redux/store';
 import { createComplementFormSchema } from '@/yup/front/createComplementFormSchema';
 import { useUser } from '@clerk/nextjs';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -53,42 +59,42 @@ function CreateComplementForm({
 
   const [requestError, setRequestError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [complements, setComplements] = useState<number[]>([]);
-  const [complementById, setComplementById] =
-    useState<GetComplementByIdReturn>();
+  const [complementsInput, setComplementsInput] = useState<number[]>([]);
+  const params = useParams();
+  const dispatch = useDispatch();
   const { user } = useUser();
   const { products, gettingProducts } = useProducts(user?.id as string);
   const filteredProducts = products;
+  const complementsFromRedux = useAppSelector(
+    (state) => state.complementsReducer.complements
+  );
+  const complementIdFromRedux = complementsFromRedux.find(
+    (complement) => complement.id === complementId
+  );
 
   useEffect(() => {
-    const fetchComplementById = async () => {
-      const complement = await getComplementsById(complementId);
-      setComplementById(complement);
-    };
-    fetchComplementById();
-  }, [complementId]);
-
-  useEffect(() => {
-    setValue(`name`, complementById ? complementById?.complements.name : ``);
+    setValue(`name`, complementIdFromRedux ? complementIdFromRedux?.name : ``);
     setValue(
       `maxAmount`,
-      complementById ? complementById?.complements.maxAmount : 0
+      complementIdFromRedux ? complementIdFromRedux?.maxAmount : 0
     );
     setValue(
       `required`,
-      complementById?.complements.required === false ? `false` : `required`
+      complementIdFromRedux?.required !== false
+        ? `required`
+        : complementIdFromRedux?.required
     );
-    complementById?.complements.items?.forEach((item, index) => {
+    complementIdFromRedux?.items?.forEach((item, index) => {
       setValue(`items.${index}.name`, item.name);
       setValue(`items.${index}.price`, Number(item.price));
     });
     setValue(
       `productsIds`,
-      complementById?.complements.productsComplements?.map(
+      complementIdFromRedux?.productsComplements?.map(
         (product) => product.productsId
       )
     );
-  }, [complementById, setValue]);
+  }, [complementIdFromRedux, setValue, dispatch]);
 
   const onSubmit = async (data: editComplementFormData) => {
     try {
@@ -110,9 +116,7 @@ function CreateComplementForm({
       }
 
       if (!!data?.items && data.items?.length > 0) {
-        const itemsIds = complementById?.complements.items?.map(
-          (item) => item.id
-        );
+        const itemsIds = complementIdFromRedux?.items?.map((item) => item.id);
         if (itemsIds) {
           const insertIdOnItem = data.items.map((item, index) => {
             if (index <= itemsIds.length && itemsIds[index]) {
@@ -143,6 +147,10 @@ function CreateComplementForm({
           });
         }
       }
+      const newComplements = await getComplements(params.companyId);
+      const newItems = await getItems(params.companyId);
+      dispatch(setComplements(newComplements.complements));
+      dispatch(setItems(newItems.items));
       toast.success(`Adicional editado com sucesso!`);
     } catch (error) {
       setRequestError(true);
@@ -153,27 +161,27 @@ function CreateComplementForm({
     setShowDialog(false);
   };
 
-  const editableItems = complementById?.complements.items?.map((item) => ({
+  const editableItems = complementIdFromRedux?.items?.map((item) => ({
     name: item.name,
     price: item.price,
     id: item.id,
   }));
 
   const addComplement = () => {
-    setComplements([...complements, complements.length + 1]);
+    setComplementsInput([...complementsInput, complementsInput.length + 1]);
   };
 
   const removeComplement = () => {
-    setComplements(complements.slice(0, complements.length - 1));
+    setComplementsInput(complementsInput.slice(0, complementsInput.length - 1));
   };
 
   return (
-    <div className={styles.createComplementFormContainer}>
+    <div className={styles.editComplementFormContainer}>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={styles.createComplementFormWrapper}
+        className={styles.editComplementFormWrapper}
       >
-        <div className={styles.createComplementForm}>
+        <div className={styles.editComplementForm}>
           <DefaultInput
             error={errors.name?.message}
             labelText="Nome do adicional:"
@@ -182,7 +190,7 @@ function CreateComplementForm({
             Icon={<FaListUl />}
             placeholder="Ex.: Complementos, bebidas, bordas..."
           />
-          <div className={styles.createComplementAmountInputWrapper}>
+          <div className={styles.editComplementAmountInputWrapper}>
             <CheckboxInput
               text="Obrigatório"
               id="required"
@@ -192,7 +200,7 @@ function CreateComplementForm({
               <input
                 type="number"
                 id="maximun"
-                className={styles.createComplementAmountInput}
+                className={styles.editComplementAmountInput}
                 placeholder="3"
                 {...register(`maxAmount`)}
               />
@@ -219,7 +227,7 @@ function CreateComplementForm({
                 />
               ))}
             {editableItems
-              ? complements.map((complement, index) => (
+              ? complementsInput.map((complement, index) => (
                   <ComplementInput
                     key={complement + 1}
                     itemName="name"
@@ -241,7 +249,7 @@ function CreateComplementForm({
                     index={editableItems.length + index}
                   />
                 ))
-              : complements.map((complement, index) => (
+              : complementsInput.map((complement, index) => (
                   <ComplementInput
                     key={complement + 1}
                     itemName="name"
@@ -253,11 +261,11 @@ function CreateComplementForm({
                     index={index + 1}
                   />
                 ))}
-            <div className={styles.createComplementButtonsWrapper}>
+            <div className={styles.editComplementButtonsWrapper}>
               <button
                 type="button"
                 onClick={addComplement}
-                className={styles.createComplementAddAndRemoveComplementButton}
+                className={styles.editComplementAddAndRemoveComplementButton}
               >
                 + itens
               </button>
@@ -265,9 +273,9 @@ function CreateComplementForm({
                 type="button"
                 onClick={removeComplement}
                 className={
-                  complements.length === 0
-                    ? styles.createComplementRemoveComplementButtonHidden
-                    : styles.createComplementAddAndRemoveComplementButton
+                  complementsInput.length === 0
+                    ? styles.editComplementRemoveComplementButtonHidden
+                    : styles.editComplementAddAndRemoveComplementButton
                 }
               >
                 - itens
