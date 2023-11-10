@@ -4,6 +4,7 @@ const complementSchema = object({
   name: string().required(),
   maxAmount: number().min(1).required(),
   required: boolean().required(),
+  companyId: string().required(),
 });
 
 export type ComplementData = InferType<typeof complementSchema>;
