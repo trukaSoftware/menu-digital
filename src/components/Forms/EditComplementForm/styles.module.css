@@ -1,24 +1,24 @@
-.createComplementFormContainer {
+.editComplementFormContainer {
   @apply py-4 px-2 h-[calc(100%_-_72px)] overflow-auto bg-white md:rounded;
 }
 
-.createComplementFormWrapper {
+.editComplementFormWrapper {
   @apply flex flex-col justify-between h-4/5 min-h-[92%] max-h-full md:h-full md:min-h-full;
 }
 
-.createComplementForm {
+.editComplementForm {
   @apply flex flex-col;
 }
 
-.createComplementAmountInputWrapper {
+.editComplementAmountInputWrapper {
   @apply flex w-full justify-center gap-28 mt-2;
 }
 
-.createComplementAmountInput {
+.editComplementAmountInput {
   @apply text-center mr-2 w-7 border border-gray-300 rounded-md focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none;
 }
 
-.createComplementAmountInput::placeholder {
+.editComplementAmountInput::placeholder {
   @apply text-center;
 }
 
@@ -26,19 +26,19 @@
   @apply text-xs text-red-500 font-medium;
 }
 
-.createComplementButtonsWrapper {
+.editComplementButtonsWrapper {
   @apply flex justify-between mx-1;
 }
 
-.createComplementAddAndRemoveComplementButton {
+.editComplementAddAndRemoveComplementButton {
   @apply text-red-500 mb-2;
 }
 
-.createComplementAddAndRemoveComplementButton:hover {
+.editComplementAddAndRemoveComplementButton:hover {
   @apply md:underline;
 }
 
-.createComplementRemoveComplementButtonHidden {
+.editComplementRemoveComplementButtonHidden {
   @apply hidden;
 }
 
