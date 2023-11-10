@@ -1,9 +1,27 @@
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 
-export const getItemsService = async () => {
+export const getItemsService = async (companyId: string) => {
   try {
-    const items = await prisma.items.findMany();
+    const existCompany = await prisma.company.findUnique({
+      where: { id: companyId },
+    });
+
+    if (!existCompany) throw new Error(`Empresa não encontrada`);
+
+    const items = await prisma.items.findMany({
+      where: {
+        complements: {
+          productsComplements: {
+            every: {
+              products: {
+                companyId,
+              },
+            },
+          },
+        },
+      },
+    });
 
     return items;
   } catch (error) {
