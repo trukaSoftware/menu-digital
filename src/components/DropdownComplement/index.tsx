@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
+
+import { useParams } from 'next/navigation';
 
 import { InferType } from 'yup';
 
@@ -9,7 +12,9 @@ import { ItemReturn } from '@/types/item';
 
 import { createItem } from '@/utils/api/createItem';
 import { editItem } from '@/utils/api/editItem';
+import { getItems } from '@/utils/api/getItems';
 
+import { setItems } from '@/redux/features/items-slice';
 import { editComplementFormSchema } from '@/yup/front/editComplementFormSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -45,6 +50,8 @@ export default function DropdownComplement({
   const [registredWithSucess, setRegistredWithSucess] = useState(false);
   const [isSubmiting, setIsSubmiting] = useState(false);
   const [requestError, setRequestError] = useState(false);
+  const dispatch = useDispatch();
+  const params = useParams();
 
   const itemsIds = filteredItems
     ?.filter((item) => item.complementId === complements.id)
@@ -65,7 +72,7 @@ export default function DropdownComplement({
       itemsIds,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [complements]);
+  }, [dispatch, complements, filteredItems]);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -90,34 +97,48 @@ export default function DropdownComplement({
         const itemWithComplement = allItemsToAdd.filter(
           (item) => item.complementId !== null
         );
+
         if (itemWithoutComplement.length > 0) {
-          itemWithoutComplement.forEach(async (item) => {
-            await editItem({
-              id: item.id,
-              name: item.name,
-              price: item.price,
-              complementId: complements.id,
-            });
-          });
+          const itemWithoutComplementIds = itemWithoutComplement.map(
+            (item) => item.id
+          );
+          const removeItemsFromRedux = filteredItems.filter(
+            (item) => !itemWithoutComplementIds.includes(item.id)
+          );
+
+          const newItemstoAdd = await Promise.all(
+            itemWithoutComplement.map(async (item) =>
+              editItem({
+                id: item.id,
+                name: item.name,
+                price: item.price,
+                complementId: complements.id,
+              })
+            )
+          );
+          removeItemsFromRedux.push(...newItemstoAdd);
+          dispatch(setItems(removeItemsFromRedux));
         }
 
         if (itemWithComplement.length > 0) {
-          const newItems = itemWithComplement.map((item) => ({
-            name: item.name,
-            price: item.price,
-          }));
-
           const itemsToCreate = {
             complementId: complements.id,
-            items: newItems,
+            items: itemWithComplement.map((item) => ({
+              name: item.name,
+              price: item.price,
+            })),
           };
-
           await createItem(itemsToCreate);
+          const allItems = await getItems(params.companyId);
+          dispatch(setItems(allItems.items));
         }
       }
 
       if (itemsToRemoveId.length > 0) {
-        const completeItemsToRemove = filteredItems
+        const removeItemsFromRedux = filteredItems.filter(
+          (item) => !itemsToRemoveId.includes(item.id)
+        );
+        const itemsWithoutComplementId = filteredItems
           .filter((item) => itemsToRemoveId.includes(item.id))
           .map((item) => ({
             id: item.id,
@@ -125,10 +146,11 @@ export default function DropdownComplement({
             price: item.price,
             complementId: null,
           }));
-
-        completeItemsToRemove.forEach(async (item) => {
-          await editItem(item);
-        });
+        const completeItemsToRemove = await Promise.all(
+          itemsWithoutComplementId.map(async (item) => editItem(item))
+        );
+        removeItemsFromRedux.push(...completeItemsToRemove);
+        dispatch(setItems(removeItemsFromRedux));
       }
     } catch {
       setRequestError(true);
