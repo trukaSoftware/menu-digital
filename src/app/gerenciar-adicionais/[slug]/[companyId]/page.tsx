@@ -24,7 +24,7 @@ export default async function ManageCategories({ params }: RouterParams) {
 
   const { complements } = await getComplements(companyId);
 
-  const { items } = await getItems();
+  const { items } = await getItems(companyId);
 
   return (
     <div className={styles.manageComplementsWrapper}>
