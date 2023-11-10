@@ -6,6 +6,7 @@ export const createComplementService = async ({
   name,
   maxAmount,
   required,
+  companyId,
 }: ComplementData) => {
   try {
     const complementExists = await prisma.complements.findFirst({
@@ -19,6 +20,7 @@ export const createComplementService = async ({
         name,
         maxAmount,
         required,
+        companyId,
       },
     });
 

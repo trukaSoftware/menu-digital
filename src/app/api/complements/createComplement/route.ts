@@ -8,19 +8,22 @@ import {
 import { createComplementService } from '../../services/complement/createComplementService';
 
 export async function POST(req: Request) {
-  const { name, maxAmount, required } = (await req.json()) as ComplementData;
+  const { name, maxAmount, required, companyId } =
+    (await req.json()) as ComplementData;
 
   try {
     await validateComplementData({
       name,
       maxAmount,
       required,
+      companyId,
     });
 
     const complementId = await createComplementService({
       name,
       maxAmount,
       required,
+      companyId,
     });
 
     return NextResponse.json({ complementId });
