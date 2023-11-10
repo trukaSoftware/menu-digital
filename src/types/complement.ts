@@ -2,6 +2,7 @@ export interface ComplementPayload {
   name: string;
   maxAmount: number;
   required: boolean;
+  companyId: string;
 }
 
 export interface editComplementPayload {
