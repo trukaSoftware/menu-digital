@@ -11,15 +11,7 @@ export const getItemsService = async (companyId: string) => {
 
     const items = await prisma.items.findMany({
       where: {
-        complements: {
-          productsComplements: {
-            every: {
-              products: {
-                companyId,
-              },
-            },
-          },
-        },
+        companyId,
       },
     });
 
