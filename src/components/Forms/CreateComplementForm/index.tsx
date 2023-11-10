@@ -65,6 +65,7 @@ function CreateComplementForm({ setShowDialog }: CreateComplementProps) {
         name: data.name,
         required: data.required === `required`,
         maxAmount: data.maxAmount,
+        companyId: `${user?.id}`,
       });
 
       if (!!data?.productsIds && data?.productsIds?.length > 0) {
