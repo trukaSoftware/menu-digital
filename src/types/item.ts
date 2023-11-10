@@ -1,6 +1,7 @@
 export interface ItemPayload {
   complementId: string | null;
   items: Item[];
+  companyId: string;
 }
 
 export interface Item {
