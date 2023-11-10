@@ -12,6 +12,7 @@ const itemSchema = object({
         .required()
     )
     .required(),
+  companyId: string().required(),
 });
 
 export type ItemData = InferType<typeof itemSchema>;
