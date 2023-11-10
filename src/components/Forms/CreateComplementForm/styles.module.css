@@ -11,7 +11,7 @@
 }
 
 .createComplementAmountInputWrapper {
-  @apply flex w-full justify-center gap-28 mt-2;
+  @apply flex w-full justify-center gap-28 mt-2 ml-2 pr-2;
 }
 
 .createComplementAmountInput {
