@@ -81,6 +81,21 @@ export default function DropdownComplement({
     setSearch(value.toLocaleLowerCase());
   };
 
+  const onlyNullComplementsId = filteredItems.filter(
+    (item) => item.complementId === null
+  );
+
+  const onlyNonNullComplementsId = filteredItems.filter(
+    (item) => item.complementId
+  );
+
+  const dropdownItemFilter = [
+    ...onlyNonNullComplementsId,
+    ...onlyNullComplementsId,
+  ].filter(
+    (item) => item.complementId === complements.id || item.complementId === null
+  );
+
   const onSubmit = async (data: EditComplementFormData) => {
     setIsSubmiting(true);
     const itemsToRemoveId =
@@ -206,10 +221,10 @@ export default function DropdownComplement({
             <SearchComplementsList
               filteredItems={
                 search
-                  ? filteredItems.filter((product) =>
+                  ? dropdownItemFilter.filter((product) =>
                       product.name.toLocaleLowerCase().includes(search)
                     )
-                  : filteredItems
+                  : dropdownItemFilter
               }
               gettingProducts={gettingProducts}
               register={register(`itemsIds`)}
