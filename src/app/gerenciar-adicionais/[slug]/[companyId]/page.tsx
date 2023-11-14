@@ -1,5 +1,4 @@
 import ComplementsWithSearchInput from '@/components/ComplementWithSearchInput';
-import CreateFormTrigger from '@/components/Dialogs/CreateFormDialog/CreateFormTrigger';
 import ManagementScreenHeader from '@/components/ManagementScreenHeader';
 import ComplementsPreLoader from '@/components/PreLoaders/ComplementsPreLoader';
 import ItemsPreLoader from '@/components/PreLoaders/ItemsPreLoader';
@@ -36,8 +35,6 @@ export default async function ManageComplements({ params }: RouterParams) {
         backPage="/"
         title="Adicionais"
       />
-
-      <CreateFormTrigger title="Adicionais" formType="complement-form" />
       <ComplementsWithSearchInput />
     </div>
   );
