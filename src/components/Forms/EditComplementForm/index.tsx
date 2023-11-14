@@ -40,7 +40,7 @@ interface EditComplementProps {
   complementId: string;
 }
 
-function CreateComplementForm({
+function EditComplementForm({
   setShowDialog,
   complementId,
 }: EditComplementProps) {
@@ -300,4 +300,4 @@ function CreateComplementForm({
   );
 }
 
-export default CreateComplementForm;
+export default EditComplementForm;

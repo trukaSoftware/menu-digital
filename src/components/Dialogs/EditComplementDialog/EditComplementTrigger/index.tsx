@@ -7,13 +7,13 @@ import { Root, Trigger } from '@radix-ui/react-dialog';
 
 import EditComplementPortal from '../EditComplementPortal';
 
-export interface EditComplementTrigger {
+export interface EditComplementTriggerProps {
   complementId: string;
 }
 
 export default function EditComplementTrigger({
   complementId,
-}: EditComplementTrigger) {
+}: EditComplementTriggerProps) {
   const [showDialog, setShowDialog] = useState(false);
 
   return (

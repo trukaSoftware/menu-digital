@@ -104,7 +104,7 @@ export default function DropdownComplement({
           const itemWithoutComplementIds = itemWithoutComplement.map(
             (item) => item.id
           );
-          const removeItemsFromRedux = filteredItems.filter(
+          const itemsToBeRemovedFromRedux = filteredItems.filter(
             (item) => !itemWithoutComplementIds.includes(item.id)
           );
 
@@ -118,8 +118,8 @@ export default function DropdownComplement({
               })
             )
           );
-          removeItemsFromRedux.push(...newItemstoAdd);
-          dispatch(setItems(removeItemsFromRedux));
+          itemsToBeRemovedFromRedux.push(...newItemstoAdd);
+          dispatch(setItems(itemsToBeRemovedFromRedux));
         }
 
         if (itemWithComplement.length > 0) {
@@ -138,7 +138,7 @@ export default function DropdownComplement({
       }
 
       if (itemsToRemoveId.length > 0) {
-        const removeItemsFromRedux = filteredItems.filter(
+        const itemsToBeRemovedFromRedux = filteredItems.filter(
           (item) => !itemsToRemoveId.includes(item.id)
         );
         const itemsWithoutComplementId = filteredItems
@@ -152,8 +152,8 @@ export default function DropdownComplement({
         const completeItemsToRemove = await Promise.all(
           itemsWithoutComplementId.map(async (item) => editItem(item))
         );
-        removeItemsFromRedux.push(...completeItemsToRemove);
-        dispatch(setItems(removeItemsFromRedux));
+        itemsToBeRemovedFromRedux.push(...completeItemsToRemove);
+        dispatch(setItems(itemsToBeRemovedFromRedux));
       }
     } catch {
       setRequestError(true);
@@ -219,8 +219,8 @@ export default function DropdownComplement({
             isSubmiting={isSubmiting}
             text={
               registredWithSucess
-                ? `Adicional editado com sucesso ✔️`
-                : `Editar Adicional`
+                ? `Adicional atualizado com sucesso ✔️`
+                : `Atualizar Adicional`
             }
             submitError={requestError}
             className={styles.dropdownSubmitButton}

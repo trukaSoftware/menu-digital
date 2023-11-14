@@ -35,9 +35,9 @@ export default function CreateFormTrigger({
         ) : (
           <CreateCategoryPortal setShowDialog={setShowDialog} />
         )}
-        {formType === `complement-form` && (
+        {formType === `complement-form` ? (
           <CreateComplementPortal setShowDialog={setShowDialog} />
-        )}
+        ) : null}
       </div>
     </Root>
   );

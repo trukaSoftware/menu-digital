@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 
 const complementValidation = Yup.string().required(
-  `É preciso preencher este campo com o nome da adicional.`
+  `É preciso preencher este campo com o nome do adicional.`
 );
 
 const itemsIdsValidation = Yup.array().of(Yup.string());
