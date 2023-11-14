@@ -11,7 +11,7 @@ import { RouterParams, CompanyProps } from '@/utils/types';
 
 import styles from './styles.module.css';
 
-export default async function ManageCategories({ params }: RouterParams) {
+export default async function ManageComplements({ params }: RouterParams) {
   const { companyId } = params;
 
   const companyResults = await api.get<CompanyProps>(

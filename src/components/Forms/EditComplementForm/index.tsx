@@ -214,19 +214,20 @@ function EditComplementForm({
             </label>
           </div>
           <div>
-            {editableItems &&
-              editableItems?.map((item, index) => (
-                <ComplementInput
-                  key={`${item.name}-${item.price}}`}
-                  itemName="name"
-                  itemRegister={register(`items.${index}.name`)}
-                  itemError={errors.items?.[index]?.name?.message}
-                  priceName="price"
-                  priceRegister={register(`items.${index}.price`)}
-                  priceError={errors.items?.[index]?.price?.message}
-                  index={index}
-                />
-              ))}
+            {editableItems
+              ? editableItems?.map((item, index) => (
+                  <ComplementInput
+                    key={`${item.name}-${item.price}}`}
+                    itemName="name"
+                    itemRegister={register(`items.${index}.name`)}
+                    itemError={errors.items?.[index]?.name?.message}
+                    priceName="price"
+                    priceRegister={register(`items.${index}.price`)}
+                    priceError={errors.items?.[index]?.price?.message}
+                    index={index}
+                  />
+                ))
+              : null}
             {editableItems
               ? complementsInput.map((complement, index) => (
                   <ComplementInput

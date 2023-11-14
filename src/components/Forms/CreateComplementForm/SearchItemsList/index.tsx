@@ -10,17 +10,17 @@ import { priceToBrazilCurrency } from '@/utils/priceToBrazilCurrency';
 
 import styles from './styles.module.css';
 
-export interface SearchProductsListProps {
+export interface SearchItemsListProps {
   filteredItems: ItemReturn[];
   register: UseFormRegisterReturn;
   gettingProducts: boolean;
 }
 
-export default function SearchComplementsList({
+export default function SearchItemsList({
   filteredItems,
   register,
   gettingProducts,
-}: SearchProductsListProps) {
+}: SearchItemsListProps) {
   return (
     <div className={styles.searchItemsList}>
       {gettingProducts ? (

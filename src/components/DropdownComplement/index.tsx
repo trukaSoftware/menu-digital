@@ -21,7 +21,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import ButtonSubmit from '../ButtonSubmit';
 import EditableComplementTitle from '../EditableComplement';
-import SearchComplementsList from '../Forms/CreateComplementForm/SearchItemsList';
+import SearchItemsList from '../Forms/CreateComplementForm/SearchItemsList';
 import SearchInput from '../SearchInput';
 import styles from './styles.module.css';
 
@@ -218,7 +218,7 @@ export default function DropdownComplement({
             value={search}
           />
           {showDropdown === currentComplementIndex && (
-            <SearchComplementsList
+            <SearchItemsList
               filteredItems={
                 search
                   ? dropdownItemFilter.filter((product) =>

@@ -47,10 +47,10 @@ export default function ComplementWithSearchInput() {
       />
       <div className={styles.complementsWithSearchInputContainerProducts}>
         {filteredComplements.length > 0 ? (
-          filteredComplements.map((complementes, index) => (
+          filteredComplements.map((complement, index) => (
             <DropdownComplement
-              key={complementes.id}
-              complements={complementes}
+              key={complement.id}
+              complements={complement}
               filteredItems={items}
               currentComplementIndex={index}
               gettingProducts={false}
