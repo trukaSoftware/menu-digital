@@ -68,12 +68,14 @@ export type EditComplementsData = {
   id: string;
   name?: string;
   maxAmount?: number;
+  required: boolean;
 };
 
 export type EditItemData = {
   id: string;
   name?: string;
   price?: number;
+  complementId: string | null;
 };
 
 export type EditCategoryData = {

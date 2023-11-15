@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaListUl } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+
+import { useParams } from 'next/navigation';
 
 import { InferType } from 'yup';
 
@@ -13,8 +16,12 @@ import DefaultInput from '@/components/DefaultInput';
 import { createComplement } from '@/utils/api/createComplement';
 import { createItem } from '@/utils/api/createItem';
 import { editProduct } from '@/utils/api/editProduct';
+import { getComplements } from '@/utils/api/getComplements';
+import { getItems } from '@/utils/api/getItems';
 
 import { useProducts } from '@/hooks/useProducts';
+import { setComplements } from '@/redux/features/complements-slice';
+import { setItems } from '@/redux/features/items-slice';
 import { createComplementFormSchema } from '@/yup/front/createComplementFormSchema';
 import { useUser } from '@clerk/nextjs';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -43,8 +50,10 @@ function CreateComplementForm({ setShowDialog }: CreateComplementProps) {
 
   const [requestError, setRequestError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [complements, setComplements] = useState<number[]>([]);
+  const [complementsInput, setComplementsInput] = useState<number[]>([]);
   const { user } = useUser();
+  const params = useParams();
+  const dispatch = useDispatch();
   const { products, gettingProducts } = useProducts(user?.id as string);
   const filteredProducts = products;
 
@@ -56,6 +65,7 @@ function CreateComplementForm({ setShowDialog }: CreateComplementProps) {
         name: data.name,
         required: data.required === `required`,
         maxAmount: data.maxAmount,
+        companyId: `${user?.id}`,
       });
 
       if (!!data?.productsIds && data?.productsIds?.length > 0) {
@@ -71,9 +81,14 @@ function CreateComplementForm({ setShowDialog }: CreateComplementProps) {
         const itemsPayLoad = {
           complementId: createdComplement.complementId,
           items: data.items,
+          companyId: `${user?.id}`,
         };
 
         await createItem(itemsPayLoad);
+        const newComplements = await getComplements(params.companyId);
+        const newItems = await getItems(params.companyId);
+        dispatch(setComplements(newComplements.complements));
+        dispatch(setItems(newItems.items));
       }
       toast.success(`Complementos criados com sucesso!`);
     } catch (error) {
@@ -86,11 +101,11 @@ function CreateComplementForm({ setShowDialog }: CreateComplementProps) {
   };
 
   const addComplement = () => {
-    setComplements([...complements, complements.length + 1]);
+    setComplementsInput([...complementsInput, complementsInput.length + 1]);
   };
 
   const removeComplement = () => {
-    setComplements(complements.slice(0, complements.length - 1));
+    setComplementsInput(complementsInput.slice(0, complementsInput.length - 1));
   };
 
   return (
@@ -140,7 +155,7 @@ function CreateComplementForm({ setShowDialog }: CreateComplementProps) {
               priceError={errors.items?.[0]?.price?.message}
               index={0}
             />
-            {complements.map((complement, index) => (
+            {complementsInput.map((complement, index) => (
               <ComplementInput
                 key={complement + 1}
                 itemName="name"
@@ -164,7 +179,7 @@ function CreateComplementForm({ setShowDialog }: CreateComplementProps) {
                 type="button"
                 onClick={removeComplement}
                 className={
-                  complements.length === 0
+                  complementsInput.length === 0
                     ? styles.createComplementRemoveComplementButtonHidden
                     : styles.createComplementAddAndRemoveComplementButton
                 }

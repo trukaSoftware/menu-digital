@@ -1,5 +1,5 @@
 .checkboxInputLabel {
-  @apply flex relative items-center;
+  @apply flex relative items-start;
 }
 
 .checkboxInput {
@@ -7,7 +7,7 @@
 }
 
 .newCheckBox {
-  @apply top-0 left-0 w-5 h-5 border border-gray-300 rounded mr-2 after:content-[''] after:absolute after:hidden after:border-solid after:border-green-600 after:h-3 after:rotate-45;
+  @apply top-0 left-0 w-5 h-5 border border-gray-300 rounded mr-2 after:content-[''] after:ml-1.5 after:mt-0.5 after:hidden after:border-solid after:border-green-600 after:h-3 after:rotate-45;
 }
 
 .checkboxInputLabel input:checked ~ .newCheckBox {

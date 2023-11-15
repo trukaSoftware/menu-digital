@@ -7,6 +7,7 @@ export const editComplementService = async ({
   id,
   name,
   maxAmount,
+  required,
 }: EditComplementsData) => {
   try {
     const existingRegister = await prisma.complements.findUnique({
@@ -14,6 +15,8 @@ export const editComplementService = async ({
         id,
       },
     });
+
+    const isRequired = !!required;
 
     if (!existingRegister) {
       throw new Error(`Registro não encontrado para o ID: ${id}`);
@@ -24,6 +27,7 @@ export const editComplementService = async ({
       data: {
         name: name || existingRegister.name,
         maxAmount: maxAmount || existingRegister.maxAmount,
+        required: isRequired,
       },
     });
 

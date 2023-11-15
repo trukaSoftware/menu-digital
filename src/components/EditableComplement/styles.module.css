@@ -1,0 +1,15 @@
+.editableComplementTitleContent {
+  @apply flex justify-between mb-3 w-full;
+}
+
+.editableComplementTitleButtonsWrapper {
+  @apply flex gap-x-4;
+}
+
+.editableComplementTitle {
+  @apply text-lg font-semibold text-gray-900;
+}
+
+.editableComplementTitleDeleteButton {
+  @apply text-red-500;
+}

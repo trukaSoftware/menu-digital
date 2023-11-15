@@ -1,4 +1,4 @@
-import { FaGripLines, FaShoppingBasket } from 'react-icons/fa';
+import { FaGripLines, FaShoppingBasket, FaListUl } from 'react-icons/fa';
 
 export const menuItens = [
   {
@@ -10,5 +10,10 @@ export const menuItens = [
     menuIcon: FaGripLines,
     itemText: `Categorias`,
     managementPageHref: `/gerenciar-categorias`,
+  },
+  {
+    menuIcon: FaListUl,
+    itemText: `Adicionais`,
+    managementPageHref: `/gerenciar-adicionais`,
   },
 ];
