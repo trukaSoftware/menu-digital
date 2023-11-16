@@ -218,7 +218,7 @@ export default function CreateCompany() {
               labelText="taxa de entrega*"
               error={errors.deliveryTax?.message}
               register={register(`deliveryTax`)}
-              placeholder="Ex: 3,50"
+              placeholder="Ex: 3.50"
               type="number"
               step="0.01"
             />
@@ -228,7 +228,7 @@ export default function CreateCompany() {
               name="deliveryTime"
               labelText="tempo de entrega*"
               error={errors.deliveryTime?.message}
-              register={register(`deliveryTime`)}
+              register={register(`deliveryTime`, { required: false })}
               placeholder="Ex: Entre 30 e 40 minutos"
             />
             <DefaultInput
@@ -244,7 +244,7 @@ export default function CreateCompany() {
               labelClassName={styles.createCompanyLabel}
               Icon={<BiLogoInstagramAlt size={20} color="#9ca3af" />}
               name="instagramUrl"
-              labelText="Link do Instagram*"
+              labelText="Link do Instagram"
               error={errors.instagramUrl?.message}
               register={register(`instagramUrl`)}
               placeholder="Ex: https://www.instagram.com/açai-do-bom/"
