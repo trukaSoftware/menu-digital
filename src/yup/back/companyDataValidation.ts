@@ -22,7 +22,7 @@ const companySchema = object({
   deliveryTax: number().required(),
   deliveryTime: string().required(),
   openingHours: string().required(),
-  instagramUrl: string().required(),
+  instagramUrl: string(),
 });
 
 export type CompanyData = InferType<typeof companySchema>;

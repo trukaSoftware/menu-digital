@@ -16,7 +16,7 @@ export interface CompanyPayload {
   deliveryTax: number;
   deliveryTime: string;
   openingHours: string;
-  instagramUrl: string;
+  instagramUrl?: string;
 }
 
 export interface CreateCompanyResponse {
