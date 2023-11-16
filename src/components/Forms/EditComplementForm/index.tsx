@@ -49,6 +49,7 @@ function EditComplementForm({
     handleSubmit,
     formState: { errors },
     setValue,
+    unregister,
   } = useForm({
     resolver: yupResolver(createComplementFormSchema),
     mode: `onChange`,
@@ -137,7 +138,7 @@ function EditComplementForm({
           if (itemsToCreate.length > 0) {
             const itemsPayLoad = {
               complementId: editedComplement.id,
-              items: itemsToCreate,
+              items: itemsToCreate.filter(Boolean),
               companyId: `${user?.id}`,
             };
             await createItem(itemsPayLoad);
@@ -174,6 +175,14 @@ function EditComplementForm({
 
   const removeComplement = () => {
     setComplementsInput(complementsInput.slice(0, complementsInput.length - 1));
+    if (editableItems) {
+      const inputIndex = editableItems.length + complementsInput.length - 1;
+      unregister([`items.${inputIndex}.name`, `items.${inputIndex}.price`]);
+    }
+    unregister([
+      `items.${complementsInput.length}.name`,
+      `items.${complementsInput.length}.price`,
+    ]);
   };
 
   return (
