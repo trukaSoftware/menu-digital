@@ -39,6 +39,7 @@ function CreateComplementForm({ setShowDialog }: CreateComplementProps) {
   const {
     register,
     handleSubmit,
+    unregister,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(createComplementFormSchema),
@@ -80,7 +81,7 @@ function CreateComplementForm({ setShowDialog }: CreateComplementProps) {
       if (!!data?.items && data.items?.length > 0) {
         const itemsPayLoad = {
           complementId: createdComplement.complementId,
-          items: data.items,
+          items: data.items.filter(Boolean),
           companyId: `${user?.id}`,
         };
 
@@ -106,6 +107,10 @@ function CreateComplementForm({ setShowDialog }: CreateComplementProps) {
 
   const removeComplement = () => {
     setComplementsInput(complementsInput.slice(0, complementsInput.length - 1));
+    unregister([
+      `items.${complementsInput.length}.name`,
+      `items.${complementsInput.length}.price`,
+    ]);
   };
 
   return (
