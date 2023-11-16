@@ -43,5 +43,5 @@ export const createCompanyFormSchema = yup.object().shape({
   deliveryTax: yup.number().required(),
   deliveryTime: yup.string().required(),
   openingHours: yup.string().required(),
-  instagramUrl: yup.string().required(),
+  instagramUrl: yup.string(),
 });

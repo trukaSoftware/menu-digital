@@ -313,7 +313,7 @@ describe(`CreateCompany`, () => {
 
     await userEvent.type(openingHoursInput, `Entre 30 e 40 minutos`);
 
-    const instagramURLInput = screen.getByLabelText(`Link do Instagram*`);
+    const instagramURLInput = screen.getByLabelText(`Link do Instagram`);
 
     await userEvent.type(
       instagramURLInput,

@@ -171,7 +171,7 @@ export interface CreateCompanyData {
   deliveryTax: number;
   deliveryTime: string;
   openingHours: string;
-  instagramUrl: string;
+  instagramUrl?: string;
 }
 
 export interface EditCompanyInterface {
