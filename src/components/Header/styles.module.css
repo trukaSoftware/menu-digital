@@ -15,7 +15,7 @@
 }
 
 .functioningHoursAndSocias {
-  @apply flex justify-between items-center w-full p-2 text-sm font-medium lg:mt-8 lg:justify-normal;
+  @apply flex justify-between items-center w-full p-2 text-sm font-medium lg:mt-8 lg:justify-normal lg:w-[95.8%] lg:my-0 lg:mx-auto;
 }
 
 .openingHoursText {
