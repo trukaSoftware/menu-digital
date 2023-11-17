@@ -3,7 +3,7 @@
 }
 
 .themeContainer {
-  @apply relative w-full h-16 lg:h-48 xl:h-64;
+  @apply relative w-full h-24 lg:h-48 xl:h-64;
 }
 
 .imageAndTitleContainer {
@@ -15,9 +15,13 @@
 }
 
 .functioningHoursAndSocias {
-  @apply flex justify-between mt-8 p-2 text-sm font-medium;
+  @apply flex justify-between items-center w-full p-2 text-sm font-medium lg:mt-8 lg:justify-normal;
+}
+
+.openingHoursText {
+  @apply font-bold lg:mr-3;
 }
 
 .title {
-  @apply ml-2 text-lg font-bold text-gray-900 lg:text-2xl;
+  @apply ml-2 text-lg font-bold text-white bg-red-600/80 p-1 rounded-lg lg:text-2xl lg:text-gray-900 lg:bg-transparent lg:p-0 lg:rounded-none;
 }
