@@ -71,7 +71,7 @@ span.bigPriceClassName {
 }
 
 .btnAddToCart {
-  @apply flex px-4 justify-between items-center bg-red-600 rounded font-semibold text-white w-2/3 max-w-full flex-wrap max-h-fit;
+  @apply flex px-4 justify-between items-center bg-red-600 rounded font-semibold text-white w-2/3 max-w-full flex-wrap;
 }
 
 .btnAddToCart > span {
