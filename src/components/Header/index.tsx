@@ -40,7 +40,7 @@ export default function Header({
         <h1 className={styles.title}>{companyName}</h1>
       </div>
       <div className={styles.functioningHoursAndSocias}>
-        <h2>{openingHours}</h2>
+        <h2 className={styles.openingHoursText}>{openingHours}</h2>
         {instagramUrl ? (
           <div>
             <Link href={instagramUrl} target="_blank" rel="noopener noreferrer">
@@ -49,7 +49,9 @@ export default function Header({
           </div>
         ) : null}
       </div>
-      <Badges badges={companyCategories} />
+      {companyCategories.length > 0 ? (
+        <Badges badges={companyCategories} />
+      ) : null}
     </header>
   );
 }
