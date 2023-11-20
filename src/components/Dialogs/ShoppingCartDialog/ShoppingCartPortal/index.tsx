@@ -185,7 +185,7 @@ export default function ShoppingCartPortal({
       if (!clientName) {
         setError(`clientName`, {
           type: `manual`,
-          message: `Insira seu telefone de contato`,
+          message: `Insira seu nome`,
         });
       }
 
