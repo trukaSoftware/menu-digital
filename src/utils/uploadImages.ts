@@ -1,6 +1,6 @@
 import cloudinary from './cloudinary';
 
-type UploadImagesData = {
+export type UploadImagesData = {
   file: string;
   name?: string;
   alt?: string;
