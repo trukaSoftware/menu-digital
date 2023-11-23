@@ -1,7 +1,7 @@
 import { createSlug } from '@/utils/createSlug';
 import { EditCompanyData } from '@/utils/types';
 import { updateUserMetadata } from '@/utils/updateUserMetadata';
-import { uploadImages } from '@/utils/uploadImages';
+import { UploadImagesData, uploadImages } from '@/utils/uploadImages';
 
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
@@ -45,8 +45,7 @@ export const editCompanyService = async ({
     if (companyInfo) {
       const { companyLogo, companyTheme } = companyInfo;
 
-      const companyImages =
-        companyLogo && companyTheme ? [companyLogo, companyTheme] : null;
+      const companyImages = [companyLogo, companyTheme] as UploadImagesData[];
 
       let imagesUrls = [] as {
         name: string | undefined;
@@ -56,7 +55,7 @@ export const editCompanyService = async ({
 
       if (companyImages) {
         imagesUrls = await uploadImages(
-          companyImages,
+          companyImages.filter(Boolean),
           existingRegister.name,
           `companies`
         );
