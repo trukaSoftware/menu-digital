@@ -8,7 +8,7 @@ export const createCategoryService = async ({
 }: CategoryData) => {
   try {
     const categoryExists = await prisma.productCategories.findFirst({
-      where: { name },
+      where: { name, companyId },
     });
 
     if (categoryExists) throw new Error(`Categoria já existe`);
