@@ -24,7 +24,15 @@ export default function MenuComponent({
       <div className={styles.menuComponentWrapper}>
         <h2 className={styles.menuComponentTitle}>{menuTitle}</h2>
         <div className={styles.menuComponentContainerItems}>
-          {menuTitle === `Criar novo(a)`
+          {menuTitle === `Criar novo(a)` ? (
+            <div className={styles.menuComponentTrigger}>
+              <CreateProductTrigger />
+              <CreateCategoryTrigger />
+              <CreateComplementTrigger />
+              <CreateQrCodeTrigger />
+            </div>
+          ) : null}
+          {menuTitle === `Gerenciar`
             ? menuItens.map((item) => (
                 <a
                   title={`${item.itemText}`}
@@ -43,14 +51,6 @@ export default function MenuComponent({
                 </a>
               ))
             : null}
-          {menuTitle === `Gerenciar` ? (
-            <div className={styles.menuComponentTrigger}>
-              <CreateProductTrigger />
-              <CreateCategoryTrigger />
-              <CreateComplementTrigger />
-              <CreateQrCodeTrigger />
-            </div>
-          ) : null}
 
           {menuTitle === `Compartilhar` ? (
             <div className={styles.menuComponentTrigger}>
