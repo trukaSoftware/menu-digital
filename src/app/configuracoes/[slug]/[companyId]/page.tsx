@@ -28,6 +28,10 @@ export default async function Configs({ params }: RouterParams) {
             menuTitle="Gerenciar"
             companyInfos={{ slug, companyId }}
           />
+          <MenuComponent
+            menuTitle="Compartilhar"
+            companyInfos={{ slug, companyId }}
+          />
         </div>
 
         <a
