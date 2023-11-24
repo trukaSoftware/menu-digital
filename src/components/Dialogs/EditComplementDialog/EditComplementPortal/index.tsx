@@ -17,7 +17,7 @@ export default function EditComplementPortal({
   return (
     <Portal>
       <Overlay className={styles.editComplementOverlay} />
-      <Content className={styles.editComplementContent}>
+      <Content forceMount className={styles.editComplementContent}>
         <ModalDefaultHeader title="Edição de adicionais" />
         <EditComplementForm
           setShowDialog={setShowDialog}
