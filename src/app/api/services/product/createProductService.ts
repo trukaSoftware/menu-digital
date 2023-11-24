@@ -16,7 +16,7 @@ export const createProductService = async ({
 }: ProductData) => {
   try {
     const productExists = await prisma.products.findFirst({
-      where: { name },
+      where: { name, companyId },
     });
 
     if (productExists) throw new Error(`Produto já existe`);
