@@ -20,12 +20,20 @@ export const editItemService = async ({
       throw new Error(`Registro não encontrado para o ID: ${id}`);
     }
 
+    const itemPrice =
+      // eslint-disable-next-line no-nested-ternary
+      price === 0
+        ? price
+        : price !== undefined
+        ? price
+        : existingRegister.price;
+
     if (complementId === null) {
       return prisma.items.update({
         where: { id },
         data: {
           name: name || existingRegister.name,
-          price: price || existingRegister.price,
+          price: itemPrice,
           complementId: null,
         },
       });
@@ -35,7 +43,7 @@ export const editItemService = async ({
       where: { id },
       data: {
         name: name || existingRegister.name,
-        price: price || existingRegister.price,
+        price: itemPrice,
         complementId: complementId || existingRegister.complementId,
       },
     });
