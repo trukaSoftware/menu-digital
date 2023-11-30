@@ -61,7 +61,7 @@ export default function SearchItemsList({
       {!gettingProducts &&
         (filteredItems.length > 0 ? (
           filteredItems.map((item) => (
-            <div key={item.id} className={styles.teste}>
+            <div key={item.id} className={styles.checkboxInputWrapper}>
               <CheckboxInput
                 text={`${item.name} - ${priceToBrazilCurrency(
                   Number(item.price)
