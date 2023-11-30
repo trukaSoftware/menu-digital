@@ -48,7 +48,7 @@ model Info {
   companyId           String   @unique
   branchId            String?  @unique
   deliveryTax         Decimal? @db.Money
-  deliveryTime        String?  
+  deliveryTime        String?
   openingHours        String?
   instagramUrl        String?
   createdAt           DateTime @default(now())
@@ -107,6 +107,7 @@ model Complements {
 model Items {
   id           String       @id @default(uuid())
   name         String
+  visible      Boolean
   price        Decimal?     @db.Money
   complements  Complements? @relation(fields: [complementId], references: [id], onDelete: Cascade)
   complementId String?
