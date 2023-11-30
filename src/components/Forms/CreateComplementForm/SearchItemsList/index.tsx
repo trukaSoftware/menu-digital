@@ -36,17 +36,9 @@ export default function SearchItemsList({
   const handleVisible = async (item: editItemPayload) => {
     const { visible } = item;
     try {
-      if (visible === true) {
-        const editedItem = {
-          ...item,
-          visible: false,
-        };
-        await editItem(editedItem);
-        return;
-      }
       const editedItem = {
         ...item,
-        visible: true,
+        visible: !visible,
       };
       await editItem(editedItem);
     } catch (error) {
