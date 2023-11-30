@@ -9,7 +9,12 @@ export const createItemService = async ({
 }: ItemData) => {
   try {
     const createdItens = await prisma.items.createMany({
-      data: items.map((item) => ({ ...item, complementId, companyId })),
+      data: items.map((item) => ({
+        ...item,
+        complementId,
+        companyId,
+        visible: true,
+      })),
       skipDuplicates: true,
     });
 

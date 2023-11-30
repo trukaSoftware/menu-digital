@@ -12,12 +12,14 @@ export async function POST(req: Request) {
       complementId,
       items,
       companyId,
+      visible: true,
     });
 
     const createdItems = await createItemService({
       complementId,
       items,
       companyId,
+      visible: true,
     });
 
     return NextResponse.json({ items: createdItems });

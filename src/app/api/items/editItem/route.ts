@@ -5,7 +5,8 @@ import { EditItemData } from '@/utils/types';
 import { editItemService } from '../../services/item/editItemService';
 
 export async function PUT(req: Request) {
-  const { id, name, price, complementId } = (await req.json()) as EditItemData;
+  const { id, name, price, complementId, visible } =
+    (await req.json()) as EditItemData;
 
   try {
     if (!id)
@@ -21,6 +22,7 @@ export async function PUT(req: Request) {
       name,
       price,
       complementId,
+      visible,
     });
 
     return NextResponse.json({ itemData });
