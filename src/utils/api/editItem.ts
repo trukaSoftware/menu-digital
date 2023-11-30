@@ -7,6 +7,7 @@ export const editItem = async ({
   id,
   name,
   price,
+  visible,
 }: editItemPayload) => {
   const item = await put<editItemResponse, editItemPayload>(
     `/api/items/editItem`,
@@ -15,6 +16,7 @@ export const editItem = async ({
       id,
       name,
       price,
+      visible,
     }
   );
 
