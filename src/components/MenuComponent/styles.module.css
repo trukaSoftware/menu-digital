@@ -27,3 +27,7 @@
 .menuComponentTrigger {
   @apply flex flex-wrap gap-3;
 }
+
+.copyStoreLinkBtn {
+  @apply rounded border border-gray-400 p-3;
+}

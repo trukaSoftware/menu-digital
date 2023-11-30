@@ -54,7 +54,10 @@ export default function MenuComponent({
 
           {menuTitle === `Compartilhar loja` ? (
             <div className={styles.menuComponentTrigger}>
-              <CopyToClickBoardButton companyInfos={companyInfos} />
+              <CopyToClickBoardButton
+                companyInfos={companyInfos}
+                className={styles.copyStoreLinkBtn}
+              />
             </div>
           ) : null}
         </div>

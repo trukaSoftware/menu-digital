@@ -14,6 +14,7 @@ export interface CopyToClickBoardButtonProps
 
 export default function CopyToClickBoardButton({
   companyInfos,
+  ...rest
 }: CopyToClickBoardButtonProps) {
   const [baseUrl, setBaseUrl] = useState(``);
 
@@ -33,8 +34,12 @@ export default function CopyToClickBoardButton({
   }, []);
 
   return (
-    <button type="button" onClick={copyToClipboard}>
-      <FaLink size="32" />
+    <button type="button" onClick={copyToClipboard} {...rest}>
+      <FaLink
+        size="32"
+        aria-label="Copiar link da loja"
+        title="Copiar link da loja"
+      />
     </button>
   );
 }
