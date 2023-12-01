@@ -30,7 +30,7 @@ export default function CopyToClickBoardButton({
     const parsedUrl = new URL(currentUrl);
     const baseUrlParsed = `${parsedUrl.protocol}//${parsedUrl.host}`;
 
-    setBaseUrl(baseUrlParsed); // Saída: http://localhost:3000
+    setBaseUrl(baseUrlParsed);
   }, []);
 
   return (
