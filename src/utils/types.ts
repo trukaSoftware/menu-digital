@@ -76,6 +76,7 @@ export type EditItemData = {
   name?: string;
   price?: number;
   complementId: string | null;
+  visible: boolean;
 };
 
 export type EditCategoryData = {

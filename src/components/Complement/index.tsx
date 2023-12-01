@@ -126,15 +126,17 @@ export default function Complement({
         </p>
       </div>
       <ul className={styles.complementItemsWrapper}>
-        {complement.items.map((complementItem) => (
-          <ComplementItem
-            key={complementItem.id}
-            complementItem={complementItem}
-            handleAddComplement={handleAddComplement}
-            handleRemoveComplement={handleRemoveComplement}
-            complementsSelected={complementItemsSelected}
-          />
-        ))}
+        {complement.items
+          .filter((complementItem) => complementItem.visible)
+          .map((complementItem) => (
+            <ComplementItem
+              key={complementItem.id}
+              complementItem={complementItem}
+              handleAddComplement={handleAddComplement}
+              handleRemoveComplement={handleRemoveComplement}
+              complementsSelected={complementItemsSelected}
+            />
+          ))}
       </ul>
     </div>
   );

@@ -1,3 +1,7 @@
+.checkboxInputWrapper {
+  @apply flex;
+}
+
 .searchItemsList {
   @apply p-2 border border-gray-300 rounded h-72 w-full overflow-y-auto;
 }
@@ -8,6 +12,14 @@
 
 .searchingItems > p {
   @apply text-gray-600;
+}
+
+.eyeCheckboxInputLabel {
+  @apply flex ml-2 md:cursor-pointer;
+}
+
+.eyeCheckboxInput {
+  @apply appearance-none opacity-0 w-0 h-0;
 }
 
 .noProductsFound {

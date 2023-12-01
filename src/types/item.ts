@@ -14,6 +14,7 @@ export interface editItemPayload {
   price: number;
   id: string;
   complementId: string | null;
+  visible: boolean;
 }
 
 export interface editItemResponse {
@@ -24,6 +25,7 @@ export interface ItemReturn {
   id: string;
   name: string;
   price: number;
+  visible: boolean;
   complementId: string | null;
   createdAt: string;
   updatedAt: string;

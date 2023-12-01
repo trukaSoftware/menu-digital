@@ -130,6 +130,7 @@ export default function DropdownComplement({
                 name: item.name,
                 price: item.price,
                 complementId: complements.id,
+                visible: item.visible,
               })
             )
           );
@@ -163,6 +164,7 @@ export default function DropdownComplement({
             name: item.name,
             price: item.price,
             complementId: null,
+            visible: item.visible,
           }));
         const completeItemsToRemove = await Promise.all(
           itemsWithoutComplementId.map(async (item) => editItem(item))

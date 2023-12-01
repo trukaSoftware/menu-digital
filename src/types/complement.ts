@@ -41,6 +41,7 @@ export interface ComplementItemProp {
   id: string;
   name: string;
   price: string;
+  visible: boolean;
   complementId: string;
   createdAt: string;
   updatedAt: string;

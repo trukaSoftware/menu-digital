@@ -1,4 +1,4 @@
-import { object, string, number, InferType, array } from 'yup';
+import { object, string, number, InferType, array, boolean } from 'yup';
 
 const itemSchema = object({
   complementId: string().required(),
@@ -13,6 +13,7 @@ const itemSchema = object({
     )
     .required(),
   companyId: string().required(),
+  visible: boolean().required(),
 });
 
 export type ItemData = InferType<typeof itemSchema>;

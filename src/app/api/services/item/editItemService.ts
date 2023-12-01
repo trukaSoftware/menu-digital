@@ -8,6 +8,7 @@ export const editItemService = async ({
   name,
   price,
   complementId,
+  visible,
 }: EditItemData) => {
   try {
     const existingRegister = await prisma.items.findUnique({
@@ -15,6 +16,8 @@ export const editItemService = async ({
         id,
       },
     });
+
+    const isVisible = !!visible;
 
     if (!existingRegister) {
       throw new Error(`Registro não encontrado para o ID: ${id}`);
@@ -35,6 +38,7 @@ export const editItemService = async ({
           name: name || existingRegister.name,
           price: itemPrice,
           complementId: null,
+          visible: isVisible,
         },
       });
     }
@@ -45,6 +49,7 @@ export const editItemService = async ({
         name: name || existingRegister.name,
         price: itemPrice,
         complementId: complementId || existingRegister.complementId,
+        visible: isVisible,
       },
     });
 
